@@ -1,0 +1,33 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "kubeview.fullname" . }}
+  labels:
+    {{- include "kubeview.labels" . | nindent 4 }}
+rules:
+  - apiGroups: ["extensions"]
+    resources:
+      - ingresses
+    verbs: ["get", "list"]
+  - apiGroups: ["apps"]
+    resources:
+      - deployments
+      - replicasets
+      - daemonsets
+      - statefulsets
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources:
+      - pods
+      - ingresses
+      - events
+      - endpoints
+      - namespaces
+      - nodes
+      - persistentvolumes
+      - persistentvolumeclaims
+      - resourcequotas
+      - services
+    verbs: ["get", "list"]
+  - nonResourceURLs: ["*"]
+    verbs: ["get", "list"]

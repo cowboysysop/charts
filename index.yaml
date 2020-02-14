@@ -14,4 +14,19 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/kubebox-1.0.0/kubebox-1.0.0.tgz
     version: 1.0.0
+  kubeview:
+  - apiVersion: v1
+    appVersion: 0.1.9
+    created: "2020-02-14T08:40:19.620830786Z"
+    description: Kubernetes cluster visualiser and graphical explorer
+    digest: 2496d151aa086aa44b7673738218f4e85622e63aa7fbd66a23ae54b4470da882
+    home: https://github.com/benc-uk/kubeview
+    icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubeview
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
+    version: 1.0.0
 generated: "2020-02-13T11:49:04.349126996Z"

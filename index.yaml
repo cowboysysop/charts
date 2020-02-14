@@ -29,4 +29,19 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
+  whoami:
+  - apiVersion: v1
+    appVersion: 1.4.0
+    created: "2020-02-14T09:42:38.537558822Z"
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: 70c0a27267ea509951eeb8cecaaee04141550ee72defeebc532122eac5f99859
+    home: https://github.com/containous/whoami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: whoami
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
+    version: 1.0.0
 generated: "2020-02-13T11:49:04.349126996Z"

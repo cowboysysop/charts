@@ -1,0 +1,10 @@
+apiVersion: v1
+appVersion: 0.54.0
+description: Web-based MongoDB admin interface, written with Node.js and express
+home: https://github.com/mongo-express/mongo-express
+icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: mongo-express
+version: 1.0.0

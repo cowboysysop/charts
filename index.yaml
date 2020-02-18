@@ -43,6 +43,21 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
+  mongo-express:
+  - apiVersion: v1
+    appVersion: 0.54.0
+    created: "2020-02-18T12:49:44.426471595Z"
+    description: Web-based MongoDB admin interface, written with Node.js and express
+    digest: d408c71bb2aad18a92e28a604f83aaaf60757cb5ffa348ef419428027a6e95c0
+    home: https://github.com/mongo-express/mongo-express
+    icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mongo-express
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mongo-express-1.0.0/mongo-express-1.0.0.tgz
+    version: 1.0.0
   whoami:
   - apiVersion: v1
     appVersion: 1.4.0

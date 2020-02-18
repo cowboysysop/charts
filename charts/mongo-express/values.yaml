@@ -1,0 +1,112 @@
+# Default values for mongo-express.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: mongo-express
+  tag: 0.54.0
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8081
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: mongo-express.local
+      paths: []
+  tls: []
+  #  - secretName: mongo-express-tls
+  #    hosts:
+  #      - mongo-express.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# MongoDB host name or IP address
+mongodbServer: mongodb
+
+# MongoDB port
+mongodbPort: 27017
+
+# Enable administrator access
+mongodbEnableAdmin: false
+
+# Administrator username
+mongodbAdminUsername: root
+
+# Administrator password
+mongodbAdminPassword: ""
+
+# Database name (only needed if `mongodbEnableAdmin` is `false`)
+mongodbAuthDatabase: ""
+
+# Database username (only needed if `mongodbEnableAdmin` is `false`)
+mongodbAuthUsername: ""
+
+# Database password (only needed if `mongodbEnableAdmin` is `false`)
+mongodbAuthPassword: ""
+
+# String used by cookie-parser middleware to sign cookies
+siteCookieSecret: ""
+
+# String used to sign the session ID cookie by express-session middleware
+siteSessionSecret: ""
+
+# Mongo Express web login name
+basicAuthUsername: ""
+
+# Mongo Express Web login password
+basicAuthPassword: ""
+
+# Name of existing Secret to use
+existingSecret: ""
+
+mongodb:
+  # Whether to use the MongoDB chart (for testing purposes only)
+  enabled: false

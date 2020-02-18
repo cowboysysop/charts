@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mongo-express.fullname" . }}
+  labels:
+    {{- include "mongo-express.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mongo-express.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mongo-express.selectorLabels" . | nindent 8 }}
+      annotations:
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "mongo-express.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ME_CONFIG_MONGODB_SERVER
+              value: {{ .Values.mongodbServer | quote }}
+            - name: ME_CONFIG_MONGODB_PORT
+              value: {{ .Values.mongodbPort | quote }}
+            - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
+              value: {{ .Values.mongodbEnableAdmin | quote }}
+            {{- if .Values.mongodbEnableAdmin }}
+            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+              value: {{ .Values.mongodbAdminUsername | quote }}
+            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "mongo-express.secretName" . }}
+                  key: mongodb-admin-password
+            {{- else }}
+            - name: ME_CONFIG_MONGODB_AUTH_DATABASE
+              value: {{ .Values.mongodbAuthDatabase | quote }}
+            - name: ME_CONFIG_MONGODB_AUTH_USERNAME
+              value: {{ .Values.mongodbAuthUsername | quote }}
+            - name: ME_CONFIG_MONGODB_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "mongo-express.secretName" . }}
+                  key: mongodb-auth-password
+            {{- end }}
+            - name: ME_CONFIG_SITE_COOKIESECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "mongo-express.secretName" . }}
+                  key: site-cookie-secret
+            - name: ME_CONFIG_SITE_SESSIONSECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "mongo-express.secretName" . }}
+                  key: site-session-secret
+            {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
+            - name: ME_CONFIG_BASICAUTH_USERNAME
+              value: {{ .Values.basicAuthUsername | quote }}
+            - name: ME_CONFIG_BASICAUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "mongo-express.secretName" . }}
+                  key: basic-auth-password
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+              {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
+              httpHeaders:
+                - name: Authorization
+                  value: {{ include "mongo-express.basicAuthHttpHeader" . }}
+              {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+              {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
+              httpHeaders:
+                - name: Authorization
+                  value: {{ include "mongo-express.basicAuthHttpHeader" . }}
+              {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

@@ -3,6 +3,19 @@ entries:
   kubebox:
   - apiVersion: v1
     appVersion: 0.7.0
+    created: "2020-02-18T21:05:26.205313154Z"
+    description: Terminal and Web console for Kubernetes
+    digest: 1a666a897e67398d3897bf4706d0d9a19a2fe098fb3fcb234b43f10813592df7
+    home: https://github.com/astefanutti/kubebox
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubebox
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubebox-1.0.1/kubebox-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v1
+    appVersion: 0.7.0
     created: "2020-02-13T11:49:04.563904284Z"
     description: Terminal and Web console for Kubernetes
     digest: bb33b82e12e3c2dc6bd3fe735ce5a3ffca0a8e3737171f2ed38e984173ab7361
@@ -15,6 +28,20 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubebox-1.0.0/kubebox-1.0.0.tgz
     version: 1.0.0
   kubeview:
+  - apiVersion: v1
+    appVersion: 0.1.9
+    created: "2020-02-18T21:05:26.383060913Z"
+    description: Kubernetes cluster visualiser and graphical explorer
+    digest: 784740b8ffdbc1e9aef7be62b24d5c44c2de986cfea9e6888a36589e25f9d0f8
+    home: https://github.com/benc-uk/kubeview
+    icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubeview
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.2/kubeview-1.0.2.tgz
+    version: 1.0.2
   - apiVersion: v1
     appVersion: 0.1.9
     created: "2020-02-14T10:08:13.40169599Z"
@@ -59,6 +86,20 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/mongo-express-1.0.0/mongo-express-1.0.0.tgz
     version: 1.0.0
   whoami:
+  - apiVersion: v1
+    appVersion: 1.4.0
+    created: "2020-02-18T21:05:26.545905975Z"
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: 95fa75f96b81a75c7bf174898f2f2e7cc81d999e85101da7b6dc4b45570422f4
+    home: https://github.com/containous/whoami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: whoami
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.1/whoami-1.0.1.tgz
+    version: 1.0.1
   - apiVersion: v1
     appVersion: 1.4.0
     created: "2020-02-14T09:42:38.537558822Z"

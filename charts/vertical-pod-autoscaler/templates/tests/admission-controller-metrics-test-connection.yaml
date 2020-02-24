@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "vertical-pod-autoscaler.admissionController.metrics.fullname" . }}-test-connection"
+  labels:
+    {{- include "vertical-pod-autoscaler.admissionController.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "vertical-pod-autoscaler.admissionController.metrics.fullname" . }}:{{ .Values.admissionController.metrics.service.port }}/metrics']
+  restartPolicy: Never

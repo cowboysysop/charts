@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vertical-pod-autoscaler.recommender.fullname" . }}
+  labels:
+    {{- include "vertical-pod-autoscaler.recommender.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.recommender.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "vertical-pod-autoscaler.recommender.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "vertical-pod-autoscaler.recommender.selectorLabels" . | nindent 8 }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "vertical-pod-autoscaler.recommender.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.recommender.podSecurityContext | nindent 8 }}
+      containers:
+        - name: recommender
+          securityContext:
+            {{- toYaml .Values.recommender.securityContext | nindent 12 }}
+          image: "{{ .Values.recommender.image.repository }}:{{ .Values.recommender.image.tag }}"
+          imagePullPolicy: {{ .Values.recommender.image.pullPolicy }}
+          args:
+            - --v=2
+          ports:
+            - name: metrics
+              containerPort: 8942
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          resources:
+            {{- toYaml .Values.recommender.resources | nindent 12 }}
+      {{- with .Values.recommender.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.recommender.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.recommender.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

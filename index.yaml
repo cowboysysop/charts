@@ -126,6 +126,21 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/mongo-express-1.0.0/mongo-express-1.0.0.tgz
     version: 1.0.0
+  vertical-pod-autoscaler:
+  - apiVersion: v1
+    appVersion: 0.6.3
+    created: "2020-02-28T16:45:06.966690032Z"
+    description: Set of components that automatically adjust the amount of CPU and
+      memory requested by pods running in the Kubernetes Cluster
+    digest: 0ace3e94abf1a177f9abdcbfa1921a8e4d717c35872a6e0b5f2128817f56cfca
+    home: https://github.com/kubernetes/autoscaler
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: vertical-pod-autoscaler
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-1.0.0/vertical-pod-autoscaler-1.0.0.tgz
+    version: 1.0.0
   whoami:
   - apiVersion: v1
     appVersion: 1.4.0

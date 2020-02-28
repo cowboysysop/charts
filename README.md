@@ -6,9 +6,10 @@
 
 ## Charts
 
-| Name                                  | Description                                                             |
-|---------------------------------------|-------------------------------------------------------------------------|
-| [kubebox](charts/kubebox)             | Terminal and Web console for Kubernetes                                 |
-| [kubeview](charts/kubeview)           | Kubernetes cluster visualiser and graphical explorer                    |
-| [mongo-express](charts/mongo-express) | Web-based MongoDB admin interface, written with Node.js and express     |
-| [whoami](charts/whoami)               | Tiny Go webserver that prints os information and HTTP request to output |
+| Name                                                      | Description                                                                                                                  |
+|-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| [kubebox](charts/kubebox)                                 | Terminal and Web console for Kubernetes                                                                                      |
+| [kubeview](charts/kubeview)                               | Kubernetes cluster visualiser and graphical explorer                                                                         |
+| [mongo-express](charts/mongo-express)                     | Web-based MongoDB admin interface, written with Node.js and express                                                          |
+| [vertical-pod-autoscaler](charts/vertical-pod-autoscaler) | Set of components that automatically adjust the amount of CPU and memory requested by pods running in the Kubernetes Cluster |
+| [whoami](charts/whoami)                                   | Tiny Go webserver that prints os information and HTTP request to output                                                      |

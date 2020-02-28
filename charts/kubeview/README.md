@@ -57,32 +57,32 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 The following table lists all the configurable parameters expose by the KubeView chart and their default values.
 
-|              Name             |                                          Description                                          |                      Default                     |
-|-------------------------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------|
-| `replicaCount`                | Number of replicas                                                                            | `1`                                              |
-| `image.repository`            | KubeView image name                                                                           | `bencuk/kubeview`                                |
-| `image.tag`                   | KubeView image tag                                                                            | `latest`                                         |
-| `image.pullPolicy`            | Image pull policy                                                                             | `Always`                                         |
-| `imagePullSecrets`            | Docker registry secret names as an array                                                      | `[]`                                             |
-| `nameOverride`                | Partially override `kubeview.fullname` template with a string (will prepend the release name) | `nil`                                            |
-| `fullnameOverride`            | Fully override `kubeview.fullname` template with a string                                     | `nil`                                            |
-| `serviceAccount.create`       | Specify whether to create a ServiceAccount                                                    | `true`                                           |
-| `serviceAccount.annotations`  | ServiceAccount annotations                                                                    | `{}`                                             |
-| `serviceAccount.name`         | The name of the ServiceAccount to create                                                      | Generated using the `kubeview.fullname` template |
-| `podSecurityContext`          | Pod security context                                                                          | `{}`                                             |
-| `securityContext`             | Container security context                                                                    | `{}`                                             |
-| `service.type`                | Kubernetes Service type                                                                       | `ClusterIP`                                      |
-| `service.port`                | KubeView service port                                                                         | `8000`                                           |
-| `ingress.enabled`             | Enable ingress controller resource                                                            | `false`                                          |
-| `ingress.annotations`         | Ingress annotations                                                                           | `{}`                                             |
-| `ingress.hosts[0].name`       | Hostname to your KubeView installation                                                        | `kubeview.local`                                 |
-| `ingress.hosts[0].paths`      | Paths within the url structure                                                                | `[]`                                             |
-| `ingress.tls[0].secretName`   | TLS Secret (certificates)                                                                     | `nil`                                            |
-| `ingress.tls[0].hosts[0]`     | TLS hosts                                                                                     | `nil`                                            |
-| `resources`                   | CPU/Memory resource requests/limits                                                           | `{}`                                             |
-| `nodeSelector`                | Node labels for pod assignment                                                                | `{}`                                             |
-| `tolerations`                 | Tolerations for pod assignment                                                                | `[]`                                             |
-| `affinity`                    | Map of node/pod affinities                                                                    | `{}`                                             |
+| Name                         | Description                                                                                   | Default                                          |
+|------------------------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------|
+| `replicaCount`               | Number of replicas                                                                            | `1`                                              |
+| `image.repository`           | KubeView image name                                                                           | `bencuk/kubeview`                                |
+| `image.tag`                  | KubeView image tag                                                                            | `latest`                                         |
+| `image.pullPolicy`           | Image pull policy                                                                             | `Always`                                         |
+| `imagePullSecrets`           | Docker registry secret names as an array                                                      | `[]`                                             |
+| `nameOverride`               | Partially override `kubeview.fullname` template with a string (will prepend the release name) | `nil`                                            |
+| `fullnameOverride`           | Fully override `kubeview.fullname` template with a string                                     | `nil`                                            |
+| `serviceAccount.create`      | Specify whether to create a ServiceAccount                                                    | `true`                                           |
+| `serviceAccount.annotations` | ServiceAccount annotations                                                                    | `{}`                                             |
+| `serviceAccount.name`        | The name of the ServiceAccount to create                                                      | Generated using the `kubeview.fullname` template |
+| `podSecurityContext`         | Pod security context                                                                          | `{}`                                             |
+| `securityContext`            | Container security context                                                                    | `{}`                                             |
+| `service.type`               | Kubernetes Service type                                                                       | `ClusterIP`                                      |
+| `service.port`               | KubeView service port                                                                         | `8000`                                           |
+| `ingress.enabled`            | Enable ingress controller resource                                                            | `false`                                          |
+| `ingress.annotations`        | Ingress annotations                                                                           | `{}`                                             |
+| `ingress.hosts[0].name`      | Hostname to your KubeView installation                                                        | `kubeview.local`                                 |
+| `ingress.hosts[0].paths`     | Paths within the url structure                                                                | `[]`                                             |
+| `ingress.tls[0].secretName`  | TLS Secret (certificates)                                                                     | `nil`                                            |
+| `ingress.tls[0].hosts[0]`    | TLS hosts                                                                                     | `nil`                                            |
+| `resources`                  | CPU/Memory resource requests/limits                                                           | `{}`                                             |
+| `nodeSelector`               | Node labels for pod assignment                                                                | `{}`                                             |
+| `tolerations`                | Tolerations for pod assignment                                                                | `[]`                                             |
+| `affinity`                   | Map of node/pod affinities                                                                    | `{}`                                             |
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

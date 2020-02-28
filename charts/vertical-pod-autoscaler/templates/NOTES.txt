@@ -1,0 +1,11 @@
+** Please be patient while the chart is being deployed **
+
+1. Get the application status by running the command:
+
+If you're using Helm 2:
+
+$ helm status {{ .Release.Name }}
+
+If you're using Helm 3:
+
+$ helm status {{ .Release.Name }} --namespace {{ .Release.Namespace }}

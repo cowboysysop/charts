@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "vertical-pod-autoscaler.updater.metrics.fullname" . }}
+  labels:
+    {{- include "vertical-pod-autoscaler.updater.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.updater.metrics.service.type }}
+  ports:
+    - port: {{ .Values.updater.metrics.service.port }}
+      targetPort: metrics
+      protocol: TCP
+      name: metrics
+  selector:
+    {{- include "vertical-pod-autoscaler.updater.selectorLabels" . | nindent 4 }}

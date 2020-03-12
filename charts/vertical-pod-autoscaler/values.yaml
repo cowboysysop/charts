@@ -11,7 +11,7 @@ admissionController:
 
   image:
     repository: k8s.gcr.io/vpa-admission-controller
-    tag: 0.6.3
+    tag: 0.7.0
     pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -72,7 +72,7 @@ recommender:
 
   image:
     repository: k8s.gcr.io/vpa-recommender
-    tag: 0.6.3
+    tag: 0.7.0
     pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -123,7 +123,7 @@ updater:
 
   image:
     repository: k8s.gcr.io/vpa-updater
-    tag: 0.6.3
+    tag: 0.7.0
     pullPolicy: IfNotPresent
 
   serviceAccount:

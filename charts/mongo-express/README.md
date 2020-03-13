@@ -66,6 +66,7 @@ The following table lists all the configurable parameters expose by the Mongo Ex
 | `imagePullSecrets`           | Docker registry secret names as an array                                                           | `[]`                                                  |
 | `nameOverride`               | Partially override `mongo-express.fullname` template with a string (will prepend the release name) | `nil`                                                 |
 | `fullnameOverride`           | Fully override `mongo-express.fullname` template with a string                                     | `nil`                                                 |
+| `podLabels`                  | Specify labels to the Pod                                                                           | `[]`                                                  |
 | `serviceAccount.create`      | Specify whether to create a ServiceAccount                                                         | `true`                                                |
 | `serviceAccount.annotations` | ServiceAccount annotations                                                                         | `{}`                                                  |
 | `serviceAccount.name`        | The name of the ServiceAccount to create                                                           | Generated using the `mongo-express.fullname` template |

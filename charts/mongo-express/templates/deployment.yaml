@@ -12,10 +12,10 @@ spec:
   template:
     metadata:
       labels:
+      {{- if .Values.podLabels }}
+{{ toYaml .Values.podLabels | indent 8 }}
+      {{- end }}
         {{- include "mongo-express.selectorLabels" . | nindent 8 }}
-        {{- if .Values.podLabels }}
-          {{ toYaml .Values.podLabels | indent 8 }}
-        {{- end }}
       annotations:
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
     spec:

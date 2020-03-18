@@ -13,8 +13,14 @@ spec:
     metadata:
       labels:
         {{- include "vertical-pod-autoscaler.admissionController.selectorLabels" . | nindent 8 }}
+        {{- with .Values.admissionController.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
       annotations:
         checksum/secret: {{ include (print $.Template.BasePath "/admission-controller/tls-secret.yaml") . | sha256sum }}
+        {{- with .Values.admissionController.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

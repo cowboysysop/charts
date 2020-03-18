@@ -69,6 +69,8 @@ The following table lists all the configurable parameters expose by the Whoami c
 | `serviceAccount.create`      | Specify whether to create a ServiceAccount                                                  | `true`                                         |
 | `serviceAccount.annotations` | ServiceAccount annotations                                                                  | `{}`                                           |
 | `serviceAccount.name`        | The name of the ServiceAccount to create                                                    | Generated using the `whoami.fullname` template |
+| `podAnnotations`             | Additional pod annotations                                                                  | `{}`                                           |
+| `podLabels`                  | Additional pod labels                                                                       | `{}`                                           |
 | `podSecurityContext`         | Pod security context                                                                        | `{}`                                           |
 | `securityContext`            | Container security context                                                                  | `{}`                                           |
 | `service.type`               | Kubernetes Service type                                                                     | `ClusterIP`                                    |

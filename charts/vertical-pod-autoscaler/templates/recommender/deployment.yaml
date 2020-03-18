@@ -13,6 +13,13 @@ spec:
     metadata:
       labels:
         {{- include "vertical-pod-autoscaler.recommender.selectorLabels" . | nindent 8 }}
+        {{- with .Values.recommender.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.recommender.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

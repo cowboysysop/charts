@@ -23,6 +23,12 @@ admissionController:
     # If not set and create is true, a name is generated using the fullname template
     name:
 
+  # Additional pod annotations (admission controller component)
+  podAnnotations: {}
+
+  # Additional pod labels (admission controller component)
+  podLabels: {}
+
   podSecurityContext: {}
     # fsGroup: 2000
 
@@ -84,6 +90,12 @@ recommender:
     # If not set and create is true, a name is generated using the fullname template
     name:
 
+  # Additional pod annotations (recommender component)
+  podAnnotations: {}
+
+  # Additional pod labels (recommender component)
+  podLabels: {}
+
   podSecurityContext: {}
     # fsGroup: 2000
 
@@ -134,6 +146,12 @@ updater:
     # The name of the service account to use.
     # If not set and create is true, a name is generated using the fullname template
     name:
+
+  # Additional pod annotations (updater component)
+  podAnnotations: {}
+
+  # Additional pod labels (updater component)
+  podLabels: {}
 
   podSecurityContext: {}
     # fsGroup: 2000

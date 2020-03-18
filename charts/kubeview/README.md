@@ -61,8 +61,8 @@ The following table lists all the configurable parameters expose by the KubeView
 |------------------------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------|
 | `replicaCount`               | Number of replicas                                                                            | `1`                                              |
 | `image.repository`           | KubeView image name                                                                           | `bencuk/kubeview`                                |
-| `image.tag`                  | KubeView image tag                                                                            | `latest`                                         |
-| `image.pullPolicy`           | Image pull policy                                                                             | `Always`                                         |
+| `image.tag`                  | KubeView image tag                                                                            | `0.1.11`                                         |
+| `image.pullPolicy`           | Image pull policy                                                                             | `IfNotPresent`                                   |
 | `imagePullSecrets`           | Docker registry secret names as an array                                                      | `[]`                                             |
 | `nameOverride`               | Partially override `kubeview.fullname` template with a string (will prepend the release name) | `nil`                                            |
 | `fullnameOverride`           | Fully override `kubeview.fullname` template with a string                                     | `nil`                                            |

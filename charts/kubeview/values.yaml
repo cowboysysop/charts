@@ -6,8 +6,8 @@ replicaCount: 1
 
 image:
   repository: bencuk/kubeview
-  tag: latest
-  pullPolicy: Always
+  tag: 0.1.11
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 nameOverride: ""

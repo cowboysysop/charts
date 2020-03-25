@@ -35,7 +35,7 @@ spec:
           image: "{{ .Values.updater.image.repository }}:{{ .Values.updater.image.tag }}"
           imagePullPolicy: {{ .Values.updater.image.pullPolicy }}
           args:
-            - --v=2
+            {{- toYaml .Values.updater.args | nindent 12 }}
           ports:
             - name: metrics
               containerPort: 8943

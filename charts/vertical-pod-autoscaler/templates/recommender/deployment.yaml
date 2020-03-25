@@ -35,7 +35,7 @@ spec:
           image: "{{ .Values.recommender.image.repository }}:{{ .Values.recommender.image.tag }}"
           imagePullPolicy: {{ .Values.recommender.image.pullPolicy }}
           args:
-            - --v=2
+            {{- toYaml .Values.recommender.args | nindent 12 }}
           ports:
             - name: metrics
               containerPort: 8942

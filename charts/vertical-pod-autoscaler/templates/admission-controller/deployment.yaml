@@ -36,10 +36,7 @@ spec:
           image: "{{ .Values.admissionController.image.repository }}:{{ .Values.admissionController.image.tag }}"
           imagePullPolicy: {{ .Values.admissionController.image.pullPolicy }}
           args:
-            - --client-ca-file=/tls-secret/ca.crt
-            - --tls-cert-file=/tls-secret/tls.crt
-            - --tls-private-key=/tls-secret/tls.key
-            - --v=2
+            {{- toYaml .Values.admissionController.args | nindent 12 }}
           env:
             - name: NAMESPACE
               valueFrom:

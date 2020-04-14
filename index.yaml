@@ -2,6 +2,19 @@ apiVersion: v1
 entries:
   kubebox:
   - apiVersion: v1
+    appVersion: 0.8.0
+    created: "2020-04-14T16:33:35.765636464Z"
+    description: Terminal and Web console for Kubernetes
+    digest: 0a4fa7710648e3e9d5f8fbf38232e606a83f8d94b0b7d537f025faaadc52d6aa
+    home: https://github.com/astefanutti/kubebox
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubebox
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubebox-1.2.0/kubebox-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v1
     appVersion: 0.7.0
     created: "2020-03-18T19:50:12.548847209Z"
     description: Terminal and Web console for Kubernetes

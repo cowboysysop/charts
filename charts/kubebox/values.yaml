@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: astefanutti/kubebox
-  tag: 0.7.0-server
+  tag: 0.8.0-server
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

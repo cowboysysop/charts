@@ -1,9 +1,9 @@
 apiVersion: v1
-appVersion: 0.7.0
+appVersion: 0.8.0
 description: Terminal and Web console for Kubernetes
 home: https://github.com/astefanutti/kubebox
 maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: kubebox
-version: 1.1.0
+version: 1.2.0

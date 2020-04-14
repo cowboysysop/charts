@@ -16,6 +16,7 @@ This chart bootstraps a Kubebox deployment on a [Kubernetes](http://kubernetes.i
 ## Prerequisites
 
 - Kubernetes 1.12+
+- cAdvisor 0.36+ (you can use the [code-chris/cadvisor](https://hub.helm.sh/charts/code-chris/cadvisor) chart)
 - Helm 2.11+
 
 ## Installing
@@ -61,7 +62,7 @@ The following table lists all the configurable parameters expose by the Kubebox 
 |------------------------------|----------------------------------------------------------------------------------------------|-------------------------------------------------|
 | `replicaCount`               | Number of replicas                                                                           | `1`                                             |
 | `image.repository`           | Kubebox image name                                                                           | `astefanutti/kubebox`                           |
-| `image.tag`                  | Kubebox image tag                                                                            | `0.7.0-server`                                  |
+| `image.tag`                  | Kubebox image tag                                                                            | `0.8.0-server`                                  |
 | `image.pullPolicy`           | Image pull policy                                                                            | `IfNotPresent`                                  |
 | `imagePullSecrets`           | Docker registry secret names as an array                                                     | `[]`                                            |
 | `nameOverride`               | Partially override `kubebox.fullname` template with a string (will prepend the release name) | `nil`                                           |

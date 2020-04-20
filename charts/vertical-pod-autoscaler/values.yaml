@@ -10,8 +10,8 @@ admissionController:
   replicaCount: 1
 
   image:
-    repository: k8s.gcr.io/vpa-admission-controller
-    tag: 0.7.0
+    repository: us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-admission-controller
+    tag: 0.8.0
     pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -80,8 +80,8 @@ recommender:
   replicaCount: 1
 
   image:
-    repository: k8s.gcr.io/vpa-recommender
-    tag: 0.7.0
+    repository: us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-recommender
+    tag: 0.8.0
     pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -161,8 +161,8 @@ updater:
   replicaCount: 1
 
   image:
-    repository: k8s.gcr.io/vpa-updater
-    tag: 0.7.0
+    repository: us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-updater
+    tag: 0.8.0
     pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -210,10 +210,13 @@ updater:
   affinity: {}
 
   extraArgs:
-    # evict-after-oom-treshold: 10m0s
+    # evict-after-oom-threshold: 10m0s
+    # eviction-rate-burst: 1
+    # eviction-rate-limit: -1
     # eviction-tolerance: 0.5
     # min-replicas: 2
     # updater-interval: 1m0s
+    # use-admission-controller-status: true
     v: 2
 
   metrics:

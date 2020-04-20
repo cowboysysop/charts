@@ -47,3 +47,18 @@ spec:
                   type: array
                   items:
                     type: object
+                    properties:
+                      containerName:
+                        type: string
+                      mode:
+                        type: string
+                        enum: ["Auto", "Off"]
+                      minAllowed:
+                        type: object
+                      maxAllowed:
+                        type: object
+                      controlledResources:
+                        type: array
+                        items:
+                          type: string
+                          enum: ["cpu", "memory"]

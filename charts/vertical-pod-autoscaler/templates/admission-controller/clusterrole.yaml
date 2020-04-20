@@ -34,7 +34,7 @@ rules:
       - get
       - list
       - watch
-  # system:admission-controller
+  # system:vpa-admission-controller
   - apiGroups:
       - ""
     resources:
@@ -68,6 +68,16 @@ rules:
     resources:
       - verticalpodautoscalers
     verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - "coordination.k8s.io"
+    resources:
+      - leases
+    verbs:
+      - create
+      - update
       - get
       - list
       - watch

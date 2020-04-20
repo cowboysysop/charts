@@ -74,6 +74,7 @@ rules:
       - watch
   # system:evictioner
   - apiGroups:
+      - "apps"
       - "extensions"
     resources:
       - replicasets
@@ -85,3 +86,12 @@ rules:
       - pods/eviction
     verbs:
       - create
+  # system:vpa-status-reader
+  - apiGroups:
+      - "coordination.k8s.io"
+    resources:
+      - leases
+    verbs:
+      - get
+      - list
+      - watch

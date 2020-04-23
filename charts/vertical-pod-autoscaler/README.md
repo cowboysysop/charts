@@ -76,72 +76,89 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 
 ## Configuration
 
-The following table lists all the configurable parameters expose by the Vertical Pod Autoscaler chart and their default values.
+The following tables lists all the configurable parameters expose by the Vertical Pod Autoscaler chart and their default values.
 
-| Name                                             | Description                                                                                                  | Default                                                                             |
-|--------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| `imagePullSecrets`                               | Docker registry secret names as an array                                                                     | `[]`                                                                                |
-| `nameOverride`                                   | Partially override `vertical-pod-autoscaler.fullname` template with a string (will prepend the release name) | `nil`                                                                               |
-| `fullnameOverride`                               | Fully override `vertical-pod-autoscaler.fullname` template with a string                                     | `nil`                                                                               |
-| `admissionController.replicaCount`               | Number of replicas (admission controller component)                                                          | `1`                                                                                 |
-| `admissionController.image.repository`           | Vertical Pod Autoscaler image name (admission controller component)                                          | `us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-admission-controller`                 |
-| `admissionController.image.tag`                  | Vertical Pod Autoscaler image tag (admission controller component)                                           | `0.8.0`                                                                             |
-| `admissionController.image.pullPolicy`           | Image pull policy (admission controller component)                                                           | `IfNotPresent`                                                                      |
-| `admissionController.serviceAccount.create`      | Specify whether to create a ServiceAccount (admission controller component)                                  | `true`                                                                              |
-| `admissionController.serviceAccount.annotations` | ServiceAccount annotations (admission controller component)                                                  | `{}`                                                                                |
-| `admissionController.serviceAccount.name`        | The name of the ServiceAccount to create (admission controller component)                                    | Generated using the `vertical-pod-autoscaler.admissionController.fullname` template |
-| `admissionController.podAnnotations`             | Additional pod annotations (admission controller component)                                                  | `{}`                                                                                |
-| `admissionController.podLabels`                  | Additional pod labels (admission controller component)                                                       | `{}`                                                                                |
-| `admissionController.podSecurityContext`         | Pod security context (admission controller component)                                                        | `{}`                                                                                |
-| `admissionController.securityContext`            | Container security context (admission controller component)                                                  | `{}`                                                                                |
-| `admissionController.service.type`               | Kubernetes Service type (admission controller component)                                                     | `ClusterIP`                                                                         |
-| `admissionController.resources`                  | CPU/Memory resource requests/limits (admission controller component)                                         | `{}`                                                                                |
-| `admissionController.nodeSelector`               | Node labels for pod assignment (admission controller component)                                              | `{}`                                                                                |
-| `admissionController.tolerations`                | Tolerations for pod assignment (admission controller component)                                              | `[]`                                                                                |
-| `admissionController.affinity`                   | Map of node/pod affinities (admission controller component)                                                  | `{}`                                                                                |
-| `admissionController.extraArgs`                  | Additional container arguments (admission controller component)                                              | `{ v: 2 }`                                                                          |
-| `admissionController.metrics.service.type`       | Metrics Kubernetes Service type (admission controller component)                                             | `ClusterIP`                                                                         |
-| `admissionController.metrics.service.port`       | Metrics service port (admission controller component)                                                        | `8944`                                                                              |
-| `admissionController.tls.caCert`                 | TLS CA certificate (admission controller component)                                                          | Generated using the `genCA` function                                                |
-| `admissionController.tls.cert`                   | TLS certificate (admission controller component)                                                             | Generated using the `genSignedCert` function                                        |
-| `admissionController.tls.key`                    | TLS private key (admission controller component)                                                             | Generated using the `genSignedCert` function                                        |
-| `admissionController.tls.existingSecret`         | Name of existing TLS Secret to use (admission controller component)                                          | `nil`                                                                               |
-| `recommender.replicaCount`                       | Number of replicas (recommender component)                                                                   | `1`                                                                                 |
-| `recommender.image.repository`                   | Vertical Pod Autoscaler image name (recommender component)                                                   | `us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-recommender`                          |
-| `recommender.image.tag`                          | Vertical Pod Autoscaler image tag (recommender component)                                                    | `0.8.0`                                                                             |
-| `recommender.image.pullPolicy`                   | Image pull policy (recommender component)                                                                    | `IfNotPresent`                                                                      |
-| `recommender.serviceAccount.create`              | Specify whether to create a ServiceAccount (recommender component)                                           | `true`                                                                              |
-| `recommender.serviceAccount.annotations`         | ServiceAccount annotations (recommender component)                                                           | `{}`                                                                                |
-| `recommender.serviceAccount.name`                | The name of the ServiceAccount to create (recommender component)                                             | Generated using the `vertical-pod-autoscaler.recommender.fullname` template         |
-| `recommender.podAnnotations`                     | Additional pod annotations (recommender component)                                                           | `{}`                                                                                |
-| `recommender.podLabels`                          | Additional pod labels (recommender component)                                                                | `{}`                                                                                |
-| `recommender.podSecurityContext`                 | Pod security context (recommender component)                                                                 | `{}`                                                                                |
-| `recommender.securityContext`                    | Container security context (recommender component)                                                           | `{}`                                                                                |
-| `recommender.resources`                          | CPU/Memory resource requests/limits (recommender component)                                                  | `{}`                                                                                |
-| `recommender.nodeSelector`                       | Node labels for pod assignment (recommender component)                                                       | `{}`                                                                                |
-| `recommender.tolerations`                        | Tolerations for pod assignment (recommender component)                                                       | `[]`                                                                                |
-| `recommender.affinity`                           | Map of node/pod affinities (recommender component)                                                           | `{}`                                                                                |
-| `recommender.extraArgs`                          | Additional container arguments (recommender component)                                                       | `{ v: 2 }`                                                                          |
-| `recommender.metrics.service.type`               | Metrics Kubernetes Service type (recommender component)                                                      | `ClusterIP`                                                                         |
-| `recommender.metrics.service.port`               | Metrics service port (recommender component)                                                                 | `8942`                                                                              |
-| `updater.replicaCount`                           | Number of replicas (updater component)                                                                       | `1`                                                                                 |
-| `updater.image.repository`                       | Vertical Pod Autoscaler image name (updater component)                                                       | `us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-updater`                              |
-| `updater.image.tag`                              | Vertical Pod Autoscaler image tag (updater component)                                                        | `0.8.0`                                                                             |
-| `updater.image.pullPolicy`                       | Image pull policy (updater component)                                                                        | `IfNotPresent`                                                                      |
-| `updater.serviceAccount.create`                  | Specify whether to create a ServiceAccount (updater component)                                               | `true`                                                                              |
-| `updater.serviceAccount.annotations`             | ServiceAccount annotations (updater component)                                                               | `{}`                                                                                |
-| `updater.serviceAccount.name`                    | The name of the ServiceAccount to create (updater component)                                                 | Generated using the `vertical-pod-autoscaler.updater.fullname` template             |
-| `updater.podAnnotations`                         | Additional pod annotations (updater component)                                                               | `{}`                                                                                |
-| `updater.podLabels`                              | Additional pod labels (updater component)                                                                    | `{}`                                                                                |
-| `updater.podSecurityContext`                     | Pod security context (updater component)                                                                     | `{}`                                                                                |
-| `updater.securityContext`                        | Container security context (updater component)                                                               | `{}`                                                                                |
-| `updater.resources`                              | CPU/Memory resource requests/limits (updater component)                                                      | `{}`                                                                                |
-| `updater.nodeSelector`                           | Node labels for pod assignment (updater component)                                                           | `{}`                                                                                |
-| `updater.tolerations`                            | Tolerations for pod assignment (updater component)                                                           | `[]`                                                                                |
-| `updater.affinity`                               | Map of node/pod affinities (updater component)                                                               | `{}`                                                                                |
-| `updater.extraArgs`                              | Additional container arguments (updater component)                                                           | `{ v: 2 }`                                                                          |
-| `updater.metrics.service.type`                   | Metrics Kubernetes Service type (updater component)                                                          | `ClusterIP`                                                                         |
-| `updater.metrics.service.port`                   | Metrics service port (updater component)                                                                     | `8943`                                                                              |
+### Common parameters
+
+| Name               | Description                                                                                                  | Default |
+|--------------------|--------------------------------------------------------------------------------------------------------------|---------|
+| `imagePullSecrets` | Docker registry secret names as an array                                                                     | `[]`    |
+| `nameOverride`     | Partially override `vertical-pod-autoscaler.fullname` template with a string (will prepend the release name) | `nil`   |
+| `fullnameOverride` | Fully override `vertical-pod-autoscaler.fullname` template with a string                                     | `nil`   |
+
+### Admission controller parameters
+
+| Name                                             | Description                                | Default                                                                             |
+|--------------------------------------------------|--------------------------------------------|-------------------------------------------------------------------------------------|
+| `admissionController.replicaCount`               | Number of replicas                         | `1`                                                                                 |
+| `admissionController.image.repository`           | Image name                                 | `us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-admission-controller`                 |
+| `admissionController.image.tag`                  | Image tag                                  | `0.8.0`                                                                             |
+| `admissionController.image.pullPolicy`           | Image pull policy                          | `IfNotPresent`                                                                      |
+| `admissionController.serviceAccount.create`      | Specify whether to create a ServiceAccount | `true`                                                                              |
+| `admissionController.serviceAccount.annotations` | ServiceAccount annotations                 | `{}`                                                                                |
+| `admissionController.serviceAccount.name`        | The name of the ServiceAccount to create   | Generated using the `vertical-pod-autoscaler.admissionController.fullname` template |
+| `admissionController.podAnnotations`             | Additional pod annotations                 | `{}`                                                                                |
+| `admissionController.podLabels`                  | Additional pod labels                      | `{}`                                                                                |
+| `admissionController.podSecurityContext`         | Pod security context                       | `{}`                                                                                |
+| `admissionController.securityContext`            | Container security context                 | `{}`                                                                                |
+| `admissionController.service.type`               | Kubernetes Service type                    | `ClusterIP`                                                                         |
+| `admissionController.resources`                  | CPU/Memory resource requests/limits        | `{}`                                                                                |
+| `admissionController.nodeSelector`               | Node labels for pod assignment             | `{}`                                                                                |
+| `admissionController.tolerations`                | Tolerations for pod assignment             | `[]`                                                                                |
+| `admissionController.affinity`                   | Map of node/pod affinities                 | `{}`                                                                                |
+| `admissionController.extraArgs`                  | Additional container arguments             | `{ v: 2 }`                                                                          |
+| `admissionController.metrics.service.type`       | Metrics Kubernetes Service type            | `ClusterIP`                                                                         |
+| `admissionController.metrics.service.port`       | Metrics service port                       | `8944`                                                                              |
+| `admissionController.tls.caCert`                 | TLS CA certificate                         | Generated using the `genCA` function                                                |
+| `admissionController.tls.cert`                   | TLS certificate                            | Generated using the `genSignedCert` function                                        |
+| `admissionController.tls.key`                    | TLS private key                            | Generated using the `genSignedCert` function                                        |
+| `admissionController.tls.existingSecret`         | Name of existing TLS Secret to use         | `nil`                                                                               |
+
+### Recommender parameters
+
+| Name                                     | Description                                | Default                                                                     |
+|------------------------------------------|--------------------------------------------|-----------------------------------------------------------------------------|
+| `recommender.replicaCount`               | Number of replicas                         | `1`                                                                         |
+| `recommender.image.repository`           | Image name                                 | `us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-recommender`                  |
+| `recommender.image.tag`                  | Image tag                                  | `0.8.0`                                                                     |
+| `recommender.image.pullPolicy`           | Image pull policy                          | `IfNotPresent`                                                              |
+| `recommender.serviceAccount.create`      | Specify whether to create a ServiceAccount | `true`                                                                      |
+| `recommender.serviceAccount.annotations` | ServiceAccount annotations                 | `{}`                                                                        |
+| `recommender.serviceAccount.name`        | The name of the ServiceAccount to create   | Generated using the `vertical-pod-autoscaler.recommender.fullname` template |
+| `recommender.podAnnotations`             | Additional pod annotations                 | `{}`                                                                        |
+| `recommender.podLabels`                  | Additional pod labels                      | `{}`                                                                        |
+| `recommender.podSecurityContext`         | Pod security context                       | `{}`                                                                        |
+| `recommender.securityContext`            | Container security context                 | `{}`                                                                        |
+| `recommender.resources`                  | CPU/Memory resource requests/limits        | `{}`                                                                        |
+| `recommender.nodeSelector`               | Node labels for pod assignment             | `{}`                                                                        |
+| `recommender.tolerations`                | Tolerations for pod assignment             | `[]`                                                                        |
+| `recommender.affinity`                   | Map of node/pod affinities                 | `{}`                                                                        |
+| `recommender.extraArgs`                  | Additional container arguments             | `{ v: 2 }`                                                                  |
+| `recommender.metrics.service.type`       | Metrics Kubernetes Service type            | `ClusterIP`                                                                 |
+| `recommender.metrics.service.port`       | Metrics service port                       | `8942`                                                                      |
+
+### Updater parameters
+
+| Name                                 | Description                                | Default                                                                 |
+|--------------------------------------|--------------------------------------------|-------------------------------------------------------------------------|
+| `updater.replicaCount`               | Number of replicas                         | `1`                                                                     |
+| `updater.image.repository`           | Image name                                 | `us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-updater`                  |
+| `updater.image.tag`                  | Image tag                                  | `0.8.0`                                                                 |
+| `updater.image.pullPolicy`           | Image pull policy                          | `IfNotPresent`                                                          |
+| `updater.serviceAccount.create`      | Specify whether to create a ServiceAccount | `true`                                                                  |
+| `updater.serviceAccount.annotations` | ServiceAccount annotations                 | `{}`                                                                    |
+| `updater.serviceAccount.name`        | The name of the ServiceAccount to create   | Generated using the `vertical-pod-autoscaler.updater.fullname` template |
+| `updater.podAnnotations`             | Additional pod annotations                 | `{}`                                                                    |
+| `updater.podLabels`                  | Additional pod labels                      | `{}`                                                                    |
+| `updater.podSecurityContext`         | Pod security context                       | `{}`                                                                    |
+| `updater.securityContext`            | Container security context                 | `{}`                                                                    |
+| `updater.resources`                  | CPU/Memory resource requests/limits        | `{}`                                                                    |
+| `updater.nodeSelector`               | Node labels for pod assignment             | `{}`                                                                    |
+| `updater.tolerations`                | Tolerations for pod assignment             | `[]`                                                                    |
+| `updater.affinity`                   | Map of node/pod affinities                 | `{}`                                                                    |
+| `updater.extraArgs`                  | Additional container arguments             | `{ v: 2 }`                                                              |
+| `updater.metrics.service.type`       | Metrics Kubernetes Service type            | `ClusterIP`                                                             |
+| `updater.metrics.service.port`       | Metrics service port                       | `8943`                                                                  |
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

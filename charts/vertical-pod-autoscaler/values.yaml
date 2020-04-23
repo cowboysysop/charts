@@ -23,10 +23,10 @@ admissionController:
     # If not set and create is true, a name is generated using the fullname template
     name:
 
-  # Additional pod annotations (admission controller component)
+  # Additional pod annotations
   podAnnotations: {}
 
-  # Additional pod labels (admission controller component)
+  # Additional pod labels
   podLabels: {}
 
   podSecurityContext: {}
@@ -93,10 +93,10 @@ recommender:
     # If not set and create is true, a name is generated using the fullname template
     name:
 
-  # Additional pod annotations (recommender component)
+  # Additional pod annotations
   podAnnotations: {}
 
-  # Additional pod labels (recommender component)
+  # Additional pod labels
   podLabels: {}
 
   podSecurityContext: {}
@@ -174,10 +174,10 @@ updater:
     # If not set and create is true, a name is generated using the fullname template
     name:
 
-  # Additional pod annotations (updater component)
+  # Additional pod annotations
   podAnnotations: {}
 
-  # Additional pod labels (updater component)
+  # Additional pod labels
   podLabels: {}
 
   podSecurityContext: {}

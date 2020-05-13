@@ -61,7 +61,7 @@ The following table lists all the configurable parameters expose by the Whoami c
 |------------------------------|---------------------------------------------------------------------------------------------|------------------------------------------------|
 | `replicaCount`               | Number of replicas                                                                          | `1`                                            |
 | `image.repository`           | Whoami image name                                                                           | `containous/whoami`                            |
-| `image.tag`                  | Whoami image tag                                                                            | `v1.4.0`                                       |
+| `image.tag`                  | Whoami image tag                                                                            | `v1.5.0`                                       |
 | `image.pullPolicy`           | Image pull policy                                                                           | `IfNotPresent`                                 |
 | `imagePullSecrets`           | Docker registry secret names as an array                                                    | `[]`                                           |
 | `nameOverride`               | Partially override `whoami.fullname` template with a string (will prepend the release name) | `nil`                                          |
@@ -85,6 +85,7 @@ The following table lists all the configurable parameters expose by the Whoami c
 | `nodeSelector`               | Node labels for pod assignment                                                              | `{}`                                           |
 | `tolerations`                | Tolerations for pod assignment                                                              | `[]`                                           |
 | `affinity`                   | Map of node/pod affinities                                                                  | `{}`                                           |
+| `extraArgs`                  | Additional container arguments                                                              | `{}`                                           |
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

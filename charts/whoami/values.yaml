@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: containous/whoami
-  tag: v1.4.0
+  tag: v1.5.0
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -73,3 +73,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+extraArgs: {}
+  # name: ""

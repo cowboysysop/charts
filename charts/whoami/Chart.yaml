@@ -1,9 +1,9 @@
 apiVersion: v1
-appVersion: 1.4.0
+appVersion: 1.5.0
 description: Tiny Go webserver that prints os information and HTTP request to output
 home: https://github.com/containous/whoami
 maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: whoami
-version: 1.1.0
+version: 1.2.0

@@ -281,6 +281,20 @@ entries:
     version: 1.0.0
   whoami:
   - apiVersion: v1
+    appVersion: 1.5.0
+    created: "2020-05-13T07:38:32.092510685Z"
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: eb9e1e6e75e55872efc8836d5b04c108c90726d5e1be9b0e5d3e8f2eb7efdd35
+    home: https://github.com/containous/whoami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: whoami
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/whoami-1.2.0/whoami-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v1
     appVersion: 1.4.0
     created: "2020-03-18T19:50:12.952247605Z"
     description: Tiny Go webserver that prints os information and HTTP request to

@@ -31,7 +31,8 @@ spec:
       properties:
         spec:
           type: object
-          required: []
+          # Compatibility with reconciliation tools such as Argo CD
+          # required: []
           properties:
             targetRef:
               type: object

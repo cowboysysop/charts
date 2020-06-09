@@ -6,4 +6,4 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: vertical-pod-autoscaler
-version: 1.4.2
+version: 1.4.3

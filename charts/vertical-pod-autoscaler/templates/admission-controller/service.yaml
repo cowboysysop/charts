@@ -12,6 +12,6 @@ spec:
     - port: 443
       targetPort: http
       protocol: TCP
-      name: http
+      name: https
   selector:
     {{- include "vertical-pod-autoscaler.admissionController.selectorLabels" . | nindent 4 }}

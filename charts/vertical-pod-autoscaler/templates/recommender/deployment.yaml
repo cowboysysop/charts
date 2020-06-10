@@ -42,14 +42,28 @@ spec:
             - name: metrics
               containerPort: 8942
               protocol: TCP
+          {{- if .Values.recommender.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: /metrics
               port: metrics
+            initialDelaySeconds: {{ .Values.recommender.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.recommender.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.recommender.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.recommender.livenessProbe.failureThreshold }}
+            successThreshold: {{ .Values.recommender.livenessProbe.successThreshold }}
+          {{- end }}
+          {{- if .Values.recommender.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
               path: /metrics
               port: metrics
+            initialDelaySeconds: {{ .Values.recommender.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.recommender.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.recommender.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.recommender.readinessProbe.failureThreshold }}
+            successThreshold: {{ .Values.recommender.readinessProbe.successThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.recommender.resources | nindent 12 }}
       {{- with .Values.recommender.nodeSelector }}

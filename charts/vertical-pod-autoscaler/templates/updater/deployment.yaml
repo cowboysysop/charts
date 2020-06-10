@@ -42,14 +42,28 @@ spec:
             - name: metrics
               containerPort: 8943
               protocol: TCP
+          {{- if .Values.updater.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: /metrics
               port: metrics
+            initialDelaySeconds: {{ .Values.updater.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.updater.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.updater.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.updater.livenessProbe.failureThreshold }}
+            successThreshold: {{ .Values.updater.livenessProbe.successThreshold }}
+          {{- end }}
+          {{- if .Values.updater.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
               path: /metrics
               port: metrics
+            initialDelaySeconds: {{ .Values.updater.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.updater.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.updater.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.updater.readinessProbe.failureThreshold }}
+            successThreshold: {{ .Values.updater.readinessProbe.successThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.updater.resources | nindent 12 }}
       {{- with .Values.updater.nodeSelector }}

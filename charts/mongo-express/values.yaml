@@ -39,6 +39,44 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+livenessProbe:
+  # Enable liveness probe
+  enabled: true
+
+  # Delay before the liveness probe is initiated
+  initialDelaySeconds: 0
+
+  # How often to perform the liveness probe
+  periodSeconds: 10
+
+  # When the liveness probe times out
+  timeoutSeconds: 1
+
+  # Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
+  failureThreshold: 3
+
+  # Minimum consecutive successes for the liveness probe to be considered successful after having failed
+  successThreshold: 1
+
+readinessProbe:
+  # Enable readiness probe
+  enabled: true
+
+  # Delay before the readiness probe is initiated
+  initialDelaySeconds: 0
+
+  # How often to perform the readiness probe
+  periodSeconds: 10
+
+  # When the readiness probe times out
+  timeoutSeconds: 1
+
+  # Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
+  failureThreshold: 3
+
+  # Minimum consecutive successes for the readiness probe to be considered successful after having failed
+  successThreshold: 1
+
 service:
   type: ClusterIP
   port: 8081

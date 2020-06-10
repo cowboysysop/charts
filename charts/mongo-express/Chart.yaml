@@ -7,4 +7,4 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: mongo-express
-version: 1.1.0
+version: 1.2.0

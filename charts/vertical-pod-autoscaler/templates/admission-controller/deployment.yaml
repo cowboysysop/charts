@@ -54,14 +54,28 @@ spec:
             - name: metrics
               containerPort: 8944
               protocol: TCP
+          {{- if .Values.admissionController.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: /metrics
               port: metrics
+            initialDelaySeconds: {{ .Values.admissionController.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.admissionController.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.admissionController.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.admissionController.livenessProbe.failureThreshold }}
+            successThreshold: {{ .Values.admissionController.livenessProbe.successThreshold }}
+          {{- end }}
+          {{- if .Values.admissionController.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
               path: /metrics
               port: metrics
+            initialDelaySeconds: {{ .Values.admissionController.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.admissionController.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.admissionController.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.admissionController.readinessProbe.failureThreshold }}
+            successThreshold: {{ .Values.admissionController.readinessProbe.successThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.admissionController.resources | nindent 12 }}
           volumeMounts:

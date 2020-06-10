@@ -3,6 +3,19 @@ entries:
   kubebox:
   - apiVersion: v1
     appVersion: 0.8.0
+    created: "2020-06-10T15:07:43.173762974Z"
+    description: Terminal and Web console for Kubernetes
+    digest: af6aef051b8f5e2d182d5c0d8b32082883a2b1535633495a2675242b87a975a5
+    home: https://github.com/astefanutti/kubebox
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubebox
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubebox-1.3.0/kubebox-1.3.0.tgz
+    version: 1.3.0
+  - apiVersion: v1
+    appVersion: 0.8.0
     created: "2020-04-14T16:33:35.765636464Z"
     description: Terminal and Web console for Kubernetes
     digest: 0a4fa7710648e3e9d5f8fbf38232e606a83f8d94b0b7d537f025faaadc52d6aa
@@ -67,6 +80,20 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubebox-1.0.0/kubebox-1.0.0.tgz
     version: 1.0.0
   kubeview:
+  - apiVersion: v1
+    appVersion: 0.1.11
+    created: "2020-06-10T15:07:43.270272502Z"
+    description: Kubernetes cluster visualiser and graphical explorer
+    digest: 72a1cdbde18ee90a9e2b1c35737b1466769a336bf82fc4eaf270fd0f416f5152
+    home: https://github.com/benc-uk/kubeview
+    icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubeview
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubeview-1.3.0/kubeview-1.3.0.tgz
+    version: 1.3.0
   - apiVersion: v1
     appVersion: 0.1.11
     created: "2020-03-18T19:50:12.655713146Z"
@@ -154,6 +181,25 @@ entries:
   mongo-express:
   - apiVersion: v1
     appVersion: 0.54.0
+    created: "2020-06-10T15:07:43.372379909Z"
+    dependencies:
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://kubernetes-charts.storage.googleapis.com/
+      version: 7.8.4
+    description: Web-based MongoDB admin interface, written with Node.js and express
+    digest: d7a34db73c1bbb4ba6d9c602b2d651162bced5ece0738dd21ed07e33ce9d4743
+    home: https://github.com/mongo-express/mongo-express
+    icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mongo-express
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mongo-express-1.2.0/mongo-express-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v1
+    appVersion: 0.54.0
     created: "2020-03-18T19:50:12.752415461Z"
     description: Web-based MongoDB admin interface, written with Node.js and express
     digest: b7fadfb8c7147a1def5a5456e21d650f240b3755415f20be2062a462ffcb45b5
@@ -195,6 +241,20 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/mongo-express-1.0.0/mongo-express-1.0.0.tgz
     version: 1.0.0
   vertical-pod-autoscaler:
+  - apiVersion: v1
+    appVersion: 0.8.0
+    created: "2020-06-10T15:07:43.476388808Z"
+    description: Set of components that automatically adjust the amount of CPU and
+      memory requested by pods running in the Kubernetes Cluster
+    digest: 461f118800364f162014c8260c9f5ac0c8af56fa61aaf1e969f858af37577e63
+    home: https://github.com/kubernetes/autoscaler
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: vertical-pod-autoscaler
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-1.5.0/vertical-pod-autoscaler-1.5.0.tgz
+    version: 1.5.0
   - apiVersion: v1
     appVersion: 0.8.0
     created: "2020-06-09T09:51:29.881282394Z"
@@ -308,6 +368,20 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-1.0.0/vertical-pod-autoscaler-1.0.0.tgz
     version: 1.0.0
   whoami:
+  - apiVersion: v1
+    appVersion: 1.5.0
+    created: "2020-06-10T15:07:43.569622249Z"
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: b26ce0abd45f08ce418ad5ee3e99a69f04d7ef983b934a9e023c0eec1773dc3a
+    home: https://github.com/containous/whoami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: whoami
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/whoami-1.3.0/whoami-1.3.0.tgz
+    version: 1.3.0
   - apiVersion: v1
     appVersion: 1.5.0
     created: "2020-05-13T07:38:32.092510685Z"

@@ -8,8 +8,8 @@ spec:
   type: {{ .Values.recommender.metrics.service.type }}
   ports:
     - port: {{ .Values.recommender.metrics.service.port }}
-      targetPort: metrics
+      targetPort: http-metrics
       protocol: TCP
-      name: metrics
+      name: http-metrics
   selector:
     {{- include "vertical-pod-autoscaler.recommender.selectorLabels" . | nindent 4 }}

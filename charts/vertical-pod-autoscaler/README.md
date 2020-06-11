@@ -49,6 +49,10 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 2.0.0
+
+The port names have been changed to be compatible with Istio service mesh.
+
 ## Uninstalling
 
 Delete the `vpa-webhook-config` mutating webhook configuration automatically created by Vertical Pod Autoscaler admission controller component using:

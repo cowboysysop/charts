@@ -8,8 +8,8 @@ spec:
   type: {{ .Values.admissionController.metrics.service.type }}
   ports:
     - port: {{ .Values.admissionController.metrics.service.port }}
-      targetPort: metrics
+      targetPort: http-metrics
       protocol: TCP
-      name: metrics
+      name: http-metrics
   selector:
     {{- include "vertical-pod-autoscaler.admissionController.selectorLabels" . | nindent 4 }}

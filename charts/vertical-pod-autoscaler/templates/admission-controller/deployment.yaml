@@ -48,17 +48,17 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
           ports:
-            - name: http
+            - name: https
               containerPort: 8000
               protocol: TCP
-            - name: metrics
+            - name: http-metrics
               containerPort: 8944
               protocol: TCP
           {{- if .Values.admissionController.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: /metrics
-              port: metrics
+              port: http-metrics
             initialDelaySeconds: {{ .Values.admissionController.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.admissionController.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.admissionController.livenessProbe.timeoutSeconds }}
@@ -69,7 +69,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /metrics
-              port: metrics
+              port: http-metrics
             initialDelaySeconds: {{ .Values.admissionController.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.admissionController.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.admissionController.readinessProbe.timeoutSeconds }}

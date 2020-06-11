@@ -8,8 +8,8 @@ spec:
   type: {{ .Values.updater.metrics.service.type }}
   ports:
     - port: {{ .Values.updater.metrics.service.port }}
-      targetPort: metrics
+      targetPort: http-metrics
       protocol: TCP
-      name: metrics
+      name: http-metrics
   selector:
     {{- include "vertical-pod-autoscaler.updater.selectorLabels" . | nindent 4 }}

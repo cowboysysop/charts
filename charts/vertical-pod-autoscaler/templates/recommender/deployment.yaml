@@ -39,14 +39,14 @@ spec:
             - --{{ $key }}={{ $value }}
             {{- end }}
           ports:
-            - name: metrics
+            - name: http-metrics
               containerPort: 8942
               protocol: TCP
           {{- if .Values.recommender.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
               path: /metrics
-              port: metrics
+              port: http-metrics
             initialDelaySeconds: {{ .Values.recommender.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.recommender.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.recommender.livenessProbe.timeoutSeconds }}
@@ -57,7 +57,7 @@ spec:
           readinessProbe:
             httpGet:
               path: /metrics
-              port: metrics
+              port: http-metrics
             initialDelaySeconds: {{ .Values.recommender.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.recommender.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.recommender.readinessProbe.timeoutSeconds }}

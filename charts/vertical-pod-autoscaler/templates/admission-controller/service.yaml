@@ -10,8 +10,8 @@ spec:
   ports:
     # - port: {{ .Values.admissionController.service.port }}
     - port: 443
-      targetPort: http
+      targetPort: https
       protocol: TCP
-      name: http
+      name: https
   selector:
     {{- include "vertical-pod-autoscaler.admissionController.selectorLabels" . | nindent 4 }}

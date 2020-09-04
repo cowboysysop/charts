@@ -86,8 +86,14 @@ The following table lists all the configurable parameters expose by the Kubebox 
 | `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                                             |
 | `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                             |
 | `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                             |
-| `service.type`                       | Kubernetes Service type                                                                               | `ClusterIP`                                     |
-| `service.port`                       | Kubebox service port                                                                                  | `8080`                                          |
+| `service.annotations`                | Service annotations                                                                                   | {}                                              |
+| `service.type`                       | Service type                                                                                          | `ClusterIP`                                     |
+| `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                                           |
+| `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                                           |
+| `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                                           |
+| `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                                       |
+| `service.port`                       | Service port                                                                                          | `8080`                                          |
+| `service.nodePort`                   | Service node port when service type is LoadBalancer or NodePort                                       | `nil`                                           |
 | `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                                         |
 | `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                            |
 | `ingress.hosts[0].name`              | Hostname to your Kubebox installation                                                                 | `kubebox.local`                                 |

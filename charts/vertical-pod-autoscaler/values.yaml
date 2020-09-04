@@ -79,7 +79,16 @@ admissionController:
     successThreshold: 1
 
   service:
+    # Service annotations
+    annotations: {}
+
+    # Service type
     type: ClusterIP
+
+    # Static cluster IP address or None for headless service when service type is ClusterIP
+    # clusterIP: 10.43.0.100
+
+    # Service port
     # port: 8000
 
   resources: {}
@@ -105,7 +114,16 @@ admissionController:
 
   metrics:
     service:
+      # Metrics service annotations
+      annotations: {}
+
+      # Metrics service type
       type: ClusterIP
+
+      # Metrics static cluster IP address or None for headless service when service type is ClusterIP
+      # clusterIP: 10.43.0.100
+
+      # Metrics service port
       port: 8944
 
   tls:
@@ -230,7 +248,16 @@ recommender:
 
   metrics:
     service:
+      # Metrics service annotations
+      annotations: {}
+
+      # Metrics service type
       type: ClusterIP
+
+      # Metrics static cluster IP address or None for headless service when service type is ClusterIP
+      # clusterIP: 10.43.0.100
+
+      # Metrics service port
       port: 8942
 
 updater:
@@ -335,5 +362,14 @@ updater:
 
   metrics:
     service:
+      # Metrics service annotations
+      annotations: {}
+
+      # Metrics service type
       type: ClusterIP
+
+      # Metrics static cluster IP address or None for headless service when service type is ClusterIP
+      # clusterIP: 10.43.0.100
+
+      # Metrics service port
       port: 8943

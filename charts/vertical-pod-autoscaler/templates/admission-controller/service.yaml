@@ -5,8 +5,15 @@ metadata:
   name: vpa-webhook
   labels:
     {{- include "vertical-pod-autoscaler.admissionController.labels" . | nindent 4 }}
+  {{- with .Values.admissionController.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.admissionController.service.type }}
+  {{- if and (eq .Values.admissionController.service.type "ClusterIP") .Values.admissionController.service.clusterIP }}
+  clusterIP: {{ .Values.admissionController.service.clusterIP }}
+  {{- end }}
   ports:
     # - port: {{ .Values.admissionController.service.port }}
     - port: 443

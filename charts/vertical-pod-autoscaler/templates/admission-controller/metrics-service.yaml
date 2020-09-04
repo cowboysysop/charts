@@ -4,8 +4,15 @@ metadata:
   name: {{ include "vertical-pod-autoscaler.admissionController.metrics.fullname" . }}
   labels:
     {{- include "vertical-pod-autoscaler.admissionController.labels" . | nindent 4 }}
+  {{- with .Values.admissionController.metrics.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.admissionController.metrics.service.type }}
+  {{- if and (eq .Values.admissionController.metrics.service.type "ClusterIP") .Values.admissionController.metrics.service.clusterIP }}
+  clusterIP: {{ .Values.admissionController.metrics.service.clusterIP }}
+  {{- end }}
   ports:
     - port: {{ .Values.admissionController.metrics.service.port }}
       targetPort: http-metrics

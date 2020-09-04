@@ -78,8 +78,30 @@ readinessProbe:
   successThreshold: 1
 
 service:
+  # Service annotations
+  annotations: {}
+
+  # Service type
   type: ClusterIP
+
+  # Static cluster IP address or None for headless service when service type is ClusterIP
+  # clusterIP: 10.43.0.100
+
+  # Static load balancer IP address when service type is LoadBalancer
+  # loadBalancerIP: 10.0.0.100
+
+  # Source IP address ranges when service type is LoadBalancer
+  # loadBalancerSourceRanges:
+  #   - 10.0.0.0/24
+
+  # External traffic routing policy when service type is LoadBalancer or NodePort
+  externalTrafficPolicy: Cluster
+
+  # Service port
   port: 80
+
+  # Service node port when service type is LoadBalancer or NodePort
+  # nodePort: 30000
 
 ingress:
   enabled: false

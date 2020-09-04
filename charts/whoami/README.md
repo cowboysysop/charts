@@ -91,7 +91,7 @@ The following table lists all the configurable parameters expose by the Whoami c
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                                          |
 | `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                                          |
 | `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                                      |
-| `service.port`                       | Service port                                                                                          | `8081`                                         |
+| `service.port`                       | Service port                                                                                          | `80`                                           |
 | `service.nodePort`                   | Service node port when service type is LoadBalancer or NodePort                                       | `nil`                                          |
 | `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                                        |
 | `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                           |

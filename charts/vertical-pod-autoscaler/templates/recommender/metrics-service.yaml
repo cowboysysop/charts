@@ -4,8 +4,15 @@ metadata:
   name: {{ include "vertical-pod-autoscaler.recommender.metrics.fullname" . }}
   labels:
     {{- include "vertical-pod-autoscaler.recommender.labels" . | nindent 4 }}
+  {{- with .Values.recommender.metrics.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.recommender.metrics.service.type }}
+  {{- if and (eq .Values.recommender.metrics.service.type "ClusterIP") .Values.recommender.metrics.service.clusterIP }}
+  clusterIP: {{ .Values.recommender.metrics.service.clusterIP }}
+  {{- end }}
   ports:
     - port: {{ .Values.recommender.metrics.service.port }}
       targetPort: http-metrics

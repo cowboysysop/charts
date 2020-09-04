@@ -4,8 +4,15 @@ metadata:
   name: {{ include "vertical-pod-autoscaler.updater.metrics.fullname" . }}
   labels:
     {{- include "vertical-pod-autoscaler.updater.labels" . | nindent 4 }}
+  {{- with .Values.updater.metrics.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.updater.metrics.service.type }}
+  {{- if and (eq .Values.updater.metrics.service.type "ClusterIP") .Values.updater.metrics.service.clusterIP }}
+  clusterIP: {{ .Values.updater.metrics.service.clusterIP }}
+  {{- end }}
   ports:
     - port: {{ .Values.updater.metrics.service.port }}
       targetPort: http-metrics

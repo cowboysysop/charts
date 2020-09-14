@@ -95,7 +95,7 @@ The following table lists all the configurable parameters expose by the Mongo Ex
 | `service.nodePort`                   | Service node port when service type is LoadBalancer or NodePort                                       | `nil`                                                 |
 | `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                                               |
 | `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                                  |
-| `ingress.hosts[0].name`              | Hostname to your Mongo Express installation                                                           | `mongo-express.local`                                 |
+| `ingress.hosts[0].host`              | Hostname to your Mongo Express installation                                                           | `mongo-express.local`                                 |
 | `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[]`                                                  |
 | `ingress.tls[0].secretName`          | TLS Secret (certificates)                                                                             | `nil`                                                 |
 | `ingress.tls[0].hosts[0]`            | TLS hosts                                                                                             | `nil`                                                 |

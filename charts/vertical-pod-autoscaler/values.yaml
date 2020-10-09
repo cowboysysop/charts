@@ -10,8 +10,8 @@ admissionController:
   replicaCount: 1
 
   image:
-    repository: us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-admission-controller
-    tag: 0.8.0
+    repository: k8s.gcr.io/autoscaling/vpa-admission-controller
+    tag: 0.9.0
     pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -29,8 +29,10 @@ admissionController:
   # Additional pod labels
   podLabels: {}
 
-  podSecurityContext: {}
+  podSecurityContext:
     # fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 65534
 
   securityContext: {}
     # capabilities:
@@ -111,6 +113,8 @@ admissionController:
 
   extraArgs:
     v: 2
+    # vpa-object-namespace: ""
+    # webhook-timeout-seconds: 30
 
   metrics:
     service:
@@ -136,8 +140,8 @@ recommender:
   replicaCount: 1
 
   image:
-    repository: us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-recommender
-    tag: 0.8.0
+    repository: k8s.gcr.io/autoscaling/vpa-recommender
+    tag: 0.9.0
     pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -155,8 +159,10 @@ recommender:
   # Additional pod labels
   podLabels: {}
 
-  podSecurityContext: {}
+  podSecurityContext:
     # fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 65534
 
   securityContext: {}
     # capabilities:
@@ -225,12 +231,17 @@ recommender:
   extraArgs:
     # checkpoints-gc-interval: 10m0s
     # checkpoints-timeout: 1m0s
+    # cpu-histogram-decay-half-life: 24h0m0s
     # container-name-label: name
     # container-namespace-label: namespace
     # container-pod-name-label: pod_name
     # history-length: 8d
+    # history-resolution: 1h
     # kube-api-burst: 10
     # kube-api-qps: 5
+    # memory-aggregation-interval: 24h0m0s
+    # memory-aggregation-interval-count: 8
+    # memory-histogram-decay-half-life: 24h0m0s
     # memory-saver: false
     # metric-for-pod-labels: up{job="kubernetes-pods"}
     # min-checkpoints: 10
@@ -241,10 +252,12 @@ recommender:
     # pod-recommendation-min-memory-mb: 250
     # prometheus-address: ""
     # prometheus-cadvisor-job-name: kubernetes-cadvisor
+    # prometheus-query-timeout: 5m
     # recommendation-margin-fraction: 0.15
     # recommender-interval: 1m0s
     # storage: checkpoint
     v: 2
+    # vpa-object-namespace: ""
 
   metrics:
     service:
@@ -264,8 +277,8 @@ updater:
   replicaCount: 1
 
   image:
-    repository: us.gcr.io/k8s-artifacts-prod/autoscaling/vpa-updater
-    tag: 0.8.0
+    repository: k8s.gcr.io/autoscaling/vpa-updater
+    tag: 0.9.0
     pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -283,8 +296,10 @@ updater:
   # Additional pod labels
   podLabels: {}
 
-  podSecurityContext: {}
+  podSecurityContext:
     # fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 65534
 
   securityContext: {}
     # capabilities:
@@ -359,6 +374,7 @@ updater:
     # updater-interval: 1m0s
     # use-admission-controller-status: true
     v: 2
+    # vpa-object-namespace: ""
 
   metrics:
     service:

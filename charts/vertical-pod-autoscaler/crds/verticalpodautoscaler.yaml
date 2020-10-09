@@ -3,6 +3,7 @@ kind: CustomResourceDefinition
 metadata:
   name: verticalpodautoscalers.autoscaling.k8s.io
   annotations:
+    api-approved.kubernetes.io: https://github.com/kubernetes/kubernetes/pull/63797
     helm.sh/hook: crd-install
     helm.sh/hook-delete-policy: before-hook-creation
 spec:
@@ -51,6 +52,9 @@ spec:
                     properties:
                       containerName:
                         type: string
+                      controlledValues:
+                        type: string
+                        enum: ["RequestsAndLimits", "RequestsOnly"]
                       mode:
                         type: string
                         enum: ["Auto", "Off"]

@@ -1,0 +1,10 @@
+apiVersion: v1
+appVersion: 0.6.0
+description: Enables running a server to display Lighthouse CI results
+home: https://github.com/GoogleChrome/lighthouse-ci
+icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: lighthouse-ci
+version: 1.0.0

@@ -232,6 +232,21 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
+  lighthouse-ci:
+  - apiVersion: v1
+    appVersion: 0.6.0
+    created: "2020-11-02T20:17:54.520621905Z"
+    description: Enables running a server to display Lighthouse CI results
+    digest: ae69326accafbfc03638453b8dd77c6ff359f45819a4ea59388e38e76445616c
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-1.0.0/lighthouse-ci-1.0.0.tgz
+    version: 1.0.0
   mongo-express:
   - apiVersion: v1
     appVersion: 0.54.0

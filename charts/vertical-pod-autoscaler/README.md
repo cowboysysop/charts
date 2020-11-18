@@ -6,7 +6,7 @@
 
 ```bash
 $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
-$ helm install cowboysysop/vertical-pod-autoscaler
+$ helm install my-release cowboysysop/vertical-pod-autoscaler
 ```
 
 ## Introduction
@@ -17,7 +17,7 @@ This chart bootstraps a Vertical Pod Autoscaler deployment on a [Kubernetes](htt
 
 - Kubernetes 1.16+
 - Metrics Server 0.2+ (you can use the [stable/metrics-server](https://hub.helm.sh/charts/stable/metrics-server) chart)
-- Helm 2.11+
+- Helm 3.0+
 
 ## Installing
 
@@ -25,7 +25,7 @@ Install the chart using:
 
 ```bash
 $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
-$ helm install --name my-release cowboysysop/vertical-pod-autoscaler
+$ helm install my-release cowboysysop/vertical-pod-autoscaler
 ```
 
 These commands deploy Vertical Pod Autoscaler on the Kubernetes cluster in the default configuration and with the release name `my-release`. The deployment configuration can be customized by specifying the customization parameters with the `helm install` command using the `--values` or `--set` arguments. Find more information in the [configuration section](#configuration) of this document.
@@ -49,6 +49,12 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 3.0.0
+
+The chart is no more compatible with Helm 2.
+
+Refer to the [Helm documentation](https://helm.sh/docs/topics/v2_v3_migration/) for more information.
+
 ### Upgrading to version 2.0.0
 
 The port names have been changed to be compatible with Istio service mesh.
@@ -64,7 +70,7 @@ $ kubectl delete mutatingwebhookconfiguration vpa-webhook-config
 Uninstall the `my-release` deployment using:
 
 ```bash
-$ helm delete my-release
+$ helm uninstall my-release
 ```
 
 The command deletes the release named `my-release` and frees all the kubernetes resources associated with the release.
@@ -211,7 +217,7 @@ The following tables lists all the configurable parameters expose by the Vertica
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
-$ helm install --name my-release \
+$ helm install my-release \
     --set nameOverride=my-name cowboysysop/vertical-pod-autoscaler
 ```
 
@@ -220,7 +226,7 @@ The above command sets the `nameOverride` to `my-name`.
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```bash
-$ helm install --name my-release \
+$ helm install my-release \
     --values values.yaml cowboysysop/vertical-pod-autoscaler
 ```
 

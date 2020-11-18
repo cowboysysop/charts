@@ -1,3 +1,4 @@
 chart-repos:
   - stable=https://kubernetes-charts.storage.googleapis.com/
   - incubator=https://kubernetes-charts-incubator.storage.googleapis.com/
+  - bitnami=https://charts.bitnami.com/bitnami/

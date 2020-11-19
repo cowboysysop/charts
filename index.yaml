@@ -1,6 +1,19 @@
 apiVersion: v1
 entries:
   kubebox:
+  - apiVersion: v2
+    appVersion: 0.8.0
+    created: "2020-11-19T21:20:40.886015151Z"
+    description: Terminal and Web console for Kubernetes
+    digest: 805eb49562ded39fde40bb8b8bc6ca3ae2a4f7bf5a37392dfb3dbd2167d49adb
+    home: https://github.com/astefanutti/kubebox
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubebox
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubebox-2.0.0/kubebox-2.0.0.tgz
+    version: 2.0.0
   - apiVersion: v1
     appVersion: 0.8.0
     created: "2020-10-01T11:03:05.897010248Z"
@@ -106,6 +119,20 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubebox-1.0.0/kubebox-1.0.0.tgz
     version: 1.0.0
   kubeview:
+  - apiVersion: v2
+    appVersion: 0.1.11
+    created: "2020-11-19T21:20:41.001143467Z"
+    description: Kubernetes cluster visualiser and graphical explorer
+    digest: b569328f606be23951d800065e49d3a9e9e628e7f3442ba814fbf4ab99411f32
+    home: https://github.com/benc-uk/kubeview
+    icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubeview
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubeview-2.0.0/kubeview-2.0.0.tgz
+    version: 2.0.0
   - apiVersion: v1
     appVersion: 0.1.11
     created: "2020-10-01T11:03:06.025750708Z"
@@ -233,6 +260,20 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
   lighthouse-ci:
+  - apiVersion: v2
+    appVersion: 0.6.0
+    created: "2020-11-19T21:20:41.093792016Z"
+    description: Enables running a server to display Lighthouse CI results
+    digest: 90b5f1fe57001ca49628ae5265c14d889a2cea236ded5757441624320845fef9
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-2.0.0/lighthouse-ci-2.0.0.tgz
+    version: 2.0.0
   - apiVersion: v1
     appVersion: 0.6.0
     created: "2020-11-02T20:17:54.520621905Z"
@@ -248,6 +289,25 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-1.0.0/lighthouse-ci-1.0.0.tgz
     version: 1.0.0
   mongo-express:
+  - apiVersion: v2
+    appVersion: 0.54.0
+    created: "2020-11-19T21:20:41.198181084Z"
+    dependencies:
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 10.0.5
+    description: Web-based MongoDB admin interface, written with Node.js and express
+    digest: 6a0d4fe1c979b8e0d55c173144769b1737333a6369501c96a9b43355f75c90c5
+    home: https://github.com/mongo-express/mongo-express
+    icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mongo-express
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mongo-express-2.0.0/mongo-express-2.0.0.tgz
+    version: 2.0.0
   - apiVersion: v1
     appVersion: 0.54.0
     created: "2020-10-01T11:03:06.149331353Z"
@@ -348,6 +408,20 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/mongo-express-1.0.0/mongo-express-1.0.0.tgz
     version: 1.0.0
   vertical-pod-autoscaler:
+  - apiVersion: v2
+    appVersion: 0.9.0
+    created: "2020-11-19T21:20:41.309116519Z"
+    description: Set of components that automatically adjust the amount of CPU and
+      memory requested by pods running in the Kubernetes Cluster
+    digest: 402bb187b67cdc0f7f92b9b3c1313c9968ddbd0a38cae2419cef7237b015ad1d
+    home: https://github.com/kubernetes/autoscaler
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: vertical-pod-autoscaler
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-3.0.0/vertical-pod-autoscaler-3.0.0.tgz
+    version: 3.0.0
   - apiVersion: v1
     appVersion: 0.9.0
     created: "2020-11-14T10:01:24.506249745Z"
@@ -531,6 +605,20 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-1.0.0/vertical-pod-autoscaler-1.0.0.tgz
     version: 1.0.0
   whoami:
+  - apiVersion: v2
+    appVersion: 1.5.0
+    created: "2020-11-19T21:20:41.409051141Z"
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: 1fbda88be7e06b9f189a51a509f84c542b9aaa78362c5dd35a4085841780223e
+    home: https://github.com/containous/whoami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: whoami
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/whoami-2.0.0/whoami-2.0.0.tgz
+    version: 2.0.0
   - apiVersion: v1
     appVersion: 1.5.0
     created: "2020-10-01T11:03:06.273254199Z"

@@ -6,7 +6,7 @@
 
 ```bash
 $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
-$ helm install cowboysysop/kubeview
+$ helm install my-release cowboysysop/kubeview
 ```
 
 ## Introduction
@@ -16,7 +16,7 @@ This chart bootstraps a KubeView deployment on a [Kubernetes](http://kubernetes.
 ## Prerequisites
 
 - Kubernetes 1.12+
-- Helm 2.11+
+- Helm 3.0+
 
 ## Installing
 
@@ -24,7 +24,7 @@ Install the chart using:
 
 ```bash
 $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
-$ helm install --name my-release cowboysysop/kubeview
+$ helm install my-release cowboysysop/kubeview
 ```
 
 These commands deploy KubeView on the Kubernetes cluster in the default configuration and with the release name `my-release`. The deployment configuration can be customized by specifying the customization parameters with the `helm install` command using the `--values` or `--set` arguments. Find more information in the [configuration section](#configuration) of this document.
@@ -41,12 +41,18 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 2.0.0
+
+The chart is no more compatible with Helm 2.
+
+Refer to the [Helm documentation](https://helm.sh/docs/topics/v2_v3_migration/) for more information.
+
 ## Uninstalling
 
 Uninstall the `my-release` deployment using:
 
 ```bash
-$ helm delete my-release
+$ helm uninstall my-release
 ```
 
 The command deletes the release named `my-release` and frees all the kubernetes resources associated with the release.
@@ -107,7 +113,7 @@ The following table lists all the configurable parameters expose by the KubeView
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
-$ helm install --name my-release \
+$ helm install my-release \
     --set replicaCount=3 cowboysysop/kubeview
 ```
 
@@ -116,7 +122,7 @@ The above command sets the `replicaCount` to `3`.
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
 ```bash
-$ helm install --name my-release \
+$ helm install my-release \
     --values values.yaml cowboysysop/kubeview
 ```
 

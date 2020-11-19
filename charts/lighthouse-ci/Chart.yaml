@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 appVersion: 0.6.0
 description: Enables running a server to display Lighthouse CI results
 home: https://github.com/GoogleChrome/lighthouse-ci
@@ -7,4 +7,4 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: lighthouse-ci
-version: 1.0.0
+version: 2.0.0

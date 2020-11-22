@@ -164,3 +164,7 @@ basicAuthPassword: ""
 
 # Name of existing Secret to use
 existingSecret: ""
+
+env: {}
+#  - name: "LHCI_DELETE_OLD_BUILDS_CRON__MAX_AGE_IN_DAYS"
+#    value: "40"

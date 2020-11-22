@@ -6,5 +6,7 @@ icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packag
 maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
+  - name: Michele Cantelli
+    email: emmekappa@gmail.com
 name: lighthouse-ci
-version: 2.0.0
+version: 2.0.1

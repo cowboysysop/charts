@@ -168,3 +168,5 @@ existingSecret: ""
 env: {}
 #  - name: "LHCI_DELETE_OLD_BUILDS_CRON__MAX_AGE_IN_DAYS"
 #    value: "40"
+#  - name: "LHCI_DELETE_OLD_BUILDS_CRON__SCHEDULE"
+#    value: "0 * * * *"

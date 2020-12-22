@@ -82,10 +82,10 @@ spec:
             - name: tls-secret
               mountPath: /tls-secret
               readOnly: true
-      {{- with .Values.admissionController.nodeSelector }}
+    {{- with .Values.admissionController.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
-      {{- end }}
+    {{- end }}
     {{- with .Values.admissionController.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
@@ -93,6 +93,9 @@ spec:
     {{- with .Values.admissionController.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- if .Values.admissionController.priorityClassName }}
+      priorityClassName: {{- .Values.admissionController.priorityClassName }}
     {{- end }}
       volumes:
         - name: tls-secret

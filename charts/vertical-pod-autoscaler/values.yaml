@@ -111,6 +111,8 @@ admissionController:
 
   affinity: {}
 
+  priorityClassName: ""
+
   extraArgs:
     v: 2
     # vpa-object-namespace: ""
@@ -227,6 +229,8 @@ recommender:
   tolerations: []
 
   affinity: {}
+
+  priorityClassName: ""
 
   extraArgs:
     # checkpoints-gc-interval: 10m0s
@@ -364,6 +368,8 @@ updater:
   tolerations: []
 
   affinity: {}
+
+  priorityClassName: ""
 
   extraArgs:
     # evict-after-oom-threshold: 10m0s

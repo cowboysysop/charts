@@ -61,6 +61,8 @@ spec:
                   name: {{ include "mongo-express.secretName" . }}
                   key: mongodb-auth-password
             {{- end }}
+            - name: ME_CONFIG_SITE_BASEURL
+              value: {{ .Values.siteBaseUrl | quote }}
             - name: ME_CONFIG_SITE_COOKIESECRET
               valueFrom:
                 secretKeyRef:

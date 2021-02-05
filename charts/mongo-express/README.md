@@ -111,6 +111,7 @@ The following table lists all the configurable parameters expose by the Mongo Ex
 | `mongodbAuthDatabase`                | Database name (only needed if `mongodbEnableAdmin` is `false`)                                        | `nil`                                                 |
 | `mongodbAuthUsername`                | Database username (only needed if `mongodbEnableAdmin` is `false`)                                    | `nil`                                                 |
 | `mongodbAuthPassword`                | Database password (only needed if `mongodbEnableAdmin` is `false`)                                    | `nil`                                                 |
+| `siteBaseUrl`                        | Set the express baseUrl to ease mounting at a subdirectory                                            | `/`                                                   |
 | `siteCookieSecret`                   | String used by cookie-parser middleware to sign cookies                                               | Random 32 character long alphanumeric string          |
 | `siteSessionSecret`                  | String used to sign the session ID cookie by express-session middleware                               | Random 32 character long alphanumeric string          |
 | `basicAuthUsername`                  | Mongo Express web login name                                                                          | `nil`                                                 |

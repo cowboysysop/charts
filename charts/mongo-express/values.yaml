@@ -158,6 +158,9 @@ mongodbAuthUsername: ""
 # Database password (only needed if `mongodbEnableAdmin` is `false`)
 mongodbAuthPassword: ""
 
+# Set the express baseUrl to ease mounting at a subdirectory
+siteBaseUrl: /
+
 # String used by cookie-parser middleware to sign cookies
 siteCookieSecret: ""
 

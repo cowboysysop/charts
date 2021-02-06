@@ -31,6 +31,9 @@ podLabels: {}
 podSecurityContext: {}
   # fsGroup: 2000
 
+# Priority class name
+# priorityClassName : high-priority
+
 securityContext: {}
   # capabilities:
   #   drop:

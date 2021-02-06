@@ -34,6 +34,9 @@ admissionController:
     runAsNonRoot: true
     runAsUser: 65534
 
+  # Priority class name
+  # priorityClassName : high-priority
+
   securityContext: {}
     # capabilities:
     #   drop:
@@ -163,6 +166,9 @@ recommender:
     # fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 65534
+
+  # Priority class name
+  # priorityClassName : high-priority
 
   securityContext: {}
     # capabilities:
@@ -300,6 +306,9 @@ updater:
     # fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 65534
+
+  # Priority class name
+  # priorityClassName : high-priority
 
   securityContext: {}
     # capabilities:

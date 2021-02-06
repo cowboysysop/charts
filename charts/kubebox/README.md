@@ -79,6 +79,7 @@ The following table lists all the configurable parameters expose by the Kubebox 
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                                            |
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                                            |
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                                            |
+| `priorityClassName`                  | Priority class name                                                                                   | `nil`                                           |
 | `securityContext`                    | Container security context                                                                            | `{}`                                            |
 | `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                                          |
 | `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `0`                                             |

@@ -41,6 +41,12 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 2.0.0
+
+The chart is no more compatible with Helm 2.
+
+Refer to the [Helm documentation](https://helm.sh/docs/topics/v2_v3_migration/) for more information.
+
 ## Uninstalling
 
 Uninstall the `my-release` deployment using:
@@ -72,6 +78,7 @@ The following table lists all the configurable parameters expose by the Whoami c
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                                           |
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                                           |
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                                           |
+| `priorityClassName`                  | Priority class name                                                                                   | `nil`                                          |
 | `securityContext`                    | Container security context                                                                            | `{}`                                           |
 | `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                                         |
 | `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `0`                                            |

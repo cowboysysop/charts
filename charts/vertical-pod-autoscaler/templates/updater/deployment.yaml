@@ -25,6 +25,9 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      {{- if .Values.updater.priorityClassName }}
+      priorityClassName: {{ .Values.updater.priorityClassName | quote }}
+      {{- end }}
       serviceAccountName: {{ include "vertical-pod-autoscaler.updater.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.updater.podSecurityContext | nindent 8 }}

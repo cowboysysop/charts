@@ -7,4 +7,4 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: kubeview
-version: 2.0.0
+version: 2.1.0

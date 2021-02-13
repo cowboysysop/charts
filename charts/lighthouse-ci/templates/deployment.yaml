@@ -56,13 +56,8 @@ spec:
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /version
+              path: /healthz
               port: http
-              {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
-              httpHeaders:
-                - name: Authorization
-                  value: {{ include "lighthouse-ci.basicAuthHttpHeader" . }}
-              {{- end }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
@@ -72,13 +67,8 @@ spec:
           {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /version
+              path: /healthz
               port: http
-              {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
-              httpHeaders:
-                - name: Authorization
-                  value: {{ include "lighthouse-ci.basicAuthHttpHeader" . }}
-              {{- end }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}

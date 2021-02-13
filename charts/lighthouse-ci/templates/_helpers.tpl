@@ -72,10 +72,3 @@ Create the name of the secret to use
     {{ include "lighthouse-ci.fullname" . }}
 {{- end -}}
 {{- end -}}
-
-{{/*
-Create the basic authentification HTTP header
-*/}}
-{{- define "lighthouse-ci.basicAuthHttpHeader" -}}
-Basic {{ printf "%s:%s" .Values.basicAuthUsername .Values.basicAuthPassword | b64enc }}
-{{- end -}}

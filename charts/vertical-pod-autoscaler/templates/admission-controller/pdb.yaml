@@ -1,0 +1,18 @@
+{{- if .Values.admissionController.pdb.create }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "vertical-pod-autoscaler.admissionController.fullname" . }}
+  labels:
+    {{- include "vertical-pod-autoscaler.admissionController.labels" . | nindent 4 }}
+spec:
+  {{- if .Values.admissionController.pdb.minAvailable }}
+  minAvailable: {{ .Values.admissionController.pdb.minAvailable }}
+  {{- end }}
+  {{- if .Values.admissionController.pdb.maxUnavailable }}
+  maxUnavailable: {{ .Values.admissionController.pdb.maxUnavailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "vertical-pod-autoscaler.admissionController.selectorLabels" . | nindent 6 }}
+{{- end }}

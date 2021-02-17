@@ -72,6 +72,9 @@ The following table lists all the configurable parameters expose by the KubeView
 | `imagePullSecrets`                   | Docker registry secret names as an array                                                              | `[]`                                             |
 | `nameOverride`                       | Partially override `kubeview.fullname` template with a string (will prepend the release name)         | `nil`                                            |
 | `fullnameOverride`                   | Fully override `kubeview.fullname` template with a string                                             | `nil`                                            |
+| `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                          |
+| `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                              |
+| `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                                            |
 | `serviceAccount.create`              | Specify whether to create a ServiceAccount                                                            | `true`                                           |
 | `serviceAccount.annotations`         | ServiceAccount annotations                                                                            | `{}`                                             |
 | `serviceAccount.name`                | The name of the ServiceAccount to create                                                              | Generated using the `kubeview.fullname` template |

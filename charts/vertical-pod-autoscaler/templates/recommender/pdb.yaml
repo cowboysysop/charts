@@ -1,0 +1,18 @@
+{{- if .Values.recommender.pdb.create }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "vertical-pod-autoscaler.recommender.fullname" . }}
+  labels:
+    {{- include "vertical-pod-autoscaler.recommender.labels" . | nindent 4 }}
+spec:
+  {{- if .Values.recommender.pdb.minAvailable }}
+  minAvailable: {{ .Values.recommender.pdb.minAvailable }}
+  {{- end }}
+  {{- if .Values.recommender.pdb.maxUnavailable }}
+  maxUnavailable: {{ .Values.recommender.pdb.maxUnavailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "vertical-pod-autoscaler.recommender.selectorLabels" . | nindent 6 }}
+{{- end }}

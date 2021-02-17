@@ -13,6 +13,16 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+pdb:
+  # Specifies whether a pod disruption budget should be created
+  create: false
+
+  # Minimum number/percentage of pods that should remain scheduled
+  minAvailable: 1
+
+  # Maximum number/percentage of pods that may be made unavailable
+  # maxUnavailable: 1
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true

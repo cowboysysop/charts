@@ -92,7 +92,7 @@ spec:
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.siteBaseUrl }}
               port: http
               {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
               httpHeaders:
@@ -108,7 +108,7 @@ spec:
           {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.siteBaseUrl }}
               port: http
               {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
               httpHeaders:

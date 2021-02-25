@@ -1,0 +1,4 @@
+fullnameOverride: lighthouse-ci
+mariadb:
+  enabled: true
+  fullnameOverride: mariadb

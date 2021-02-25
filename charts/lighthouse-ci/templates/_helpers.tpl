@@ -72,3 +72,150 @@ Create the name of the secret to use
     {{ include "lighthouse-ci.fullname" . }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+MariaDB fully qualified app name
+*/}}
+{{- define "lighthouse-ci.mariadb.fullname" -}}
+{{- if .Values.mariadb.fullnameOverride -}}
+{{- .Values.mariadb.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default "mariadb" .Values.mariadb.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+MariaDB host
+*/}}
+{{- define "lighthouse-ci.mariadb.host" -}}
+{{- if .Values.mariadb.enabled -}}
+{{- if eq .Values.mariadb.architecture "replication" -}}
+    {{- if .Values.mariadb.fullnameOverride -}}
+    {{- printf "%s-%s" .Values.mariadb.fullnameOverride "primary" | trunc 63 | trimSuffix "-" -}}
+    {{- else -}}
+    {{- $name := default "mariadb" .Values.mariadb.nameOverride -}}
+    {{- printf "%s-%s-%s" .Release.Name $name "primary" | trunc 63 | trimSuffix "-" -}}
+    {{- end -}}
+{{- else -}}
+    {{ include "lighthouse-ci.mariadb.fullname" . }}
+{{- end -}}
+{{- else -}}
+    {{ .Values.externalMariadb.host }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+MariaDB port
+*/}}
+{{- define "lighthouse-ci.mariadb.port" -}}
+{{- if .Values.mariadb.enabled -}}
+    {{ .Values.mariadb.primary.service.port }}
+{{- else -}}
+    {{ .Values.externalMariadb.port }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+MariaDB user
+*/}}
+{{- define "lighthouse-ci.mariadb.username" -}}
+{{- if .Values.mariadb.enabled -}}
+    {{ .Values.mariadb.auth.username }}
+{{- else -}}
+    {{ .Values.externalMariadb.username }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+MariaDB secret name
+*/}}
+{{- define "lighthouse-ci.mariadb.secretName" -}}
+{{- if .Values.mariadb.auth.existingSecret -}}
+    {{ .Values.mariadb.auth.existingSecret }}
+{{- else if .Values.externalMariadb.existingSecret -}}
+    {{ .Values.externalMariadb.existingSecret }}
+{{- else -}}
+    {{ include "lighthouse-ci.mariadb.fullname" . }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+MariaDB database
+*/}}
+{{- define "lighthouse-ci.mariadb.database" -}}
+{{- if .Values.mariadb.enabled -}}
+    {{ .Values.mariadb.auth.database }}
+{{- else -}}
+    {{ .Values.externalMariadb.database }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+PostgreSQL fully qualified app name
+*/}}
+{{- define "lighthouse-ci.postgresql.fullname" -}}
+{{- if .Values.postgresql.fullnameOverride -}}
+{{- .Values.postgresql.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default "postgresql" .Values.postgresql.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+PostgreSQL host
+*/}}
+{{- define "lighthouse-ci.postgresql.host" -}}
+{{- if .Values.postgresql.enabled -}}
+    {{ include "lighthouse-ci.postgresql.fullname" . }}
+{{- else -}}
+    {{ .Values.externalPostgresql.host }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+PostgreSQL port
+*/}}
+{{- define "lighthouse-ci.postgresql.port" -}}
+{{- if .Values.postgresql.enabled -}}
+    {{ .Values.postgresql.service.port }}
+{{- else -}}
+    {{ .Values.externalPostgresql.port }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+PostgreSQL user
+*/}}
+{{- define "lighthouse-ci.postgresql.username" -}}
+{{- if .Values.postgresql.enabled -}}
+    {{ .Values.postgresql.postgresqlUsername }}
+{{- else -}}
+    {{ .Values.externalPostgresql.username }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+PostgreSQL secret name
+*/}}
+{{- define "lighthouse-ci.postgresql.secretName" -}}
+{{- if .Values.postgresql.existingSecret -}}
+    {{ .Values.postgresql.existingSecret }}
+{{- else if .Values.externalPostgresql.existingSecret -}}
+    {{ .Values.externalPostgresql.existingSecret }}
+{{- else -}}
+    {{ include "lighthouse-ci.postgresql.fullname" . }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+PostgreSQL database
+*/}}
+{{- define "lighthouse-ci.postgresql.database" -}}
+{{- if .Values.postgresql.enabled -}}
+    {{ .Values.postgresql.postgresqlDatabase }}
+{{- else -}}
+    {{ .Values.externalPostgresql.database }}
+{{- end -}}
+{{- end -}}

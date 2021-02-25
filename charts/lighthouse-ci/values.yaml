@@ -177,3 +177,92 @@ basicAuthPassword: ""
 
 # Name of existing Secret to use
 existingSecret: ""
+
+mariadb:
+  # Whether to use the MariaDB chart
+  enabled: false
+
+  # MariaDB architecture
+  architecture: standalone
+
+  auth:
+    # MariaDB database
+    database: lighthouse-ci
+
+    # MariaDB user
+    username: lighthouse-ci
+
+    # MariaDB password
+    password: lighthouse-ci
+
+    # Name of existing Secret to use
+    existingSecret: ""
+
+  primary:
+    service:
+      # MariaDB port
+      port: 3306
+
+externalMariadb:
+  # Whether to use an external MariaDB
+  enabled: false
+
+  # External MariaDB host
+  host: mariadb
+
+  # External MariaDB port
+  port: 3306
+
+  # External MariaDB user
+  username: lighthouse-ci
+
+  # External MariaDB password
+  password: lighthouse-ci
+
+  # Name of existing Secret to use
+  existingSecret: ""
+
+  # External MariaDB database
+  database: lighthouse-ci
+
+postgresql:
+  # Whether to use the PostgreSQL chart
+  enabled: false
+
+  # PostgreSQL user
+  postgresqlUsername: lighthouse-ci
+
+  # PostgreSQL password
+  postgresqlPassword: lighthouse-ci
+
+  # Name of existing Secret to use
+  existingSecret: ""
+
+  # PostgreSQL database
+  postgresqlDatabase: lighthouse-ci
+
+  service:
+    # PostgreSQL port
+    port: 5432
+
+externalPostgresql:
+  # Whether to use an external PostgreSQL
+  enabled: false
+
+  # External PostgreSQL host
+  host: postgresql
+
+  # External PostgreSQL port
+  port: 5432
+
+  # External PostgreSQL user
+  username: lighthouse-ci
+
+  # External PostgreSQL password
+  password: lighthouse-ci
+
+  # Name of existing Secret to use
+  existingSecret: ""
+
+  # External PostgreSQL database
+  database: lighthouse-ci

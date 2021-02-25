@@ -77,7 +77,12 @@ Create the name of the secret to use
 MariaDB fully qualified app name
 */}}
 {{- define "lighthouse-ci.mariadb.fullname" -}}
-{{- printf "%s-%s" .Release.Name "mariadb" | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.mariadb.fullnameOverride -}}
+{{- .Values.mariadb.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default "mariadb" .Values.mariadb.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 {{- end -}}
 
 {{/*
@@ -86,7 +91,12 @@ MariaDB host
 {{- define "lighthouse-ci.mariadb.host" -}}
 {{- if .Values.mariadb.enabled -}}
 {{- if eq .Values.mariadb.architecture "replication" -}}
-    {{- printf "%s-%s-%s" .Release.Name "mariadb" "primary" | trunc 63 | trimSuffix "-" -}}
+    {{- if .Values.mariadb.fullnameOverride -}}
+    {{- printf "%s-%s" .Values.mariadb.fullnameOverride "primary" | trunc 63 | trimSuffix "-" -}}
+    {{- else -}}
+    {{- $name := default "mariadb" .Values.mariadb.nameOverride -}}
+    {{- printf "%s-%s-%s" .Release.Name $name "primary" | trunc 63 | trimSuffix "-" -}}
+    {{- end -}}
 {{- else -}}
     {{ include "lighthouse-ci.mariadb.fullname" . }}
 {{- end -}}
@@ -145,7 +155,12 @@ MariaDB database
 PostgreSQL fully qualified app name
 */}}
 {{- define "lighthouse-ci.postgresql.fullname" -}}
-{{- printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.postgresql.fullnameOverride -}}
+{{- .Values.postgresql.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default "postgresql" .Values.postgresql.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 {{- end -}}
 
 {{/*

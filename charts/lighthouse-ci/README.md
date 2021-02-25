@@ -123,6 +123,33 @@ The following table lists all the configurable parameters expose by the Lighthou
 | `basicAuthUsername`                  | The username to protect the server with HTTP Basic Authentication                                     | `nil`                                                 |
 | `basicAuthPassword`                  | The password to protect the server with HTTP Basic Authentication                                     | `nil`                                                 |
 | `existingSecret`                     | Name of existing Secret to use                                                                        | `nil`                                                 |
+| `mariadb.enabled`                    | Whether to use the MariaDB chart                                                                      | `false`                                               |
+| `mariadb.architecture`               | MariaDB architecture                                                                                  | `standalone`                                          |
+| `mariadb.auth.database`              | MariaDB database                                                                                      | `lighthouse-ci`                                       |
+| `mariadb.auth.username`              | MariaDB user                                                                                          | `lighthouse-ci`                                       |
+| `mariadb.auth.password`              | MariaDB password                                                                                      | `lighthouse-ci`                                       |
+| `mariadb.auth.existingSecret`        | Name of existing Secret to use                                                                        | `nil`                                                 |
+| `mariadb.primary.service.port`       | MariaDB port                                                                                          | `3306`                                                |
+| `externalMariadb.enabled`            | Whether to use an external MariaDB                                                                    | `false`                                               |
+| `externalMariadb.host`               | External MariaDB host                                                                                 | `mariadb`                                             |
+| `externalMariadb.port`               | External MariaDB port                                                                                 | `3306`                                                |
+| `externalMariadb.username`           | External MariaDB user                                                                                 | `lighthouse-ci`                                       |
+| `externalMariadb.password`           | External MariaDB password                                                                             | `lighthouse-ci`                                       |
+| `externalMariadb.existingSecret`     | Name of existing Secret to use                                                                        | `nil`                                                 |
+| `externalMariadb.database`           | External MariaDB database                                                                             | `lighthouse-ci`                                       |
+| `postgresql.enabled`                 | Whether to use the PostgreSQL chart                                                                   | `false`                                               |
+| `postgresql.postgresqlUsername`      | PostgreSQL user                                                                                       | `lighthouse-ci`                                       |
+| `postgresql.postgresqlPassword`      | PostgreSQL password                                                                                   | `lighthouse-ci`                                       |
+| `postgresql.existingSecret`          | Name of existing Secret to use                                                                        | `nil`                                                 |
+| `postgresql.postgresqlDatabase`      | PostgreSQL database                                                                                   | `lighthouse-ci`                                       |
+| `postgresql.service.port`            | PostgreSQL port                                                                                       | `5432`                                                |
+| `externalPostgresql.enabled`         | Whether to use an external PostgreSQL                                                                 | `false`                                               |
+| `externalPostgresql.host`            | External PostgreSQL host                                                                              | `postgresql`                                          |
+| `externalPostgresql.port`            | External PostgreSQL port                                                                              | `5432`                                                |
+| `externalPostgresql.username`        | External PostgreSQL user                                                                              | `lighthouse-ci`                                       |
+| `externalPostgresql.password`        | External PostgreSQL password                                                                          | `lighthouse-ci`                                       |
+| `externalPostgresql.existingSecret`  | Name of existing Secret to use                                                                        | `nil`                                                 |
+| `externalPostgresql.database`        | External PostgreSQL database                                                                          | `lighthouse-ci`                                       |
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

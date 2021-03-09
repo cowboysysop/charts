@@ -178,6 +178,23 @@ basicAuthPassword: ""
 # Name of existing Secret to use
 existingSecret: ""
 
+# The configuration to automatically collect results using the PageSpeed Insights API
+psiCollectCron:
+  # The API key to use with the PageSpeed Insights API
+  psiApiKey: ""
+
+  # The array of sites to collect results for
+  sites: []
+    # - urls:
+    #     - http://example.local/
+    #   schedule: 0 * * * *
+    #   projectSlug: example
+
+# The configuration to automatically delete old records
+deleteOldBuildsCron: []
+  # - schedule: 0 * * * *
+  #   maxAgeInDays: 30
+
 mariadb:
   # Whether to use the MariaDB chart
   enabled: false

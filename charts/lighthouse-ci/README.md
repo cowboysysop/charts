@@ -123,6 +123,9 @@ The following table lists all the configurable parameters expose by the Lighthou
 | `basicAuthUsername`                  | The username to protect the server with HTTP Basic Authentication                                     | `nil`                                                 |
 | `basicAuthPassword`                  | The password to protect the server with HTTP Basic Authentication                                     | `nil`                                                 |
 | `existingSecret`                     | Name of existing Secret to use                                                                        | `nil`                                                 |
+| `psiCollectCron.psiApiKey`           | The API key to use with the PageSpeed Insights API                                                    | `nil`                                                 |
+| `psiCollectCron.sites`               | The array of sites to collect results for                                                             | `[]`                                                  |
+| `deleteOldBuildsCron`                | The configuration to automatically delete old records                                                 | `[]`                                                  |
 | `mariadb.enabled`                    | Whether to use the MariaDB chart                                                                      | `false`                                               |
 | `mariadb.architecture`               | MariaDB architecture                                                                                  | `standalone`                                          |
 | `mariadb.auth.database`              | MariaDB database                                                                                      | `lighthouse-ci`                                       |

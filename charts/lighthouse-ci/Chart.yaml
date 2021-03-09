@@ -7,7 +7,7 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: lighthouse-ci
-version: 2.4.0
+version: 2.5.0
 dependencies:
   - name: mariadb
     version: 9.3.4

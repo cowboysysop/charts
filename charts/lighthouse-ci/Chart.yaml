@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 0.7.0
+appVersion: 0.7.1
 description: Enables running a server to display Lighthouse CI results
 home: https://github.com/GoogleChrome/lighthouse-ci
 icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
@@ -7,13 +7,13 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: lighthouse-ci
-version: 2.5.0
+version: 2.5.1
 dependencies:
   - name: mariadb
-    version: 9.3.4
+    version: 9.3.6
     repository: https://charts.bitnami.com/bitnami/
     condition: mariadb.enabled
   - name: postgresql
-    version: 10.3.6
+    version: 10.3.17
     repository: https://charts.bitnami.com/bitnami/
     condition: postgresql.enabled

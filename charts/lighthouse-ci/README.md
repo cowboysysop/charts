@@ -153,6 +153,7 @@ The following table lists all the configurable parameters expose by the Lighthou
 | `externalPostgresql.password`        | External PostgreSQL password                                                                          | `lighthouse-ci`                                       |
 | `externalPostgresql.existingSecret`  | Name of existing Secret to use                                                                        | `nil`                                                 |
 | `externalPostgresql.database`        | External PostgreSQL database                                                                          | `lighthouse-ci`                                       |
+| `externalPostgresql.ssl`             | External PostgreSQL SSL Connectivity                                                                  | `false`                                               |
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

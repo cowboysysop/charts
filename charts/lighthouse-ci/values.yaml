@@ -283,3 +283,6 @@ externalPostgresql:
 
   # External PostgreSQL database
   database: lighthouse-ci
+
+  # Enable PostgreSQL SSL connectivity
+  ssl: false

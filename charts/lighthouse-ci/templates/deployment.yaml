@@ -87,6 +87,12 @@ spec:
               value: {{ include "lighthouse-ci.postgresql.database" . | quote }}
             - name: LHCI_STORAGE__SQL_CONNECTION_URL
               value: "postgres://$(POSTGRESQL_USERNAME):$(POSTGRESQL_PASSWORD)@$(POSTGRESQL_HOST):$(POSTGRESQL_PORT)/$(POSTGRESQL_DATABASE)"
+            {{- if .Values.externalPostgresql.ssl }}
+            - name: LHCI_STORAGE__SQL_CONNECTION_SSL
+              value: 'true'
+            - name: LHCI_STORAGE__SQL_DIALECT_OPTIONS__SSL
+              value: 'true'
+            {{- end }}
             {{- end }}
           ports:
             - name: http

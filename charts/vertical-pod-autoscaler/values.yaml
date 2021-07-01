@@ -6,6 +6,12 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+# Annotations to add to all deployed objects
+commonAnnotations: {}
+
+# Labels to add to all deployed objects
+commonLabels: {}
+
 admissionController:
   replicaCount: 1
 

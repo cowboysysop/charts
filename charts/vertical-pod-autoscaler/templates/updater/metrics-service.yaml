@@ -4,9 +4,17 @@ metadata:
   name: {{ include "vertical-pod-autoscaler.updater.metrics.fullname" . }}
   labels:
     {{- include "vertical-pod-autoscaler.updater.labels" . | nindent 4 }}
-  {{- with .Values.updater.metrics.service.annotations }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.updater.metrics.service.annotations .Values.commonAnnotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
+    {{- if .Values.updater.metrics.service.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.updater.metrics.service.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
   {{- end }}
 spec:
   type: {{ .Values.updater.metrics.service.type }}

@@ -5,9 +5,17 @@ metadata:
   name: vpa-webhook
   labels:
     {{- include "vertical-pod-autoscaler.admissionController.labels" . | nindent 4 }}
-  {{- with .Values.admissionController.service.annotations }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.admissionController.service.annotations .Values.commonAnnotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
+    {{- if .Values.admissionController.service.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.admissionController.service.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
   {{- end }}
 spec:
   type: {{ .Values.admissionController.service.type }}

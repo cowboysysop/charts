@@ -62,7 +62,19 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ## Configuration
 
-The following table lists all the configurable parameters expose by the Kubebox chart and their default values.
+The following tables lists all the configurable parameters expose by the chart and their default values.
+
+### Common parameters
+
+| Name                | Description                                                                                  | Default |
+|---------------------|----------------------------------------------------------------------------------------------|---------|
+| `imagePullSecrets`  | Docker registry secret names as an array                                                     | `[]`    |
+| `nameOverride`      | Partially override `kubebox.fullname` template with a string (will prepend the release name) | `nil`   |
+| `fullnameOverride`  | Fully override `kubebox.fullname` template with a string                                     | `nil`   |
+| `commonAnnotations` | Annotations to add to all deployed objects                                                   | `{}`    |
+| `commonLabels`      | Labels to add to all deployed objects                                                        | `{}`    |
+
+### Parameters
 
 | Name                                 | Description                                                                                           | Default                                         |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------|
@@ -70,9 +82,6 @@ The following table lists all the configurable parameters expose by the Kubebox 
 | `image.repository`                   | Kubebox image name                                                                                    | `astefanutti/kubebox`                           |
 | `image.tag`                          | Kubebox image tag                                                                                     | `0.8.0-server`                                  |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                  |
-| `imagePullSecrets`                   | Docker registry secret names as an array                                                              | `[]`                                            |
-| `nameOverride`                       | Partially override `kubebox.fullname` template with a string (will prepend the release name)          | `nil`                                           |
-| `fullnameOverride`                   | Fully override `kubebox.fullname` template with a string                                              | `nil`                                           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                         |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                             |
 | `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                                           |

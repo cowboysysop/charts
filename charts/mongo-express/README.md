@@ -79,6 +79,7 @@ The following table lists all the configurable parameters expose by the Mongo Ex
 | `serviceAccount.annotations`         | ServiceAccount annotations                                                                            | `{}`                                                  |
 | `serviceAccount.name`                | The name of the ServiceAccount to create                                                              | Generated using the `mongo-express.fullname` template |
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                                                  |
+| `labels`                             | Label shared by all objects                                                                                 | `{}`
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                                                  |
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                                                  |
 | `priorityClassName`                  | Priority class name                                                                                   | `nil`                                                 |
@@ -94,8 +95,9 @@ The following table lists all the configurable parameters expose by the Mongo Ex
 | `readinessProbe.periodSeconds`       | How often to perform the readiness probe                                                              | `10`                                                  |
 | `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                                                   |
 | `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                                   |
-| `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                                   |
-| `service.annotations`                | Service annotations                                                                                   | {}                                                    |
+| `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1` 
+| `service.labels`                     | Service labels                                                                                      | `{}`                                                    |
+| `service.annotations`                | Service annotations                                                                                   | `{}`                                                    |
 | `service.type`                       | Service type                                                                                          | `ClusterIP`                                           |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                                                 |
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                                                 |
@@ -104,6 +106,7 @@ The following table lists all the configurable parameters expose by the Mongo Ex
 | `service.port`                       | Service port                                                                                          | `8081`                                                |
 | `service.nodePort`                   | Service node port when service type is LoadBalancer or NodePort                                       | `nil`                                                 |
 | `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                                               |
+| `ingress.labels`                     | Ingress labels                                                                                        | `{}`     
 | `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                                  |
 | `ingress.hosts[0].host`              | Hostname to your Mongo Express installation                                                           | `mongo-express.local`                                 |
 | `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[]`                                                  |
@@ -128,6 +131,8 @@ The following table lists all the configurable parameters expose by the Mongo Ex
 | `basicAuthPassword`                  | Mongo Express Web login password                                                                      | `nil`                                                 |
 | `existingSecret`                     | Name of existing Secret to use                                                                        | `nil`                                                 |
 | `mongodb.enabled`                    | Whether to use the MongoDB chart (for testing purposes only)                                          | `false`                                               |
+| `testConnection.labels`              | Test connection Pod labels                                                                                            |     `{}`                                                    |
+| `testConnection.annotations`         | Test connection Pod annotations                                                                                   |           `{}`                    
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

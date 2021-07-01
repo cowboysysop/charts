@@ -50,6 +50,20 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+            {{- if .Values.admissionController.extraEnvVars }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.admissionController.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          {{- if or .Values.admissionController.extraEnvVarsCM .Values.admissionController.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.admissionController.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.admissionController.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.admissionController.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.admissionController.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
           ports:
             - name: https
               containerPort: 8000

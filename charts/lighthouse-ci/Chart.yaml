@@ -7,8 +7,11 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: lighthouse-ci
-version: 2.6.0
+version: 2.7.0
 dependencies:
+  - name: common
+    version: 1.6.1
+    repository: https://charts.bitnami.com/bitnami/
   - name: mariadb
     version: 9.3.14
     repository: https://charts.bitnami.com/bitnami/

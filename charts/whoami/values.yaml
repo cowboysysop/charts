@@ -149,3 +149,14 @@ affinity: {}
 
 extraArgs: {}
   # name: ""
+
+# Additional container environment variables
+extraEnvVars: []
+#  - name: MY-NAME
+#    value: "MY-VALUE"
+
+# Name of existing ConfigMap containing additional container environment variables
+extraEnvVarsCM:
+
+# Name of existing Secret containing additional container environment variables
+extraEnvVarsSecret:

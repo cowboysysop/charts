@@ -41,6 +41,21 @@ spec:
             {{- range $key, $value := .Values.recommender.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
+          {{- if .Values.recommender.extraEnvVars }}
+          env:
+            {{- include "common.tplvalues.render" (dict "value" .Values.recommender.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if or .Values.recommender.extraEnvVarsCM .Values.recommender.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.recommender.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.recommender.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.recommender.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.recommender.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
           ports:
             - name: http-metrics
               containerPort: 8942

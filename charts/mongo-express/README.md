@@ -113,6 +113,9 @@ The following table lists all the configurable parameters expose by the Mongo Ex
 | `nodeSelector`                       | Node labels for pod assignment                                                                        | `{}`                                                  |
 | `tolerations`                        | Tolerations for pod assignment                                                                        | `[]`                                                  |
 | `affinity`                           | Map of node/pod affinities                                                                            | `{}`                                                  |
+| `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                                  |
+| `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                 |
+| `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                                 |
 | `mongodbServer`                      | MongoDB host name or IP address                                                                       | `mongodb`                                             |
 | `mongodbPort`                        | MongoDB port                                                                                          | `27017`                                               |
 | `mongodbEnableAdmin`                 | Enable administrator access                                                                           | `false`                                               |

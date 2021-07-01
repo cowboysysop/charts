@@ -113,6 +113,9 @@ The following table lists all the configurable parameters expose by the KubeView
 | `nodeSelector`                       | Node labels for pod assignment                                                                        | `{}`                                             |
 | `tolerations`                        | Tolerations for pod assignment                                                                        | `[]`                                             |
 | `affinity`                           | Map of node/pod affinities                                                                            | `{}`                                             |
+| `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                             |
+| `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                            |
+| `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                            |
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

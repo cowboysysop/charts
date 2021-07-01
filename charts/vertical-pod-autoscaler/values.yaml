@@ -129,6 +129,17 @@ admissionController:
     # vpa-object-namespace: ""
     # webhook-timeout-seconds: 30
 
+  # Additional container environment variables
+  extraEnvVars: []
+  #  - name: MY-NAME
+  #    value: "MY-VALUE"
+
+  # Name of existing ConfigMap containing additional container environment variables
+  extraEnvVarsCM:
+
+  # Name of existing Secret containing additional container environment variables
+  extraEnvVarsSecret:
+
   metrics:
     service:
       # Metrics service annotations
@@ -285,6 +296,17 @@ recommender:
     v: 2
     # vpa-object-namespace: ""
 
+  # Additional container environment variables
+  extraEnvVars: []
+  #  - name: MY-NAME
+  #    value: "MY-VALUE"
+
+  # Name of existing ConfigMap containing additional container environment variables
+  extraEnvVarsCM:
+
+  # Name of existing Secret containing additional container environment variables
+  extraEnvVarsSecret:
+
   metrics:
     service:
       # Metrics service annotations
@@ -414,6 +436,17 @@ updater:
     # use-admission-controller-status: true
     v: 2
     # vpa-object-namespace: ""
+
+  # Additional container environment variables
+  extraEnvVars: []
+  #  - name: MY-NAME
+  #    value: "MY-VALUE"
+
+  # Name of existing ConfigMap containing additional container environment variables
+  extraEnvVarsCM:
+
+  # Name of existing Secret containing additional container environment variables
+  extraEnvVarsSecret:
 
   metrics:
     service:

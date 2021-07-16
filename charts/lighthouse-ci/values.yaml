@@ -2,16 +2,22 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# Annotations to add to all deployed objects
+commonAnnotations: {}
+
+# Labels to add to all deployed objects
+commonLabels: {}
+
 replicaCount: 1
 
 image:
   repository: patrickhulce/lhci-server
   tag: 0.8.0
   pullPolicy: IfNotPresent
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
 
 pdb:
   # Specifies whether a pod disruption budget should be created

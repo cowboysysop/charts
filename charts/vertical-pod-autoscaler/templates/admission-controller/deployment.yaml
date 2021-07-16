@@ -4,6 +4,13 @@ metadata:
   name: {{ include "vertical-pod-autoscaler.admissionController.fullname" . }}
   labels:
     {{- include "vertical-pod-autoscaler.admissionController.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
 spec:
   replicas: {{ .Values.admissionController.replicaCount }}
   selector:
@@ -13,13 +20,19 @@ spec:
     metadata:
       labels:
         {{- include "vertical-pod-autoscaler.admissionController.selectorLabels" . | nindent 8 }}
-        {{- with .Values.admissionController.podLabels }}
-        {{- toYaml . | nindent 8 }}
+        {{- if .Values.admissionController.podLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.admissionController.podLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
       annotations:
         checksum/secret: {{ include (print $.Template.BasePath "/admission-controller/tls-secret.yaml") . | sha256sum }}
-        {{- with .Values.admissionController.podAnnotations }}
-        {{- toYaml . | nindent 8 }}
+        {{- if .Values.admissionController.podAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.admissionController.podAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
     spec:
     {{- with .Values.imagePullSecrets }}

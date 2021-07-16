@@ -4,9 +4,17 @@ metadata:
   name: {{ include "vertical-pod-autoscaler.admissionController.metrics.fullname" . }}
   labels:
     {{- include "vertical-pod-autoscaler.admissionController.labels" . | nindent 4 }}
-  {{- with .Values.admissionController.metrics.service.annotations }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.admissionController.metrics.service.annotations .Values.commonAnnotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
+    {{- if .Values.admissionController.metrics.service.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.admissionController.metrics.service.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
   {{- end }}
 spec:
   type: {{ .Values.admissionController.metrics.service.type }}

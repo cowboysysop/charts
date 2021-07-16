@@ -61,7 +61,19 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ## Configuration
 
-The following table lists all the configurable parameters expose by the Lighthouse CI Server chart and their default values.
+The following tables lists all the configurable parameters expose by the chart and their default values.
+
+### Common parameters
+
+| Name                | Description                                                                                        | Default |
+|---------------------|----------------------------------------------------------------------------------------------------|---------|
+| `imagePullSecrets`  | Docker registry secret names as an array                                                           | `[]`    |
+| `nameOverride`      | Partially override `lighthouse-ci.fullname` template with a string (will prepend the release name) | `nil`   |
+| `fullnameOverride`  | Fully override `lighthouse-ci.fullname` template with a string                                     | `nil`   |
+| `commonAnnotations` | Annotations to add to all deployed objects                                                         | `{}`    |
+| `commonLabels`      | Labels to add to all deployed objects                                                              | `{}`    |
+
+### Parameters
 
 | Name                                 | Description                                                                                           | Default                                               |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
@@ -69,9 +81,6 @@ The following table lists all the configurable parameters expose by the Lighthou
 | `image.repository`                   | Image name                                                                                            | `patrickhulce/lhci-server`                            |
 | `image.tag`                          | Image tag                                                                                             | `0.6.0`                                               |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                        |
-| `imagePullSecrets`                   | Docker registry secret names as an array                                                              | `[]`                                                  |
-| `nameOverride`                       | Partially override `lighthouse-ci.fullname` template with a string (will prepend the release name)    | `nil`                                                 |
-| `fullnameOverride`                   | Fully override `lighthouse-ci.fullname` template with a string                                        | `nil`                                                 |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                               |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                   |
 | `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                                                 |

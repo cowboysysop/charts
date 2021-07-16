@@ -86,15 +86,17 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 
 ## Configuration
 
-The following tables lists all the configurable parameters expose by the Vertical Pod Autoscaler chart and their default values.
+The following tables lists all the configurable parameters expose by the chart and their default values.
 
 ### Common parameters
 
-| Name               | Description                                                                                                  | Default |
-|--------------------|--------------------------------------------------------------------------------------------------------------|---------|
-| `imagePullSecrets` | Docker registry secret names as an array                                                                     | `[]`    |
-| `nameOverride`     | Partially override `vertical-pod-autoscaler.fullname` template with a string (will prepend the release name) | `nil`   |
-| `fullnameOverride` | Fully override `vertical-pod-autoscaler.fullname` template with a string                                     | `nil`   |
+| Name                | Description                                                                                                  | Default |
+|---------------------|--------------------------------------------------------------------------------------------------------------|---------|
+| `imagePullSecrets`  | Docker registry secret names as an array                                                                     | `[]`    |
+| `nameOverride`      | Partially override `vertical-pod-autoscaler.fullname` template with a string (will prepend the release name) | `nil`   |
+| `fullnameOverride`  | Fully override `vertical-pod-autoscaler.fullname` template with a string                                     | `nil`   |
+| `commonAnnotations` | Annotations to add to all deployed objects                                                                   | `{}`    |
+| `commonLabels`      | Labels to add to all deployed objects                                                                        | `{}`    |
 
 ### Admission controller parameters
 

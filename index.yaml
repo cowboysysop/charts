@@ -3,6 +3,23 @@ entries:
   kubebox:
   - apiVersion: v2
     appVersion: 0.9.0
+    created: "2021-07-16T20:41:47.730532661Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.6.1
+    description: Terminal and Web console for Kubernetes
+    digest: bca8e053a803568744cdbc540b0d9d3930967e790cee079d6ad164f2c952b120
+    home: https://github.com/astefanutti/kubebox
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubebox
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubebox-2.5.0/kubebox-2.5.0.tgz
+    version: 2.5.0
+  - apiVersion: v2
+    appVersion: 0.9.0
     created: "2021-07-01T15:13:02.923472397Z"
     dependencies:
     - name: common
@@ -175,6 +192,24 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubebox-1.0.0/kubebox-1.0.0.tgz
     version: 1.0.0
   kubeview:
+  - apiVersion: v2
+    appVersion: 0.1.11
+    created: "2021-07-16T20:41:47.970332532Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.6.1
+    description: Kubernetes cluster visualiser and graphical explorer
+    digest: abfede7cca9b92a0f7f5fecda18434135b30ef778f548820a24fce2abfdc5618
+    home: https://github.com/benc-uk/kubeview
+    icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubeview
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubeview-2.4.0/kubeview-2.4.0.tgz
+    version: 2.4.0
   - apiVersion: v2
     appVersion: 0.1.11
     created: "2021-07-01T15:13:03.134895975Z"
@@ -362,6 +397,32 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
   lighthouse-ci:
+  - apiVersion: v2
+    appVersion: 0.8.0
+    created: "2021-07-16T20:41:48.179154833Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.6.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 9.3.14
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami/
+      version: 10.4.9
+    description: Enables running a server to display Lighthouse CI results
+    digest: 488a335d9197c688132f72ac2597671a2d7f8367747ad6965f48ce322a5be841
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-2.8.0/lighthouse-ci-2.8.0.tgz
+    version: 2.8.0
   - apiVersion: v2
     appVersion: 0.8.0
     created: "2021-07-01T15:13:03.328110967Z"
@@ -574,6 +635,28 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-1.0.0/lighthouse-ci-1.0.0.tgz
     version: 1.0.0
   mongo-express:
+  - apiVersion: v2
+    appVersion: 0.54.0
+    created: "2021-07-16T20:41:48.367965294Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.6.1
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 10.0.5
+    description: Web-based MongoDB admin interface, written with Node.js and express
+    digest: 49bca165dd5abd9e231b0d755bed6f750d3728f6fb5570272d9c1db43c2370c5
+    home: https://github.com/mongo-express/mongo-express
+    icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mongo-express
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mongo-express-2.5.0/mongo-express-2.5.0.tgz
+    version: 2.5.0
   - apiVersion: v2
     appVersion: 0.54.0
     created: "2021-07-01T15:13:03.642824228Z"
@@ -791,6 +874,24 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/mongo-express-1.0.0/mongo-express-1.0.0.tgz
     version: 1.0.0
   vertical-pod-autoscaler:
+  - apiVersion: v2
+    appVersion: 0.9.2
+    created: "2021-07-16T20:41:48.560186795Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.6.1
+    description: Set of components that automatically adjust the amount of CPU and
+      memory requested by pods running in the Kubernetes Cluster
+    digest: f55e97ae10daae04770983503e2081fa085584a9fdf8471d69527be96f33189b
+    home: https://github.com/kubernetes/autoscaler
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: vertical-pod-autoscaler
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-3.4.0/vertical-pod-autoscaler-3.4.0.tgz
+    version: 3.4.0
   - apiVersion: v2
     appVersion: 0.9.2
     created: "2021-07-01T15:13:03.803782551Z"
@@ -1048,6 +1149,24 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-1.0.0/vertical-pod-autoscaler-1.0.0.tgz
     version: 1.0.0
   whoami:
+  - apiVersion: v2
+    appVersion: 1.5.0
+    created: "2021-07-16T20:41:48.756459646Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.6.1
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: 52423ff620954fac041a41dd78671099da257b998344ea27650a8fe74ac78e61
+    home: https://github.com/containous/whoami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: whoami
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/whoami-2.4.0/whoami-2.4.0.tgz
+    version: 2.4.0
   - apiVersion: v2
     appVersion: 1.5.0
     created: "2021-07-01T15:13:04.053525735Z"

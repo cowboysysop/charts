@@ -92,6 +92,7 @@ The following tables lists all the configurable parameters expose by the chart a
 
 | Name                | Description                                                                                                  | Default |
 |---------------------|--------------------------------------------------------------------------------------------------------------|---------|
+| `kubeVersion`       | Override Kubernetes version                                                                                  | `""`    |
 | `imagePullSecrets`  | Docker registry secret names as an array                                                                     | `[]`    |
 | `nameOverride`      | Partially override `vertical-pod-autoscaler.fullname` template with a string (will prepend the release name) | `nil`   |
 | `fullnameOverride`  | Fully override `vertical-pod-autoscaler.fullname` template with a string                                     | `nil`   |

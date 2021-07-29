@@ -1,14 +1,8 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "kubeview.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
-{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
-apiVersion: networking.k8s.io/v1beta1
-{{- else -}}
-apiVersion: extensions/v1beta1
-{{- end }}
+apiVersion: {{ include "common.capabilities.ingress.apiVersion" . }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ include "kubeview.fullname" . }}
   labels:
     {{- include "kubeview.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
@@ -24,26 +18,31 @@ metadata:
     {{- end }}
   {{- end }}
 spec:
-{{- if .Values.ingress.tls }}
-  tls:
-  {{- range .Values.ingress.tls }}
-    - hosts:
-      {{- range .hosts }}
-        - {{ . | quote }}
-      {{- end }}
-      secretName: {{ .secretName }}
+  {{- if and .Values.ingress.ingressClassName (eq "true" (include "common.ingress.supportsIngressClassname" .)) }}
+  ingressClassName: {{ .Values.ingress.ingressClassName | quote }}
   {{- end }}
-{{- end }}
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
   rules:
-  {{- range .Values.ingress.hosts }}
+    {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
-        {{- range .paths }}
+          {{- range .paths }}
           - path: {{ . }}
+            {{- if eq "true" (include "common.ingress.supportsPathType" $) }}
+            pathType: {{ $.Values.ingress.pathType }}
+            {{- end }}
             backend:
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
-        {{- end }}
-  {{- end }}
+              {{- include "common.ingress.backend" (dict "serviceName" (include "kubeview.fullname" $) "servicePort" $.Values.service.port "context" $) | nindent 14 }}
+          {{- end }}
+    {{- end }}
 {{- end }}

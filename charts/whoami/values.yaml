@@ -2,6 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# Override Kubernetes version
+kubeVersion: ""
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
@@ -124,6 +127,13 @@ service:
 
 ingress:
   enabled: false
+
+  # IngressClass that will be be used to implement the Ingress
+  ingressClassName: ""
+
+  # Ingress path type
+  pathType: ImplementationSpecific
+
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"

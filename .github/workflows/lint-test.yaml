@@ -39,6 +39,15 @@ jobs:
     needs:
       - lint
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        kubernetes:
+          - v1.16.15
+          - v1.17.17
+          - v1.18.19
+          - v1.19.11
+          - v1.20.7
+          - v1.21.2
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -69,6 +78,8 @@ jobs:
       - name: Create kind cluster
         uses: helm/kind-action@v1.2.0
         if: steps.list-changed.outputs.changed == 'true'
+        with:
+          node_image: kindest/node:${{ matrix.kubernetes }}
 
       - name: Run chart-testing (install)
         run: ct install --config ct.yaml

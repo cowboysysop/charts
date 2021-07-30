@@ -15,6 +15,10 @@
 | [vertical-pod-autoscaler](charts/vertical-pod-autoscaler) | Set of components that automatically adjust the amount of CPU and memory requested by pods running in the Kubernetes Cluster |
 | [whoami](charts/whoami)                                   | Tiny Go webserver that prints os information and HTTP request to output                                                      |
 
+## Quality
+
+All these charts are tested with [ct](https://github.com/helm/chart-testing) on multiple Kubernetes versions, from v1.16 to v1.21, with the help of [kind](https://kind.sigs.k8s.io/).
+
 ## Contributing
 
 As this is a personal project, as I want to keep some consistency between these charts and as I don't have enough time to write down the best practices I use, I'm not accepting any pull requests.

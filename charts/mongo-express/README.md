@@ -15,7 +15,7 @@ This chart bootstraps a Mongo Express deployment on a [Kubernetes](http://kubern
 
 ## Prerequisites
 
-- Kubernetes 1.12+
+- Kubernetes 1.16+ (should work with 1.12+)
 - Helm 3.0+
 
 ## Installing
@@ -67,6 +67,7 @@ The following tables lists all the configurable parameters expose by the chart a
 
 | Name                | Description                                                                                        | Default |
 |---------------------|----------------------------------------------------------------------------------------------------|---------|
+| `kubeVersion`       | Override Kubernetes version                                                                        | `""`    |
 | `imagePullSecrets`  | Docker registry secret names as an array                                                           | `[]`    |
 | `nameOverride`      | Partially override `mongo-express.fullname` template with a string (will prepend the release name) | `nil`   |
 | `fullnameOverride`  | Fully override `mongo-express.fullname` template with a string                                     | `nil`   |
@@ -113,6 +114,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | `service.port`                       | Service port                                                                                          | `8081`                                                |
 | `service.nodePort`                   | Service node port when service type is LoadBalancer or NodePort                                       | `nil`                                                 |
 | `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                                               |
+| `ingress.ingressClassName`           | IngressClass that will be be used to implement the Ingress                                            | `""`                                                  |
+| `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific`                              |
 | `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                                  |
 | `ingress.hosts[0].host`              | Hostname to your Mongo Express installation                                                           | `mongo-express.local`                                 |
 | `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[]`                                                  |

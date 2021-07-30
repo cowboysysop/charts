@@ -7,10 +7,10 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: mongo-express
-version: 2.5.0
+version: 2.6.0
 dependencies:
   - name: common
-    version: 1.6.1
+    version: 1.7.1
     repository: https://charts.bitnami.com/bitnami/
   - name: mongodb
     version: 10.0.5

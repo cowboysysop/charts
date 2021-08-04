@@ -956,6 +956,26 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/mongo-express-1.0.0/mongo-express-1.0.0.tgz
     version: 1.0.0
+  quickchart:
+  - apiVersion: v2
+    appVersion: 1.5.0
+    created: "2021-08-04T10:24:53.507050725Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Chart image and QR code web API
+    digest: 2723082e82cbd2fdc94adf7c8f33bf96b62a8261001753aa0e57d698ae2b9545
+    home: https://quickchart.io/
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: quickchart
+    sources:
+    - https://github.com/typpo/quickchart
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/quickchart-1.0.0/quickchart-1.0.0.tgz
+    version: 1.0.0
   vertical-pod-autoscaler:
   - apiVersion: v2
     appVersion: 0.9.2

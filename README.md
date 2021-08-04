@@ -18,7 +18,7 @@
 
 ## Quality
 
-All these charts are tested with [ct](https://github.com/helm/chart-testing) on multiple Kubernetes versions, from v1.16 to v1.21, with the help of [kind](https://kind.sigs.k8s.io/).
+All these charts are tested with [ct](https://github.com/helm/chart-testing) on multiple Kubernetes versions, from v1.16 to v1.22, with the help of [kind](https://kind.sigs.k8s.io/).
 
 ## Contributing
 

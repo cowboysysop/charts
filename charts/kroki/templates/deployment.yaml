@@ -1,0 +1,251 @@
+apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ include "kroki.fullname" . }}
+  labels:
+    {{- include "kroki.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "kroki.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "kroki.selectorLabels" . | nindent 8 }}
+        {{- if .Values.podLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.podLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- if or .Values.podAnnotations .Values.commonAnnotations }}
+      annotations:
+        {{- if .Values.podAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.podAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- end }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      {{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName | quote }}
+      {{- end }}
+      serviceAccountName: {{ include "kroki.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: kroki
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- with .Values.extraArgs }}
+          args:
+            {{- range $key, $value := . }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.extraEnvVars }}
+          env:
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if or .Values.extraEnvVarsCM .Values.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          {{- end }}
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        {{- if .Values.blockdiag.enabled }}
+        - name: blockdiag
+          securityContext:
+            {{- toYaml .Values.blockdiag.securityContext | nindent 12 }}
+          image: "{{ .Values.blockdiag.image.repository }}:{{ .Values.blockdiag.image.tag }}"
+          imagePullPolicy: {{ .Values.blockdiag.image.pullPolicy }}
+          {{- with .Values.blockdiag.extraArgs }}
+          args:
+            {{- range $key, $value := . }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.blockdiag.extraEnvVars }}
+          env:
+            {{- include "common.tplvalues.render" (dict "value" .Values.blockdiag.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if or .Values.blockdiag.extraEnvVarsCM .Values.blockdiag.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.blockdiag.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.blockdiag.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.blockdiag.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.blockdiag.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8001
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.blockdiag.resources | nindent 12 }}
+        {{- end }}
+        {{- if .Values.bpmn.enabled }}
+        - name: bpmn
+          securityContext:
+            {{- toYaml .Values.bpmn.securityContext | nindent 12 }}
+          image: "{{ .Values.bpmn.image.repository }}:{{ .Values.bpmn.image.tag }}"
+          imagePullPolicy: {{ .Values.bpmn.image.pullPolicy }}
+          {{- with .Values.bpmn.extraArgs }}
+          args:
+            {{- range $key, $value := . }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.bpmn.extraEnvVars }}
+          env:
+            {{- include "common.tplvalues.render" (dict "value" .Values.bpmn.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if or .Values.bpmn.extraEnvVarsCM .Values.bpmn.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.bpmn.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.bpmn.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.bpmn.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.bpmn.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8003
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.bpmn.resources | nindent 12 }}
+        {{- end }}
+        {{- if .Values.excalidraw.enabled }}
+        - name: excalidraw
+          securityContext:
+            {{- toYaml .Values.excalidraw.securityContext | nindent 12 }}
+          image: "{{ .Values.excalidraw.image.repository }}:{{ .Values.excalidraw.image.tag }}"
+          imagePullPolicy: {{ .Values.excalidraw.image.pullPolicy }}
+          {{- with .Values.excalidraw.extraArgs }}
+          args:
+            {{- range $key, $value := . }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.excalidraw.extraEnvVars }}
+          env:
+            {{- include "common.tplvalues.render" (dict "value" .Values.excalidraw.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if or .Values.excalidraw.extraEnvVarsCM .Values.excalidraw.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.excalidraw.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.excalidraw.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.excalidraw.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.excalidraw.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8004
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.excalidraw.resources | nindent 12 }}
+        {{- end }}
+        {{- if .Values.mermaid.enabled }}
+        - name: mermaid
+          securityContext:
+            {{- toYaml .Values.mermaid.securityContext | nindent 12 }}
+          image: "{{ .Values.mermaid.image.repository }}:{{ .Values.mermaid.image.tag }}"
+          imagePullPolicy: {{ .Values.mermaid.image.pullPolicy }}
+          {{- with .Values.mermaid.extraArgs }}
+          args:
+            {{- range $key, $value := . }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.mermaid.extraEnvVars }}
+          env:
+            {{- include "common.tplvalues.render" (dict "value" .Values.mermaid.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if or .Values.mermaid.extraEnvVarsCM .Values.mermaid.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.mermaid.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.mermaid.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.mermaid.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.mermaid.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8002
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.mermaid.resources | nindent 12 }}
+        {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

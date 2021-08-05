@@ -8,6 +8,7 @@
 
 | Name                                                      | Description                                                                                                                  |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| [kroki](charts/kroki)                                     | Creates diagrams from textual descriptions                                                                                   |
 | [kubebox](charts/kubebox)                                 | Terminal and Web console for Kubernetes                                                                                      |
 | [kubeview](charts/kubeview)                               | Kubernetes cluster visualiser and graphical explorer                                                                         |
 | [lighthouse-ci](charts/lighthouse-ci)                     | Enables running a server to display Lighthouse CI results                                                                    |

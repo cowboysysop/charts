@@ -1,0 +1,350 @@
+# Default values for kroki.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Override Kubernetes version
+kubeVersion: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+# Annotations to add to all deployed objects
+commonAnnotations: {}
+
+# Labels to add to all deployed objects
+commonLabels: {}
+
+replicaCount: 1
+
+image:
+  repository: yuzutech/kroki
+  tag: 0.14.0
+  pullPolicy: IfNotPresent
+
+pdb:
+  # Specifies whether a pod disruption budget should be created
+  create: false
+
+  # Minimum number/percentage of pods that should remain scheduled
+  minAvailable: 1
+
+  # Maximum number/percentage of pods that may be made unavailable
+  # maxUnavailable: 1
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+# Additional pod annotations
+podAnnotations: {}
+
+# Additional pod labels
+podLabels: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+# Priority class name
+# priorityClassName : high-priority
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+livenessProbe:
+  # Enable liveness probe
+  enabled: true
+
+  # Delay before the liveness probe is initiated
+  initialDelaySeconds: 0
+
+  # How often to perform the liveness probe
+  periodSeconds: 10
+
+  # When the liveness probe times out
+  timeoutSeconds: 1
+
+  # Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
+  failureThreshold: 3
+
+  # Minimum consecutive successes for the liveness probe to be considered successful after having failed
+  successThreshold: 1
+
+readinessProbe:
+  # Enable readiness probe
+  enabled: true
+
+  # Delay before the readiness probe is initiated
+  initialDelaySeconds: 0
+
+  # How often to perform the readiness probe
+  periodSeconds: 10
+
+  # When the readiness probe times out
+  timeoutSeconds: 1
+
+  # Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
+  failureThreshold: 3
+
+  # Minimum consecutive successes for the readiness probe to be considered successful after having failed
+  successThreshold: 1
+
+service:
+  # Service annotations
+  annotations: {}
+
+  # Service type
+  type: ClusterIP
+
+  # Static cluster IP address or None for headless service when service type is ClusterIP
+  # clusterIP: 10.43.0.100
+
+  # Static load balancer IP address when service type is LoadBalancer
+  # loadBalancerIP: 10.0.0.100
+
+  # Source IP address ranges when service type is LoadBalancer
+  # loadBalancerSourceRanges:
+  #   - 10.0.0.0/24
+
+  # External traffic routing policy when service type is LoadBalancer or NodePort
+  externalTrafficPolicy: Cluster
+
+  # Service port
+  port: 8000
+
+  # Service node port when service type is LoadBalancer or NodePort
+  # nodePort: 30000
+
+ingress:
+  enabled: false
+
+  # IngressClass that will be be used to implement the Ingress
+  ingressClassName: ""
+
+  # Ingress path type
+  pathType: ImplementationSpecific
+
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: kroki.local
+      paths: []
+  tls: []
+  #  - secretName: kroki-tls
+  #    hosts:
+  #      - kroki.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+extraArgs: {}
+  # name: ""
+
+# Additional container environment variables
+extraEnvVars: []
+#  - name: MY-NAME
+#    value: "MY-VALUE"
+
+# Name of existing ConfigMap containing additional container environment variables
+extraEnvVarsCM:
+
+# Name of existing Secret containing additional container environment variables
+extraEnvVarsSecret:
+
+blockdiag:
+  # Enable BlockDiag diagrams
+  enabled: true
+
+  image:
+    repository: yuzutech/kroki-blockdiag
+    tag: 0.14.0
+    pullPolicy: IfNotPresent
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  extraArgs: {}
+    # name: ""
+
+  # Additional container environment variables
+  extraEnvVars: []
+  #  - name: MY-NAME
+  #    value: "MY-VALUE"
+
+  # Name of existing ConfigMap containing additional container environment variables
+  extraEnvVarsCM:
+
+  # Name of existing Secret containing additional container environment variables
+  extraEnvVarsSecret:
+
+bpmn:
+  # Enable BPMN diagrams
+  enabled: true
+
+  image:
+    repository: yuzutech/kroki-bpmn
+    tag: 0.14.0
+    pullPolicy: IfNotPresent
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  extraArgs: {}
+    # name: ""
+
+  # Additional container environment variables
+  extraEnvVars: []
+  #  - name: MY-NAME
+  #    value: "MY-VALUE"
+
+  # Name of existing ConfigMap containing additional container environment variables
+  extraEnvVarsCM:
+
+  # Name of existing Secret containing additional container environment variables
+  extraEnvVarsSecret:
+
+excalidraw:
+  # Enable Excalidraw diagrams
+  enabled: true
+
+  image:
+    repository: yuzutech/kroki-excalidraw
+    tag: 0.14.0
+    pullPolicy: IfNotPresent
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  extraArgs: {}
+    # name: ""
+
+  # Additional container environment variables
+  extraEnvVars: []
+  #  - name: MY-NAME
+  #    value: "MY-VALUE"
+
+  # Name of existing ConfigMap containing additional container environment variables
+  extraEnvVarsCM:
+
+  # Name of existing Secret containing additional container environment variables
+  extraEnvVarsSecret:
+
+mermaid:
+  # Enable Mermaid diagrams
+  enabled: true
+
+  image:
+    repository: yuzutech/kroki-mermaid
+    tag: 0.14.0
+    pullPolicy: IfNotPresent
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  extraArgs: {}
+    # name: ""
+
+  # Additional container environment variables
+  extraEnvVars: []
+  #  - name: MY-NAME
+  #    value: "MY-VALUE"
+
+  # Name of existing ConfigMap containing additional container environment variables
+  extraEnvVarsCM:
+
+  # Name of existing Secret containing additional container environment variables
+  extraEnvVarsSecret:

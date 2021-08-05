@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: 0.14.0
+description: Creates diagrams from textual descriptions
+home: https://kroki.io/
+icon: https://raw.githubusercontent.com/yuzutech/kroki.io/master/assets/favicon-196x196.png
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: kroki
+sources:
+  - https://github.com/yuzutech/kroki
+version: 1.0.0
+dependencies:
+  - name: common
+    version: 1.7.1
+    repository: https://charts.bitnami.com/bitnami/

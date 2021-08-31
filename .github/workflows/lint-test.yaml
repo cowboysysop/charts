@@ -84,3 +84,15 @@ jobs:
 
       - name: Run chart-testing (install)
         run: ct install --config ct.yaml
+  checkov:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@v12.842.0
+        with:
+          config_file: checkov.yaml

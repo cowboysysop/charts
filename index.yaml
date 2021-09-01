@@ -454,6 +454,34 @@ entries:
     version: 1.0.0
   lighthouse-ci:
   - apiVersion: v2
+    appVersion: 0.8.1
+    created: "2021-09-01T17:00:39.933219581Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 9.4.4
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami/
+      version: 10.9.4
+    description: Enables running a server to display Lighthouse CI results
+    digest: 80f1db2ac5186b0425ca1007a35ff217a6bad2d49aa9f27369753fdb6ea1cc91
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    sources:
+    - https://github.com/GoogleChrome/lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-2.10.0/lighthouse-ci-2.10.0.tgz
+    version: 2.10.0
+  - apiVersion: v2
     appVersion: 0.8.0
     created: "2021-07-30T10:56:40.125281222Z"
     dependencies:

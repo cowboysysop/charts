@@ -2,6 +2,26 @@ apiVersion: v1
 entries:
   kroki:
   - apiVersion: v2
+    appVersion: 0.15.0
+    created: "2021-10-02T17:25:17.165484875Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Creates diagrams from textual descriptions
+    digest: fa28f611b9b5af399116dd1da23dd4349a359422a0c90c969a13c7ceac045f03
+    home: https://kroki.io/
+    icon: https://raw.githubusercontent.com/yuzutech/kroki.io/master/assets/favicon-196x196.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kroki
+    sources:
+    - https://github.com/yuzutech/kroki
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kroki-1.1.0/kroki-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
     appVersion: 0.14.0
     created: "2021-08-05T17:38:12.040692753Z"
     dependencies:

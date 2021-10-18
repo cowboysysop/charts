@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: 0.3.0
+description: Makes it easy to run allreduce-style distributed training on Kubernetes
+home: https://github.com/kubeflow/mpi-operator
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: mpi-operator
+sources:
+  - https://github.com/kubeflow/mpi-operator
+  - https://github.com/cowboysysop/charts/tree/master/charts/mpi-operator
+version: 1.0.0
+dependencies:
+  - name: common
+    version: 1.7.1
+    repository: https://charts.bitnami.com/bitnami/

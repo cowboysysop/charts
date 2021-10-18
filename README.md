@@ -13,6 +13,7 @@
 | [kubeview](charts/kubeview)                               | Kubernetes cluster visualiser and graphical explorer                                                                         |
 | [lighthouse-ci](charts/lighthouse-ci)                     | Enables running a server to display Lighthouse CI results                                                                    |
 | [mongo-express](charts/mongo-express)                     | Web-based MongoDB admin interface, written with Node.js and express                                                          |
+| [mpi-operator](charts/mpi-operator)                       | Makes it easy to run allreduce-style distributed training on Kubernetes                                                      |
 | [quickchart](charts/quickchart)                           | Chart image and QR code web API                                                                                              |
 | [vertical-pod-autoscaler](charts/vertical-pod-autoscaler) | Set of components that automatically adjust the amount of CPU and memory requested by pods running in the Kubernetes Cluster |
 | [whoami](charts/whoami)                                   | Tiny Go webserver that prints os information and HTTP request to output                                                      |

@@ -1,0 +1,55 @@
+apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
+kind: ClusterRole
+metadata:
+  name: {{ include "training-operator.fullname" . }}
+  labels:
+    {{- include "training-operator.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+rules:
+  - apiGroups:
+      - kubeflow.org
+    resources:
+      - tfjobs
+      - mxjobs
+      - pytorchjobs
+      - xgboostjobs
+      - tfjobs/status
+      - pytorchjobs/status
+      - mxjobs/status
+      - xgboostjobs/status
+    verbs:
+      - create
+      - delete
+      - get
+      - list
+      - patch
+      - update
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+      - services
+      - endpoints
+      - events
+    verbs:
+      - "*"
+  - apiGroups:
+      - apps
+      - extensions
+    resources:
+      - deployments
+    verbs:
+      - "*"
+  - apiGroups:
+      - scheduling.volcano.sh
+    resources:
+      - podgroups
+    verbs:
+      - "*"

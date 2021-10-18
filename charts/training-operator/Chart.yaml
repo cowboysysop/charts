@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: 1.3.0
+description: Makes it easy to run distributed or non-distributed TensorFlow/PyTorch/MXNet/XGBoost jobs on Kubernetes
+home: https://github.com/kubeflow/training-operator
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: training-operator
+sources:
+  - https://github.com/kubeflow/training-operator
+  - https://github.com/cowboysysop/charts/tree/master/charts/training-operator
+version: 1.0.0
+dependencies:
+  - name: common
+    version: 1.7.1
+    repository: https://charts.bitnami.com/bitnami/

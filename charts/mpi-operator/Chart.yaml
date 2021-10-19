@@ -9,7 +9,7 @@ name: mpi-operator
 sources:
   - https://github.com/kubeflow/mpi-operator
   - https://github.com/cowboysysop/charts/tree/master/charts/mpi-operator
-version: 1.0.0
+version: 1.0.1
 dependencies:
   - name: common
     version: 1.7.1

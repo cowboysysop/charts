@@ -147,3 +147,7 @@ metrics:
 
 # The container image used to deliver the kubectl binary
 kubectlDeliveryImage: mpioperator/kubectl-delivery:latest
+
+kubeflow:
+  # Enable integration with Kubeflow
+  enabled: false

@@ -124,6 +124,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `metrics.service.clusterIP`          | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                |
 | `metrics.service.port`               | Metrics service port                                                                                  | `8081`                                               |
 | `kubectlDeliveryImage`               | The container image used to deliver the kubectl binary                                                | `mpioperator/kubectl-delivery:latest`                |
+| `kubeflow.enabled`                   | Enable integration with Kubeflow                                                                      | `false`                                              |
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

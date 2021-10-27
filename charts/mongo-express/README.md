@@ -160,4 +160,11 @@ $ helm install my-release \
     --values values.yaml cowboysysop/mongo-express
 ```
 
+If you want to set admin password directly from a secret, you could do it with:
+
+```bash
+$ helm install my-release \
+    --set mongodbEnableAdmin=true,mongodbAdminPasswordKeyRef.name=mongo-mongodb,mongodbAdminPasswordKeyRef.key=mongodb-root-password cowboysysop/mongo-express
+```
+
 **Tip**: You can use the default [values.yaml](values.yaml).

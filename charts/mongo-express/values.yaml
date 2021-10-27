@@ -189,6 +189,11 @@ mongodbAdminUsername: root
 # Administrator password
 mongodbAdminPassword: ""
 
+#bitnami/mongodb default secrets
+mongodbAdminPasswordKeyRef:
+  name: "" #mongo-mongodb. Set any value to use it
+  key: "" #mongodb-root-password.
+
 # Database name (only needed if `mongodbEnableAdmin` is `false`)
 mongodbAuthDatabase: ""
 
@@ -197,6 +202,10 @@ mongodbAuthUsername: ""
 
 # Database password (only needed if `mongodbEnableAdmin` is `false`)
 mongodbAuthPassword: ""
+
+mongodbAuthPasswordKeyRef:
+  name: "" #mongo-mongodb. Set any value to use it
+  key: "" #mongodb-root-password.
 
 # Set the express baseUrl to ease mounting at a subdirectory
 siteBaseUrl: /

@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: 1.4.0
+description: A Kubernetes controller that spawns a notebook for a user
+home: https://github.com/kubeflow/kubeflow/tree/master/components/notebook-controller
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: notebook-controller
+sources:
+  - https://github.com/kubeflow/kubeflow/tree/master/components/notebook-controller
+  - https://github.com/cowboysysop/charts/tree/master/charts/notebook-controller
+version: 1.0.0
+dependencies:
+  - name: common
+    version: 1.7.1
+    repository: https://charts.bitnami.com/bitnami/

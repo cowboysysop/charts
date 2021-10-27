@@ -26,8 +26,11 @@ spec:
         {{- if .Values.commonLabels }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
-      {{- if or .Values.podAnnotations .Values.commonAnnotations }}
+      {{- if or .Values.kubeflow.enabled .Values.podAnnotations .Values.commonAnnotations }}
       annotations:
+        {{- if .Values.kubeflow.enabled }}
+        sidecar.istio.io/inject: "false"
+        {{- end }}
         {{- if .Values.podAnnotations }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.podAnnotations "context" $ ) | nindent 8 }}
         {{- end }}

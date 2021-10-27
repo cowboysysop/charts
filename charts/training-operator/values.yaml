@@ -144,3 +144,7 @@ metrics:
 
     # Metrics service port
     port: 8080
+
+kubeflow:
+  # Enable integration with Kubeflow
+  enabled: false

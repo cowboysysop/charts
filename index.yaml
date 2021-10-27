@@ -1028,6 +1028,26 @@ entries:
   mpi-operator:
   - apiVersion: v2
     appVersion: 0.3.0
+    created: "2021-10-27T21:07:27.825707731Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Makes it easy to run allreduce-style distributed training on Kubernetes
+    digest: 233de193b0a4c006f7b8f9c30250fe10bf1e8f490215ae0d61c50c9222ac99b4
+    home: https://github.com/kubeflow/mpi-operator
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mpi-operator
+    sources:
+    - https://github.com/kubeflow/mpi-operator
+    - https://github.com/cowboysysop/charts/tree/master/charts/mpi-operator
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mpi-operator-1.1.0/mpi-operator-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 0.3.0
     created: "2021-10-19T12:10:07.973686876Z"
     dependencies:
     - name: common

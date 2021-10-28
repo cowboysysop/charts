@@ -1,0 +1,128 @@
+apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ include "katib.ui.fullname" . }}
+  labels:
+    {{- include "katib.ui.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.ui.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "katib.ui.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "katib.ui.selectorLabels" . | nindent 8 }}
+        {{- if .Values.ui.podLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.ui.podLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- if or .Values.kubeflow.enabled .Values.ui.podAnnotations .Values.commonAnnotations }}
+      annotations:
+        {{- if .Values.kubeflow.enabled }}
+        sidecar.istio.io/inject: "false"
+        {{- end }}
+        {{- if .Values.ui.podAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.ui.podAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- end }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      {{- if .Values.ui.priorityClassName }}
+      priorityClassName: {{ .Values.ui.priorityClassName | quote }}
+      {{- end }}
+      serviceAccountName: {{ include "katib.ui.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.ui.podSecurityContext | nindent 8 }}
+      containers:
+        - name: ui
+          securityContext:
+            {{- toYaml .Values.ui.securityContext | nindent 12 }}
+          image: "{{ .Values.ui.image.repository }}:{{ .Values.ui.image.tag }}"
+          imagePullPolicy: {{ .Values.ui.image.pullPolicy }}
+          {{- with .Values.ui.extraArgs }}
+          args:
+            {{- range $key, $value := . }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          command:
+            - ./katib-ui
+          env:
+            - name: KATIB_CORE_NAMESPACE
+              value: {{ .Release.Namespace }}
+            - name: KATIB_DB_MANAGER_SERVICE_NAMESPACE
+              value: {{ .Release.Namespace }}
+            - name: KATIB_DB_MANAGER_SERVICE_IP
+              value: {{ include "katib.dbManager.fullname" . }}
+            - name: KATIB_DB_MANAGER_SERVICE_PORT
+              value: {{ .Values.dbManager.service.port | quote }}
+            {{- if .Values.ui.extraEnvVars }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.ui.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          {{- if or .Values.ui.extraEnvVarsCM .Values.ui.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.ui.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.ui.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.ui.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.ui.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          {{- if .Values.ui.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /katib/
+              port: http
+            initialDelaySeconds: {{ .Values.ui.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.ui.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.ui.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.ui.livenessProbe.failureThreshold }}
+            successThreshold: {{ .Values.ui.livenessProbe.successThreshold }}
+          {{- end }}
+          {{- if .Values.ui.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /katib/
+              port: http
+            initialDelaySeconds: {{ .Values.ui.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.ui.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.ui.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.ui.readinessProbe.failureThreshold }}
+            successThreshold: {{ .Values.ui.readinessProbe.successThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.ui.resources | nindent 12 }}
+      {{- with .Values.ui.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.ui.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.ui.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

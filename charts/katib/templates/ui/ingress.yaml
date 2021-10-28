@@ -1,0 +1,48 @@
+{{- if .Values.ui.ingress.enabled -}}
+apiVersion: {{ include "common.capabilities.ingress.apiVersion" . }}
+kind: Ingress
+metadata:
+  name: {{ include "katib.ui.fullname" . }}
+  labels:
+    {{- include "katib.ui.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.ui.ingress.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- if .Values.ui.ingress.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.ui.ingress.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  {{- if and .Values.ui.ingress.ingressClassName (eq "true" (include "common.ingress.supportsIngressClassname" .)) }}
+  ingressClassName: {{ .Values.ui.ingress.ingressClassName | quote }}
+  {{- end }}
+  {{- if .Values.ui.ingress.tls }}
+  tls:
+    {{- range .Values.ui.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range .Values.ui.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ . }}
+            {{- if eq "true" (include "common.ingress.supportsPathType" $) }}
+            pathType: {{ $.Values.ui.ingress.pathType }}
+            {{- end }}
+            backend:
+              {{- include "common.ingress.backend" (dict "serviceName" (include "katib.ui.fullname" $) "servicePort" $.Values.ui.service.port "context" $) | nindent 14 }}
+          {{- end }}
+    {{- end }}
+{{- end }}

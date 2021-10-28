@@ -1,0 +1,67 @@
+apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
+kind: ClusterRole
+metadata:
+  name: {{ include "katib.controller.fullname" . }}
+  labels:
+    {{- include "katib.controller.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+      - serviceaccounts
+      - services
+      - events
+      - namespaces
+      - persistentvolumes
+      - persistentvolumeclaims
+      - pods
+      - pods/log
+      - pods/status
+    verbs:
+      - "*"
+  - apiGroups:
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - "*"
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - roles
+      - rolebindings
+    verbs:
+      - "*"
+  - apiGroups:
+      - batch
+    resources:
+      - jobs
+      - cronjobs
+    verbs:
+      - "*"
+  - apiGroups:
+      - kubeflow.org
+    resources:
+      - experiments
+      - experiments/status
+      - experiments/finalizers
+      - trials
+      - trials/status
+      - trials/finalizers
+      - suggestions
+      - suggestions/status
+      - suggestions/finalizers
+      - tfjobs
+      - pytorchjobs
+      - mpijobs
+      - xgboostjobs
+    verbs:
+      - "*"

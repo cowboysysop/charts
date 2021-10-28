@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  # name: {{ include "katib.controller.fullname" . }}
+  name: katib-config
+  labels:
+    {{- include "katib.controller.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+data:
+  metrics-collector-sidecar: |
+    {
+      "StdOut": {
+        "image": "kubeflowkatib/file-metrics-collector:v0.12.0"
+      },
+      "File": {
+        "image": "kubeflowkatib/file-metrics-collector:v0.12.0"
+      },
+      "TensorFlowEvent": {
+        "image": "kubeflowkatib/tfevent-metrics-collector:v0.12.0",
+        "resources": {
+          "limits": {
+            "memory": "1Gi"
+          }
+        }
+      }
+    }
+  suggestion: |
+    {
+      "random": {
+        "image": "kubeflowkatib/suggestion-hyperopt:v0.12.0"
+      },
+      "tpe": {
+        "image": "kubeflowkatib/suggestion-hyperopt:v0.12.0"
+      },
+      "grid": {
+        "image": "kubeflowkatib/suggestion-chocolate:v0.12.0"
+      },
+      "hyperband": {
+        "image": "kubeflowkatib/suggestion-hyperband:v0.12.0"
+      },
+      "bayesianoptimization": {
+        "image": "kubeflowkatib/suggestion-skopt:v0.12.0"
+      },
+      "cmaes": {
+        "image": "kubeflowkatib/suggestion-goptuna:v0.12.0"
+      },
+      "sobol": {
+        "image": "kubeflowkatib/suggestion-goptuna:v0.12.0"
+      },
+      "multivariate-tpe": {
+        "image": "kubeflowkatib/suggestion-optuna:v0.12.0"
+      },
+      "enas": {
+        "image": "kubeflowkatib/suggestion-enas:v0.12.0",
+        "resources": {
+          "limits": {
+            "memory": "200Mi"
+          }
+        }
+      },
+      "darts": {
+        "image": "kubeflowkatib/suggestion-darts:v0.12.0"
+      }
+    }
+  early-stopping: |
+    {
+      "medianstop": {
+        "image": "kubeflowkatib/earlystopping-medianstop:v0.12.0"
+      }
+    }

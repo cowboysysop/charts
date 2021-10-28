@@ -1,0 +1,57 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: {{ include "katib.controller.fullname" . }}
+  labels:
+    {{- include "katib.controller.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "katib.controller.fullname" . }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+webhooks:
+  - admissionReviewVersions:
+      - v1beta1
+    clientConfig:
+      service:
+        name: {{ include "katib.controller.fullname" . }}
+        namespace: {{ .Release.Namespace }}
+        path: /mutate-experiment
+        port: {{ .Values.controller.service.port }}
+    name: mutate-experiment.katib.kubeflow.org
+    rules:
+      - apiGroups:
+          - kubeflow.org
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - experiments
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1beta1
+    clientConfig:
+      service:
+        name: {{ include "katib.controller.fullname" . }}
+        namespace: {{ .Release.Namespace }}
+        path: /mutate-pod
+        port: {{ .Values.controller.service.port }}
+    name: mutate-pod.katib.kubeflow.org
+    namespaceSelector:
+      matchLabels:
+        katib-metricscollector-injection: enabled
+    rules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+        resources:
+          - pods
+    sideEffects: None

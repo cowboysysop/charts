@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "katib.tests.fullname" . }}
+  labels:
+    {{- include "katib.tests.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  annotations:
+    helm.sh/hook: test
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+spec:
+  {{- with .Values.imagePullSecrets }}
+  imagePullSecrets:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+  containers:
+    - name: tests
+      image: "{{ .Values.tests.image.repository }}:{{ .Values.tests.image.tag }}"
+      imagePullPolicy: {{ .Values.tests.image.pullPolicy }}
+      env:
+        - name: MARIADB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "katib.mariadb.secretName" . }}
+              key: mariadb-password
+      volumeMounts:
+        - name: tests
+          mountPath: /tests
+          readOnly: true
+        - name: controller-tls-secret
+          mountPath: /controller-tls-secret
+          readOnly: true
+      workingDir: /tests
+  restartPolicy: Never
+  volumes:
+    - name: tests
+      configMap:
+        name: {{ include "katib.tests.fullname" . }}
+    - name: controller-tls-secret
+      secret:
+        secretName: {{ include "katib.controller.tls.secretName" . }}

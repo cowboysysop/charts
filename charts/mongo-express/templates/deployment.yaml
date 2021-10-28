@@ -64,8 +64,8 @@ spec:
             - name: ME_CONFIG_MONGODB_ADMINPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "mongo-express.secretName" . }}
-                  key: mongodb-admin-password
+                  name: {{ .Values.mongodbAdminPasswordKeyRef.name | default (include "mongo-express.secretName" .) }}
+                  key: {{ .Values.mongodbAdminPasswordKeyRef.key | default "mongodb-admin-password" }}
             {{- else }}
             - name: ME_CONFIG_MONGODB_AUTH_DATABASE
               value: {{ .Values.mongodbAuthDatabase | quote }}
@@ -74,8 +74,8 @@ spec:
             - name: ME_CONFIG_MONGODB_AUTH_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "mongo-express.secretName" . }}
-                  key: mongodb-auth-password
+                  name: {{ .Values.mongodbAuthPasswordKeyRef.name | default (include "mongo-express.secretName" .) }}
+                  key: {{ .Values.mongodbAuthPasswordKeyRef.key | default "mongodb-auth-password" }}
             {{- end }}
             - name: ME_CONFIG_SITE_BASEURL
               value: {{ .Values.siteBaseUrl | quote }}

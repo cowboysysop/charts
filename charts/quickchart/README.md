@@ -16,7 +16,7 @@ This chart bootstraps a QuickChart deployment on a [Kubernetes](http://kubernete
 ## Prerequisites
 
 - Kubernetes 1.16+ (should work with 1.12+)
-- Helm 3.0+
+- Helm 3.1+
 
 ## Installing
 

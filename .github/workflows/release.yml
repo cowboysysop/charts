@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.0.0
         with:
           fetch-depth: 0
 
@@ -19,12 +19,10 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
-      # See https://github.com/helm/chart-releaser-action/issues/6
-      - name: Install Helm
-        run: |
-          curl -fsSLo get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-          chmod 700 get_helm.sh
-          ./get_helm.sh
+      - name: Set up Helm
+        uses: azure/setup-helm@v1.1
+        with:
+          version: v3.7.0
 
       - name: Add dependency chart repos
         run: |

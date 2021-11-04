@@ -9,12 +9,12 @@ jobs:
       matrix:
         helm:
           - v3.1.3 # renovate: helm
-          - v3.2.0 # renovate: helm
-          - v3.3.0 # renovate: helm
-          - v3.4.0 # renovate: helm
-          - v3.5.0 # renovate: helm
-          - v3.6.1 # renovate: helm
-          - v3.7.0 # renovate: helm
+          - v3.2.4 # renovate: helm
+          - v3.3.4 # renovate: helm
+          - v3.4.2 # renovate: helm
+          - v3.5.4 # renovate: helm
+          - v3.6.3 # renovate: helm
+          - v3.7.1 # renovate: helm
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.0
@@ -58,7 +58,7 @@ jobs:
           - v1.19.11 # renovate: kindest/node
           - v1.20.7 # renovate: kindest/node
           - v1.21.2 # renovate: kindest/node
-          - v1.22.0 # renovate: kindest/node
+          - v1.22.2 # renovate: kindest/node
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.0
@@ -68,7 +68,7 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v1.1
         with:
-          version: v3.7.0 # renovate: helm
+          version: v3.7.1 # renovate: helm
 
       - name: Set up Python
         uses: actions/setup-python@v2.2.0

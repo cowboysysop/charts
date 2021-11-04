@@ -1,0 +1,76 @@
+{
+  "dependencyDashboard": true,
+  "includePaths": [
+    ".github/workflows/**"
+  ],
+  "major": {
+    "bumpVersion": "major",
+    "semanticCommitType": "BREAKING CHANGE"
+  },
+  "minor": {
+    "bumpVersion": "minor",
+    "semanticCommitType": "feat"
+  },
+  "patch": {
+    "bumpVersion": "patch",
+    "semanticCommitType": "fix"
+  },
+  "semanticCommits": "enabled",
+  "semanticCommitScope": null,
+  "packageRules": [
+    {
+      "matchPaths": [
+	".github/workflows/**"
+      ],
+      "groupName": "github workflows",
+      "semanticCommitType": "ci"
+    },
+    {
+      "matchPackageNames": [
+	"helm",
+        "kindest/node"
+      ],
+      "separateMinorPatch": true
+    },
+    {
+      "matchPackageNames": [
+	"helm",
+        "kindest/node"
+      ],
+      "matchUpdateTypes": [
+        "major",
+        "minor"
+      ],
+      "enabled": false
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "matchStrings": [
+        "(:|-) (?<currentValue>.+?) # renovate: helm\\n"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "helm",
+      "lookupNameTemplate": "helm/helm"
+    },
+    {
+      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "matchStrings": [
+        "(:|-) (?<currentValue>.+?) # renovate: kindest\\/node\\n"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "kindest/node"
+    },
+    {
+      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "matchStrings": [
+        "(:|-) (?<currentValue>.+?) # renovate: python\\n"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "python",
+      "extractVersionTemplate": "^(?<version>.+)-\\d+$",
+      "lookupNameTemplate": "actions/python-versions"
+    }
+  ]
+}

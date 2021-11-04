@@ -16,7 +16,7 @@ This chart bootstraps a Training Operator deployment on a [Kubernetes](http://ku
 ## Prerequisites
 
 - Kubernetes 1.16+
-- Helm 3.0+
+- Helm 3.1+
 
 ## Installing
 

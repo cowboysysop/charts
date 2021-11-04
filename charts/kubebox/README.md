@@ -17,7 +17,7 @@ This chart bootstraps a Kubebox deployment on a [Kubernetes](http://kubernetes.i
 
 - Kubernetes 1.16+ (should work with 1.12+)
 - cAdvisor 0.36+ (you can use the [code-chris/cadvisor](https://hub.helm.sh/charts/code-chris/cadvisor) chart)
-- Helm 3.0+
+- Helm 3.1+
 
 ## Installing
 

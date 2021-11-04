@@ -17,7 +17,7 @@ This chart bootstraps a Vertical Pod Autoscaler deployment on a [Kubernetes](htt
 
 - Kubernetes 1.16+
 - Metrics Server 0.2+ (you can use the [stable/metrics-server](https://hub.helm.sh/charts/stable/metrics-server) chart)
-- Helm 3.0+
+- Helm 3.1+
 
 ## Installing
 

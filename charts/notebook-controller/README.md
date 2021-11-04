@@ -16,7 +16,7 @@ This chart bootstraps a Notebook Controller deployment on a [Kubernetes](http://
 ## Prerequisites
 
 - Kubernetes 1.16+
-- Helm 3.0+
+- Helm 3.1+
 
 ## Installing
 

@@ -16,7 +16,7 @@ This chart bootstraps a MPI Operator deployment on a [Kubernetes](http://kuberne
 ## Prerequisites
 
 - Kubernetes 1.16+
-- Helm 3.0+
+- Helm 3.1+
 
 ## Installing
 

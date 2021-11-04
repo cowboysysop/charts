@@ -9,7 +9,7 @@ maintainers:
 name: lighthouse-ci
 sources:
   - https://github.com/GoogleChrome/lighthouse-ci
-version: 2.10.0
+version: 2.10.1
 dependencies:
   - name: common
     version: 1.7.1

@@ -103,6 +103,7 @@ The following tables lists all the configurable parameters expose by the chart a
 
 | Name                                                     | Description                                                                                           | Default                                                                             |
 |----------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| `admissionController.enabled`                            | Enable the admission controller                                                                       | `true`                                                                              |
 | `admissionController.replicaCount`                       | Number of replicas                                                                                    | `1`                                                                                 |
 | `admissionController.image.repository`                   | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-admission-controller`                                   |
 | `admissionController.image.tag`                          | Image tag                                                                                             | `0.9.2`                                                                             |
@@ -198,6 +199,7 @@ The following tables lists all the configurable parameters expose by the chart a
 
 | Name                                         | Description                                                                                           | Default                                                                 |
 |----------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| `updater.enabled`                            | Enable the updater                                                                                    | `true`                                                                  |
 | `updater.replicaCount`                       | Number of replicas                                                                                    | `1`                                                                     |
 | `updater.image.repository`                   | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-updater`                                    |
 | `updater.image.tag`                          | Image tag                                                                                             | `0.9.2`                                                                 |

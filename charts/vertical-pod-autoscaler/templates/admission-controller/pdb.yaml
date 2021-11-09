@@ -1,4 +1,4 @@
-{{- if .Values.admissionController.pdb.create }}
+{{- if and .Values.admissionController.enabled .Values.admissionController.pdb.create }}
 apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:

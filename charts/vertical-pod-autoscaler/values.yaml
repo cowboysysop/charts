@@ -16,6 +16,8 @@ commonAnnotations: {}
 commonLabels: {}
 
 admissionController:
+  enabled: true
+
   replicaCount: 1
 
   image:
@@ -331,6 +333,8 @@ recommender:
       port: 8942
 
 updater:
+  enabled: true
+
   replicaCount: 1
 
   image:

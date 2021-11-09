@@ -1,3 +1,4 @@
+{{- if .Values.updater.enabled }}
 apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
 kind: ClusterRole
 metadata:
@@ -109,3 +110,4 @@ rules:
       - get
       - list
       - watch
+{{- end }}

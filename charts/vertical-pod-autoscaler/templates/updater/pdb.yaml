@@ -1,4 +1,4 @@
-{{- if .Values.updater.pdb.create }}
+{{- if and .Values.updater.enabled .Values.updater.pdb.create }}
 apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:

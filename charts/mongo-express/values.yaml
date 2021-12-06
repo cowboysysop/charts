@@ -219,3 +219,14 @@ existingSecret: ""
 mongodb:
   # Whether to use the MongoDB chart (for testing purposes only)
   enabled: false
+
+tests:
+  image:
+    # Image name
+    repository: ghcr.io/cowboysysop/pytest
+
+    # Image tag
+    tag: 1.0.0
+
+    # Image pull policy
+    pullPolicy: IfNotPresent

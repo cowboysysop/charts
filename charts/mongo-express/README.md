@@ -144,6 +144,14 @@ The following tables lists all the configurable parameters expose by the chart a
 | `existingSecret`                     | Name of existing Secret to use                                                                        | `nil`                                                 |
 | `mongodb.enabled`                    | Whether to use the MongoDB chart (for testing purposes only)                                          | `false`                                               |
 
+### Tests parameters
+
+| Name                     | Description       | Default                      |
+|--------------------------|-------------------|------------------------------|
+| `tests.image.repository` | Image name        | `ghcr.io/cowboysysop/pytest` |
+| `tests.image.tag`        | Image tag         | `1.0.0`                      |
+| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash

@@ -240,6 +240,14 @@ The following tables lists all the configurable parameters expose by the chart a
 | `updater.metrics.service.clusterIP`          | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                                   |
 | `updater.metrics.service.port`               | Metrics service port                                                                                  | `8943`                                                                  |
 
+### Tests parameters
+
+| Name                     | Description       | Default                      |
+|--------------------------|-------------------|------------------------------|
+| `tests.image.repository` | Image name        | `ghcr.io/cowboysysop/pytest` |
+| `tests.image.tag`        | Image tag         | `1.0.0`                      |
+| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash

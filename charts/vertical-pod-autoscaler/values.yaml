@@ -474,3 +474,14 @@ updater:
 
       # Metrics service port
       port: 8943
+
+tests:
+  image:
+    # Image name
+    repository: ghcr.io/cowboysysop/pytest
+
+    # Image tag
+    tag: 1.0.0
+
+    # Image pull policy
+    pullPolicy: IfNotPresent

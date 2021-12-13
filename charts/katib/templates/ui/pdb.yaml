@@ -1,0 +1,25 @@
+{{- if .Values.ui.pdb.create }}
+apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "katib.ui.fullname" . }}
+  labels:
+    {{- include "katib.ui.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.ui.pdb.minAvailable }}
+  minAvailable: {{ .Values.ui.pdb.minAvailable }}
+  {{- end }}
+  {{- if .Values.ui.pdb.maxUnavailable }}
+  maxUnavailable: {{ .Values.ui.pdb.maxUnavailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "katib.ui.selectorLabels" . | nindent 6 }}
+{{- end }}

@@ -92,6 +92,12 @@ jobs:
         with:
           node_image: kindest/node:${{ matrix.kubernetes }}
 
+      - name: Install cert-manager
+        run: |
+          kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml # renovate: cert-manager
+          helm repo add jetstack https://charts.jetstack.io/
+          helm install cert-manager jetstack/cert-manager -n cert-manager --create-namespace --version v1.6.1 --wait # renovate: cert-manager
+
       - name: Run chart-testing (install)
         run: ct install --config ct.yaml
   checkov:

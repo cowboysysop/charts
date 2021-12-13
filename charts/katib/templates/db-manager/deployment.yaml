@@ -1,0 +1,136 @@
+apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ include "katib.dbManager.fullname" . }}
+  labels:
+    {{- include "katib.dbManager.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.dbManager.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "katib.dbManager.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "katib.dbManager.selectorLabels" . | nindent 8 }}
+        {{- if .Values.dbManager.podLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.dbManager.podLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+      annotations:
+        checksum/mariadb-secret: {{ include (print $.Template.BasePath "/mariadb-secret.yaml") . | sha256sum }}
+        {{- if .Values.kubeflow.enabled }}
+        sidecar.istio.io/inject: "false"
+        {{- end }}
+        {{- if .Values.dbManager.podAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.dbManager.podAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      {{- if .Values.dbManager.priorityClassName }}
+      priorityClassName: {{ .Values.dbManager.priorityClassName | quote }}
+      {{- end }}
+      serviceAccountName: {{ include "katib.dbManager.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.dbManager.podSecurityContext | nindent 8 }}
+      containers:
+        - name: db-manager
+          securityContext:
+            {{- toYaml .Values.dbManager.securityContext | nindent 12 }}
+          image: "{{ .Values.dbManager.image.repository }}:{{ .Values.dbManager.image.tag }}"
+          imagePullPolicy: {{ .Values.dbManager.image.pullPolicy }}
+          {{- with .Values.dbManager.extraArgs }}
+          args:
+            {{- range $key, $value := . }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          command:
+            - ./katib-db-manager
+          env:
+            - name: DB_NAME
+              value: mysql
+            - name: KATIB_MYSQL_DB_HOST
+              value: {{ include "katib.mariadb.host" . | quote }}
+            - name: KATIB_MYSQL_DB_PORT
+              value: {{ include "katib.mariadb.port" . | quote }}
+            - name: DB_USER
+              value: {{ include "katib.mariadb.username" . | quote }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "katib.mariadb.secretName" . }}
+                  key: mariadb-password
+            - name: KATIB_MYSQL_DB_DATABASE
+              value: {{ include "katib.mariadb.database" . | quote }}
+            {{- if .Values.dbManager.extraEnvVars }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.dbManager.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          {{- if or .Values.dbManager.extraEnvVarsCM .Values.dbManager.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.dbManager.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.dbManager.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.dbManager.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.dbManager.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: grpc
+              containerPort: 6789
+              protocol: TCP
+          {{- if .Values.dbManager.livenessProbe.enabled }}
+          livenessProbe:
+            exec:
+              command:
+                - /bin/grpc_health_probe
+                - -addr=:6789
+            initialDelaySeconds: {{ .Values.dbManager.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.dbManager.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.dbManager.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.dbManager.livenessProbe.failureThreshold }}
+            successThreshold: {{ .Values.dbManager.livenessProbe.successThreshold }}
+          {{- end }}
+          {{- if .Values.dbManager.readinessProbe.enabled }}
+          readinessProbe:
+            exec:
+              command:
+                - /bin/grpc_health_probe
+                - -addr=:6789
+            initialDelaySeconds: {{ .Values.dbManager.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.dbManager.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.dbManager.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.dbManager.readinessProbe.failureThreshold }}
+            successThreshold: {{ .Values.dbManager.readinessProbe.successThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.dbManager.resources | nindent 12 }}
+      {{- with .Values.dbManager.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.dbManager.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.dbManager.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

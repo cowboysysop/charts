@@ -1,0 +1,3 @@
+fullnameOverride: katib
+mariadb:
+  fullnameOverride: mariadb

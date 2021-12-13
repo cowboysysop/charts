@@ -9,6 +9,7 @@
 
 | Name                                                      | Description                                                                                                                  |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| [katib](charts/katib)                                     | A Kubernetes-native project for automated machine learning                                                                   |
 | [kroki](charts/kroki)                                     | Creates diagrams from textual descriptions                                                                                   |
 | [kubebox](charts/kubebox)                                 | Terminal and Web console for Kubernetes                                                                                      |
 | [kubeview](charts/kubeview)                               | Kubernetes cluster visualiser and graphical explorer                                                                         |

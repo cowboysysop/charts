@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "katib.ui.fullname" . }}
+  labels:
+    {{- include "katib.ui.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.ui.service.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- if .Values.ui.service.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.ui.service.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  type: {{ .Values.ui.service.type }}
+  {{- if and (eq .Values.ui.service.type "ClusterIP") .Values.ui.service.clusterIP }}
+  clusterIP: {{ .Values.ui.service.clusterIP }}
+  {{- end }}
+  {{- if and (eq .Values.ui.service.type "LoadBalancer") .Values.ui.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.ui.service.loadBalancerIP }}
+  {{- end }}
+  {{- if and (eq .Values.ui.service.type "LoadBalancer") .Values.ui.service.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges:
+    {{- toYaml .Values.ui.service.loadBalancerSourceRanges | nindent 4 }}
+  {{- end }}
+  {{- if or (eq .Values.ui.service.type "LoadBalancer") (eq .Values.ui.service.type "NodePort") }}
+  externalTrafficPolicy: {{ .Values.ui.service.externalTrafficPolicy }}
+  {{- end }}
+  ports:
+    - port: {{ .Values.ui.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+      {{- if and (or (eq .Values.ui.service.type "LoadBalancer") (eq .Values.ui.service.type "NodePort")) .Values.ui.service.nodePort }}
+      nodePort: {{ .Values.ui.service.nodePort }}
+      {{- end }}
+  selector:
+    {{- include "katib.ui.selectorLabels" . | nindent 4 }}

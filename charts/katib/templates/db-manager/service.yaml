@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "katib.dbManager.fullname" . }}
+  labels:
+    {{- include "katib.dbManager.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.dbManager.service.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- if .Values.dbManager.service.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.dbManager.service.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  type: {{ .Values.dbManager.service.type }}
+  {{- if and (eq .Values.dbManager.service.type "ClusterIP") .Values.dbManager.service.clusterIP }}
+  clusterIP: {{ .Values.dbManager.service.clusterIP }}
+  {{- end }}
+  {{- if and (eq .Values.dbManager.service.type "LoadBalancer") .Values.dbManager.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.dbManager.service.loadBalancerIP }}
+  {{- end }}
+  {{- if and (eq .Values.dbManager.service.type "LoadBalancer") .Values.dbManager.service.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges:
+    {{- toYaml .Values.dbManager.service.loadBalancerSourceRanges | nindent 4 }}
+  {{- end }}
+  {{- if or (eq .Values.dbManager.service.type "LoadBalancer") (eq .Values.dbManager.service.type "NodePort") }}
+  externalTrafficPolicy: {{ .Values.dbManager.service.externalTrafficPolicy }}
+  {{- end }}
+  ports:
+    - port: {{ .Values.dbManager.service.port }}
+      targetPort: grpc
+      protocol: TCP
+      name: grpc
+      {{- if and (or (eq .Values.dbManager.service.type "LoadBalancer") (eq .Values.dbManager.service.type "NodePort")) .Values.dbManager.service.nodePort }}
+      nodePort: {{ .Values.dbManager.service.nodePort }}
+      {{- end }}
+  selector:
+    {{- include "katib.dbManager.selectorLabels" . | nindent 4 }}

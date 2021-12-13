@@ -48,6 +48,15 @@
     {
       "fileMatch": ["^\\.github\\/workflows\\/.*$"],
       "matchStrings": [
+        "(?<currentValue>v\\d+\\.\\d+\\.\\d+).* # renovate: cert-manager\\n"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "cert-manager",
+      "lookupNameTemplate": "jetstack/cert-manager"
+    },
+    {
+      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: helm\\n"
       ],
       "datasourceTemplate": "github-releases",

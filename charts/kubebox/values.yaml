@@ -139,7 +139,8 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: kubebox.local
-      paths: []
+      paths:
+        - /
   tls: []
   #  - secretName: kubebox-tls
   #    hosts:

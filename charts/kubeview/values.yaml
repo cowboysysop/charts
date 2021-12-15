@@ -139,7 +139,8 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: kubeview.local
-      paths: []
+      paths:
+        - /
   tls: []
   #  - secretName: kubeview-tls
   #    hosts:

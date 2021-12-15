@@ -139,7 +139,8 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: whoami.local
-      paths: []
+      paths:
+        - /
   tls: []
   #  - secretName: whoami-tls
   #    hosts:

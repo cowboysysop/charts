@@ -447,7 +447,8 @@ ui:
       # kubernetes.io/tls-acme: "true"
     hosts:
       - host: katib.local
-        paths: []
+        paths:
+          - /katib/
     tls: []
     #  - secretName: katib-tls
     #    hosts:

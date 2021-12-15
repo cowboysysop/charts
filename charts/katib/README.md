@@ -233,7 +233,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `ui.ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific`                         |
 | `ui.ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                             |
 | `ui.ingress.hosts[0].host`              | Hostname to your Katib installation                                                                   | `katib.local`                                    |
-| `ui.ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[]`                                             |
+| `ui.ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[/katib/]`                                      |
 | `ui.ingress.tls[0].secretName`          | TLS Secret (certificates)                                                                             | `nil`                                            |
 | `ui.ingress.tls[0].hosts[0]`            | TLS hosts                                                                                             | `nil`                                            |
 | `ui.resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                                             |

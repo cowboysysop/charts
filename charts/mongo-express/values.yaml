@@ -139,7 +139,8 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: mongo-express.local
-      paths: []
+      paths:
+        - /
   tls: []
   #  - secretName: mongo-express-tls
   #    hosts:

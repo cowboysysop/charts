@@ -139,7 +139,8 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: quickchart.local
-      paths: []
+      paths:
+        - /
   tls: []
   #  - secretName: quickchart-tls
   #    hosts:

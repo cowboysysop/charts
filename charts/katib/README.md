@@ -16,7 +16,7 @@ This chart bootstraps a Katib deployment on a [Kubernetes](http://kubernetes.io)
 ## Prerequisites
 
 - Kubernetes 1.16+
-- Cert-manager 1.3+ (you can use the [cert-manager/cert-manager](https://artifacthub.io/packages/helm/cert-manager/cert-manager) chart)
+- cert-manager 1.3+ (you can use the [cert-manager/cert-manager](https://artifacthub.io/packages/helm/cert-manager/cert-manager) chart)
 - Helm 3.1+
 
 ## Installing
@@ -274,6 +274,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | `tests.image.tag`        | Image tag         | `1.0.0`                      |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
 
+### Setting parameters
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
@@ -290,4 +292,4 @@ $ helm install my-release \
     --values values.yaml cowboysysop/katib
 ```
 
-**Tip**: You can use the default [values.yaml](values.yaml).
+**TIP**: You can use the default [values.yaml](values.yaml).

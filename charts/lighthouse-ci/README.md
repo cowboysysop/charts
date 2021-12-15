@@ -177,6 +177,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | `tests.image.tag`        | Image tag         | `1.0.0`                      |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
 
+### Setting parameters
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
@@ -193,4 +195,4 @@ $ helm install my-release \
     --values values.yaml cowboysysop/lighthouse-ci
 ```
 
-**Tip**: You can use the default [values.yaml](values.yaml).
+**TIP**: You can use the default [values.yaml](values.yaml).

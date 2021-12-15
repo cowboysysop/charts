@@ -79,8 +79,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                                 | Description                                                                                           | Default                                               |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------|
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                                   |
-| `image.repository`                   | Mongo Express image name                                                                              | `mongo-express`                                       |
-| `image.tag`                          | Mongo Express image tag                                                                               | `0.54.0`                                              |
+| `image.repository`                   | Image name                                                                                            | `mongo-express`                                       |
+| `image.tag`                          | Image tag                                                                                             | `0.54.0`                                              |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                        |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                               |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                   |
@@ -152,14 +152,16 @@ The following tables lists all the configurable parameters expose by the chart a
 | `tests.image.tag`        | Image tag         | `1.0.0`                      |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
 
+### Setting parameters
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
 $ helm install my-release \
-    --set replicaCount=3 cowboysysop/mongo-express
+    --set nameOverride=my-name cowboysysop/mongo-express
 ```
 
-The above command sets the `replicaCount` to `3`.
+The above command sets the `nameOverride` to `my-name`.
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
@@ -168,4 +170,4 @@ $ helm install my-release \
     --values values.yaml cowboysysop/mongo-express
 ```
 
-**Tip**: You can use the default [values.yaml](values.yaml).
+**TIP**: You can use the default [values.yaml](values.yaml).

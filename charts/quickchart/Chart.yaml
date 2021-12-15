@@ -8,6 +8,7 @@ maintainers:
 name: quickchart
 sources:
   - https://github.com/typpo/quickchart
+  - https://github.com/cowboysysop/charts/tree/master/charts/quickchart
 version: 1.0.2
 dependencies:
   - name: common

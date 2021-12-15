@@ -16,7 +16,7 @@ This chart bootstraps a Vertical Pod Autoscaler deployment on a [Kubernetes](htt
 ## Prerequisites
 
 - Kubernetes 1.16+
-- Metrics Server 0.2+ (you can use the [stable/metrics-server](https://hub.helm.sh/charts/stable/metrics-server) chart)
+- Metrics Server 0.2+ (you can use the [bitnami/metrics-server](https://artifacthub.io/packages/helm/bitnami/metrics-server) chart)
 - Helm 3.1+
 
 ## Installing
@@ -78,6 +78,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 **TIP**: Specify the `--purge` argument to the above command to remove the release from the store and make its name free for later use.
 
 Optionally, delete the custom resource definitions created by the chart using:
+
+**WARNING**: It will also try to delete all instances of the custom resource definitions.
 
 ```bash
 $ kubectl delete crd verticalpodautoscalers.autoscaling.k8s.io
@@ -248,6 +250,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | `tests.image.tag`        | Image tag         | `1.0.0`                      |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
 
+### Setting parameters
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
@@ -264,7 +268,7 @@ $ helm install my-release \
     --values values.yaml cowboysysop/vertical-pod-autoscaler
 ```
 
-**Tip**: You can use the default [values.yaml](values.yaml).
+**TIP**: You can use the default [values.yaml](values.yaml).
 
 ## Limitations
 

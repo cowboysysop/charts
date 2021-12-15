@@ -73,8 +73,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                                 | Description                                                                                           | Default                                            |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|----------------------------------------------------|
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                                |
-| `image.repository`                   | QuickChart image name                                                                                 | `ianw/quickchart`                                  |
-| `image.tag`                          | QuickChart image tag                                                                                  | `v1.5.0`                                           |
+| `image.repository`                   | Image name                                                                                            | `ianw/quickchart`                                  |
+| `image.tag`                          | Image tag                                                                                             | `v1.5.0`                                           |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                     |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                            |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                |
@@ -132,6 +132,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | `tests.image.tag`        | Image tag         | `1.0.0`                      |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
 
+### Setting parameters
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
@@ -148,4 +150,4 @@ $ helm install my-release \
     --values values.yaml cowboysysop/quickchart
 ```
 
-**Tip**: You can use the default [values.yaml](values.yaml).
+**TIP**: You can use the default [values.yaml](values.yaml).

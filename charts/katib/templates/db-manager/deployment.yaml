@@ -54,14 +54,14 @@ spec:
             {{- toYaml .Values.dbManager.securityContext | nindent 12 }}
           image: "{{ .Values.dbManager.image.repository }}:{{ .Values.dbManager.image.tag }}"
           imagePullPolicy: {{ .Values.dbManager.image.pullPolicy }}
+          command:
+            - ./katib-db-manager
           {{- with .Values.dbManager.extraArgs }}
           args:
             {{- range $key, $value := . }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
-          command:
-            - ./katib-db-manager
           env:
             - name: DB_NAME
               value: mysql

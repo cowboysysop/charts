@@ -1,9 +1,12 @@
 # Cowboy Sysop Charts
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org/)
+[![Semantic Versioning](https://img.shields.io/badge/Semantic%20Versioning-2.0.0-yellow.svg?logo=semver)](https://semver.org/)
+
+[![Renovate](https://img.shields.io/badge/Renovate-enabled-brightgreen.svg?logo=renovatebot)](https://renovatebot.com/)
 [![Release Charts](../../workflows/Release%20Charts/badge.svg)](../../actions?query=workflow%3A%22Release+Charts%22)
-[![Renovate](https://img.shields.io/badge/Renovate-enabled-green.svg?logo=renovatebot)](https://renovatebot.com/)
-[![Downloads](https://img.shields.io/github/downloads/cowboysysop/charts/total?color=green&label=Downloads)](https://somsubhra.github.io/github-release-stats/?username=cowboysysop&repository=charts)
+[![Downloads](https://img.shields.io/github/downloads/cowboysysop/charts/total?label=Downloads)](https://somsubhra.github.io/github-release-stats/?username=cowboysysop&repository=charts)
 
 ## Charts
 
@@ -24,7 +27,7 @@
 
 ## Quality
 
-All these charts are tested with [ct](https://github.com/helm/chart-testing) on multiple Kubernetes versions, from v1.16 to v1.22, with the help of [kind](https://kind.sigs.k8s.io/).
+All these charts are tested with [ct](https://github.com/helm/chart-testing) on multiple Kubernetes versions, from v1.16 to v1.23, with the help of [kind](https://kind.sigs.k8s.io/).
 
 ## Contributing
 

@@ -10,7 +10,7 @@ name: katib
 sources:
   - https://github.com/kubeflow/katib
   - https://github.com/cowboysysop/charts/tree/master/charts/katib
-version: 1.0.0
+version: 1.0.1
 dependencies:
   - name: common
     version: 1.7.1

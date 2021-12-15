@@ -55,6 +55,8 @@ spec:
             {{- toYaml .Values.controller.securityContext | nindent 12 }}
           image: "{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
           imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
+          command:
+            - ./katib-controller
           args:
             - --trial-resources=Job.v1.batch
             - --trial-resources=MPIJob.v1.kubeflow.org
@@ -64,8 +66,6 @@ spec:
             {{- range $key, $value := .Values.controller.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
-          command:
-            - ./katib-controller
           env:
             - name: KATIB_CORE_NAMESPACE
               value: {{ .Release.Namespace }}

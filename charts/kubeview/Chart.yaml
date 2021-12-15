@@ -7,7 +7,10 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: kubeview
-version: 2.5.1
+sources:
+  - https://github.com/benc-uk/kubeview
+  - https://github.com/cowboysysop/charts/tree/master/charts/kubeview
+version: 2.5.2
 dependencies:
   - name: common
     version: 1.7.1

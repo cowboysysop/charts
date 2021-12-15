@@ -16,7 +16,7 @@ This chart bootstraps a Kubebox deployment on a [Kubernetes](http://kubernetes.i
 ## Prerequisites
 
 - Kubernetes 1.16+ (should work with 1.12+)
-- cAdvisor 0.36+ (you can use the [code-chris/cadvisor](https://hub.helm.sh/charts/code-chris/cadvisor) chart)
+- cAdvisor 0.36+ (you can use the [ckotzbauer/cadvisor](https://artifacthub.io/packages/helm/ckotzbauer/cadvisor) chart)
 - Helm 3.1+
 
 ## Installing
@@ -80,8 +80,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                                 | Description                                                                                           | Default                                         |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------|
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                             |
-| `image.repository`                   | Kubebox image name                                                                                    | `astefanutti/kubebox`                           |
-| `image.tag`                          | Kubebox image tag                                                                                     | `0.8.0-server`                                  |
+| `image.repository`                   | Image name                                                                                            | `astefanutti/kubebox`                           |
+| `image.tag`                          | Image tag                                                                                             | `0.8.0-server`                                  |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                  |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                         |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                             |
@@ -119,7 +119,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific`                        |
 | `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                            |
 | `ingress.hosts[0].host`              | Hostname to your Kubebox installation                                                                 | `kubebox.local`                                 |
-| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[]`                                            |
+| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[/]`                                           |
 | `ingress.tls[0].secretName`          | TLS Secret (certificates)                                                                             | `nil`                                           |
 | `ingress.tls[0].hosts[0]`            | TLS hosts                                                                                             | `nil`                                           |
 | `resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                                            |
@@ -130,14 +130,24 @@ The following tables lists all the configurable parameters expose by the chart a
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                           |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                           |
 
+### Tests parameters
+
+| Name                     | Description       | Default                      |
+|--------------------------|-------------------|------------------------------|
+| `tests.image.repository` | Image name        | `ghcr.io/cowboysysop/pytest` |
+| `tests.image.tag`        | Image tag         | `1.0.0`                      |
+| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
+
+### Setting parameters
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
 $ helm install my-release \
-    --set replicaCount=3 cowboysysop/kubebox
+    --set nameOverride=my-name cowboysysop/kubebox
 ```
 
-The above command sets the `replicaCount` to `3`.
+The above command sets the `nameOverride` to `my-name`.
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
 
@@ -146,4 +156,4 @@ $ helm install my-release \
     --values values.yaml cowboysysop/kubebox
 ```
 
-**Tip**: You can use the default [values.yaml](values.yaml).
+**TIP**: You can use the default [values.yaml](values.yaml).

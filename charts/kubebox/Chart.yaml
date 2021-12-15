@@ -6,7 +6,10 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: kubebox
-version: 2.6.1
+sources:
+  - https://github.com/astefanutti/kubebox
+  - https://github.com/cowboysysop/charts/tree/master/charts/kubebox
+version: 2.6.2
 dependencies:
   - name: common
     version: 1.7.1

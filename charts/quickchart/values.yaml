@@ -139,7 +139,8 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: quickchart.local
-      paths: []
+      paths:
+        - /
   tls: []
   #  - secretName: quickchart-tls
   #    hosts:
@@ -176,3 +177,14 @@ extraEnvVarsCM:
 
 # Name of existing Secret containing additional container environment variables
 extraEnvVarsSecret:
+
+tests:
+  image:
+    # Image name
+    repository: ghcr.io/cowboysysop/pytest
+
+    # Image tag
+    tag: 1.0.0
+
+    # Image pull policy
+    pullPolicy: IfNotPresent

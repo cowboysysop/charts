@@ -61,6 +61,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 Optionally, delete the custom resource definitions created by the chart using:
 
+**WARNING**: It will also try to delete all instances of the custom resource definitions.
+
 ```bash
 $ kubectl delete crd notebooks.kubeflow.org
 ```
@@ -126,6 +128,16 @@ The following tables lists all the configurable parameters expose by the chart a
 | `kubeflow.enabled`                   | Enable integration with Kubeflow                                                                      | `false`                                                     |
 | `kubeflow.gatewayName`               | Istio gateway name                                                                                    | `kubeflow`                                                  |
 
+### Tests parameters
+
+| Name                     | Description       | Default                      |
+|--------------------------|-------------------|------------------------------|
+| `tests.image.repository` | Image name        | `ghcr.io/cowboysysop/pytest` |
+| `tests.image.tag`        | Image tag         | `1.0.0`                      |
+| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
+
+### Setting parameters
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
@@ -142,4 +154,4 @@ $ helm install my-release \
     --values values.yaml cowboysysop/notebook-controller
 ```
 
-**Tip**: You can use the default [values.yaml](values.yaml).
+**TIP**: You can use the default [values.yaml](values.yaml).

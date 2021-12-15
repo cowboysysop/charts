@@ -7,7 +7,10 @@ maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
 name: mongo-express
-version: 2.6.1
+sources:
+  - https://github.com/mongo-express/mongo-express
+  - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
+version: 2.6.2
 dependencies:
   - name: common
     version: 1.7.1

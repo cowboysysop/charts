@@ -139,7 +139,8 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: lighthouse-ci.local
-      paths: []
+      paths:
+        - /
   tls: []
   #  - secretName: lighthouse-ci-tls
   #    hosts:
@@ -310,3 +311,14 @@ externalPostgresql:
 
   # External PostgreSQL database
   database: lighthouse-ci
+
+tests:
+  image:
+    # Image name
+    repository: ghcr.io/cowboysysop/pytest
+
+    # Image tag
+    tag: 1.0.0
+
+    # Image pull policy
+    pullPolicy: IfNotPresent

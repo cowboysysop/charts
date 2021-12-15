@@ -20,21 +20,21 @@
   "packageRules": [
     {
       "matchPaths": [
-	".github/workflows/**"
+        ".github/workflows/**"
       ],
       "groupName": "github workflows",
       "semanticCommitType": "ci"
     },
     {
       "matchPackageNames": [
-	"helm",
+        "helm",
         "kindest/node"
       ],
       "separateMinorPatch": true
     },
     {
       "matchPackageNames": [
-	"helm",
+        "helm",
         "kindest/node"
       ],
       "matchUpdateTypes": [

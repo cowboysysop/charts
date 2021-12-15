@@ -118,7 +118,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific`                              |
 | `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                                  |
 | `ingress.hosts[0].host`              | Hostname to your Lighthouse CI Server installation                                                    | `lighthouse-ci.local`                                 |
-| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[]`                                                  |
+| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[/]`                                                 |
 | `ingress.tls[0].secretName`          | TLS Secret (certificates)                                                                             | `nil`                                                 |
 | `ingress.tls[0].hosts[0]`            | TLS hosts                                                                                             | `nil`                                                 |
 | `resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                                                  |
@@ -169,6 +169,16 @@ The following tables lists all the configurable parameters expose by the chart a
 | `externalPostgresql.existingSecret`  | Name of existing Secret to use                                                                        | `nil`                                                 |
 | `externalPostgresql.database`        | External PostgreSQL database                                                                          | `lighthouse-ci`                                       |
 
+### Tests parameters
+
+| Name                     | Description       | Default                      |
+|--------------------------|-------------------|------------------------------|
+| `tests.image.repository` | Image name        | `ghcr.io/cowboysysop/pytest` |
+| `tests.image.tag`        | Image tag         | `1.0.0`                      |
+| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
+
+### Setting parameters
+
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
 ```bash
@@ -185,4 +195,4 @@ $ helm install my-release \
     --values values.yaml cowboysysop/lighthouse-ci
 ```
 
-**Tip**: You can use the default [values.yaml](values.yaml).
+**TIP**: You can use the default [values.yaml](values.yaml).

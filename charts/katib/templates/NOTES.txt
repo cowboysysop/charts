@@ -2,7 +2,7 @@
 {{- if .Values.ui.ingress.enabled }}
 {{- range $host := .Values.ui.ingress.hosts }}
   {{- range .paths }}
-  http{{ if $.Values.ui.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }}katib/
+  http{{ if $.Values.ui.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }}
   {{- end }}
 {{- end }}
 {{- else if contains "NodePort" .Values.ui.service.type }}

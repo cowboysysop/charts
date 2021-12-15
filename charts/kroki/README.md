@@ -73,8 +73,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                                 | Description                                                                                           | Default                                       |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------|
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                           |
-| `image.repository`                   | Kroki image name                                                                                      | `yuzutech/kroki`                              |
-| `image.tag`                          | Kroki image tag                                                                                       | `0.14.0`                                      |
+| `image.repository`                   | Image name                                                                                            | `yuzutech/kroki`                              |
+| `image.tag`                          | Image tag                                                                                             | `0.14.0`                                      |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                       |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                           |
@@ -112,7 +112,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific`                      |
 | `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                          |
 | `ingress.hosts[0].host`              | Hostname to your Kroki installation                                                                   | `kroki.local`                                 |
-| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[]`                                          |
+| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[/]`                                         |
 | `ingress.tls[0].secretName`          | TLS Secret (certificates)                                                                             | `nil`                                         |
 | `ingress.tls[0].hosts[0]`            | TLS hosts                                                                                             | `nil`                                         |
 | `resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                                          |
@@ -129,8 +129,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                           | Description                                                                      | Default                    |
 |--------------------------------|----------------------------------------------------------------------------------|----------------------------|
 | `blockdiag.enabled`            | Enable BlockDiag diagrams                                                        | `true`                     |
-| `blockdiag.image.repository`   | BlockDiag image name                                                             | `yuzutech/kroki-blockdiag` |
-| `blockdiag.image.tag`          | BlockDiag image tag                                                              | `0.14.0`                   |
+| `blockdiag.image.repository`   | Image name                                                                       | `yuzutech/kroki-blockdiag` |
+| `blockdiag.image.tag`          | Image tag                                                                        | `0.14.0`                   |
 | `blockdiag.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`             |
 | `blockdiag.securityContext`    | Container security context                                                       | `{}`                       |
 | `blockdiag.resources`          | CPU/Memory resource requests/limits                                              | `{}`                       |
@@ -144,8 +144,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                      | Description                                                                      | Default               |
 |---------------------------|----------------------------------------------------------------------------------|-----------------------|
 | `bpmn.enabled`            | Enable BPMN diagrams                                                             | `true`                |
-| `bpmn.image.repository`   | BPMN image name                                                                  | `yuzutech/kroki-bpmn` |
-| `bpmn.image.tag`          | BPMN image tag                                                                   | `0.14.0`              |
+| `bpmn.image.repository`   | Image name                                                                       | `yuzutech/kroki-bpmn` |
+| `bpmn.image.tag`          | Image tag                                                                        | `0.14.0`              |
 | `bpmn.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`        |
 | `bpmn.securityContext`    | Container security context                                                       | `{}`                  |
 | `bpmn.resources`          | CPU/Memory resource requests/limits                                              | `{}`                  |
@@ -159,8 +159,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                            | Description                                                                      | Default                     |
 |---------------------------------|----------------------------------------------------------------------------------|-----------------------------|
 | `excalidraw.enabled`            | Enable Excalidraw diagrams                                                       | `true`                      |
-| `excalidraw.image.repository`   | Excalidraw image name                                                            | `yuzutech/kroki-excalidraw` |
-| `excalidraw.image.tag`          | Excalidraw image tag                                                             | `0.14.0`                    |
+| `excalidraw.image.repository`   | Image name                                                                       | `yuzutech/kroki-excalidraw` |
+| `excalidraw.image.tag`          | Image tag                                                                        | `0.14.0`                    |
 | `excalidraw.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`              |
 | `excalidraw.securityContext`    | Container security context                                                       | `{}`                        |
 | `excalidraw.resources`          | CPU/Memory resource requests/limits                                              | `{}`                        |
@@ -174,8 +174,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                         | Description                                                                      | Default                  |
 |------------------------------|----------------------------------------------------------------------------------|--------------------------|
 | `mermaid.enabled`            | Enable Mermaid diagrams                                                          | `true`                   |
-| `mermaid.image.repository`   | Mermaid image name                                                               | `yuzutech/kroki-mermaid` |
-| `mermaid.image.tag`          | Mermaid image tag                                                                | `0.14.0`                 |
+| `mermaid.image.repository`   | Image name                                                                       | `yuzutech/kroki-mermaid` |
+| `mermaid.image.tag`          | Image tag                                                                        | `0.14.0`                 |
 | `mermaid.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`           |
 | `mermaid.securityContext`    | Container security context                                                       | `{}`                     |
 | `mermaid.resources`          | CPU/Memory resource requests/limits                                              | `{}`                     |
@@ -183,6 +183,16 @@ The following tables lists all the configurable parameters expose by the chart a
 | `mermaid.extraEnvVars`       | Additional container environment variables                                       | `[]`                     |
 | `mermaid.extraEnvVarsCM`     | Name of existing ConfigMap containing additional container environment variables | `nil`                    |
 | `mermaid.extraEnvVarsSecret` | Name of existing Secret containing additional container environment variables    | `nil`                    |
+
+### Tests parameters
+
+| Name                     | Description       | Default                      |
+|--------------------------|-------------------|------------------------------|
+| `tests.image.repository` | Image name        | `ghcr.io/cowboysysop/pytest` |
+| `tests.image.tag`        | Image tag         | `1.0.0`                      |
+| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
+
+### Setting parameters
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 
@@ -200,4 +210,4 @@ $ helm install my-release \
     --values values.yaml cowboysysop/kroki
 ```
 
-**Tip**: You can use the default [values.yaml](values.yaml).
+**TIP**: You can use the default [values.yaml](values.yaml).

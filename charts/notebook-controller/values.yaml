@@ -151,3 +151,14 @@ kubeflow:
 
   # Istio gateway name
   gatewayName: kubeflow
+
+tests:
+  image:
+    # Image name
+    repository: ghcr.io/cowboysysop/pytest
+
+    # Image tag
+    tag: 1.0.0
+
+    # Image pull policy
+    pullPolicy: IfNotPresent

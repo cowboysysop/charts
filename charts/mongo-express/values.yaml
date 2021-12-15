@@ -139,7 +139,8 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: mongo-express.local
-      paths: []
+      paths:
+        - /
   tls: []
   #  - secretName: mongo-express-tls
   #    hosts:
@@ -219,3 +220,14 @@ existingSecret: ""
 mongodb:
   # Whether to use the MongoDB chart (for testing purposes only)
   enabled: false
+
+tests:
+  image:
+    # Image name
+    repository: ghcr.io/cowboysysop/pytest
+
+    # Image tag
+    tag: 1.0.0
+
+    # Image pull policy
+    pullPolicy: IfNotPresent

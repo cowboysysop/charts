@@ -247,24 +247,25 @@ The following tables lists all the configurable parameters expose by the chart a
 
 ### MariaDB parameters
 
-| Name                               | Description                                           | Default                                |
-|------------------------------------|-------------------------------------------------------|----------------------------------------|
-| `mariadb.enabled`                  | Whether to use the MariaDB chart                      | `true`                                 |
-| `mariadb.architecture`             | MariaDB architecture                                  | `standalone`                           |
-| `mariadb.auth.database`            | MariaDB database                                      | `katib`                                |
-| `mariadb.auth.username`            | MariaDB user                                          | `katib`                                |
-| `mariadb.auth.password`            | MariaDB password                                      | `katib`                                |
-| `mariadb.auth.existingSecret`      | Name of existing Secret to use                        | `nil`                                  |
-| `mariadb.primary.podAnnotations`   | Additional pod annotations for MariaDB primary pods   | `{ sidecar.istio.io/inject: "false" }` |
-| `mariadb.primary.service.port`     | MariaDB port                                          | `3306`                                 |
-| `mariadb.secondary.podAnnotations` | Additional pod annotations for MariaDB secondary pods | `{ sidecar.istio.io/inject: "false" }` |
-| `externalMariadb.enabled`          | Whether to use an external MariaDB                    | `false`                                |
-| `externalMariadb.host`             | External MariaDB host                                 | `mariadb`                              |
-| `externalMariadb.port`             | External MariaDB port                                 | `3306`                                 |
-| `externalMariadb.username`         | External MariaDB user                                 | `katib`                                |
-| `externalMariadb.password`         | External MariaDB password                             | `katib`                                |
-| `externalMariadb.existingSecret`   | Name of existing Secret to use                        | `nil`                                  |
-| `externalMariadb.database`         | External MariaDB database                             | `katib`                                |
+| Name                                        | Description                                                       | Default                                |
+|---------------------------------------------|-------------------------------------------------------------------|----------------------------------------|
+| `mariadb.enabled`                           | Whether to use the MariaDB chart                                  | `true`                                 |
+| `mariadb.architecture`                      | MariaDB architecture                                              | `standalone`                           |
+| `mariadb.auth.database`                     | MariaDB database                                                  | `katib`                                |
+| `mariadb.auth.username`                     | MariaDB user                                                      | `katib`                                |
+| `mariadb.auth.password`                     | MariaDB password                                                  | `katib`                                |
+| `mariadb.auth.existingSecret`               | Name of existing Secret to use                                    | `nil`                                  |
+| `mariadb.primary.podAnnotations`            | Additional pod annotations for MariaDB primary pods               | `{ sidecar.istio.io/inject: "false" }` |
+| `mariadb.primary.service.port`              | MariaDB port                                                      | `3306`                                 |
+| `mariadb.secondary.podAnnotations`          | Additional pod annotations for MariaDB secondary pods             | `{ sidecar.istio.io/inject: "false" }` |
+| `externalMariadb.enabled`                   | Whether to use an external MariaDB                                | `false`                                |
+| `externalMariadb.host`                      | External MariaDB host                                             | `mariadb`                              |
+| `externalMariadb.port`                      | External MariaDB port                                             | `3306`                                 |
+| `externalMariadb.username`                  | External MariaDB user                                             | `katib`                                |
+| `externalMariadb.password`                  | External MariaDB password                                         | `katib`                                |
+| `externalMariadb.existingSecret`            | Name of existing Secret to use                                    | `nil`                                  |
+| `externalMariadb.existingSecretKeyPassword` | Name of the key in existing Secret that contains MariaDB password | `mariadb-password`                     |
+| `externalMariadb.database`                  | External MariaDB database                                         | `katib`                                |
 
 ### Tests parameters
 

@@ -119,6 +119,17 @@ MariaDB secret name
 {{- end -}}
 
 {{/*
+MariaDB password secret key name
+*/}}
+{{- define "katib.mariadb.secretKeyNamePassword" -}}
+{{- if .Values.externalMariadb.existingSecret -}}
+    {{ .Values.externalMariadb.existingSecretKeyPassword }}
+{{- else -}}
+    mariadb-password
+{{- end -}}
+{{- end -}}
+
+{{/*
 MariaDB database
 */}}
 {{- define "katib.mariadb.database" -}}

@@ -61,7 +61,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "lighthouse-ci.secretName" . }}
-                  key: basic-auth-password
+                  key: {{ include "lighthouse-ci.secretKeyNameBasicAuthPassword" . }}
             {{- end }}
             {{- if or .Values.mariadb.enabled .Values.externalMariadb.enabled }}
             - name: LHCI_STORAGE__SQL_DIALECT
@@ -76,7 +76,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "lighthouse-ci.mariadb.secretName" . }}
-                  key: mariadb-password
+                  key: {{ include "lighthouse-ci.mariadb.secretKeyNamePassword" . }}
             - name: MARIADB_DATABASE
               value: {{ include "lighthouse-ci.mariadb.database" . | quote }}
             - name: LHCI_STORAGE__SQL_CONNECTION_URL
@@ -95,7 +95,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "lighthouse-ci.postgresql.secretName" . }}
-                  key: postgresql-password
+                  key: {{ include "lighthouse-ci.postgresql.secretKeyNamePassword" . }}
             - name: POSTGRESQL_DATABASE
               value: {{ include "lighthouse-ci.postgresql.database" . | quote }}
             - name: LHCI_STORAGE__SQL_CONNECTION_URL

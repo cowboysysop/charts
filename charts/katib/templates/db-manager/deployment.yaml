@@ -75,7 +75,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "katib.mariadb.secretName" . }}
-                  key: mariadb-password
+                  key: {{ include "katib.mariadb.secretKeyNamePassword" . }}
             - name: KATIB_MYSQL_DB_DATABASE
               value: {{ include "katib.mariadb.database" . | quote }}
             {{- if .Values.dbManager.extraEnvVars }}

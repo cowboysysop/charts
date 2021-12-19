@@ -3,6 +3,31 @@ entries:
   katib:
   - apiVersion: v2
     appVersion: 0.12.0
+    created: "2021-12-19T17:34:13.482498135Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 9.4.4
+    description: A Kubernetes-native project for automated machine learning
+    digest: b58d37acdc59ee525f378a125c0fcc12795429ffec600fe64a159c0dc15a8e6f
+    home: https://github.com/kubeflow/katib
+    icon: https://github.com/kubeflow/katib/blob/master/docs/images/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: katib
+    sources:
+    - https://github.com/kubeflow/katib
+    - https://github.com/cowboysysop/charts/tree/master/charts/katib
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/katib-1.1.0/katib-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
+    appVersion: 0.12.0
     created: "2021-12-15T11:17:07.330681618Z"
     dependencies:
     - name: common
@@ -641,6 +666,35 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
   lighthouse-ci:
+  - apiVersion: v2
+    appVersion: 0.8.1
+    created: "2021-12-19T17:34:13.622245644Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 9.4.4
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami/
+      version: 10.9.4
+    description: Enables running a server to display Lighthouse CI results
+    digest: 90a902d9006f2bb439c4e6b62ff3d180ec5a8268ed37c451f990a156d413c71f
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    sources:
+    - https://github.com/GoogleChrome/lighthouse-ci
+    - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-2.11.0/lighthouse-ci-2.11.0.tgz
+    version: 2.11.0
   - apiVersion: v2
     appVersion: 0.8.1
     created: "2021-12-15T11:17:08.366323111Z"
@@ -2201,4 +2255,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2021-12-15T11:17:09.91776904Z"
+generated: "2021-12-19T17:34:13.623313109Z"

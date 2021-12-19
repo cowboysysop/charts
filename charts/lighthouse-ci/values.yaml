@@ -206,6 +206,9 @@ basicAuthPassword: ""
 # Name of existing Secret to use
 existingSecret: ""
 
+# Name of the key in existing Secret that contains HTTP Basic Authentication password
+existingSecretKeyBasicAuthPassword: basic-auth-password
+
 # The configuration to automatically collect results using the PageSpeed Insights API
 psiCollectCron:
   # The API key to use with the PageSpeed Insights API
@@ -267,6 +270,9 @@ externalMariadb:
   # Name of existing Secret to use
   existingSecret: ""
 
+  # Name of the key in existing Secret that contains MariaDB password
+  existingSecretKeyPassword: mariadb-password
+
   # External MariaDB database
   database: lighthouse-ci
 
@@ -308,6 +314,9 @@ externalPostgresql:
 
   # Name of existing Secret to use
   existingSecret: ""
+
+  # Name of the key in existing Secret that contains PostgreSQL password
+  existingSecretKeyPassword: postgresql-password
 
   # External PostgreSQL database
   database: lighthouse-ci

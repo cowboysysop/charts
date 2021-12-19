@@ -74,6 +74,17 @@ Create the name of the secret to use
 {{- end -}}
 
 {{/*
+HTTP Basic Authentication password secret key name
+*/}}
+{{- define "lighthouse-ci.secretKeyNameBasicAuthPassword" -}}
+{{- if .Values.existingSecret -}}
+    {{ .Values.existingSecretKeyBasicAuthPassword }}
+{{- else -}}
+    basic-auth-password
+{{- end -}}
+{{- end -}}
+
+{{/*
 MariaDB fully qualified app name
 */}}
 {{- define "lighthouse-ci.mariadb.fullname" -}}
@@ -137,6 +148,17 @@ MariaDB secret name
     {{ .Values.externalMariadb.existingSecret }}
 {{- else -}}
     {{ include "lighthouse-ci.mariadb.fullname" . }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+MariaDB password secret key name
+*/}}
+{{- define "lighthouse-ci.mariadb.secretKeyNamePassword" -}}
+{{- if .Values.externalMariadb.existingSecret -}}
+    {{ .Values.externalMariadb.existingSecretKeyPassword }}
+{{- else -}}
+    mariadb-password
 {{- end -}}
 {{- end -}}
 
@@ -206,6 +228,17 @@ PostgreSQL secret name
     {{ .Values.externalPostgresql.existingSecret }}
 {{- else -}}
     {{ include "lighthouse-ci.postgresql.fullname" . }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+PostgreSQL password secret key name
+*/}}
+{{- define "lighthouse-ci.postgresql.secretKeyNamePassword" -}}
+{{- if .Values.externalPostgresql.existingSecret -}}
+    {{ .Values.externalPostgresql.existingSecretKeyPassword }}
+{{- else -}}
+    postgresql-password
 {{- end -}}
 {{- end -}}
 

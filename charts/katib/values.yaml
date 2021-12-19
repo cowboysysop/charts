@@ -539,6 +539,9 @@ externalMariadb:
   # Name of existing Secret to use
   existingSecret: ""
 
+  # Name of the key in existing Secret that contains MariaDB password
+  existingSecretKeyPassword: mariadb-password
+
   # External MariaDB database
   database: katib
 

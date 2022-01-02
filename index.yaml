@@ -1043,6 +1043,28 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-1.0.0/lighthouse-ci-1.0.0.tgz
     version: 1.0.0
+  metacontroller:
+  - apiVersion: v2
+    appVersion: 2.0.19
+    created: "2022-01-02T11:10:39.548396859Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Add-on for Kubernetes that makes it easy to write and deploy custom
+      controllers
+    digest: 1338c06db99b62da4e5ffab035cdaf34dda5675f73bd335d877f33defc66388c
+    home: https://metacontroller.github.io/metacontroller/
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: metacontroller
+    sources:
+    - https://github.com/metacontroller/metacontroller
+    - https://github.com/cowboysysop/charts/tree/master/charts/metacontroller
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/metacontroller-1.0.0/metacontroller-1.0.0.tgz
+    version: 1.0.0
   mongo-express:
   - apiVersion: v2
     appVersion: 0.54.0
@@ -2255,4 +2277,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2021-12-19T17:34:13.623313109Z"
+generated: "2022-01-02T11:10:39.548897756Z"

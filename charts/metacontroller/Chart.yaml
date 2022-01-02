@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: 2.0.19
+description: Add-on for Kubernetes that makes it easy to write and deploy custom controllers
+home: https://metacontroller.github.io/metacontroller/
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: metacontroller
+sources:
+  - https://github.com/metacontroller/metacontroller
+  - https://github.com/cowboysysop/charts/tree/master/charts/metacontroller
+version: 1.0.0
+dependencies:
+  - name: common
+    version: 1.7.1
+    repository: https://charts.bitnami.com/bitnami/

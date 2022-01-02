@@ -17,6 +17,7 @@
 | [kubebox](charts/kubebox)                                 | Terminal and Web console for Kubernetes                                                                                      |
 | [kubeview](charts/kubeview)                               | Kubernetes cluster visualiser and graphical explorer                                                                         |
 | [lighthouse-ci](charts/lighthouse-ci)                     | Enables running a server to display Lighthouse CI results                                                                    |
+| [metacontroller](charts/metacontroller)                   | Add-on for Kubernetes that makes it easy to write and deploy custom controllers                                              |
 | [mongo-express](charts/mongo-express)                     | Web-based MongoDB admin interface, written with Node.js and express                                                          |
 | [mpi-operator](charts/mpi-operator)                       | Makes it easy to run allreduce-style distributed training on Kubernetes                                                      |
 | [notebook-controller](charts/notebook-controller)         | A Kubernetes controller that spawns a notebook for a user on Kubernetes                                                      |

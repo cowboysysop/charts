@@ -1045,6 +1045,27 @@ entries:
     version: 1.0.0
   metacontroller:
   - apiVersion: v2
+    appVersion: 2.1.0
+    created: "2022-01-12T20:23:39.775771972Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Add-on for Kubernetes that makes it easy to write and deploy custom
+      controllers
+    digest: 0b32f00534219fefce8ff6d988492c820be30440bf7364e9fa9a3e5ed3b91030
+    home: https://metacontroller.github.io/metacontroller/
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: metacontroller
+    sources:
+    - https://github.com/metacontroller/metacontroller
+    - https://github.com/cowboysysop/charts/tree/master/charts/metacontroller
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/metacontroller-1.1.0/metacontroller-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
     appVersion: 2.0.19
     created: "2022-01-02T11:10:39.548396859Z"
     dependencies:
@@ -2277,4 +2298,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2022-01-02T11:10:39.548897756Z"
+generated: "2022-01-12T20:23:39.776291906Z"

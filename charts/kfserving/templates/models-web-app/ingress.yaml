@@ -1,0 +1,48 @@
+{{- if .Values.modelsWebApp.ingress.enabled -}}
+apiVersion: {{ include "common.capabilities.ingress.apiVersion" . }}
+kind: Ingress
+metadata:
+  name: {{ include "kfserving.modelsWebApp.fullname" . }}
+  labels:
+    {{- include "kfserving.modelsWebApp.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.modelsWebApp.ingress.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- if .Values.modelsWebApp.ingress.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.modelsWebApp.ingress.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  {{- if and .Values.modelsWebApp.ingress.ingressClassName (eq "true" (include "common.ingress.supportsIngressClassname" .)) }}
+  ingressClassName: {{ .Values.modelsWebApp.ingress.ingressClassName | quote }}
+  {{- end }}
+  {{- if .Values.modelsWebApp.ingress.tls }}
+  tls:
+    {{- range .Values.modelsWebApp.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range .Values.modelsWebApp.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ . }}
+            {{- if eq "true" (include "common.ingress.supportsPathType" $) }}
+            pathType: {{ $.Values.modelsWebApp.ingress.pathType }}
+            {{- end }}
+            backend:
+              {{- include "common.ingress.backend" (dict "serviceName" (include "kfserving.modelsWebApp.fullname" $) "servicePort" $.Values.modelsWebApp.service.port "context" $) | nindent 14 }}
+          {{- end }}
+    {{- end }}
+{{- end }}

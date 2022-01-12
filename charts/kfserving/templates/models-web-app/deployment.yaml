@@ -1,0 +1,131 @@
+apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ include "kfserving.modelsWebApp.fullname" . }}
+  labels:
+    {{- include "kfserving.modelsWebApp.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.modelsWebApp.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "kfserving.modelsWebApp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "kfserving.modelsWebApp.selectorLabels" . | nindent 8 }}
+        {{- if .Values.modelsWebApp.podLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.modelsWebApp.podLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- if or .Values.kubeflow.enabled .Values.modelsWebApp.podAnnotations .Values.commonAnnotations }}
+      annotations:
+        {{- if .Values.kubeflow.enabled }}
+        sidecar.istio.io/inject: "false"
+        {{- end }}
+        {{- if .Values.modelsWebApp.podAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.modelsWebApp.podAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- end }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      {{- if .Values.modelsWebApp.priorityClassName }}
+      priorityClassName: {{ .Values.modelsWebApp.priorityClassName | quote }}
+      {{- end }}
+      serviceAccountName: {{ include "kfserving.modelsWebApp.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.modelsWebApp.podSecurityContext | nindent 8 }}
+      containers:
+        - name: models-web-app
+          securityContext:
+            {{- toYaml .Values.modelsWebApp.securityContext | nindent 12 }}
+          image: "{{ .Values.modelsWebApp.image.repository }}:{{ .Values.modelsWebApp.image.tag }}"
+          imagePullPolicy: {{ .Values.modelsWebApp.image.pullPolicy }}
+          {{- with .Values.modelsWebApp.extraArgs }}
+          args:
+            {{- range $key, $value := . }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          env:
+            - name: APP_PREFIX
+              value: /
+            - name: APP_SECURE_COOKIES
+              value: "false"
+            {{- if .Values.kubeflow.enabled }}
+            - name: USERID_HEADER
+              value: {{ .Values.kubeflow.useridHeader }}
+            - name: USERID_PREFIX
+              value: {{ .Values.kubeflow.useridPrefix | quote }}
+            {{- else }}
+            - name: APP_DISABLE_AUTH
+              value: "True"
+            {{- end }}
+            {{- if .Values.modelsWebApp.extraEnvVars }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.modelsWebApp.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          {{- if or .Values.modelsWebApp.extraEnvVarsCM .Values.modelsWebApp.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.modelsWebApp.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.modelsWebApp.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.modelsWebApp.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.modelsWebApp.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          {{- if .Values.modelsWebApp.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.modelsWebApp.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.modelsWebApp.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.modelsWebApp.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.modelsWebApp.livenessProbe.failureThreshold }}
+            successThreshold: {{ .Values.modelsWebApp.livenessProbe.successThreshold }}
+          {{- end }}
+          {{- if .Values.modelsWebApp.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.modelsWebApp.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.modelsWebApp.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.modelsWebApp.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.modelsWebApp.readinessProbe.failureThreshold }}
+            successThreshold: {{ .Values.modelsWebApp.readinessProbe.successThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.modelsWebApp.resources | nindent 12 }}
+      {{- with .Values.modelsWebApp.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.modelsWebApp.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.modelsWebApp.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

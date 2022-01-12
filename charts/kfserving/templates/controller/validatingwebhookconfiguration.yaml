@@ -1,0 +1,75 @@
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: {{ include "kfserving.controller.fullname" . }}
+  labels:
+    {{- include "kfserving.controller.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "kfserving.controller.fullname" . }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+webhooks:
+  - admissionReviewVersions:
+      - v1beta1
+    clientConfig:
+      service:
+        name: {{ include "kfserving.controller.fullname" . }}
+        namespace: {{ .Release.Namespace }}
+        path: /validate-serving-kubeflow-org-v1alpha2-inferenceservice
+        port: {{ .Values.controller.service.port }}
+    name: validate-inferenceservice-v1alpha2.kfserving.kubeflow.org
+    rules:
+      - apiGroups:
+          - serving.kubeflow.org
+        apiVersions:
+          - v1alpha2
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - inferenceservices
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1beta1
+    clientConfig:
+      service:
+        name: {{ include "kfserving.controller.fullname" . }}
+        namespace: {{ .Release.Namespace }}
+        path: /validate-serving-kubeflow-org-v1beta1-inferenceservice
+        port: {{ .Values.controller.service.port }}
+    name: validate-inferenceservice-v1beta1.kfserving.kubeflow.org
+    rules:
+      - apiGroups:
+          - serving.kubeflow.org
+        apiVersions:
+          - v1beta1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - inferenceservices
+    sideEffects: None
+  - admissionReviewVersions:
+      - v1beta1
+    clientConfig:
+      service:
+        name: {{ include "kfserving.controller.fullname" . }}
+        namespace: {{ .Release.Namespace }}
+        path: /validate-serving-kubeflow-org-v1alpha1-trainedmodel
+        port: {{ .Values.controller.service.port }}
+    name: validate-trainedmodel.kfserving.kubeflow.org
+    rules:
+      - apiGroups:
+          - serving.kubeflow.org
+        apiVersions:
+          - v1alpha1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - trainedmodels
+    sideEffects: None

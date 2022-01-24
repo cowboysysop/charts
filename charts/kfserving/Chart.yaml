@@ -3,7 +3,7 @@ appVersion: 0.6.1
 description: Highly scalable and standards based Model Inference Platform on Kubernetes
 home: https://kserve.github.io/website/
 icon: https://raw.githubusercontent.com/kserve/artwork/main/icon/color/k-serve-icon-color.svg
-kubeVersion: ">= 1.16 <= 1.21"
+kubeVersion: ">=1.16 <=1.21"
 maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com

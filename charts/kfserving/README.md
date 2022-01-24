@@ -18,8 +18,8 @@ This chart bootstraps a KFServing deployment on a [Kubernetes](http://kubernetes
 ## Prerequisites
 
 - Kubernetes >= 1.16 and <= 1.21
-- Knative Serving >= 0.22 with Istio network layer
 - cert-manager >= 1.3 (you can use the [cert-manager/cert-manager](https://artifacthub.io/packages/helm/cert-manager/cert-manager) chart)
+- Knative Serving >= 0.22 with Istio network layer
 - Helm >= 3.1
 
 ## Installing

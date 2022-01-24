@@ -100,8 +100,27 @@ jobs:
           helm install cert-manager jetstack/cert-manager -n cert-manager --create-namespace --version v1.6.1 --wait # renovate: cert-manager
         if: steps.list-changed.outputs.changed == 'true'
 
+      - name: Install Istio
+        run: |
+          helm repo add istio https://istio-release.storage.googleapis.com/charts/
+          helm install istio-base istio/base -n istio-system --create-namespace --version v1.12.1 --wait # renovate: istio
+        if: steps.list-changed.outputs.changed == 'true'
+
+      - name: Install Knative Serving
+        run: |
+          kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.1.0/serving-crds.yaml # renovate: knative-serving
+        if: steps.list-changed.outputs.changed == 'true'
+
+      - name: List excluded charts
+        id: list-excluded
+        run: |
+          pip install semantic_version
+          excluded=$(python .github/excluded-charts.py --kube-version ${{ matrix.kubernetes }})
+          echo "::set-output name=excluded::$excluded"
+        if: steps.list-changed.outputs.changed == 'true'
+
       - name: Run chart-testing (install)
-        run: ct install --config ct.yaml
+        run: ct install --config ct.yaml --excluded-charts "${{ steps.list-excluded.outputs.excluded }}"
         if: steps.list-changed.outputs.changed == 'true'
   checkov:
     runs-on: ubuntu-latest

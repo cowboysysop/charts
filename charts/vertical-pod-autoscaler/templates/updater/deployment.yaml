@@ -59,9 +59,7 @@ spec:
             {{- end }}
           env:
             - name: NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
+              value: {{ .Release.Namespace }}
             {{- if .Values.updater.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.updater.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}

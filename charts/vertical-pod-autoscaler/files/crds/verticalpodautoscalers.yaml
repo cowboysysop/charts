@@ -1,11 +1,17 @@
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
+  name: verticalpodautoscalers.autoscaling.k8s.io
+  labels:
+    {{- include "vertical-pod-autoscaler.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
   annotations:
     api-approved.kubernetes.io: https://github.com/kubernetes/kubernetes/pull/63797
-    controller-gen.kubebuilder.io/version: v0.4.0
-  creationTimestamp: null
-  name: verticalpodautoscalers.autoscaling.k8s.io
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
 spec:
   group: autoscaling.k8s.io
   names:
@@ -56,6 +62,23 @@ spec:
             description: 'Specification of the behavior of the autoscaler. More info:
               https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status.'
             properties:
+              recommenders:
+                description: Recommender responsible for generating recommendation
+                  for this object. List should be empty (then the default recommender
+                  will generate the recommendation) or contain exactly one recommender.
+                items:
+                  description: VerticalPodAutoscalerRecommenderSelector points to
+                    a specific Vertical Pod Autoscaler recommender. In the future
+                    it might pass parameters to the recommender.
+                  properties:
+                    name:
+                      description: Name of the recommender responsible for generating
+                        recommendation for this object.
+                      type: string
+                  required:
+                  - name
+                  type: object
+                type: array
               resourcePolicy:
                 description: Controls how the autoscaler computes recommended resources.
                   The resource policy may be used to set constraints on the recommendations
@@ -154,6 +177,13 @@ spec:
                   pods. If not specified, all fields in the `PodUpdatePolicy` are
                   set to their default values.
                 properties:
+                  minReplicas:
+                    description: Minimal number of replicas which need to be alive
+                      for Updater to attempt pod eviction (pending other checks like
+                      PDB). Only positive values are allowed. Overrides global '--min-replicas'
+                      flag.
+                    format: int32
+                    type: integer
                   updateMode:
                     description: Controls when autoscaler applies changes to the pod
                       resources. The default is 'Auto'.
@@ -281,6 +311,7 @@ spec:
         type: object
     served: true
     storage: true
+    subresources: {}
   - name: v1beta2
     schema:
       openAPIV3Schema:
@@ -512,9 +543,3 @@ spec:
         type: object
     served: true
     storage: false
-status:
-  acceptedNames:
-    kind: ""
-    plural: ""
-  conditions: []
-  storedVersions: []

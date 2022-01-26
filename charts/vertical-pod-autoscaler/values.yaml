@@ -16,13 +16,14 @@ commonAnnotations: {}
 commonLabels: {}
 
 admissionController:
+  # Enable the component
   enabled: true
 
   replicaCount: 1
 
   image:
     repository: k8s.gcr.io/autoscaling/vpa-admission-controller
-    tag: 0.9.2
+    tag: 0.10.0
     pullPolicy: IfNotPresent
 
   pdb:
@@ -136,6 +137,8 @@ admissionController:
   affinity: {}
 
   extraArgs:
+    # kube-api-burst: 10
+    # kube-api-qps: 5
     v: 2
     # vpa-object-namespace: ""
     # webhook-timeout-seconds: 30
@@ -176,7 +179,7 @@ recommender:
 
   image:
     repository: k8s.gcr.io/autoscaling/vpa-recommender
-    tag: 0.9.2
+    tag: 0.10.0
     pullPolicy: IfNotPresent
 
   pdb:
@@ -279,10 +282,10 @@ recommender:
   extraArgs:
     # checkpoints-gc-interval: 10m0s
     # checkpoints-timeout: 1m0s
-    # cpu-histogram-decay-half-life: 24h0m0s
     # container-name-label: name
     # container-namespace-label: namespace
     # container-pod-name-label: pod_name
+    # cpu-histogram-decay-half-life: 24h0m0s
     # history-length: 8d
     # history-resolution: 1h
     # kube-api-burst: 10
@@ -333,13 +336,14 @@ recommender:
       port: 8942
 
 updater:
+  # Enable the component
   enabled: true
 
   replicaCount: 1
 
   image:
     repository: k8s.gcr.io/autoscaling/vpa-updater
-    tag: 0.9.2
+    tag: 0.10.0
     pullPolicy: IfNotPresent
 
   pdb:
@@ -444,7 +448,11 @@ updater:
     # eviction-rate-burst: 1
     # eviction-rate-limit: -1
     # eviction-tolerance: 0.5
+    # in-recommendation-bounds-eviction-lifetime-threshold: 12h0m0s
+    # kube-api-burst: 10
+    # kube-api-qps: 5
     # min-replicas: 2
+    # pod-update-threshold: 0.1
     # updater-interval: 1m0s
     # use-admission-controller-status: true
     v: 2
@@ -474,6 +482,17 @@ updater:
 
       # Metrics service port
       port: 8943
+
+crds:
+  image:
+    # Image name
+    repository: bitnami/kubectl
+
+    # Image tag
+    tag: 1.23.1
+
+    # Image pull policy
+    pullPolicy: IfNotPresent
 
 tests:
   image:

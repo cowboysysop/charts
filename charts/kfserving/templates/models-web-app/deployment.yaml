@@ -62,8 +62,6 @@ spec:
             {{- end }}
           {{- end }}
           env:
-            - name: APP_PREFIX
-              value: /
             - name: APP_SECURE_COOKIES
               value: "false"
             {{- if .Values.kubeflow.enabled }}
@@ -74,6 +72,8 @@ spec:
             {{- else }}
             - name: APP_DISABLE_AUTH
               value: "True"
+            - name: APP_PREFIX
+              value: /
             {{- end }}
             {{- if .Values.modelsWebApp.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.modelsWebApp.extraEnvVars "context" $) | nindent 12 }}
@@ -96,7 +96,7 @@ spec:
           {{- if .Values.modelsWebApp.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /
+              path: /healthz/liveness
               port: http
             initialDelaySeconds: {{ .Values.modelsWebApp.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.modelsWebApp.livenessProbe.periodSeconds }}
@@ -107,7 +107,7 @@ spec:
           {{- if .Values.modelsWebApp.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /
+              path: /healthz/readiness
               port: http
             initialDelaySeconds: {{ .Values.modelsWebApp.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.modelsWebApp.readinessProbe.periodSeconds }}

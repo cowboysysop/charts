@@ -1,0 +1,18 @@
+apiVersion: v2
+appVersion: 0.6.1
+description: Highly scalable and standards based Model Inference Platform on Kubernetes
+home: https://kserve.github.io/website/
+icon: https://raw.githubusercontent.com/kserve/artwork/main/icon/color/k-serve-icon-color.svg
+kubeVersion: ">=1.16 <=1.21"
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: kfserving
+sources:
+  - https://github.com/kserve/kserve
+  - https://github.com/cowboysysop/charts/tree/master/charts/kfserving
+version: 1.0.0
+dependencies:
+  - name: common
+    version: 1.7.1
+    repository: https://charts.bitnami.com/bitnami/

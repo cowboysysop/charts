@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "kfserving.controller.fullname" . }}
+  labels:
+    {{- include "kfserving.controller.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  commonName: {{ include "kfserving.controller.fullname" . }}.{{ .Release.Namespace }}.svc
+  dnsNames:
+    - {{ include "kfserving.controller.fullname" . }}.{{ .Release.Namespace }}.svc
+  secretName: {{ include "kfserving.controller.tls.secretName" . }}
+  issuerRef:
+    kind: Issuer
+    name: {{ include "kfserving.controller.fullname" . }}
+  isCA: true

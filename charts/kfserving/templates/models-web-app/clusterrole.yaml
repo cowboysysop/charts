@@ -1,0 +1,58 @@
+apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
+kind: ClusterRole
+metadata:
+  name: {{ include "kfserving.modelsWebApp.fullname" . }}
+  labels:
+    {{- include "kfserving.modelsWebApp.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+rules:
+  - apiGroups:
+      - authorization.k8s.io
+    resources:
+      - subjectaccessreviews
+    verbs:
+      - create
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+      - pods
+      - pods/log
+      - events
+    verbs:
+      - get
+      - list
+  - apiGroups:
+      - serving.kubeflow.org
+    resources:
+      - inferenceservices
+      - inferenceservices/status
+    verbs:
+      - get
+      - list
+      - watch
+      - create
+      - delete
+      - deletecollection
+      - patch
+      - update
+  - apiGroups:
+      - serving.knative.dev
+    resources:
+      - services
+      - services/status
+      - routes
+      - routes/status
+      - configurations
+      - configurations/status
+      - revisions
+      - revisions/status
+    verbs:
+      - get
+      - list

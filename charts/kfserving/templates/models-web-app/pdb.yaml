@@ -1,0 +1,25 @@
+{{- if .Values.modelsWebApp.pdb.create }}
+apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "kfserving.modelsWebApp.fullname" . }}
+  labels:
+    {{- include "kfserving.modelsWebApp.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.modelsWebApp.pdb.minAvailable }}
+  minAvailable: {{ .Values.modelsWebApp.pdb.minAvailable }}
+  {{- end }}
+  {{- if .Values.modelsWebApp.pdb.maxUnavailable }}
+  maxUnavailable: {{ .Values.modelsWebApp.pdb.maxUnavailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "kfserving.modelsWebApp.selectorLabels" . | nindent 6 }}
+{{- end }}

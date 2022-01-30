@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "kfserving.modelsWebApp.fullname" . }}
+  labels:
+    {{- include "kfserving.modelsWebApp.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.modelsWebApp.service.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- if .Values.modelsWebApp.service.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.modelsWebApp.service.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  type: {{ .Values.modelsWebApp.service.type }}
+  {{- if and (eq .Values.modelsWebApp.service.type "ClusterIP") .Values.modelsWebApp.service.clusterIP }}
+  clusterIP: {{ .Values.modelsWebApp.service.clusterIP }}
+  {{- end }}
+  {{- if and (eq .Values.modelsWebApp.service.type "LoadBalancer") .Values.modelsWebApp.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.modelsWebApp.service.loadBalancerIP }}
+  {{- end }}
+  {{- if and (eq .Values.modelsWebApp.service.type "LoadBalancer") .Values.modelsWebApp.service.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges:
+    {{- toYaml .Values.modelsWebApp.service.loadBalancerSourceRanges | nindent 4 }}
+  {{- end }}
+  {{- if or (eq .Values.modelsWebApp.service.type "LoadBalancer") (eq .Values.modelsWebApp.service.type "NodePort") }}
+  externalTrafficPolicy: {{ .Values.modelsWebApp.service.externalTrafficPolicy }}
+  {{- end }}
+  ports:
+    - port: {{ .Values.modelsWebApp.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+      {{- if and (or (eq .Values.modelsWebApp.service.type "LoadBalancer") (eq .Values.modelsWebApp.service.type "NodePort")) .Values.modelsWebApp.service.nodePort }}
+      nodePort: {{ .Values.modelsWebApp.service.nodePort }}
+      {{- end }}
+  selector:
+    {{- include "kfserving.modelsWebApp.selectorLabels" . | nindent 4 }}

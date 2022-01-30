@@ -2,6 +2,8 @@
 
 [Metacontroller](https://metacontroller.github.io/metacontroller/) is an add-on for Kubernetes that makes it easy to write and deploy custom controllers.
 
+**DISCLAIMER**: This is an unofficial chart not supported by Metacontroller authors.
+
 ## TL;DR;
 
 ```bash
@@ -15,8 +17,8 @@ This chart bootstraps a Metacontroller deployment on a [Kubernetes](http://kuber
 
 ## Prerequisites
 
-- Kubernetes 1.16+
-- Helm 3.1+
+- Kubernetes >= 1.16
+- Helm >= 3.1
 
 ## Installing
 
@@ -125,7 +127,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                                   |
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                  |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                                  |
-| `metrics.service.annotations`        | Metrics service annotations                                                                           | {}                                                     |
+| `metrics.service.annotations`        | Metrics service annotations                                                                           | `{}`                                                   |
 | `metrics.service.type`               | Metrics service type                                                                                  | `ClusterIP`                                            |
 | `metrics.service.clusterIP`          | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                  |
 | `metrics.service.port`               | Metrics service port                                                                                  | `9999`                                                 |

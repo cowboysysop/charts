@@ -11,7 +11,7 @@ name: vertical-pod-autoscaler
 sources:
   - https://github.com/kubernetes/autoscaler
   - https://github.com/cowboysysop/charts/tree/master/charts/vertical-pod-autoscaler
-version: 4.0.0
+version: 4.0.1
 dependencies:
   - name: common
     version: 1.7.1

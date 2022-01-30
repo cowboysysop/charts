@@ -2,6 +2,8 @@
 
 [Notebook Controller](https://github.com/kubeflow/kubeflow/tree/master/components/notebook-controller) is a Kubernetes controller that spawns a notebook for a user.
 
+**DISCLAIMER**: This is an unofficial chart not supported by Notebook Controller authors.
+
 ## TL;DR;
 
 ```bash
@@ -15,8 +17,8 @@ This chart bootstraps a Notebook Controller deployment on a [Kubernetes](http://
 
 ## Prerequisites
 
-- Kubernetes 1.16+
-- Helm 3.1+
+- Kubernetes >= 1.16
+- Helm >= 3.1
 
 ## Installing
 
@@ -121,12 +123,17 @@ The following tables lists all the configurable parameters expose by the chart a
 | `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                                        |
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                       |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                                       |
-| `metrics.service.annotations`        | Metrics service annotations                                                                           | {}                                                          |
+| `metrics.service.annotations`        | Metrics service annotations                                                                           | `{}`                                                        |
 | `metrics.service.type`               | Metrics service type                                                                                  | `ClusterIP`                                                 |
 | `metrics.service.clusterIP`          | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                       |
 | `metrics.service.port`               | Metrics service port                                                                                  | `8081`                                                      |
-| `kubeflow.enabled`                   | Enable integration with Kubeflow                                                                      | `false`                                                     |
-| `kubeflow.gatewayName`               | Istio gateway name                                                                                    | `kubeflow`                                                  |
+
+### Kubeflow parameters
+
+| Name                   | Description                      | Default    |
+|------------------------|----------------------------------|------------|
+| `kubeflow.enabled`     | Enable integration with Kubeflow | `false`    |
+| `kubeflow.gatewayName` | Istio gateway name               | `kubeflow` |
 
 ### Tests parameters
 

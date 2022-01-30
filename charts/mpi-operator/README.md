@@ -2,6 +2,8 @@
 
 [MPI Operator](https://github.com/kubeflow/mpi-operator) makes it easy to run allreduce-style distributed training on Kubernetes.
 
+**DISCLAIMER**: This is an unofficial chart not supported by MPI Operator authors.
+
 ## TL;DR;
 
 ```bash
@@ -15,8 +17,8 @@ This chart bootstraps a MPI Operator deployment on a [Kubernetes](http://kuberne
 
 ## Prerequisites
 
-- Kubernetes 1.16+
-- Helm 3.1+
+- Kubernetes >= 1.16
+- Helm >= 3.1
 
 ## Installing
 
@@ -121,12 +123,17 @@ The following tables lists all the configurable parameters expose by the chart a
 | `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                                 |
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                                |
-| `metrics.service.annotations`        | Metrics service annotations                                                                           | {}                                                   |
+| `metrics.service.annotations`        | Metrics service annotations                                                                           | `{}`                                                 |
 | `metrics.service.type`               | Metrics service type                                                                                  | `ClusterIP`                                          |
 | `metrics.service.clusterIP`          | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                |
 | `metrics.service.port`               | Metrics service port                                                                                  | `8081`                                               |
 | `kubectlDeliveryImage`               | The container image used to deliver the kubectl binary                                                | `mpioperator/kubectl-delivery:latest`                |
-| `kubeflow.enabled`                   | Enable integration with Kubeflow                                                                      | `false`                                              |
+
+### Kubeflow parameters
+
+| Name               | Description                      | Default |
+|--------------------|----------------------------------|---------|
+| `kubeflow.enabled` | Enable integration with Kubeflow | `false` |
 
 ### Tests parameters
 

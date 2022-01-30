@@ -76,6 +76,29 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/katib-1.0.0/katib-1.0.0.tgz
     version: 1.0.0
+  kfserving:
+  - apiVersion: v2
+    appVersion: 0.6.1
+    created: "2022-01-30T10:14:17.843363724Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Highly scalable and standards based Model Inference Platform on Kubernetes
+    digest: 3f42cb530d585265f4552b44dc6d5f09c9dad10d2beddc8f490c47820b1ac6ca
+    home: https://kserve.github.io/website/
+    icon: https://raw.githubusercontent.com/kserve/artwork/main/icon/color/k-serve-icon-color.svg
+    kubeVersion: '>=1.16 <=1.21'
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kfserving
+    sources:
+    - https://github.com/kserve/kserve
+    - https://github.com/cowboysysop/charts/tree/master/charts/kfserving
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kfserving-1.0.0/kfserving-1.0.0.tgz
+    version: 1.0.0
   kroki:
   - apiVersion: v2
     appVersion: 0.15.0
@@ -2319,4 +2342,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2022-01-18T21:35:39.162620184Z"
+generated: "2022-01-30T10:14:17.843813827Z"

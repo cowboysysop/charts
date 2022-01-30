@@ -3,6 +3,7 @@ appVersion: 0.15.0
 description: Creates diagrams from textual descriptions
 home: https://kroki.io/
 icon: https://raw.githubusercontent.com/yuzutech/kroki.io/master/assets/favicon-196x196.png
+kubeVersion: ">=1.16"
 maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
@@ -10,7 +11,7 @@ name: kroki
 sources:
   - https://github.com/yuzutech/kroki
   - https://github.com/cowboysysop/charts/tree/master/charts/kroki
-version: 1.1.2
+version: 1.1.3
 dependencies:
   - name: common
     version: 1.7.1

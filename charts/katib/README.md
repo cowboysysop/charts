@@ -2,6 +2,8 @@
 
 [Katib](https://github.com/kubeflow/katib) is a Kubernetes-native project for automated machine learning.
 
+**DISCLAIMER**: This is an unofficial chart not supported by Katib authors.
+
 ## TL;DR;
 
 ```bash
@@ -15,9 +17,9 @@ This chart bootstraps a Katib deployment on a [Kubernetes](http://kubernetes.io)
 
 ## Prerequisites
 
-- Kubernetes 1.16+
-- cert-manager 1.3+ (you can use the [cert-manager/cert-manager](https://artifacthub.io/packages/helm/cert-manager/cert-manager) chart)
-- Helm 3.1+
+- Kubernetes >= 1.16
+- cert-manager >= 1.3 (you can use the [cert-manager/cert-manager](https://artifacthub.io/packages/helm/cert-manager/cert-manager) chart)
+- Helm >= 3.1
 
 ## Installing
 
@@ -78,16 +80,14 @@ The following tables lists all the configurable parameters expose by the chart a
 
 ### Common parameters
 
-| Name                   | Description                                                                                | Default    |
-|------------------------|--------------------------------------------------------------------------------------------|------------|
-| `kubeVersion`          | Override Kubernetes version                                                                | `""`       |
-| `imagePullSecrets`     | Docker registry secret names as an array                                                   | `[]`       |
-| `nameOverride`         | Partially override `katib.fullname` template with a string (will prepend the release name) | `nil`      |
-| `fullnameOverride`     | Fully override `katib.fullname` template with a string                                     | `nil`      |
-| `commonAnnotations`    | Annotations to add to all deployed objects                                                 | `{}`       |
-| `commonLabels`         | Labels to add to all deployed objects                                                      | `{}`       |
-| `kubeflow.enabled`     | Enable integration with Kubeflow                                                           | `false`    |
-| `kubeflow.gatewayName` | Istio gateway name                                                                         | `kubeflow` |
+| Name                | Description                                                                                | Default |
+|---------------------|--------------------------------------------------------------------------------------------|---------|
+| `kubeVersion`       | Override Kubernetes version                                                                | `""`    |
+| `imagePullSecrets`  | Docker registry secret names as an array                                                   | `[]`    |
+| `nameOverride`      | Partially override `katib.fullname` template with a string (will prepend the release name) | `nil`   |
+| `fullnameOverride`  | Fully override `katib.fullname` template with a string                                     | `nil`   |
+| `commonAnnotations` | Annotations to add to all deployed objects                                                 | `{}`    |
+| `commonLabels`      | Labels to add to all deployed objects                                                      | `{}`    |
 
 ### Controller parameters
 
@@ -120,7 +120,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `controller.readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                                                      |
 | `controller.readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                                      |
 | `controller.readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                                      |
-| `controller.service.annotations`                | Service annotations                                                                                   | {}                                                       |
+| `controller.service.annotations`                | Service annotations                                                                                   | `{}`                                                     |
 | `controller.service.type`                       | Service type                                                                                          | `ClusterIP`                                              |
 | `controller.service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                                                    |
 | `controller.service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                                                    |
@@ -136,7 +136,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `controller.extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                                     |
 | `controller.extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                    |
 | `controller.extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                                    |
-| `controller.metrics.service.annotations`        | Metrics service annotations                                                                           | {}                                                       |
+| `controller.metrics.service.annotations`        | Metrics service annotations                                                                           | `{}`                                                     |
 | `controller.metrics.service.type`               | Metrics service type                                                                                  | `ClusterIP`                                              |
 | `controller.metrics.service.clusterIP`          | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                    |
 | `controller.metrics.service.port`               | Metrics service port                                                                                  | `8080`                                                   |
@@ -172,7 +172,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `dbManager.readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                                                     |
 | `dbManager.readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                                     |
 | `dbManager.readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                                     |
-| `dbManager.service.annotations`                | Service annotations                                                                                   | {}                                                      |
+| `dbManager.service.annotations`                | Service annotations                                                                                   | `{}`                                                    |
 | `dbManager.service.type`                       | Service type                                                                                          | `ClusterIP`                                             |
 | `dbManager.service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                                                   |
 | `dbManager.service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                                                   |
@@ -220,7 +220,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `ui.readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                                              |
 | `ui.readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                              |
 | `ui.readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                              |
-| `ui.service.annotations`                | Service annotations                                                                                   | {}                                               |
+| `ui.service.annotations`                | Service annotations                                                                                   | `{}`                                             |
 | `ui.service.type`                       | Service type                                                                                          | `ClusterIP`                                      |
 | `ui.service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                                            |
 | `ui.service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                                            |
@@ -266,6 +266,13 @@ The following tables lists all the configurable parameters expose by the chart a
 | `externalMariadb.existingSecret`            | Name of existing Secret to use                                    | `nil`                                  |
 | `externalMariadb.existingSecretKeyPassword` | Name of the key in existing Secret that contains MariaDB password | `mariadb-password`                     |
 | `externalMariadb.database`                  | External MariaDB database                                         | `katib`                                |
+
+### Kubeflow parameters
+
+| Name                   | Description                      | Default    |
+|------------------------|----------------------------------|------------|
+| `kubeflow.enabled`     | Enable integration with Kubeflow | `false`    |
+| `kubeflow.gatewayName` | Istio gateway name               | `kubeflow` |
 
 ### Tests parameters
 

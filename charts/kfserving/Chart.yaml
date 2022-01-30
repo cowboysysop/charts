@@ -11,7 +11,7 @@ name: kfserving
 sources:
   - https://github.com/kserve/kserve
   - https://github.com/cowboysysop/charts/tree/master/charts/kfserving
-version: 1.0.0
+version: 1.0.1
 dependencies:
   - name: common
     version: 1.7.1

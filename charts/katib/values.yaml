@@ -15,13 +15,6 @@ commonAnnotations: {}
 # Labels to add to all deployed objects
 commonLabels: {}
 
-kubeflow:
-  # Enable integration with Kubeflow
-  enabled: false
-
-  # Istio gateway name
-  gatewayName: kubeflow
-
 controller:
   replicaCount: 1
 
@@ -544,6 +537,13 @@ externalMariadb:
 
   # External MariaDB database
   database: katib
+
+kubeflow:
+  # Enable integration with Kubeflow
+  enabled: false
+
+  # Istio gateway name
+  gatewayName: kubeflow
 
 tests:
   image:

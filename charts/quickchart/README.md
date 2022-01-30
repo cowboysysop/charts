@@ -2,6 +2,8 @@
 
 [QuickChart](https://quickchart.io/) is a chart image and QR code web API.
 
+**DISCLAIMER**: This is an unofficial chart not supported by QuickChart authors.
+
 ## TL;DR;
 
 ```bash
@@ -15,8 +17,8 @@ This chart bootstraps a QuickChart deployment on a [Kubernetes](http://kubernete
 
 ## Prerequisites
 
-- Kubernetes 1.16+ (should work with 1.12+)
-- Helm 3.1+
+- Kubernetes >= 1.16
+- Helm >= 3.1
 
 ## Installing
 
@@ -99,7 +101,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                                                |
 | `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                                |
 | `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                                |
-| `service.annotations`                | Service annotations                                                                                   | {}                                                 |
+| `service.annotations`                | Service annotations                                                                                   | `{}`                                               |
 | `service.type`                       | Service type                                                                                          | `ClusterIP`                                        |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                                              |
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                                              |

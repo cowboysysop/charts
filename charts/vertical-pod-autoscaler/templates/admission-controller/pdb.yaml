@@ -1,4 +1,5 @@
-{{- if and .Values.admissionController.enabled .Values.admissionController.pdb.create }}
+{{- if .Values.admissionController.enabled }}
+{{- if .Values.admissionController.pdb.create }}
 apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:
@@ -22,4 +23,5 @@ spec:
   selector:
     matchLabels:
       {{- include "vertical-pod-autoscaler.admissionController.selectorLabels" . | nindent 6 }}
+{{- end }}
 {{- end }}

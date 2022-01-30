@@ -2,6 +2,8 @@
 
 [Vertical Pod Autoscaler](https://github.com/kubernetes/autoscaler) is a set of components that automatically adjust the amount of CPU and memory requested by pods running in the Kubernetes Cluster.
 
+**DISCLAIMER**: This is an unofficial chart not supported by Vertical Pod Autoscaler authors.
+
 ## TL;DR;
 
 ```bash
@@ -15,9 +17,9 @@ This chart bootstraps a Vertical Pod Autoscaler deployment on a [Kubernetes](htt
 
 ## Prerequisites
 
-- Kubernetes 1.16+
-- Metrics Server 0.2+ (you can use the [bitnami/metrics-server](https://artifacthub.io/packages/helm/bitnami/metrics-server) chart)
-- Helm 3.1+
+- Kubernetes >= 1.17
+- Metrics Server >= 0.2 (you can use the [bitnami/metrics-server](https://artifacthub.io/packages/helm/bitnami/metrics-server) chart)
+- Helm >= 3.1
 
 ## Installing
 
@@ -32,13 +34,6 @@ These commands deploy Vertical Pod Autoscaler on the Kubernetes cluster in the d
 
 ## Upgrading
 
-Replace the custom resource definitions created by the chart using:
-
-```bash
-kubectl replace -f crds/verticalpodautoscaler.yaml
-kubectl replace -f crds/verticalpodautoscalercheckpoint.yaml
-```
-
 Upgrade the chart deployment using:
 
 ```bash
@@ -48,6 +43,12 @@ $ helm upgrade my-release cowboysysop/vertical-pod-autoscaler
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
+
+### Upgrading to version 4.0.0
+
+The application version is no more compatible with Kubernetes 1.16.
+
+Custom resource definitions are now created and upgraded with a pre-install/pre-upgrade job.
 
 ### Upgrading to version 3.0.0
 
@@ -105,10 +106,10 @@ The following tables lists all the configurable parameters expose by the chart a
 
 | Name                                                     | Description                                                                                           | Default                                                                             |
 |----------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| `admissionController.enabled`                            | Enable the admission controller                                                                       | `true`                                                                              |
+| `admissionController.enabled`                            | Enable the component                                                                                  | `true`                                                                              |
 | `admissionController.replicaCount`                       | Number of replicas                                                                                    | `1`                                                                                 |
 | `admissionController.image.repository`                   | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-admission-controller`                                   |
-| `admissionController.image.tag`                          | Image tag                                                                                             | `0.9.2`                                                                             |
+| `admissionController.image.tag`                          | Image tag                                                                                             | `0.10.0`                                                                            |
 | `admissionController.image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                                                      |
 | `admissionController.pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                                                             |
 | `admissionController.pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                                 |
@@ -133,7 +134,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `admissionController.readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                                                                                 |
 | `admissionController.readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                                                                 |
 | `admissionController.readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                                                                 |
-| `admissionController.service.annotations`                | Service annotations                                                                                   | {}                                                                                  |
+| `admissionController.service.annotations`                | Service annotations                                                                                   | `{}`                                                                                |
 | `admissionController.service.type`                       | Service type                                                                                          | `ClusterIP`                                                                         |
 | `admissionController.service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                                                                               |
 | `admissionController.resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                                                                                |
@@ -144,7 +145,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `admissionController.extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                                                                |
 | `admissionController.extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                                               |
 | `admissionController.extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                                                               |
-| `admissionController.metrics.service.annotations`        | Metrics service annotations                                                                           | {}                                                                                  |
+| `admissionController.metrics.service.annotations`        | Metrics service annotations                                                                           | `{}`                                                                                |
 | `admissionController.metrics.service.type`               | Metrics service type                                                                                  | `ClusterIP`                                                                         |
 | `admissionController.metrics.service.clusterIP`          | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                                               |
 | `admissionController.metrics.service.port`               | Metrics service port                                                                                  | `8944`                                                                              |
@@ -159,7 +160,7 @@ The following tables lists all the configurable parameters expose by the chart a
 |--------------------------------------------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
 | `recommender.replicaCount`                       | Number of replicas                                                                                    | `1`                                                                         |
 | `recommender.image.repository`                   | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-recommender`                                    |
-| `recommender.image.tag`                          | Image tag                                                                                             | `0.9.2`                                                                     |
+| `recommender.image.tag`                          | Image tag                                                                                             | `0.10.0`                                                                    |
 | `recommender.image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                                              |
 | `recommender.pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                                                     |
 | `recommender.pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                         |
@@ -192,7 +193,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `recommender.extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                                                        |
 | `recommender.extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                                       |
 | `recommender.extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                                                       |
-| `recommender.metrics.service.annotations`        | Metrics service annotations                                                                           | {}                                                                          |
+| `recommender.metrics.service.annotations`        | Metrics service annotations                                                                           | `{}`                                                                        |
 | `recommender.metrics.service.type`               | Metrics service type                                                                                  | `ClusterIP`                                                                 |
 | `recommender.metrics.service.clusterIP`          | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                                       |
 | `recommender.metrics.service.port`               | Metrics service port                                                                                  | `8942`                                                                      |
@@ -201,10 +202,10 @@ The following tables lists all the configurable parameters expose by the chart a
 
 | Name                                         | Description                                                                                           | Default                                                                 |
 |----------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| `updater.enabled`                            | Enable the updater                                                                                    | `true`                                                                  |
+| `updater.enabled`                            | Enable the component                                                                                  | `true`                                                                  |
 | `updater.replicaCount`                       | Number of replicas                                                                                    | `1`                                                                     |
 | `updater.image.repository`                   | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-updater`                                    |
-| `updater.image.tag`                          | Image tag                                                                                             | `0.9.2`                                                                 |
+| `updater.image.tag`                          | Image tag                                                                                             | `0.10.0`                                                                |
 | `updater.image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                                          |
 | `updater.pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                                                 |
 | `updater.pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                     |
@@ -237,10 +238,18 @@ The following tables lists all the configurable parameters expose by the chart a
 | `updater.extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                                                    |
 | `updater.extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                                   |
 | `updater.extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                                                   |
-| `updater.metrics.service.annotations`        | Metrics service annotations                                                                           | {}                                                                      |
+| `updater.metrics.service.annotations`        | Metrics service annotations                                                                           | `{}`                                                                    |
 | `updater.metrics.service.type`               | Metrics service type                                                                                  | `ClusterIP`                                                             |
 | `updater.metrics.service.clusterIP`          | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                                   |
 | `updater.metrics.service.port`               | Metrics service port                                                                                  | `8943`                                                                  |
+
+### CRDs parameters
+
+| Name                    | Description       | Default           |
+|-------------------------|-------------------|-------------------|
+| `crds.image.repository` | Image name        | `bitnami/kubectl` |
+| `crds.image.tag`        | Image tag         | `1.23.1`          |
+| `crds.image.pullPolicy` | Image pull policy | `IfNotPresent`    |
 
 ### Tests parameters
 

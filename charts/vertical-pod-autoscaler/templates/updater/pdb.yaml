@@ -1,4 +1,5 @@
-{{- if and .Values.updater.enabled .Values.updater.pdb.create }}
+{{- if .Values.updater.enabled }}
+{{- if .Values.updater.pdb.create }}
 apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:
@@ -22,4 +23,5 @@ spec:
   selector:
     matchLabels:
       {{- include "vertical-pod-autoscaler.updater.selectorLabels" . | nindent 6 }}
+{{- end }}
 {{- end }}

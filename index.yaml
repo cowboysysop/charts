@@ -1,6 +1,33 @@
 apiVersion: v1
 entries:
   katib:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 0.12.0
+    created: "2022-02-03T18:37:02.990954849Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 9.4.4
+    description: A Kubernetes-native project for automated machine learning
+    digest: af910a45053b20f06752bbcf5399db1d584505aa431abedd6e0a37ebfda15a5b
+    home: https://github.com/kubeflow/katib
+    icon: https://raw.githubusercontent.com/kubeflow/katib/master/docs/images/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: katib
+    sources:
+    - https://github.com/kubeflow/katib
+    - https://github.com/cowboysysop/charts/tree/master/charts/katib
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/katib-1.1.2/katib-1.1.2.tgz
+    version: 1.1.2
   - apiVersion: v2
     appVersion: 0.12.0
     created: "2022-01-30T17:45:25.070894425Z"
@@ -103,6 +130,29 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/katib-1.0.0/katib-1.0.0.tgz
     version: 1.0.0
   kfserving:
+  - annotations:
+      kubeVersion: '>=1.16 <=1.21'
+    apiVersion: v2
+    appVersion: 0.6.1
+    created: "2022-02-03T18:37:03.294835393Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Highly scalable and standards based Model Inference Platform on Kubernetes
+    digest: 45606c7a4eb24f5ea3a5e30d2fd9a78b29c0fd560a2b9b2ddf64cd030c174d94
+    home: https://kserve.github.io/website/
+    icon: https://raw.githubusercontent.com/kserve/artwork/main/icon/color/k-serve-icon-color.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kfserving
+    sources:
+    - https://github.com/kserve/kserve
+    - https://github.com/cowboysysop/charts/tree/master/charts/kfserving
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kfserving-1.0.2/kfserving-1.0.2.tgz
+    version: 1.0.2
   - apiVersion: v2
     appVersion: 0.6.1
     created: "2022-01-30T17:45:25.198495779Z"
@@ -148,6 +198,29 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kfserving-1.0.0/kfserving-1.0.0.tgz
     version: 1.0.0
   kroki:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 0.15.0
+    created: "2022-02-03T18:37:03.545887473Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Creates diagrams from textual descriptions
+    digest: c0a84acca4f5c597b48da05410accf2b8164d16d221199a9ba682866fc4ba2f7
+    home: https://kroki.io/
+    icon: https://raw.githubusercontent.com/yuzutech/kroki.io/master/assets/favicon-196x196.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kroki
+    sources:
+    - https://github.com/yuzutech/kroki
+    - https://github.com/cowboysysop/charts/tree/master/charts/kroki
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kroki-1.1.4/kroki-1.1.4.tgz
+    version: 1.1.4
   - apiVersion: v2
     appVersion: 0.15.0
     created: "2022-01-30T17:45:25.316710561Z"
@@ -252,6 +325,28 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kroki-1.0.0/kroki-1.0.0.tgz
     version: 1.0.0
   kubebox:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 0.9.0
+    created: "2022-02-03T18:37:03.948275385Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Terminal and Web console for Kubernetes
+    digest: ad67e46b12366e0f0921e635ea8c5fb9b18b47068b5cd4f72c6dc324ffc4092f
+    home: https://github.com/astefanutti/kubebox
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubebox
+    sources:
+    - https://github.com/astefanutti/kubebox
+    - https://github.com/cowboysysop/charts/tree/master/charts/kubebox
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubebox-2.6.4/kubebox-2.6.4.tgz
+    version: 2.6.4
   - apiVersion: v2
     appVersion: 0.9.0
     created: "2022-01-30T17:45:25.447391237Z"
@@ -518,6 +613,29 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubebox-1.0.0/kubebox-1.0.0.tgz
     version: 1.0.0
   kubeview:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 0.1.11
+    created: "2022-02-03T18:37:04.280244257Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Kubernetes cluster visualiser and graphical explorer
+    digest: 51de22391e95b8b9c9956a5dffd7c4b8fe9bd9a372628ba1330f6f64c3ab9807
+    home: https://github.com/benc-uk/kubeview
+    icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubeview
+    sources:
+    - https://github.com/benc-uk/kubeview
+    - https://github.com/cowboysysop/charts/tree/master/charts/kubeview
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubeview-2.5.4/kubeview-2.5.4.tgz
+    version: 2.5.4
   - apiVersion: v2
     appVersion: 0.1.11
     created: "2022-01-30T17:45:25.553936457Z"
@@ -802,6 +920,37 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
   lighthouse-ci:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 0.8.1
+    created: "2022-02-03T18:37:04.555259673Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 9.4.4
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami/
+      version: 10.9.4
+    description: Enables running a server to display Lighthouse CI results
+    digest: da1a1482471378c8078840c80e384fd71e2e0de17e99809acf6486c5391c4c22
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    sources:
+    - https://github.com/GoogleChrome/lighthouse-ci
+    - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-2.11.2/lighthouse-ci-2.11.2.tgz
+    version: 2.11.2
   - apiVersion: v2
     appVersion: 0.8.1
     created: "2022-01-30T17:45:25.683950907Z"
@@ -1210,6 +1359,29 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-1.0.0/lighthouse-ci-1.0.0.tgz
     version: 1.0.0
   metacontroller:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 2.1.1
+    created: "2022-02-03T18:37:04.780770658Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Add-on for Kubernetes that makes it easy to write and deploy custom
+      controllers
+    digest: 4d4bfa381794ae1196b8da6a1580c7b9f84618283e2656cad935663ab374ffcd
+    home: https://metacontroller.github.io/metacontroller/
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: metacontroller
+    sources:
+    - https://github.com/metacontroller/metacontroller
+    - https://github.com/cowboysysop/charts/tree/master/charts/metacontroller
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/metacontroller-1.1.3/metacontroller-1.1.3.tgz
+    version: 1.1.3
   - apiVersion: v2
     appVersion: 2.1.1
     created: "2022-01-30T17:45:25.797442002Z"
@@ -1296,6 +1468,33 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/metacontroller-1.0.0/metacontroller-1.0.0.tgz
     version: 1.0.0
   mongo-express:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 0.54.0
+    created: "2022-02-03T18:37:05.05789601Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 10.0.5
+    description: Web-based MongoDB admin interface, written with Node.js and express
+    digest: 454a4878e64807655e153a4324d6a169b5820b3569a329a7bcca68922aeb873e
+    home: https://github.com/mongo-express/mongo-express
+    icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mongo-express
+    sources:
+    - https://github.com/mongo-express/mongo-express
+    - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mongo-express-2.6.4/mongo-express-2.6.4.tgz
+    version: 2.6.4
   - apiVersion: v2
     appVersion: 0.54.0
     created: "2022-01-30T17:45:25.929035914Z"
@@ -1630,6 +1829,28 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/mongo-express-1.0.0/mongo-express-1.0.0.tgz
     version: 1.0.0
   mpi-operator:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 0.3.0
+    created: "2022-02-03T18:37:05.276675782Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Makes it easy to run allreduce-style distributed training on Kubernetes
+    digest: e3abd57e0c9285e70860d4c4fbc7885a227020e20bcb1cdc142271f9333de0ae
+    home: https://github.com/kubeflow/mpi-operator
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mpi-operator
+    sources:
+    - https://github.com/kubeflow/mpi-operator
+    - https://github.com/cowboysysop/charts/tree/master/charts/mpi-operator
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mpi-operator-1.1.4/mpi-operator-1.1.4.tgz
+    version: 1.1.4
   - apiVersion: v2
     appVersion: 0.3.0
     created: "2022-01-30T17:45:26.066843372Z"
@@ -1752,6 +1973,28 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/mpi-operator-1.0.0/mpi-operator-1.0.0.tgz
     version: 1.0.0
   notebook-controller:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 1.4.0
+    created: "2022-02-03T18:37:05.491532688Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: A Kubernetes controller that spawns a notebook for a user
+    digest: d030eccbd1971010d6fc918b316632ba8689c8fb4d1a72332553d5e995537336
+    home: https://github.com/kubeflow/kubeflow/tree/master/components/notebook-controller
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: notebook-controller
+    sources:
+    - https://github.com/kubeflow/kubeflow/tree/master/components/notebook-controller
+    - https://github.com/cowboysysop/charts/tree/master/charts/notebook-controller
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/notebook-controller-1.0.4/notebook-controller-1.0.4.tgz
+    version: 1.0.4
   - apiVersion: v2
     appVersion: 1.4.0
     created: "2022-01-30T17:45:26.1887372Z"
@@ -1834,6 +2077,28 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/notebook-controller-1.0.0/notebook-controller-1.0.0.tgz
     version: 1.0.0
   quickchart:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 1.5.0
+    created: "2022-02-03T18:37:05.732197528Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Chart image and QR code web API
+    digest: 06322e079c03919cd212c07227687c05f78669da15b8bc86b9cbf8ee92eb9d27
+    home: https://quickchart.io/
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: quickchart
+    sources:
+    - https://github.com/typpo/quickchart
+    - https://github.com/cowboysysop/charts/tree/master/charts/quickchart
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/quickchart-1.0.4/quickchart-1.0.4.tgz
+    version: 1.0.4
   - apiVersion: v2
     appVersion: 1.5.0
     created: "2022-01-30T17:45:26.318360234Z"
@@ -1914,6 +2179,29 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/quickchart-1.0.0/quickchart-1.0.0.tgz
     version: 1.0.0
   training-operator:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 1.3.0
+    created: "2022-02-03T18:37:06.029732422Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Makes it easy to run distributed or non-distributed TensorFlow/PyTorch/MXNet/XGBoost
+      jobs on Kubernetes
+    digest: 6d50c82951a29a3ead5b9fac40f6323dcaff466894087529d0458af34a0d18bb
+    home: https://github.com/kubeflow/training-operator
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: training-operator
+    sources:
+    - https://github.com/kubeflow/training-operator
+    - https://github.com/cowboysysop/charts/tree/master/charts/training-operator
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/training-operator-1.1.4/training-operator-1.1.4.tgz
+    version: 1.1.4
   - apiVersion: v2
     appVersion: 1.3.0
     created: "2022-01-30T17:45:26.445284261Z"
@@ -2021,6 +2309,30 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/training-operator-1.0.0/training-operator-1.0.0.tgz
     version: 1.0.0
   vertical-pod-autoscaler:
+  - annotations:
+      kubeVersion: '>=1.17'
+    apiVersion: v2
+    appVersion: 0.10.0
+    created: "2022-02-03T18:37:06.36744849Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Set of components that automatically adjust the amount of CPU and
+      memory requested by pods running in the Kubernetes Cluster
+    digest: bb8432110d9706a123c298d75d7a01d412716dbca2a578339446df8a149a16f7
+    home: https://github.com/kubernetes/autoscaler
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: vertical-pod-autoscaler
+    sources:
+    - https://github.com/kubernetes/autoscaler
+    - https://github.com/cowboysysop/charts/tree/master/charts/vertical-pod-autoscaler
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-4.0.2/vertical-pod-autoscaler-4.0.2.tgz
+    version: 4.0.2
   - apiVersion: v2
     appVersion: 0.10.0
     created: "2022-01-30T17:45:26.563574647Z"
@@ -2417,6 +2729,29 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-1.0.0/vertical-pod-autoscaler-1.0.0.tgz
     version: 1.0.0
   whoami:
+  - annotations:
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 1.5.0
+    created: "2022-02-03T18:37:06.571301512Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: 077e1383922c5074781255e31f99a371b65aa7716319b074438be41ac7219b01
+    home: https://github.com/containous/whoami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: whoami
+    sources:
+    - https://github.com/containous/whoami
+    - https://github.com/cowboysysop/charts/tree/master/charts/whoami
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/whoami-2.5.4/whoami-2.5.4.tgz
+    version: 2.5.4
   - apiVersion: v2
     appVersion: 1.5.0
     created: "2022-01-30T17:45:26.680536379Z"
@@ -2686,4 +3021,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2022-01-30T17:45:26.681516518Z"
+generated: "2022-02-03T18:37:06.572226728Z"

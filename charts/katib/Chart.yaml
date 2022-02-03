@@ -3,7 +3,6 @@ appVersion: 0.12.0
 description: A Kubernetes-native project for automated machine learning
 home: https://github.com/kubeflow/katib
 icon: https://raw.githubusercontent.com/kubeflow/katib/master/docs/images/logo.svg
-kubeVersion: ">=1.16"
 maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
@@ -11,7 +10,7 @@ name: katib
 sources:
   - https://github.com/kubeflow/katib
   - https://github.com/cowboysysop/charts/tree/master/charts/katib
-version: 1.1.1
+version: 1.1.2
 dependencies:
   - name: common
     version: 1.7.1
@@ -20,3 +19,5 @@ dependencies:
     version: 9.4.4
     repository: https://charts.bitnami.com/bitnami/
     condition: mariadb.enabled
+annotations:
+  kubeVersion: ">=1.16"

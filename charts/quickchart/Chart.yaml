@@ -2,7 +2,6 @@ apiVersion: v2
 appVersion: 1.5.0
 description: Chart image and QR code web API
 home: https://quickchart.io/
-kubeVersion: ">=1.16"
 maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
@@ -10,8 +9,10 @@ name: quickchart
 sources:
   - https://github.com/typpo/quickchart
   - https://github.com/cowboysysop/charts/tree/master/charts/quickchart
-version: 1.0.3
+version: 1.0.4
 dependencies:
   - name: common
     version: 1.7.1
     repository: https://charts.bitnami.com/bitnami/
+annotations:
+  kubeVersion: ">=1.16"

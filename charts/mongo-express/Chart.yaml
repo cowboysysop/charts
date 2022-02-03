@@ -3,7 +3,6 @@ appVersion: 0.54.0
 description: Web-based MongoDB admin interface, written with Node.js and express
 home: https://github.com/mongo-express/mongo-express
 icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
-kubeVersion: ">=1.16"
 maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
@@ -11,7 +10,7 @@ name: mongo-express
 sources:
   - https://github.com/mongo-express/mongo-express
   - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
-version: 2.6.3
+version: 2.6.4
 dependencies:
   - name: common
     version: 1.7.1
@@ -20,3 +19,5 @@ dependencies:
     version: 10.0.5
     repository: https://charts.bitnami.com/bitnami/
     condition: mongodb.enabled
+annotations:
+  kubeVersion: ">=1.16"

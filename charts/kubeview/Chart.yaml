@@ -3,7 +3,6 @@ appVersion: 0.1.11
 description: Kubernetes cluster visualiser and graphical explorer
 home: https://github.com/benc-uk/kubeview
 icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
-kubeVersion: ">=1.16"
 maintainers:
   - name: sebastien-prudhomme
     email: sebastien.prudhomme@gmail.com
@@ -11,8 +10,10 @@ name: kubeview
 sources:
   - https://github.com/benc-uk/kubeview
   - https://github.com/cowboysysop/charts/tree/master/charts/kubeview
-version: 2.5.3
+version: 2.5.4
 dependencies:
   - name: common
     version: 1.7.1
     repository: https://charts.bitnami.com/bitnami/
+annotations:
+  kubeVersion: ">=1.16"

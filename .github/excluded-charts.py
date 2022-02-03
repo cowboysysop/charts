@@ -18,13 +18,16 @@ charts = os.listdir("charts")
 for chart in charts:
     with open(f"charts/{chart}/Chart.yaml", "r") as stream:
         chart_yaml = yaml.safe_load(stream)
-        chart_kube_version = chart_yaml.get("kubeVersion")
+        chart_annotations = chart_yaml.get("annotations")
 
-        if chart_kube_version is not None:
-            spec = semantic_version.NpmSpec(chart_kube_version)
+        if chart_annotations is not None:
+            chart_kube_version = chart_annotations.get("kubeVersion")
 
-            if version not in spec:
-                excluded_charts.append(chart)
+            if chart_kube_version is not None:
+                spec = semantic_version.NpmSpec(chart_kube_version)
+
+                if version not in spec:
+                    excluded_charts.append(chart)
 
 separator = ","
 print(separator.join(excluded_charts))

@@ -3,26 +3,14 @@
   "includePaths": [
     ".github/workflows/**"
   ],
-  "major": {
-    "bumpVersion": "major",
-    "semanticCommitType": "BREAKING CHANGE"
-  },
-  "minor": {
-    "bumpVersion": "minor",
-    "semanticCommitType": "feat"
-  },
-  "patch": {
-    "bumpVersion": "patch",
-    "semanticCommitType": "fix"
-  },
   "semanticCommits": "enabled",
   "semanticCommitScope": null,
+  "semanticCommitType": "fix",
   "packageRules": [
     {
       "matchPaths": [
         ".github/workflows/**"
       ],
-      "groupName": "github workflows",
       "semanticCommitType": "ci"
     },
     {
@@ -46,7 +34,9 @@
   ],
   "regexManagers": [
     {
-      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "fileMatch": [
+        "^\\.github\\/workflows\\/.*$"
+      ],
       "matchStrings": [
         "(?<currentValue>v\\d+\\.\\d+\\.\\d+).* # renovate: cert-manager\\n"
       ],
@@ -55,7 +45,9 @@
       "lookupNameTemplate": "jetstack/cert-manager"
     },
     {
-      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "fileMatch": [
+        "^\\.github\\/workflows\\/.*$"
+      ],
       "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: helm\\n"
       ],
@@ -64,7 +56,9 @@
       "lookupNameTemplate": "helm/helm"
     },
     {
-      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "fileMatch": [
+        "^\\.github\\/workflows\\/.*$"
+      ],
       "matchStrings": [
         "v(?<currentValue>\\d+\\.\\d+\\.\\d+).* # renovate: istio\\n"
       ],
@@ -73,7 +67,9 @@
       "lookupNameTemplate": "istio/istio"
     },
     {
-      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "fileMatch": [
+        "^\\.github\\/workflows\\/.*$"
+      ],
       "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: kindest\\/node\\n"
       ],
@@ -81,7 +77,9 @@
       "depNameTemplate": "kindest/node"
     },
     {
-      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "fileMatch": [
+        "^\\.github\\/workflows\\/.*$"
+      ],
       "matchStrings": [
         "(?<currentValue>v\\d+\\.\\d+\\.\\d+).* # renovate: knative-serving\\n"
       ],
@@ -91,7 +89,9 @@
       "lookupNameTemplate": "knative/serving"
     },
     {
-      "fileMatch": ["^\\.github\\/workflows\\/.*$"],
+      "fileMatch": [
+        "^\\.github\\/workflows\\/.*$"
+      ],
       "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: python\\n"
       ],

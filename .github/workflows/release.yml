@@ -22,7 +22,7 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v1.1
         with:
-          version: v3.7.1 # renovate: helm
+          version: v3.7.2 # renovate: helm
 
       - name: Add dependency chart repos
         run: |

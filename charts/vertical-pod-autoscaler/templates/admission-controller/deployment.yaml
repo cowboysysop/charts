@@ -86,7 +86,7 @@ spec:
           {{- if .Values.admissionController.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /metrics
+              path: /health-check
               port: http-metrics
             initialDelaySeconds: {{ .Values.admissionController.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.admissionController.livenessProbe.periodSeconds }}
@@ -97,7 +97,7 @@ spec:
           {{- if .Values.admissionController.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /metrics
+              path: /health-check
               port: http-metrics
             initialDelaySeconds: {{ .Values.admissionController.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.admissionController.readinessProbe.periodSeconds }}

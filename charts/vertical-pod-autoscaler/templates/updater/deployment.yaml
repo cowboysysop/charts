@@ -81,7 +81,7 @@ spec:
           {{- if .Values.updater.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: /metrics
+              path: /health-check
               port: http-metrics
             initialDelaySeconds: {{ .Values.updater.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.updater.livenessProbe.periodSeconds }}
@@ -92,7 +92,7 @@ spec:
           {{- if .Values.updater.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: /metrics
+              path: /health-check
               port: http-metrics
             initialDelaySeconds: {{ .Values.updater.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.updater.readinessProbe.periodSeconds }}

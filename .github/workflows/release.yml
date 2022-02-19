@@ -19,6 +19,14 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v4.1.0
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+
+      - name: Export GPG key to legacy format
+        run: gpg --export-secret-keys > ~/.gnupg/pubring.gpg
+
       - name: Set up Helm
         uses: azure/setup-helm@v1.1
         with:
@@ -30,5 +38,7 @@ jobs:
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.3.0
+        with:
+          config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

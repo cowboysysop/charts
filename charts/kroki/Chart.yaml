@@ -10,10 +10,13 @@ name: kroki
 sources:
   - https://github.com/yuzutech/kroki
   - https://github.com/cowboysysop/charts/tree/master/charts/kroki
-version: 1.1.4
+version: 1.1.5
 dependencies:
   - name: common
     version: 1.7.1
     repository: https://charts.bitnami.com/bitnami/
 annotations:
+  artifacthub.io/signKey: |
+    fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+    url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
   kubeVersion: ">=1.16"

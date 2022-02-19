@@ -10,7 +10,7 @@ name: mongo-express
 sources:
   - https://github.com/mongo-express/mongo-express
   - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
-version: 2.6.4
+version: 2.6.5
 dependencies:
   - name: common
     version: 1.7.1
@@ -20,4 +20,7 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami/
     condition: mongodb.enabled
 annotations:
+  artifacthub.io/signKey: |
+    fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+    url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
   kubeVersion: ">=1.16"

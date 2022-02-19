@@ -10,10 +10,13 @@ name: kfserving
 sources:
   - https://github.com/kserve/kserve
   - https://github.com/cowboysysop/charts/tree/master/charts/kfserving
-version: 1.0.2
+version: 1.0.3
 dependencies:
   - name: common
     version: 1.7.1
     repository: https://charts.bitnami.com/bitnami/
 annotations:
+  artifacthub.io/signKey: |
+    fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+    url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
   kubeVersion: ">=1.16 <=1.21"

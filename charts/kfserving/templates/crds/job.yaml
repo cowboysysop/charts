@@ -34,6 +34,18 @@ spec:
             - name: config
               mountPath: /config
               readOnly: true
+      {{- with .Values.crds.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.crds.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.crds.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       restartPolicy: Never
       volumes:
         - name: config

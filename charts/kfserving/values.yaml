@@ -373,6 +373,12 @@ crds:
     # Image pull policy
     pullPolicy: IfNotPresent
 
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
 tests:
   image:
     # Image name

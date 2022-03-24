@@ -167,6 +167,32 @@ entries:
       kubeVersion: '>=1.16 <=1.21'
     apiVersion: v2
     appVersion: 0.6.1
+    created: "2022-03-24T09:53:08.845221529Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Highly scalable and standards based Model Inference Platform on Kubernetes
+    digest: 4dcef5c7faa739ba6672d6d891155f8bea61f7c5da3879099b0291e9c222290f
+    home: https://kserve.github.io/website/
+    icon: https://raw.githubusercontent.com/kserve/artwork/main/icon/color/k-serve-icon-color.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kfserving
+    sources:
+    - https://github.com/kserve/kserve
+    - https://github.com/cowboysysop/charts/tree/master/charts/kfserving
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kfserving-1.1.0/kfserving-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.16 <=1.21'
+    apiVersion: v2
+    appVersion: 0.6.1
     created: "2022-02-19T16:12:33.012869716Z"
     dependencies:
     - name: common
@@ -2640,6 +2666,33 @@ entries:
       kubeVersion: '>=1.17'
     apiVersion: v2
     appVersion: 0.10.0
+    created: "2022-03-24T09:53:09.053465789Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.7.1
+    description: Set of components that automatically adjust the amount of CPU and
+      memory requested by pods running in the Kubernetes Cluster
+    digest: 2700816bd828e79cbded6213932b43ad96b0ec4332941e56fcb1c9d1049a33dc
+    home: https://github.com/kubernetes/autoscaler
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: vertical-pod-autoscaler
+    sources:
+    - https://github.com/kubernetes/autoscaler
+    - https://github.com/cowboysysop/charts/tree/master/charts/vertical-pod-autoscaler
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-4.1.0/vertical-pod-autoscaler-4.1.0.tgz
+    version: 4.1.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.17'
+    apiVersion: v2
+    appVersion: 0.10.0
     created: "2022-02-19T16:12:35.417391791Z"
     dependencies:
     - name: common
@@ -3422,4 +3475,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2022-02-19T16:12:35.611858982Z"
+generated: "2022-03-24T09:53:09.054532402Z"

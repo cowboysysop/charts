@@ -18,7 +18,7 @@ data:
 
 
     def test_service_connection():
-        url = "http://{{ include "mongo-express.fullname" . }}:{{ .Values.service.port }}/"
+        url = "http://{{ include "mongo-express.fullname" . }}:{{ .Values.service.port }}{{ default "/" .Values.siteBaseUrl }}"
 
         response = requests.get(url)
 

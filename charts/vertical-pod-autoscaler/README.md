@@ -44,6 +44,13 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 5.0.0
+
+The application validates that all fields that specify CPU and memory have supported resolution:
+
+- CPU is a whole number of milli CPUs
+- Memory is a whole number of bytes
+
 ### Upgrading to version 4.0.0
 
 The application version is no more compatible with Kubernetes 1.16.

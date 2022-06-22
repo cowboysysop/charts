@@ -1,9 +1,9 @@
 {{- if .Values.admissionController.enabled }}
-{{- if .Values.admissionController.metrics.serviceMonitor.create -}}
+{{- if .Values.admissionController.metrics.serviceMonitor.enabled -}}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "vertical-pod-autoscaler.admissionController.metrics.serviceMonitorName" . }}
+  name: {{ include "vertical-pod-autoscaler.admissionController.fullname" . }}
   labels:
     {{- include "vertical-pod-autoscaler.admissionController.metrics.serviceMonitor.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}

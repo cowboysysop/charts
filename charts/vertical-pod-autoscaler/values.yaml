@@ -170,7 +170,9 @@ admissionController:
 
     serviceMonitor:
       # Specifies whether a service monitor should be created
-      create: false
+      enabled: false
+      # Extra annotations for the ServiceMonitor
+      annotations: {}
       # Extra labels for the ServiceMonitor
       labels: {}
       # The name of the label on the target service to use as the job name in Prometheus
@@ -353,7 +355,9 @@ recommender:
 
     serviceMonitor:
       # Specifies whether a service monitor should be created
-      create: false
+      enabled: false
+      # Extra annotations for the ServiceMonitor
+      annotations: {}
       # Extra labels for the ServiceMonitor
       labels: {}
       # The name of the label on the target service to use as the job name in Prometheus
@@ -516,7 +520,9 @@ updater:
       port: 8943
     serviceMonitor:
       # Specifies whether a service monitor should be created
-      create: false
+      enabled: false
+      # Extra annotations for the ServiceMonitor
+      annotations: {}
       # Extra labels for the ServiceMonitor
       labels: {}
       # The name of the label on the target service to use as the job name in Prometheus

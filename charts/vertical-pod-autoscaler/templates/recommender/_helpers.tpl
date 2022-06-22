@@ -48,17 +48,6 @@ Create the name of the service account to use
 {{- end -}}
 
 {{/*
-Create the name of the service monitor to use
-*/}}
-{{- define "vertical-pod-autoscaler.recommender.metrics.serviceMonitorName" -}}
-{{- if .Values.recommender.metrics.serviceMonitor.create -}}
-    {{ default (include "vertical-pod-autoscaler.recommender.fullname" .) .Values.recommender.metrics.serviceMonitor.name }}
-{{- else -}}
-    {{ default "default" .Values.recommender.metrics.serviceMonitor.name }}
-{{- end -}}
-{{- end -}}
-
-{{/*
 ServiceMonitor labels
 */}}
 {{- define "vertical-pod-autoscaler.recommender.metrics.serviceMonitor.labels" -}}

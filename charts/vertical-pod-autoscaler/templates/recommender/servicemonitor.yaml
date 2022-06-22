@@ -1,8 +1,8 @@
-{{- if .Values.recommender.metrics.serviceMonitor.create -}}
+{{- if .Values.recommender.metrics.serviceMonitor.enabled -}}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "vertical-pod-autoscaler.recommender.metrics.serviceMonitorName" . }}
+  name: {{ include "vertical-pod-autoscaler.recommender.fullname" . }}
   labels:
     {{- include "vertical-pod-autoscaler.recommender.metrics.serviceMonitor.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}

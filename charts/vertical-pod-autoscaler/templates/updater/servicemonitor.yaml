@@ -1,9 +1,9 @@
 {{- if .Values.updater.enabled }}
-{{- if .Values.updater.metrics.serviceMonitor.create -}}
+{{- if .Values.updater.metrics.serviceMonitor.enabled -}}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "vertical-pod-autoscaler.updater.metrics.serviceMonitorName" . }}
+  name: {{ include "vertical-pod-autoscaler.updater.fullname" . }}
   labels:
     {{- include "vertical-pod-autoscaler.updater.metrics.serviceMonitor.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}

@@ -59,17 +59,6 @@ Create the name of the tls secret to use
 {{- end -}}
 
 {{/*
-Create the name of the service monitor to use
-*/}}
-{{- define "vertical-pod-autoscaler.admissionController.metrics.serviceMonitorName" -}}
-{{- if .Values.admissionController.metrics.serviceMonitor.create -}}
-    {{ default (include "vertical-pod-autoscaler.admissionController.fullname" .) .Values.admissionController.metrics.serviceMonitor.name }}
-{{- else -}}
-    {{ default "default" .Values.admissionController.metrics.serviceMonitor.name }}
-{{- end -}}
-{{- end -}}
-
-{{/*
 ServiceMonitor labels
 */}}
 {{- define "vertical-pod-autoscaler.admissionController.metrics.serviceMonitor.labels" -}}

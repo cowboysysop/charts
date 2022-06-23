@@ -168,6 +168,24 @@ admissionController:
       # Metrics service port
       port: 8944
 
+    serviceMonitor:
+      # Specifies whether a service monitor should be created
+      enabled: false
+      # Extra annotations for the ServiceMonitor
+      annotations: {}
+      # Extra labels for the ServiceMonitor
+      labels: {}
+      # The name of the label on the target service to use as the job name in Prometheus
+      jobLabel: ""
+      # How frequently to scrape metrics
+      interval: ""
+      # Timeout after which the scrape is ended
+      scrapeTimeout: ""
+      # Specify additional relabeling of metrics
+      metricRelabelings: []
+      # Specify general relabeling
+      relabelings: []
+
   tls:
     caCert: ""
     cert: ""
@@ -335,6 +353,24 @@ recommender:
       # Metrics service port
       port: 8942
 
+    serviceMonitor:
+      # Specifies whether a service monitor should be created
+      enabled: false
+      # Extra annotations for the ServiceMonitor
+      annotations: {}
+      # Extra labels for the ServiceMonitor
+      labels: {}
+      # The name of the label on the target service to use as the job name in Prometheus
+      jobLabel: ""
+      # How frequently to scrape metrics
+      interval: ""
+      # Timeout after which the scrape is ended
+      scrapeTimeout: ""
+      # Specify additional relabeling of metrics
+      metricRelabelings: []
+      # Specify general relabeling
+      relabelings: []
+
 updater:
   # Enable the component
   enabled: true
@@ -482,6 +518,23 @@ updater:
 
       # Metrics service port
       port: 8943
+    serviceMonitor:
+      # Specifies whether a service monitor should be created
+      enabled: false
+      # Extra annotations for the ServiceMonitor
+      annotations: {}
+      # Extra labels for the ServiceMonitor
+      labels: {}
+      # The name of the label on the target service to use as the job name in Prometheus
+      jobLabel: ""
+      # How frequently to scrape metrics
+      interval: ""
+      # Timeout after which the scrape is ended
+      scrapeTimeout: ""
+      # Specify additional relabeling of metrics
+      metricRelabelings: []
+      # Specify general relabeling
+      relabelings: []
 
 crds:
   image:

@@ -1,0 +1,47 @@
+{{- if .Values.updater.enabled }}
+{{- if .Values.updater.metrics.serviceMonitor.enabled -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "vertical-pod-autoscaler.updater.fullname" . }}
+  labels:
+    {{- include "vertical-pod-autoscaler.updater.metrics.serviceMonitor.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.updater.metrics.serviceMonitor.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- if .Values.updater.metrics.serviceMonitor.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.updater.metrics.serviceMonitor.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  {{- if .Values.updater.metrics.serviceMonitor.jobLabel }}
+  jobLabel: {{ .Values.updater.metrics.serviceMonitor.jobLabel }}
+  {{- end }}
+  endpoints:
+    - port: http-metrics
+      {{- if .Values.updater.metrics.serviceMonitor.interval }}
+      interval: {{ .Values.updater.metrics.serviceMonitor.interval }}
+      {{- end}}
+      {{- if .Values.updater.metrics.serviceMonitor.scrapeTimeout }}
+      scrapeTimeout: {{ .Values.updater.metrics.serviceMonitor.scrapeTimeout }}
+      {{- end}}
+      {{- if .Values.updater.metrics.serviceMonitor.metricRelabelings }}
+      metricRelabelings: {{ toYaml .Values.updater.metrics.serviceMonitor.metricRelabelings | nindent 8 }}
+      {{- end }}
+      {{- if .Values.updater.metrics.serviceMonitor.relabelings }}
+      relabelings: {{ toYaml .Values.updater.metrics.serviceMonitor.relabelings | nindent 8 }}
+      {{- end }}
+      path: /metrics
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace | quote }}
+  selector:
+    matchLabels:
+      {{- include "vertical-pod-autoscaler.updater.selectorLabels" . | nindent 6 }}
+{{- end -}}
+{{- end -}}

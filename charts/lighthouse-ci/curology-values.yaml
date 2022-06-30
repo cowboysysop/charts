@@ -151,7 +151,7 @@ ingress:
   hosts:
     - host: lhci.curology.in
       paths:
-        - /
+        - /*
   tls: []
   #  - secretName: lighthouse-ci-tls
   #    hosts:

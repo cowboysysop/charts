@@ -264,16 +264,16 @@ mariadb:
 
 externalMariadb:
   # Whether to use an external MariaDB
-  enabled: false
+  enabled: true
 
   # External MariaDB host
-  host: mariadb
+  host: lighthouse-ci.cguserojko63.us-east-1.rds.amazonaws.com
 
   # External MariaDB port
   port: 3306
 
   # External MariaDB user
-  username: lighthouse-ci
+  username: lighthouse_ci
 
   # External MariaDB password
   password: lighthouse-ci
@@ -285,7 +285,7 @@ externalMariadb:
   existingSecretKeyPassword: mariadb-password
 
   # External MariaDB database
-  database: lighthouse-ci
+  database: lighthouse_ci
 
 postgresql:
   # Whether to use the PostgreSQL chart

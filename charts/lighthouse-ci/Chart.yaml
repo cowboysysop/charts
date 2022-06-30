@@ -13,14 +13,14 @@ sources:
 version: 2.11.3
 dependencies:
   - name: common
-    version: 1.7.1
+    version: 1.16.0
     repository: https://charts.bitnami.com/bitnami/
   - name: mariadb
-    version: 9.4.4
+    version: 11.0.13
     repository: https://charts.bitnami.com/bitnami/
     condition: mariadb.enabled
   - name: postgresql
-    version: 10.9.4
+    version: 11.6.11
     repository: https://charts.bitnami.com/bitnami/
     condition: postgresql.enabled
 annotations:

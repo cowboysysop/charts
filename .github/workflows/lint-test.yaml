@@ -27,7 +27,7 @@ jobs:
           version: ${{ matrix.helm }}
 
       - name: Set up Python
-        uses: actions/setup-python@v4.0.0
+        uses: actions/setup-python@v4.1.0
         with:
           python-version: 3.10.5 # renovate: python
 
@@ -73,7 +73,7 @@ jobs:
           version: v3.7.2 # renovate: helm
 
       - name: Set up Python
-        uses: actions/setup-python@v4.0.0
+        uses: actions/setup-python@v4.1.0
         with:
           python-version: 3.10.5 # renovate: python
 

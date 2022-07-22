@@ -9,10 +9,10 @@ name: training-operator
 sources:
   - https://github.com/kubeflow/training-operator
   - https://github.com/cowboysysop/charts/tree/master/charts/training-operator
-version: 1.1.5
+version: 1.1.6
 dependencies:
   - name: common
-    version: 1.7.1
+    version: 1.16.1
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

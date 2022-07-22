@@ -8,6 +8,36 @@ entries:
       kubeVersion: '>=1.16'
     apiVersion: v2
     appVersion: 0.12.0
+    created: "2022-07-22T16:29:10.244114203Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 11.1.0
+    description: A Kubernetes-native project for automated machine learning
+    digest: c4f5b4c0821766deafcfc125f8ae9e6b36c5a102527f0d4f69d8568e60d3c66d
+    home: https://github.com/kubeflow/katib
+    icon: https://raw.githubusercontent.com/kubeflow/katib/master/docs/images/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: katib
+    sources:
+    - https://github.com/kubeflow/katib
+    - https://github.com/cowboysysop/charts/tree/master/charts/katib
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/katib-2.0.0/katib-2.0.0.tgz
+    version: 2.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 0.12.0
     created: "2022-02-19T16:12:32.798643105Z"
     dependencies:
     - name: common
@@ -1079,6 +1109,40 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
   lighthouse-ci:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.16'
+    apiVersion: v2
+    appVersion: 0.8.1
+    created: "2022-07-22T16:29:10.419499269Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 11.1.0
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami/
+      version: 10.16.2
+    description: Enables running a server to display Lighthouse CI results
+    digest: ceb80f44462fba592e1d7acc5d6d22a581c2b41e8d26e57e9cf9616189b57180
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    sources:
+    - https://github.com/GoogleChrome/lighthouse-ci
+    - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-3.0.0/lighthouse-ci-3.0.0.tgz
+    version: 3.0.0
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -3529,4 +3593,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2022-06-23T19:56:36.99434266Z"
+generated: "2022-07-22T16:29:10.420132371Z"

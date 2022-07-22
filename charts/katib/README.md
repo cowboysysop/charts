@@ -52,6 +52,13 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 2.0.0
+
+The MariaDB subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1100
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1000
+
 ## Uninstalling
 
 Uninstall the `my-release` deployment using:
@@ -256,7 +263,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `mariadb.auth.password`                     | MariaDB password                                                  | `katib`                                |
 | `mariadb.auth.existingSecret`               | Name of existing Secret to use                                    | `nil`                                  |
 | `mariadb.primary.podAnnotations`            | Additional pod annotations for MariaDB primary pods               | `{ sidecar.istio.io/inject: "false" }` |
-| `mariadb.primary.service.port`              | MariaDB port                                                      | `3306`                                 |
+| `mariadb.primary.service.ports.mysql`       | MariaDB port                                                      | `3306`                                 |
 | `mariadb.secondary.podAnnotations`          | Additional pod annotations for MariaDB secondary pods             | `{ sidecar.istio.io/inject: "false" }` |
 | `externalMariadb.enabled`                   | Whether to use an external MariaDB                                | `false`                                |
 | `externalMariadb.host`                      | External MariaDB host                                             | `mariadb`                              |

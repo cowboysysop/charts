@@ -505,8 +505,9 @@ mariadb:
       sidecar.istio.io/inject: "false"
 
     service:
-      # MariaDB port
-      port: 3306
+      ports:
+        # MariaDB port
+        mysql: 3306
 
   secondary:
     # Additional pod annotations for MariaDB secondary pods

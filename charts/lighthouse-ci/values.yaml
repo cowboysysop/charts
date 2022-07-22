@@ -248,8 +248,9 @@ mariadb:
 
   primary:
     service:
-      # MariaDB port
-      port: 3306
+      ports:
+        # MariaDB port
+        mysql: 3306
 
 externalMariadb:
   # Whether to use an external MariaDB

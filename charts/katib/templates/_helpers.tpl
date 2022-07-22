@@ -88,7 +88,7 @@ MariaDB port
 */}}
 {{- define "katib.mariadb.port" -}}
 {{- if .Values.mariadb.enabled -}}
-    {{ .Values.mariadb.primary.service.port }}
+    {{ .Values.mariadb.primary.service.ports.mysql }}
 {{- else -}}
     {{ .Values.externalMariadb.port }}
 {{- end -}}

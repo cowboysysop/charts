@@ -43,6 +43,13 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 3.0.0
+
+The MariaDB subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1100
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1000
+
 ### Upgrading to version 2.0.0
 
 The chart is no more compatible with Helm 2.
@@ -155,7 +162,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `mariadb.auth.username`                     | MariaDB user                                                      | `lighthouse-ci`    |
 | `mariadb.auth.password`                     | MariaDB password                                                  | `lighthouse-ci`    |
 | `mariadb.auth.existingSecret`               | Name of existing Secret to use                                    | `nil`              |
-| `mariadb.primary.service.port`              | MariaDB port                                                      | `3306`             |
+| `mariadb.primary.service.ports.mysql`       | MariaDB port                                                      | `3306`             |
 | `externalMariadb.enabled`                   | Whether to use an external MariaDB                                | `false`            |
 | `externalMariadb.host`                      | External MariaDB host                                             | `mariadb`          |
 | `externalMariadb.port`                      | External MariaDB port                                             | `3306`             |

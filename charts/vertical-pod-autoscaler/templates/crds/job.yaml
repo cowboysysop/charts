@@ -15,6 +15,9 @@ metadata:
     {{- end }}
 spec:
   template:
+    metadata:
+      annotations:
+        {{- toYaml .Values.crds.podAnnotations | trim | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

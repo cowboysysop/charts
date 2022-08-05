@@ -282,6 +282,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `crds.image.tag`        | Image tag                      | `1.23.1`          |
 | `crds.image.pullPolicy` | Image pull policy              | `IfNotPresent`    |
 | `crds.nodeSelector`     | Node labels for pod assignment | `{}`              |
+| `crds.podAnnotations`   | Additional pod annotations     | `{}`              |
 | `crds.tolerations`      | Tolerations for pod assignment | `[]`              |
 | `crds.affinity`         | Map of node/pod affinities     | `{}`              |
 

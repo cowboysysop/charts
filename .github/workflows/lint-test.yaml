@@ -116,7 +116,7 @@ jobs:
 
       - name: Install Knative Serving
         run: |
-          kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.2.0/serving-crds.yaml # renovate: knative-serving
+          kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.7.1/serving-crds.yaml # renovate: knative-serving
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Run chart-testing (install)

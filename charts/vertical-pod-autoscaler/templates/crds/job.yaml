@@ -15,6 +15,16 @@ metadata:
     {{- end }}
 spec:
   template:
+    {{- if or .Values.crds.podAnnotations .Values.commonAnnotations }}
+    metadata:
+      annotations:
+        {{- if .Values.crds.podAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.crds.podAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

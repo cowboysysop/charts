@@ -547,6 +547,9 @@ crds:
     # Image pull policy
     pullPolicy: IfNotPresent
 
+  # Additional pod annotations
+  podAnnotations: {}
+
   nodeSelector: {}
 
   tolerations: []

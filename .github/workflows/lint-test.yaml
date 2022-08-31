@@ -111,7 +111,7 @@ jobs:
       - name: Install Istio
         run: |
           helm repo add istio https://istio-release.storage.googleapis.com/charts/
-          helm install istio-base istio/base -n istio-system --create-namespace --version v1.12.2 --wait # renovate: istio
+          helm install istio-base istio/base -n istio-system --create-namespace --version v1.15.0 --wait # renovate: istio
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Install Knative Serving

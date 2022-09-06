@@ -17,7 +17,7 @@ This chart bootstraps a Metacontroller deployment on a [Kubernetes](http://kuber
 
 ## Prerequisites
 
-- Kubernetes >= 1.16
+- Kubernetes >= 1.19
 - Helm >= 3.1
 
 ## Installing

@@ -17,7 +17,7 @@ This chart bootstraps a Kubebox deployment on a [Kubernetes](http://kubernetes.i
 
 ## Prerequisites
 
-- Kubernetes >= 1.16
+- Kubernetes >= 1.19
 - cAdvisor >= 0.36 (you can use the [ckotzbauer/cadvisor](https://artifacthub.io/packages/helm/ckotzbauer/cadvisor) chart)
 - Helm >= 3.1
 

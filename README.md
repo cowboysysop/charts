@@ -12,6 +12,7 @@
 
 | Name                                                      | Description                                                                                                                  |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| [dolibarr](charts/dolibarr)                               | A modern software package to manage your company or foundation's activity                                                    |
 | [katib](charts/katib)                                     | A Kubernetes-native project for automated machine learning                                                                   |
 | [kfserving](charts/kfserving)                             | Highly scalable and standards based Model Inference Platform on Kubernetes                                                   |
 | [kroki](charts/kroki)                                     | Creates diagrams from textual descriptions                                                                                   |

@@ -17,7 +17,7 @@ This chart bootstraps a Lighthouse CI Server deployment on a [Kubernetes](http:/
 
 ## Prerequisites
 
-- Kubernetes >= 1.16
+- Kubernetes >= 1.19
 - Helm >= 3.1
 
 ## Installing

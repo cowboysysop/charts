@@ -10,7 +10,7 @@ name: katib
 sources:
   - https://github.com/kubeflow/katib
   - https://github.com/cowboysysop/charts/tree/master/charts/katib
-version: 2.0.0
+version: 2.0.1
 dependencies:
   - name: common
     version: 1.16.1
@@ -23,4 +23,4 @@ annotations:
   artifacthub.io/signKey: |
     fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
     url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
-  kubeVersion: ">=1.16"
+  kubeVersion: ">=1.19"

@@ -17,7 +17,7 @@ This chart bootstraps a Katib deployment on a [Kubernetes](http://kubernetes.io)
 
 ## Prerequisites
 
-- Kubernetes >= 1.16
+- Kubernetes >= 1.19
 - cert-manager >= 1.3 (you can use the [cert-manager/cert-manager](https://artifacthub.io/packages/helm/cert-manager/cert-manager) chart)
 - Helm >= 3.1
 

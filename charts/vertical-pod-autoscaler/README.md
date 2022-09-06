@@ -17,7 +17,7 @@ This chart bootstraps a Vertical Pod Autoscaler deployment on a [Kubernetes](htt
 
 ## Prerequisites
 
-- Kubernetes >= 1.17
+- Kubernetes >= 1.19 and <= 1.24
 - Metrics Server >= 0.2 (you can use the [bitnami/metrics-server](https://artifacthub.io/packages/helm/bitnami/metrics-server) chart)
 - Helm >= 3.1
 

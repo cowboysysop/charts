@@ -30,6 +30,12 @@
         "minor"
       ],
       "enabled": false
+    },
+    {
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "automerge": true
     }
   ],
   "regexManagers": [

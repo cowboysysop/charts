@@ -69,6 +69,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `fullnameOverride`  | Fully override `dolibarr.fullname` template with a string                                     | `nil`   |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                    | `{}`    |
 | `commonLabels`      | Labels to add to all deployed objects                                                         | `{}`    |
+| `extraDeploy`       | Array of extra objects to deploy with the release                                             | `[]`    |
 
 ### Parameters
 
@@ -139,28 +140,28 @@ The following tables lists all the configurable parameters expose by the chart a
 | `dolibarr.externalUrl`               | External URL                                                                                          | `http://dolibarr.local`                          |
 | `dolibarr.cron.enabled`              | Enable cron for scheduled jobs                                                                        | `false`                                          |
 | `dolibarr.cron.username`             | Cron username                                                                                         | `admin`                                          |
-| `dolibarr.cron.securityKey`          | Cron security key                                                                                     | ``                                               |
+| `dolibarr.cron.securityKey`          | Cron security key                                                                                     | `""`                                             |
 | `existingSecret`                     | Name of existing Secret to use                                                                        | `nil`                                            |
 
 ### MariaDB parameters
 
-| Name                                        | Description                                                       | Default                                |
-|---------------------------------------------|-------------------------------------------------------------------|----------------------------------------|
-| `mariadb.enabled`                           | Whether to use the MariaDB chart                                  | `true`                                 |
-| `mariadb.architecture`                      | MariaDB architecture                                              | `standalone`                           |
-| `mariadb.auth.database`                     | MariaDB database                                                  | `dolibarr`                             |
-| `mariadb.auth.username`                     | MariaDB user                                                      | `dolibarr`                             |
-| `mariadb.auth.password`                     | MariaDB password                                                  | `dolibarr`                             |
-| `mariadb.auth.existingSecret`               | Name of existing Secret to use                                    | `nil`                                  |
-| `mariadb.primary.service.ports.mysql`       | MariaDB port                                                      | `3306`                                 |
-| `externalMariadb.enabled`                   | Whether to use an external MariaDB                                | `false`                                |
-| `externalMariadb.host`                      | External MariaDB host                                             | `mariadb`                              |
-| `externalMariadb.port`                      | External MariaDB port                                             | `3306`                                 |
-| `externalMariadb.username`                  | External MariaDB user                                             | `dolibarr`                             |
-| `externalMariadb.password`                  | External MariaDB password                                         | `dolibarr`                             |
-| `externalMariadb.existingSecret`            | Name of existing Secret to use                                    | `nil`                                  |
-| `externalMariadb.existingSecretKeyPassword` | Name of the key in existing Secret that contains MariaDB password | `mariadb-password`                     |
-| `externalMariadb.database`                  | External MariaDB database                                         | `dolibarr`                             |
+| Name                                        | Description                                                       | Default            |
+|---------------------------------------------|-------------------------------------------------------------------|--------------------|
+| `mariadb.enabled`                           | Whether to use the MariaDB chart                                  | `true`             |
+| `mariadb.architecture`                      | MariaDB architecture                                              | `standalone`       |
+| `mariadb.auth.database`                     | MariaDB database                                                  | `dolibarr`         |
+| `mariadb.auth.username`                     | MariaDB user                                                      | `dolibarr`         |
+| `mariadb.auth.password`                     | MariaDB password                                                  | `dolibarr`         |
+| `mariadb.auth.existingSecret`               | Name of existing Secret to use                                    | `nil`              |
+| `mariadb.primary.service.ports.mysql`       | MariaDB port                                                      | `3306`             |
+| `externalMariadb.enabled`                   | Whether to use an external MariaDB                                | `false`            |
+| `externalMariadb.host`                      | External MariaDB host                                             | `mariadb`          |
+| `externalMariadb.port`                      | External MariaDB port                                             | `3306`             |
+| `externalMariadb.username`                  | External MariaDB user                                             | `dolibarr`         |
+| `externalMariadb.password`                  | External MariaDB password                                         | `dolibarr`         |
+| `externalMariadb.existingSecret`            | Name of existing Secret to use                                    | `nil`              |
+| `externalMariadb.existingSecretKeyPassword` | Name of the key in existing Secret that contains MariaDB password | `mariadb-password` |
+| `externalMariadb.database`                  | External MariaDB database                                         | `dolibarr`         |
 
 ### Tests parameters
 

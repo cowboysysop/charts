@@ -95,6 +95,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `fullnameOverride`  | Fully override `katib.fullname` template with a string                                     | `nil`   |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                 | `{}`    |
 | `commonLabels`      | Labels to add to all deployed objects                                                      | `{}`    |
+| `extraDeploy`       | Array of extra objects to deploy with the release                                          | `[]`    |
 
 ### Controller parameters
 

@@ -12,6 +12,9 @@ fullnameOverride: ""
 # Annotations to add to all deployed objects
 commonAnnotations: {}
 
+# Array of extra objects to deploy with the release
+extraDeploy: []
+
 # Labels to add to all deployed objects
 commonLabels: {}
 

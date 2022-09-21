@@ -17,7 +17,7 @@ This chart bootstraps a Vertical Pod Autoscaler deployment on a [Kubernetes](htt
 
 ## Prerequisites
 
-- Kubernetes >= 1.19
+- Kubernetes >= 1.21
 - Metrics Server >= 0.2 (you can use the [bitnami/metrics-server](https://artifacthub.io/packages/helm/bitnami/metrics-server) chart)
 - Helm >= 3.1
 
@@ -43,6 +43,10 @@ $ helm upgrade my-release cowboysysop/vertical-pod-autoscaler
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
+
+### Upgrading to version 6.0.0
+
+The application version is no more compatible with Kubernetes 1.19 and 1.20.
 
 ### Upgrading to version 5.0.0
 

@@ -17,7 +17,7 @@ This chart bootstraps a Vertical Pod Autoscaler deployment on a [Kubernetes](htt
 
 ## Prerequisites
 
-- Kubernetes >= 1.19 and <= 1.24
+- Kubernetes >= 1.21
 - Metrics Server >= 0.2 (you can use the [bitnami/metrics-server](https://artifacthub.io/packages/helm/bitnami/metrics-server) chart)
 - Helm >= 3.1
 
@@ -43,6 +43,10 @@ $ helm upgrade my-release cowboysysop/vertical-pod-autoscaler
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
+
+### Upgrading to version 6.0.0
+
+The application version is no more compatible with Kubernetes 1.19 and 1.20.
 
 ### Upgrading to version 5.0.0
 
@@ -117,7 +121,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `admissionController.enabled`                                  | Enable the component                                                                                  | `true`                                                                              |
 | `admissionController.replicaCount`                             | Number of replicas                                                                                    | `1`                                                                                 |
 | `admissionController.image.repository`                         | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-admission-controller`                                   |
-| `admissionController.image.tag`                                | Image tag                                                                                             | `0.10.0`                                                                            |
+| `admissionController.image.tag`                                | Image tag                                                                                             | `0.12.0`                                                                            |
 | `admissionController.image.pullPolicy`                         | Image pull policy                                                                                     | `IfNotPresent`                                                                      |
 | `admissionController.pdb.create`                               | Specifies whether a pod disruption budget should be created                                           | `false`                                                                             |
 | `admissionController.pdb.minAvailable`                         | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                                 |
@@ -176,7 +180,7 @@ The following tables lists all the configurable parameters expose by the chart a
 |----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
 | `recommender.replicaCount`                                     | Number of replicas                                                                                    | `1`                                                                         |
 | `recommender.image.repository`                                 | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-recommender`                                    |
-| `recommender.image.tag`                                        | Image tag                                                                                             | `0.10.0`                                                                    |
+| `recommender.image.tag`                                        | Image tag                                                                                             | `0.12.0`                                                                    |
 | `recommender.image.pullPolicy`                                 | Image pull policy                                                                                     | `IfNotPresent`                                                              |
 | `recommender.pdb.create`                                       | Specifies whether a pod disruption budget should be created                                           | `false`                                                                     |
 | `recommender.pdb.minAvailable`                                 | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                         |
@@ -229,7 +233,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `updater.enabled`                                              | Enable the component                                                                                  | `true`                                                                  |
 | `updater.replicaCount`                                         | Number of replicas                                                                                    | `1`                                                                     |
 | `updater.image.repository`                                     | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-updater`                                    |
-| `updater.image.tag`                                            | Image tag                                                                                             | `0.10.0`                                                                |
+| `updater.image.tag`                                            | Image tag                                                                                             | `0.12.0`                                                                |
 | `updater.image.pullPolicy`                                     | Image pull policy                                                                                     | `IfNotPresent`                                                          |
 | `updater.pdb.create`                                           | Specifies whether a pod disruption budget should be created                                           | `false`                                                                 |
 | `updater.pdb.minAvailable`                                     | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                     |

@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 0.11.0
+appVersion: 0.12.0
 description: Set of components that automatically adjust the amount of CPU and memory requested by pods running in the Kubernetes Cluster
 home: https://github.com/kubernetes/autoscaler
 icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg
@@ -10,7 +10,7 @@ name: vertical-pod-autoscaler
 sources:
   - https://github.com/kubernetes/autoscaler
   - https://github.com/cowboysysop/charts/tree/master/charts/vertical-pod-autoscaler
-version: 5.3.0
+version: 6.0.0
 dependencies:
   - name: common
     version: 1.16.1
@@ -19,4 +19,4 @@ annotations:
   artifacthub.io/signKey: |
     fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
     url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
-  kubeVersion: ">=1.19 <=1.24"
+  kubeVersion: ">=1.21"

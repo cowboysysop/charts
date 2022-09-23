@@ -1,6 +1,6 @@
 # Whoami
 
-[Whoami](https://github.com/containous/whoami) is a tiny Go webserver that prints os information and HTTP request to output.
+[Whoami](https://github.com/traefik/whoami) is a tiny Go webserver that prints os information and HTTP request to output.
 
 **DISCLAIMER**: This is an unofficial chart not supported by Whoami authors.
 
@@ -82,8 +82,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                                 | Description                                                                                           | Default                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------|
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                            |
-| `image.repository`                   | Image name                                                                                            | `containous/whoami`                            |
-| `image.tag`                          | Image tag                                                                                             | `v1.5.0`                                       |
+| `image.repository`                   | Image name                                                                                            | `traefik/whoami`                               |
+| `image.tag`                          | Image tag                                                                                             | `v1.8.6`                                       |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                 |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                        |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                            |

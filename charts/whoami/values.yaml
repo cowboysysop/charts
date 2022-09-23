@@ -21,8 +21,8 @@ extraDeploy: []
 replicaCount: 1
 
 image:
-  repository: containous/whoami
-  tag: v1.5.0
+  repository: traefik/whoami
+  tag: v1.8.6
   pullPolicy: IfNotPresent
 
 pdb:

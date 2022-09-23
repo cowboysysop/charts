@@ -4413,6 +4413,32 @@ entries:
         url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
       kubeVersion: '>=1.19'
     apiVersion: v2
+    appVersion: 1.8.6
+    created: "2022-09-23T21:53:47.856314563Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: 489870490cb6f06bd3e0ccf3611529c9e6e3137b4a33f7c0c5683d37a69bbbde
+    home: https://github.com/traefik/whoami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: whoami
+    sources:
+    - https://github.com/traefik/whoami
+    - https://github.com/cowboysysop/charts/tree/master/charts/whoami
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/whoami-2.7.0/whoami-2.7.0.tgz
+    version: 2.7.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
     appVersion: 1.5.0
     created: "2022-09-17T14:53:26.898243467Z"
     dependencies:
@@ -4803,4 +4829,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2022-09-21T13:51:26.635202293Z"
+generated: "2022-09-23T21:53:47.85724937Z"

@@ -1,12 +1,28 @@
 {
+  "bumpVersion": "patch",
   "dependencyDashboard": true,
-  "includePaths": [
-    ".github/workflows/**"
-  ],
   "semanticCommits": "enabled",
   "semanticCommitScope": null,
   "semanticCommitType": "fix",
   "packageRules": [
+    {
+      "matchPackagePrefixes": [
+        "kubeflowkatib/katib"
+      ],
+      "groupName": "kubeflowkatib/katib"
+    },
+    {
+      "matchPackagePrefixes": [
+        "yuzutech/kroki"
+      ],
+      "groupName": "yuzutech/kroki"
+    },
+    {
+      "matchPackagePrefixes": [
+        "k8s.gcr.io/autoscaling/vpa"
+      ],
+      "groupName": "k8s.gcr.io/autoscaling/vpa"
+    },
     {
       "matchPaths": [
         ".github/workflows/**"
@@ -30,6 +46,28 @@
         "minor"
       ],
       "enabled": false
+    },
+    {
+      "matchPaths": [
+        "charts/*/Chart.yaml",
+        "charts/*/values.yaml"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "bumpVersion": "major",
+      "semanticCommitType": "feat!"
+    },
+    {
+      "matchPaths": [
+        "charts/*/Chart.yaml",
+        "charts/*/values.yaml"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "bumpVersion": "minor",
+      "semanticCommitType": "feat"
     },
     {
       "matchUpdateTypes": [

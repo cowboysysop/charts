@@ -22,7 +22,7 @@ replicaCount: 1
 
 image:
   repository: ianw/quickchart
-  tag: v1.5.0
+  tag: v1.7.1
   pullPolicy: IfNotPresent
 
 pdb:

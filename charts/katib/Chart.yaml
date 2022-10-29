@@ -10,13 +10,13 @@ name: katib
 sources:
   - https://github.com/kubeflow/katib
   - https://github.com/cowboysysop/charts/tree/master/charts/katib
-version: 2.1.0
+version: 2.2.0
 dependencies:
   - name: common
     version: 1.16.1
     repository: https://charts.bitnami.com/bitnami/
   - name: mariadb
-    version: 11.1.0
+    version: 11.3.3
     repository: https://charts.bitnami.com/bitnami/
     condition: mariadb.enabled
 annotations:

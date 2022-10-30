@@ -284,21 +284,27 @@ postgresql:
   # Whether to use the PostgreSQL chart
   enabled: false
 
-  # PostgreSQL user
-  postgresqlUsername: lighthouse-ci
+  auth:
+    # PostgreSQL user
+    username: lighthouse-ci
 
-  # PostgreSQL password
-  postgresqlPassword: lighthouse-ci
+    # PostgreSQL password
+    password: lighthouse-ci
 
-  # Name of existing Secret to use
-  existingSecret: ""
+    # PostgreSQL database
+    database: lighthouse-ci
 
-  # PostgreSQL database
-  postgresqlDatabase: lighthouse-ci
+    # Name of existing Secret to use
+    existingSecret: ""
 
-  service:
-    # PostgreSQL port
-    port: 5432
+  # PostgreSQL architecture
+  architecture: standalone
+
+  primary:
+    service:
+      ports:
+        # PostgreSQL port
+        postgresql: 5432
 
 externalPostgresql:
   # Whether to use an external PostgreSQL
@@ -320,7 +326,7 @@ externalPostgresql:
   existingSecret: ""
 
   # Name of the key in existing Secret that contains PostgreSQL password
-  existingSecretKeyPassword: postgresql-password
+  existingSecretKeyPassword: password
 
   # External PostgreSQL database
   database: lighthouse-ci

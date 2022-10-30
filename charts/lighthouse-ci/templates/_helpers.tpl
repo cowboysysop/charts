@@ -190,7 +190,16 @@ PostgreSQL host
 */}}
 {{- define "lighthouse-ci.postgresql.host" -}}
 {{- if .Values.postgresql.enabled -}}
+{{- if eq .Values.postgresql.architecture "replication" -}}
+    {{- if .Values.postgresql.fullnameOverride -}}
+    {{- printf "%s-%s" .Values.postgresql.fullnameOverride "primary" | trunc 63 | trimSuffix "-" -}}
+    {{- else -}}
+    {{- $name := default "postgresql" .Values.postgresql.nameOverride -}}
+    {{- printf "%s-%s-%s" .Release.Name $name "primary" | trunc 63 | trimSuffix "-" -}}
+    {{- end -}}
+{{- else -}}
     {{ include "lighthouse-ci.postgresql.fullname" . }}
+{{- end -}}
 {{- else -}}
     {{ .Values.externalPostgresql.host }}
 {{- end -}}
@@ -201,7 +210,7 @@ PostgreSQL port
 */}}
 {{- define "lighthouse-ci.postgresql.port" -}}
 {{- if .Values.postgresql.enabled -}}
-    {{ .Values.postgresql.service.port }}
+    {{ .Values.postgresql.primary.service.ports.postgresql }}
 {{- else -}}
     {{ .Values.externalPostgresql.port }}
 {{- end -}}
@@ -212,7 +221,7 @@ PostgreSQL user
 */}}
 {{- define "lighthouse-ci.postgresql.username" -}}
 {{- if .Values.postgresql.enabled -}}
-    {{ .Values.postgresql.postgresqlUsername }}
+    {{ .Values.postgresql.auth.username }}
 {{- else -}}
     {{ .Values.externalPostgresql.username }}
 {{- end -}}
@@ -238,7 +247,7 @@ PostgreSQL password secret key name
 {{- if .Values.externalPostgresql.existingSecret -}}
     {{ .Values.externalPostgresql.existingSecretKeyPassword }}
 {{- else -}}
-    postgresql-password
+    password
 {{- end -}}
 {{- end -}}
 
@@ -247,7 +256,7 @@ PostgreSQL database
 */}}
 {{- define "lighthouse-ci.postgresql.database" -}}
 {{- if .Values.postgresql.enabled -}}
-    {{ .Values.postgresql.postgresqlDatabase }}
+    {{ .Values.postgresql.auth.database }}
 {{- else -}}
     {{ .Values.externalPostgresql.database }}
 {{- end -}}

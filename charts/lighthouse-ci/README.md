@@ -43,6 +43,13 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 4.0.0
+
+The PostgreSQL subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1200
+- https://docs.bitnami.com/kubernetes/infrastructure/postgresql/administration/upgrade/#to-1100
+
 ### Upgrading to version 3.0.0
 
 The MariaDB subchart has been updated to a major release, see these upgrade instructions:
@@ -175,22 +182,23 @@ The following tables lists all the configurable parameters expose by the chart a
 
 ### PostgreSQL parameters
 
-| Name                                           | Description                                                          | Default               |
-|------------------------------------------------|----------------------------------------------------------------------|-----------------------|
-| `postgresql.enabled`                           | Whether to use the PostgreSQL chart                                  | `false`               |
-| `postgresql.postgresqlUsername`                | PostgreSQL user                                                      | `lighthouse-ci`       |
-| `postgresql.postgresqlPassword`                | PostgreSQL password                                                  | `lighthouse-ci`       |
-| `postgresql.existingSecret`                    | Name of existing Secret to use                                       | `nil`                 |
-| `postgresql.postgresqlDatabase`                | PostgreSQL database                                                  | `lighthouse-ci`       |
-| `postgresql.service.port`                      | PostgreSQL port                                                      | `5432`                |
-| `externalPostgresql.enabled`                   | Whether to use an external PostgreSQL                                | `false`               |
-| `externalPostgresql.host`                      | External PostgreSQL host                                             | `postgresql`          |
-| `externalPostgresql.port`                      | External PostgreSQL port                                             | `5432`                |
-| `externalPostgresql.username`                  | External PostgreSQL user                                             | `lighthouse-ci`       |
-| `externalPostgresql.password`                  | External PostgreSQL password                                         | `lighthouse-ci`       |
-| `externalPostgresql.existingSecret`            | Name of existing Secret to use                                       | `nil`                 |
-| `externalPostgresql.existingSecretKeyPassword` | Name of the key in existing Secret that contains PostgreSQL password | `postgresql-password` |
-| `externalPostgresql.database`                  | External PostgreSQL database                                         | `lighthouse-ci`       |
+| Name                                           | Description                                                          | Default         |
+|------------------------------------------------|----------------------------------------------------------------------|-----------------|
+| `postgresql.enabled`                           | Whether to use the PostgreSQL chart                                  | `false`         |
+| `postgresql.auth.username`                     | PostgreSQL user                                                      | `lighthouse-ci` |
+| `postgresql.auth.password`                     | PostgreSQL password                                                  | `lighthouse-ci` |
+| `postgresql.auth.database`                     | PostgreSQL database                                                  | `lighthouse-ci` |
+| `postgresql.auth.existingSecret`               | Name of existing Secret to use                                       | `nil`           |
+| `postgresql.architecture`                      | PostgreSQL architecture                                              | `standalone`    |
+| `postgresql.primary.service.ports.postgresql`  | PostgreSQL port                                                      | `5432`          |
+| `externalPostgresql.enabled`                   | Whether to use an external PostgreSQL                                | `false`         |
+| `externalPostgresql.host`                      | External PostgreSQL host                                             | `postgresql`    |
+| `externalPostgresql.port`                      | External PostgreSQL port                                             | `5432`          |
+| `externalPostgresql.username`                  | External PostgreSQL user                                             | `lighthouse-ci` |
+| `externalPostgresql.password`                  | External PostgreSQL password                                         | `lighthouse-ci` |
+| `externalPostgresql.existingSecret`            | Name of existing Secret to use                                       | `nil`           |
+| `externalPostgresql.existingSecretKeyPassword` | Name of the key in existing Secret that contains PostgreSQL password | `password`      |
+| `externalPostgresql.database`                  | External PostgreSQL database                                         | `lighthouse-ci` |
 
 ### Tests parameters
 

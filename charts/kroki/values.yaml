@@ -22,7 +22,7 @@ replicaCount: 1
 
 image:
   repository: yuzutech/kroki
-  tag: 0.15.0
+  tag: 0.18.0
   pullPolicy: IfNotPresent
 
 pdb:
@@ -187,7 +187,7 @@ blockdiag:
 
   image:
     repository: yuzutech/kroki-blockdiag
-    tag: 0.15.0
+    tag: 0.18.0
     pullPolicy: IfNotPresent
 
   securityContext: {}
@@ -230,7 +230,50 @@ bpmn:
 
   image:
     repository: yuzutech/kroki-bpmn
-    tag: 0.15.0
+    tag: 0.18.0
+    pullPolicy: IfNotPresent
+
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  extraArgs: {}
+    # name: ""
+
+  # Additional container environment variables
+  extraEnvVars: []
+  #  - name: MY-NAME
+  #    value: "MY-VALUE"
+
+  # Name of existing ConfigMap containing additional container environment variables
+  extraEnvVarsCM:
+
+  # Name of existing Secret containing additional container environment variables
+  extraEnvVarsSecret:
+
+diagramsnet:
+  # Enable Diagrams.net diagramss
+  enabled: true
+
+  image:
+    repository: yuzutech/kroki-diagramsnet
+    tag: 0.18.0
     pullPolicy: IfNotPresent
 
   securityContext: {}
@@ -273,7 +316,7 @@ excalidraw:
 
   image:
     repository: yuzutech/kroki-excalidraw
-    tag: 0.15.0
+    tag: 0.18.0
     pullPolicy: IfNotPresent
 
   securityContext: {}
@@ -316,7 +359,7 @@ mermaid:
 
   image:
     repository: yuzutech/kroki-mermaid
-    tag: 0.15.0
+    tag: 0.18.0
     pullPolicy: IfNotPresent
 
   securityContext: {}

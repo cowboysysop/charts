@@ -169,6 +169,40 @@ spec:
           resources:
             {{- toYaml .Values.bpmn.resources | nindent 12 }}
         {{- end }}
+        {{- if .Values.diagramsnet.enabled }}
+        - name: diagramsnet
+          securityContext:
+            {{- toYaml .Values.diagramsnet.securityContext | nindent 12 }}
+          image: "{{ .Values.diagramsnet.image.repository }}:{{ .Values.diagramsnet.image.tag }}"
+          imagePullPolicy: {{ .Values.diagramsnet.image.pullPolicy }}
+          {{- with .Values.diagramsnet.extraArgs }}
+          args:
+            {{- range $key, $value := . }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          {{- if .Values.diagramsnet.extraEnvVars }}
+          env:
+            {{- include "common.tplvalues.render" (dict "value" .Values.diagramsnet.extraEnvVars "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if or .Values.diagramsnet.extraEnvVarsCM .Values.diagramsnet.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.diagramsnet.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.diagramsnet.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.diagramsnet.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.diagramsnet.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8003
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.diagramsnet.resources | nindent 12 }}
+        {{- end }}
         {{- if .Values.excalidraw.enabled }}
         - name: excalidraw
           securityContext:

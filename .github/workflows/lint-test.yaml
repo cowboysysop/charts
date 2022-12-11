@@ -29,7 +29,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4.3.1
         with:
-          python-version: 3.11.0 # renovate: python
+          python-version: 3.11.1 # renovate: python
 
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.3.1
@@ -73,7 +73,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4.3.1
         with:
-          python-version: 3.11.0 # renovate: python
+          python-version: 3.11.1 # renovate: python
 
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.3.1

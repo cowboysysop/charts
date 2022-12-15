@@ -9,7 +9,7 @@ name: training-operator
 sources:
   - https://github.com/kubeflow/training-operator
   - https://github.com/cowboysysop/charts/tree/master/charts/training-operator
-version: 1.2.0
+version: 1.2.1
 dependencies:
   - name: common
     version: 1.16.1

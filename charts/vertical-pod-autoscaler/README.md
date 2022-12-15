@@ -17,7 +17,7 @@ This chart bootstraps a Vertical Pod Autoscaler deployment on a [Kubernetes](htt
 
 ## Prerequisites
 
-- Kubernetes >= 1.21
+- Kubernetes >= 1.22
 - Metrics Server >= 0.2 (you can use the [bitnami/metrics-server](https://artifacthub.io/packages/helm/bitnami/metrics-server) chart)
 - Helm >= 3.1
 
@@ -46,7 +46,7 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 ### Upgrading to version 6.0.0
 
-The application version is no more compatible with Kubernetes 1.19 and 1.20.
+The application version is no more compatible with Kubernetes 1.19, 1.20 and 1.21.
 
 ### Upgrading to version 5.0.0
 

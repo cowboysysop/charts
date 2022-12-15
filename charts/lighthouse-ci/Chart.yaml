@@ -10,7 +10,7 @@ name: lighthouse-ci
 sources:
   - https://github.com/GoogleChrome/lighthouse-ci
   - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
-version: 4.1.1
+version: 4.1.2
 dependencies:
   - name: common
     version: 1.16.1

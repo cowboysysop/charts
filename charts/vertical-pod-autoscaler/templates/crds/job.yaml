@@ -44,6 +44,8 @@ spec:
             - name: config
               mountPath: /config
               readOnly: true
+          resources:
+            {{- toYaml .Values.crds.resources | nindent 12 }}
       {{- with .Values.crds.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -559,6 +559,8 @@ crds:
 
   affinity: {}
 
+  resources: {}
+
 tests:
   image:
     # Image name

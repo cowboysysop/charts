@@ -22,7 +22,7 @@ replicaCount: 1
 
 image:
   repository: bencuk/kubeview
-  tag: 0.1.11
+  tag: 0.1.15
   pullPolicy: IfNotPresent
 
 pdb:

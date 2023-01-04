@@ -82,8 +82,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                                 | Description                                                                                           | Default                                          |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|--------------------------------------------------|
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                              |
-| `image.repository`                   | Image name                                                                                            | `bencuk/kubeview`                                |
-| `image.tag`                          | Image tag                                                                                             | `0.1.11`                                         |
+| `image.repository`                   | Image name                                                                                            | `ghcr.io/benc-uk/kubeview`                       |
+| `image.tag`                          | Image tag                                                                                             | `0.1.31`                                         |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                   |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                          |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                              |

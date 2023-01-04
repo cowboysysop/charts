@@ -21,8 +21,8 @@ extraDeploy: []
 replicaCount: 1
 
 image:
-  repository: bencuk/kubeview
-  tag: 0.1.15
+  repository: ghcr.io/benc-uk/kubeview
+  tag: 0.1.31
   pullPolicy: IfNotPresent
 
 pdb:

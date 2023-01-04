@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 0.1.11
+appVersion: 0.1.31
 description: Kubernetes cluster visualiser and graphical explorer
 home: https://github.com/benc-uk/kubeview
 icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
@@ -10,7 +10,7 @@ name: kubeview
 sources:
   - https://github.com/benc-uk/kubeview
   - https://github.com/cowboysysop/charts/tree/master/charts/kubeview
-version: 2.6.1
+version: 2.7.0
 dependencies:
   - name: common
     version: 1.16.1

@@ -26,7 +26,6 @@ rules:
   - apiGroups: [""]
     resources:
       - pods
-      - ingresses
       - configmaps
       - secrets
       - events
@@ -37,6 +36,10 @@ rules:
       - persistentvolumeclaims
       - resourcequotas
       - services
+    verbs: ["get", "list"]
+  - apiGroups: ["networking.k8s.io"]
+    resources:
+      - ingresses
     verbs: ["get", "list"]
   - nonResourceURLs: ["*"]
     verbs: ["get", "list"]

@@ -1544,6 +1544,32 @@ entries:
         url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
       kubeVersion: '>=1.19'
     apiVersion: v2
+    appVersion: 0.1.31
+    created: "2023-01-04T18:56:23.901506364Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Kubernetes cluster visualiser and graphical explorer
+    digest: 3f9ac115228c12e377fdaf91f7c660ea923e9082a00283047f0c8eb586681605
+    home: https://github.com/benc-uk/kubeview
+    icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubeview
+    sources:
+    - https://github.com/benc-uk/kubeview
+    - https://github.com/cowboysysop/charts/tree/master/charts/kubeview
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubeview-2.7.0/kubeview-2.7.0.tgz
+    version: 2.7.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
     appVersion: 0.1.11
     created: "2022-12-15T22:38:05.89622543Z"
     dependencies:
@@ -5959,4 +5985,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-01-04T17:35:15.652662199Z"
+generated: "2023-01-04T18:56:23.902431263Z"

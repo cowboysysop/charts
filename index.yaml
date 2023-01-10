@@ -8,6 +8,37 @@ entries:
       kubeVersion: '>=1.19'
     apiVersion: v2
     appVersion: 15.0.3
+    created: "2023-01-10T22:13:51.389129177Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 11.4.2
+    description: A modern software package to manage your company or foundation's
+      activity
+    digest: 69960ff7438593c93cce01f2926bf4332e9033a6a528fc46579fb24c7e9684ea
+    home: https://www.dolibarr.org/
+    icon: https://raw.githubusercontent.com/Dolibarr/dolibarr/develop/doc/images/dolibarr_256x256_color.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: dolibarr
+    sources:
+    - https://github.com/Dolibarr/dolibarr
+    - https://github.com/cowboysysop/charts/tree/master/charts/dolibarr
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/dolibarr-1.3.1/dolibarr-1.3.1.tgz
+    version: 1.3.1
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 15.0.3
     created: "2023-01-04T17:33:33.47217723Z"
     dependencies:
     - name: common
@@ -219,6 +250,36 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/dolibarr-1.0.0/dolibarr-1.0.0.tgz
     version: 1.0.0
   katib:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.12.0
+    created: "2023-01-10T22:13:51.576923663Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 11.4.2
+    description: A Kubernetes-native project for automated machine learning
+    digest: bc87c5ddca6372c2a8763cac9ddb64503e2830e07459b71bddf72656b467193b
+    home: https://github.com/kubeflow/katib
+    icon: https://raw.githubusercontent.com/kubeflow/katib/master/docs/images/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: katib
+    sources:
+    - https://github.com/kubeflow/katib
+    - https://github.com/cowboysysop/charts/tree/master/charts/katib
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/katib-2.3.1/katib-2.3.1.tgz
+    version: 2.3.1
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -625,6 +686,32 @@ entries:
       kubeVersion: '>=1.19 <=1.21'
     apiVersion: v2
     appVersion: 0.6.1
+    created: "2023-01-10T22:13:51.763851461Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Highly scalable and standards based Model Inference Platform on Kubernetes
+    digest: bb9ce2936b1a75fb7c55d00b2fd925f04f7046ec5b993535b7b0113e46b40584
+    home: https://kserve.github.io/website/
+    icon: https://raw.githubusercontent.com/kserve/artwork/main/icon/color/k-serve-icon-color.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kfserving
+    sources:
+    - https://github.com/kserve/kserve
+    - https://github.com/cowboysysop/charts/tree/master/charts/kfserving
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kfserving-1.3.1/kfserving-1.3.1.tgz
+    version: 1.3.1
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19 <=1.21'
+    apiVersion: v2
+    appVersion: 0.6.1
     created: "2022-09-17T14:53:23.522240978Z"
     dependencies:
     - name: common
@@ -842,6 +929,32 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kfserving-1.0.0/kfserving-1.0.0.tgz
     version: 1.0.0
   kroki:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.18.0
+    created: "2023-01-10T22:13:51.919957088Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Creates diagrams from textual descriptions
+    digest: 37617ae1a5e5f232fcf62c744dedfa965191f5ed5c09b9f7a3b5bc0269c61b0c
+    home: https://kroki.io/
+    icon: https://raw.githubusercontent.com/yuzutech/kroki.io/master/assets/favicon-196x196.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kroki
+    sources:
+    - https://github.com/yuzutech/kroki
+    - https://github.com/cowboysysop/charts/tree/master/charts/kroki
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kroki-1.3.2/kroki-1.3.2.tgz
+    version: 1.3.2
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -1125,6 +1238,31 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kroki-1.0.0/kroki-1.0.0.tgz
     version: 1.0.0
   kubebox:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.9.0
+    created: "2023-01-10T22:13:52.099246793Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Terminal and Web console for Kubernetes
+    digest: 84d51eb97f56cd1a2c0f9a79896e584e9d55ef7eaf2211592d6b69bef3b96a33
+    home: https://github.com/astefanutti/kubebox
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubebox
+    sources:
+    - https://github.com/astefanutti/kubebox
+    - https://github.com/cowboysysop/charts/tree/master/charts/kubebox
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubebox-2.7.2/kubebox-2.7.2.tgz
+    version: 2.7.2
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -1538,6 +1676,32 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubebox-1.0.0/kubebox-1.0.0.tgz
     version: 1.0.0
   kubeview:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.1.31
+    created: "2023-01-10T22:13:52.280269373Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Kubernetes cluster visualiser and graphical explorer
+    digest: 2a2c75ea9bb98c6eb13cb30ab591687ccfec73de8bf43b1a52a57dc11d014af9
+    home: https://github.com/benc-uk/kubeview
+    icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubeview
+    sources:
+    - https://github.com/benc-uk/kubeview
+    - https://github.com/cowboysysop/charts/tree/master/charts/kubeview
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubeview-2.7.1/kubeview-2.7.1.tgz
+    version: 2.7.1
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -2001,6 +2165,40 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
   lighthouse-ci:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.8.1
+    created: "2023-01-10T22:13:52.47374748Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 11.4.2
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami/
+      version: 12.1.7
+    description: Enables running a server to display Lighthouse CI results
+    digest: ebffdb16cf6b3fe82677664ffe6f6b45ca0c814d1088183bcece2072f2147cd7
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    sources:
+    - https://github.com/GoogleChrome/lighthouse-ci
+    - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-4.2.2/lighthouse-ci-4.2.2.tgz
+    version: 4.2.2
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -2957,6 +3155,32 @@ entries:
       kubeVersion: '>=1.19'
     apiVersion: v2
     appVersion: 2.1.1
+    created: "2023-01-10T22:13:52.656640734Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Add-on for Kubernetes that makes it easy to write and deploy custom
+      controllers
+    digest: 05f5a22172e4a78c1be0c73871839de6221763f42bc72a90a92c3f88a7126cd1
+    home: https://metacontroller.github.io/metacontroller/
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: metacontroller
+    sources:
+    - https://github.com/metacontroller/metacontroller
+    - https://github.com/cowboysysop/charts/tree/master/charts/metacontroller
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/metacontroller-1.2.2/metacontroller-1.2.2.tgz
+    version: 1.2.2
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 2.1.1
     created: "2022-12-15T22:38:06.173321765Z"
     dependencies:
     - name: common
@@ -3189,6 +3413,36 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/metacontroller-1.0.0/metacontroller-1.0.0.tgz
     version: 1.0.0
   mongo-express:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.54.0
+    created: "2023-01-10T22:13:52.839464089Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 13.6.2
+    description: Web-based MongoDB admin interface, written with Node.js and express
+    digest: f4b9f2ea20c64ac86397f7879cd39c4cbe70f3fa3f07530d97ba2df42fc6d16d
+    home: https://github.com/mongo-express/mongo-express
+    icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mongo-express
+    sources:
+    - https://github.com/mongo-express/mongo-express
+    - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mongo-express-2.8.1/mongo-express-2.8.1.tgz
+    version: 2.8.1
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -3827,6 +4081,31 @@ entries:
       kubeVersion: '>=1.19'
     apiVersion: v2
     appVersion: 0.3.0
+    created: "2023-01-10T22:13:53.009164727Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Makes it easy to run allreduce-style distributed training on Kubernetes
+    digest: 7184991df63dec411d1a96ce0cdac98c9f73c55a980e8b10ef3de95a03e30076
+    home: https://github.com/kubeflow/mpi-operator
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mpi-operator
+    sources:
+    - https://github.com/kubeflow/mpi-operator
+    - https://github.com/cowboysysop/charts/tree/master/charts/mpi-operator
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mpi-operator-1.2.2/mpi-operator-1.2.2.tgz
+    version: 1.2.2
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.3.0
     created: "2022-12-15T22:38:06.472061497Z"
     dependencies:
     - name: common
@@ -4096,6 +4375,31 @@ entries:
       kubeVersion: '>=1.19'
     apiVersion: v2
     appVersion: 1.4.0
+    created: "2023-01-10T22:13:53.182955704Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: A Kubernetes controller that spawns a notebook for a user
+    digest: 49161174344b6558db46d01e7c69f0aededdbe7ae4fdfaaeb8fea7c42e09ca61
+    home: https://github.com/kubeflow/kubeflow/tree/master/components/notebook-controller
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: notebook-controller
+    sources:
+    - https://github.com/kubeflow/kubeflow/tree/master/components/notebook-controller
+    - https://github.com/cowboysysop/charts/tree/master/charts/notebook-controller
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/notebook-controller-1.1.2/notebook-controller-1.1.2.tgz
+    version: 1.1.2
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 1.4.0
     created: "2022-12-15T22:38:06.607892939Z"
     dependencies:
     - name: common
@@ -4318,6 +4622,31 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/notebook-controller-1.0.0/notebook-controller-1.0.0.tgz
     version: 1.0.0
   quickchart:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 1.7.1
+    created: "2023-01-10T22:13:53.354474267Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Chart image and QR code web API
+    digest: 6e18d6df1c8c303ee8b6d63eae71b061a405852303e9451fa0044177e0829924
+    home: https://quickchart.io/
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: quickchart
+    sources:
+    - https://github.com/typpo/quickchart
+    - https://github.com/cowboysysop/charts/tree/master/charts/quickchart
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/quickchart-1.2.2/quickchart-1.2.2.tgz
+    version: 1.2.2
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -4570,6 +4899,32 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/quickchart-1.0.0/quickchart-1.0.0.tgz
     version: 1.0.0
   training-operator:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 1.3.0
+    created: "2023-01-10T22:13:53.530993997Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Makes it easy to run distributed or non-distributed TensorFlow/PyTorch/MXNet/XGBoost
+      jobs on Kubernetes
+    digest: 64016981380b9d983071b1e5e173c6097eaf1bc00a491d960e66964bc4d87aa8
+    home: https://github.com/kubeflow/training-operator
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: training-operator
+    sources:
+    - https://github.com/kubeflow/training-operator
+    - https://github.com/cowboysysop/charts/tree/master/charts/training-operator
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/training-operator-1.2.2/training-operator-1.2.2.tgz
+    version: 1.2.2
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -4830,6 +5185,33 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/training-operator-1.0.0/training-operator-1.0.0.tgz
     version: 1.0.0
   vertical-pod-autoscaler:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.22'
+    apiVersion: v2
+    appVersion: 0.12.0
+    created: "2023-01-10T22:13:53.712874091Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Set of components that automatically adjust the amount of CPU and
+      memory requested by pods running in the Kubernetes Cluster
+    digest: 99dcfcf81f3a3988b20a98122635a0cb9230d81a76bdc0468c25ae535cfedc90
+    home: https://github.com/kubernetes/autoscaler
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: vertical-pod-autoscaler
+    sources:
+    - https://github.com/kubernetes/autoscaler
+    - https://github.com/cowboysysop/charts/tree/master/charts/vertical-pod-autoscaler
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-6.0.3/vertical-pod-autoscaler-6.0.3.tgz
+    version: 6.0.3
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -5578,6 +5960,32 @@ entries:
       kubeVersion: '>=1.19'
     apiVersion: v2
     appVersion: 1.8.6
+    created: "2023-01-10T22:13:53.91526845Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: 828cb672e0afe6df8687f4ca63c599dda7f1dc7cfe0d219c955886d2f5ec2c95
+    home: https://github.com/traefik/whoami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: whoami
+    sources:
+    - https://github.com/traefik/whoami
+    - https://github.com/cowboysysop/charts/tree/master/charts/whoami
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/whoami-2.7.2/whoami-2.7.2.tgz
+    version: 2.7.2
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 1.8.6
     created: "2022-12-15T22:38:07.290200779Z"
     dependencies:
     - name: common
@@ -6019,4 +6427,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-01-08T02:42:26.067410555Z"
+generated: "2023-01-10T22:13:53.917036838Z"

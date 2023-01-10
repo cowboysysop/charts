@@ -132,7 +132,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                     | Description       | Default                      |
 |--------------------------|-------------------|------------------------------|
 | `tests.image.repository` | Image name        | `ghcr.io/cowboysysop/pytest` |
-| `tests.image.tag`        | Image tag         | `1.0.0`                      |
+| `tests.image.tag`        | Image tag         | `1.0.35`                    |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
 
 ### Setting parameters

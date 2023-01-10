@@ -9,7 +9,7 @@ name: metacontroller
 sources:
   - https://github.com/metacontroller/metacontroller
   - https://github.com/cowboysysop/charts/tree/master/charts/metacontroller
-version: 1.2.1
+version: 1.2.2
 dependencies:
   - name: common
     version: 1.16.1

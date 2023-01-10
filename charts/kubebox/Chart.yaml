@@ -9,7 +9,7 @@ name: kubebox
 sources:
   - https://github.com/astefanutti/kubebox
   - https://github.com/cowboysysop/charts/tree/master/charts/kubebox
-version: 2.7.1
+version: 2.7.2
 dependencies:
   - name: common
     version: 1.16.1

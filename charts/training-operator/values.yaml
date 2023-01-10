@@ -158,7 +158,7 @@ tests:
     repository: ghcr.io/cowboysysop/pytest
 
     # Image tag
-    tag: 1.0.0
+    tag: 1.0.35
 
     # Image pull policy
     pullPolicy: IfNotPresent

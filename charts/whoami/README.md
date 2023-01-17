@@ -83,7 +83,7 @@ The following tables lists all the configurable parameters expose by the chart a
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------|
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                            |
 | `image.repository`                   | Image name                                                                                            | `traefik/whoami`                               |
-| `image.tag`                          | Image tag                                                                                             | `v1.8.6`                                       |
+| `image.tag`                          | Image tag                                                                                             | `v1.8.7`                                       |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                 |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                        |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                            |

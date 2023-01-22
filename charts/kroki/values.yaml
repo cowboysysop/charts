@@ -22,7 +22,7 @@ replicaCount: 1
 
 image:
   repository: yuzutech/kroki
-  tag: 0.18.0
+  tag: 0.19.0
   pullPolicy: IfNotPresent
 
 pdb:
@@ -187,7 +187,7 @@ blockdiag:
 
   image:
     repository: yuzutech/kroki-blockdiag
-    tag: 0.18.0
+    tag: 0.19.0
     pullPolicy: IfNotPresent
 
   securityContext: {}
@@ -230,7 +230,7 @@ bpmn:
 
   image:
     repository: yuzutech/kroki-bpmn
-    tag: 0.18.0
+    tag: 0.19.0
     pullPolicy: IfNotPresent
 
   securityContext: {}
@@ -273,7 +273,7 @@ diagramsnet:
 
   image:
     repository: yuzutech/kroki-diagramsnet
-    tag: 0.18.0
+    tag: 0.19.0
     pullPolicy: IfNotPresent
 
   securityContext: {}
@@ -316,7 +316,7 @@ excalidraw:
 
   image:
     repository: yuzutech/kroki-excalidraw
-    tag: 0.18.0
+    tag: 0.19.0
     pullPolicy: IfNotPresent
 
   securityContext: {}
@@ -359,7 +359,7 @@ mermaid:
 
   image:
     repository: yuzutech/kroki-mermaid
-    tag: 0.18.0
+    tag: 0.19.0
     pullPolicy: IfNotPresent
 
   securityContext: {}

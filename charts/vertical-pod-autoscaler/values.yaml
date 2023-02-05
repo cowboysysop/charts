@@ -26,7 +26,7 @@ admissionController:
 
   image:
     repository: k8s.gcr.io/autoscaling/vpa-admission-controller
-    tag: 0.12.0
+    tag: 0.13.0
     pullPolicy: IfNotPresent
 
   pdb:
@@ -200,7 +200,7 @@ recommender:
 
   image:
     repository: k8s.gcr.io/autoscaling/vpa-recommender
-    tag: 0.12.0
+    tag: 0.13.0
     pullPolicy: IfNotPresent
 
   pdb:
@@ -382,7 +382,7 @@ updater:
 
   image:
     repository: k8s.gcr.io/autoscaling/vpa-updater
-    tag: 0.12.0
+    tag: 0.13.0
     pullPolicy: IfNotPresent
 
   pdb:

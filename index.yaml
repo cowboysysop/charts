@@ -8,6 +8,37 @@ entries:
       kubeVersion: '>=1.19'
     apiVersion: v2
     appVersion: 15.0.3
+    created: "2023-02-05T02:47:15.885398075Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 11.4.5
+    description: A modern software package to manage your company or foundation's
+      activity
+    digest: cfd6d61d16f5b6757441278dceedad53a99795ea5937c2403fc9a61b53c00c17
+    home: https://www.dolibarr.org/
+    icon: https://raw.githubusercontent.com/Dolibarr/dolibarr/develop/doc/images/dolibarr_256x256_color.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: dolibarr
+    sources:
+    - https://github.com/Dolibarr/dolibarr
+    - https://github.com/cowboysysop/charts/tree/master/charts/dolibarr
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/dolibarr-1.3.4/dolibarr-1.3.4.tgz
+    version: 1.3.4
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 15.0.3
     created: "2023-01-22T02:42:14.069532746Z"
     dependencies:
     - name: common
@@ -312,6 +343,36 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/dolibarr-1.0.0/dolibarr-1.0.0.tgz
     version: 1.0.0
   katib:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.12.0
+    created: "2023-02-05T02:47:16.051287504Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 11.4.5
+    description: A Kubernetes-native project for automated machine learning
+    digest: 4786f396a49e361cf422148971c12544cb08f3b9b0c8f87051287c3992dcca9f
+    home: https://github.com/kubeflow/katib
+    icon: https://raw.githubusercontent.com/kubeflow/katib/master/docs/images/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: katib
+    sources:
+    - https://github.com/kubeflow/katib
+    - https://github.com/cowboysysop/charts/tree/master/charts/katib
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/katib-2.3.4/katib-2.3.4.tgz
+    version: 2.3.4
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -2313,6 +2374,40 @@ entries:
     - https://github.com/cowboysysop/charts/releases/download/kubeview-1.0.0/kubeview-1.0.0.tgz
     version: 1.0.0
   lighthouse-ci:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.8.1
+    created: "2023-02-05T02:47:16.243032219Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 1.16.1
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 11.4.5
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami/
+      version: 12.1.11
+    description: Enables running a server to display Lighthouse CI results
+    digest: 9e435ee4d6a71ed8278608e00bc3a57b3bf66e2dc264b449f488522d33d7d8c3
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    sources:
+    - https://github.com/GoogleChrome/lighthouse-ci
+    - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-4.2.7/lighthouse-ci-4.2.7.tgz
+    version: 4.2.7
   - annotations:
       artifacthub.io/signKey: |
         fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
@@ -6827,4 +6922,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-01-29T03:14:28.396383888Z"
+generated: "2023-02-05T02:47:16.243994029Z"

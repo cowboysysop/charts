@@ -26,7 +26,7 @@ admissionController:
 
   image:
     repository: k8s.gcr.io/autoscaling/vpa-admission-controller
-    tag: 0.12.0
+    tag: 0.13.0
     pullPolicy: IfNotPresent
 
   pdb:
@@ -200,7 +200,7 @@ recommender:
 
   image:
     repository: k8s.gcr.io/autoscaling/vpa-recommender
-    tag: 0.12.0
+    tag: 0.13.0
     pullPolicy: IfNotPresent
 
   pdb:
@@ -307,6 +307,7 @@ recommender:
     # container-namespace-label: namespace
     # container-pod-name-label: pod_name
     # cpu-histogram-decay-half-life: 24h0m0s
+    # cpu-integer-post-processor-enabled: false
     # history-length: 8d
     # history-resolution: 1h
     # kube-api-burst: 10
@@ -317,6 +318,8 @@ recommender:
     # memory-saver: false
     # metric-for-pod-labels: up{job="kubernetes-pods"}
     # min-checkpoints: 10
+    # oom-bump-up-ratio: 1.2
+    # oom-min-bump-up-bytes: 104857600
     # pod-label-prefix: pod_label_
     # pod-name-label: kubernetes_pod_name
     # pod-namespace-label: kubernetes_namespace
@@ -327,7 +330,9 @@ recommender:
     # prometheus-query-timeout: 5m
     # recommendation-margin-fraction: 0.15
     # recommender-interval: 1m0s
+    # recommender-name: default
     # storage: checkpoint
+    # target-cpu-percentile: 0.9
     v: 2
     # vpa-object-namespace: ""
 
@@ -382,7 +387,7 @@ updater:
 
   image:
     repository: k8s.gcr.io/autoscaling/vpa-updater
-    tag: 0.12.0
+    tag: 0.13.0
     pullPolicy: IfNotPresent
 
   pdb:

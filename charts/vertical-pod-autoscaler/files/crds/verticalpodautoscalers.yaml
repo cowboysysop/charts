@@ -60,7 +60,7 @@ spec:
             type: object
           spec:
             description: 'Specification of the behavior of the autoscaler. More info:
-              https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status.'
+              https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.'
             properties:
               recommenders:
                 description: Recommender responsible for generating recommendation
@@ -172,6 +172,7 @@ spec:
                 - kind
                 - name
                 type: object
+                x-kubernetes-map-type: atomic
               updatePolicy:
                 description: Describes the rules on how changes are applied to the
                   pods. If not specified, all fields in the `PodUpdatePolicy` are
@@ -312,7 +313,9 @@ spec:
     served: true
     storage: true
     subresources: {}
-  - name: v1beta2
+  - deprecated: true
+    deprecationWarning: autoscaling.k8s.io/v1beta2 API is deprecated
+    name: v1beta2
     schema:
       openAPIV3Schema:
         description: VerticalPodAutoscaler is the configuration for a vertical pod
@@ -333,7 +336,7 @@ spec:
             type: object
           spec:
             description: 'Specification of the behavior of the autoscaler. More info:
-              https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status.'
+              https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.'
             properties:
               resourcePolicy:
                 description: Controls how the autoscaler computes recommended resources.
@@ -411,6 +414,7 @@ spec:
                 - kind
                 - name
                 type: object
+                x-kubernetes-map-type: atomic
               updatePolicy:
                 description: Describes the rules on how changes are applied to the
                   pods. If not specified, all fields in the `PodUpdatePolicy` are

@@ -22,7 +22,7 @@ replicaCount: 1
 
 image:
   repository: patrickhulce/lhci-server
-  tag: 0.8.1
+  tag: 0.11.0
   pullPolicy: IfNotPresent
 
 pdb:

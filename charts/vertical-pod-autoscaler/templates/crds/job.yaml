@@ -26,14 +26,11 @@ spec:
         {{- end }}
       {{- end }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.crds.image ) "global" .Values.global ) | nindent 6 }}
       serviceAccountName: {{ include "vertical-pod-autoscaler.crds.fullname" . }}
       containers:
         - name: kubectl
-          image: "{{ .Values.crds.image.repository }}:{{ .Values.crds.image.tag }}"
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.crds.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.crds.image.pullPolicy }}
           args:
             - apply

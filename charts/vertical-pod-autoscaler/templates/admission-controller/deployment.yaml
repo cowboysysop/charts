@@ -36,10 +36,7 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
     spec:
-    {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+      {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.admissionController.image ) "global" .Values.global ) | nindent 6 }}
       {{- if .Values.admissionController.priorityClassName }}
       priorityClassName: {{ .Values.admissionController.priorityClassName | quote }}
       {{- end }}
@@ -50,7 +47,7 @@ spec:
         - name: admission-controller
           securityContext:
             {{- toYaml .Values.admissionController.securityContext | nindent 12 }}
-          image: "{{ .Values.admissionController.image.repository }}:{{ .Values.admissionController.image.tag }}"
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.admissionController.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.admissionController.image.pullPolicy }}
           args:
             - --client-ca-file=/tls-secret/ca.crt

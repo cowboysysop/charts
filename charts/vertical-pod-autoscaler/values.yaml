@@ -2,10 +2,16 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  # Global Docker image registry
+  imageRegistry: ""
+
+  # Global Docker registry secret names as an array
+  imagePullSecrets: []
+
 # Override Kubernetes version
 kubeVersion: ""
 
-imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -25,8 +31,19 @@ admissionController:
   replicaCount: 1
 
   image:
-    repository: k8s.gcr.io/autoscaling/vpa-admission-controller
+    # Image registry
+    registry: registry.k8s.io
+
+    # Image repository
+    repository: autoscaling/vpa-admission-controller
+
+    # Image tag
     tag: 0.13.0
+
+    # Image digest
+    digest: ""
+
+    # Image pull policy
     pullPolicy: IfNotPresent
 
   pdb:
@@ -199,8 +216,19 @@ recommender:
   replicaCount: 1
 
   image:
-    repository: k8s.gcr.io/autoscaling/vpa-recommender
+    # Image registry
+    registry: registry.k8s.io
+
+    # Image repository
+    repository: autoscaling/vpa-recommender
+
+    # Image tag
     tag: 0.13.0
+
+    # Image digest
+    digest: ""
+
+    # Image pull policy
     pullPolicy: IfNotPresent
 
   pdb:
@@ -386,8 +414,19 @@ updater:
   replicaCount: 1
 
   image:
-    repository: k8s.gcr.io/autoscaling/vpa-updater
+    # Image registry
+    registry: registry.k8s.io
+
+    # Image repository
+    repository: autoscaling/vpa-updater
+
+    # Image tag
     tag: 0.13.0
+
+    # Image digest
+    digest: ""
+
+    # Image pull policy
     pullPolicy: IfNotPresent
 
   pdb:
@@ -546,11 +585,17 @@ updater:
 
 crds:
   image:
-    # Image name
+    # Image registry
+    registry: docker.io
+
+    # Image repository
     repository: bitnami/kubectl
 
     # Image tag
     tag: 1.23.1
+
+    # Image digest
+    digest: ""
 
     # Image pull policy
     pullPolicy: IfNotPresent
@@ -566,11 +611,17 @@ crds:
 
 tests:
   image:
-    # Image name
-    repository: ghcr.io/cowboysysop/pytest
+    # Image registry
+    registry: ghcr.io
+
+    # Image repository
+    repository: cowboysysop/pytest
 
     # Image tag
     tag: 1.0.35
+
+    # Image digest
+    digest: ""
 
     # Image pull policy
     pullPolicy: IfNotPresent

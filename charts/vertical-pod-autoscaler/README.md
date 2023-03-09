@@ -44,6 +44,13 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 7.0.0
+
+Some parameters related to image management have been modified:
+
+- Registry prefix in `image.repository` parameters is now configured in `image.registry`.
+- Parameter `imagePullSecrets` has been renamed `global.imagePullSecrets`.
+
 ### Upgrading to version 6.0.0
 
 The application version is no more compatible with Kubernetes 1.19, 1.20 and 1.21.
@@ -102,12 +109,18 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 
 The following tables lists all the configurable parameters expose by the chart and their default values.
 
+### Global parameters
+
+| Name                      | Description                                     | Default |
+|---------------------------|-------------------------------------------------|---------|
+| `global.imageRegistry`    | Global Docker image registry                    | `""`    |
+| `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]`    |
+
 ### Common parameters
 
 | Name                | Description                                                                                                  | Default |
 |---------------------|--------------------------------------------------------------------------------------------------------------|---------|
 | `kubeVersion`       | Override Kubernetes version                                                                                  | `""`    |
-| `imagePullSecrets`  | Docker registry secret names as an array                                                                     | `[]`    |
 | `nameOverride`      | Partially override `vertical-pod-autoscaler.fullname` template with a string (will prepend the release name) | `nil`   |
 | `fullnameOverride`  | Fully override `vertical-pod-autoscaler.fullname` template with a string                                     | `nil`   |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                                   | `{}`    |
@@ -120,8 +133,10 @@ The following tables lists all the configurable parameters expose by the chart a
 |----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
 | `admissionController.enabled`                                  | Enable the component                                                                                  | `true`                                                                              |
 | `admissionController.replicaCount`                             | Number of replicas                                                                                    | `1`                                                                                 |
-| `admissionController.image.repository`                         | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-admission-controller`                                   |
+| `admissionController.image.registry`                           | Image registry                                                                                        | `registry.k8s.io`                                                                   |
+| `admissionController.image.repository`                         | Image repository                                                                                      | `autoscaling/vpa-admission-controller`                                              |
 | `admissionController.image.tag`                                | Image tag                                                                                             | `0.13.0`                                                                            |
+| `admissionController.image.digest`                             | Image digest                                                                                          | `""`                                                                                |
 | `admissionController.image.pullPolicy`                         | Image pull policy                                                                                     | `IfNotPresent`                                                                      |
 | `admissionController.pdb.create`                               | Specifies whether a pod disruption budget should be created                                           | `false`                                                                             |
 | `admissionController.pdb.minAvailable`                         | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                                 |
@@ -179,8 +194,10 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                                                           | Description                                                                                           | Default                                                                     |
 |----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
 | `recommender.replicaCount`                                     | Number of replicas                                                                                    | `1`                                                                         |
-| `recommender.image.repository`                                 | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-recommender`                                    |
+| `recommender.image.registry`                                   | Image registry                                                                                        | `registry.k8s.io`                                                           |
+| `recommender.image.repository`                                 | Image repository                                                                                      | `autoscaling/vpa-recommender`                                               |
 | `recommender.image.tag`                                        | Image tag                                                                                             | `0.13.0`                                                                    |
+| `recommender.image.digest`                                     | Image digest                                                                                          | `""`                                                                        |
 | `recommender.image.pullPolicy`                                 | Image pull policy                                                                                     | `IfNotPresent`                                                              |
 | `recommender.pdb.create`                                       | Specifies whether a pod disruption budget should be created                                           | `false`                                                                     |
 | `recommender.pdb.minAvailable`                                 | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                         |
@@ -232,8 +249,10 @@ The following tables lists all the configurable parameters expose by the chart a
 |----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
 | `updater.enabled`                                              | Enable the component                                                                                  | `true`                                                                  |
 | `updater.replicaCount`                                         | Number of replicas                                                                                    | `1`                                                                     |
-| `updater.image.repository`                                     | Image name                                                                                            | `k8s.gcr.io/autoscaling/vpa-updater`                                    |
+| `updater.image.registry`                                       | Image registry                                                                                        | `registry.k8s.io`                                                       |
+| `updater.image.repository`                                     | Image repository                                                                                      | `autoscaling/vpa-updater`                                               |
 | `updater.image.tag`                                            | Image tag                                                                                             | `0.13.0`                                                                |
+| `updater.image.digest`                                         | Image digest                                                                                          | `""`                                                                    |
 | `updater.image.pullPolicy`                                     | Image pull policy                                                                                     | `IfNotPresent`                                                          |
 | `updater.pdb.create`                                           | Specifies whether a pod disruption budget should be created                                           | `false`                                                                 |
 | `updater.pdb.minAvailable`                                     | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                     |
@@ -281,23 +300,27 @@ The following tables lists all the configurable parameters expose by the chart a
 
 ### CRDs parameters
 
-| Name                    | Description                    | Default           |
-|-------------------------|--------------------------------|-------------------|
-| `crds.image.repository` | Image name                     | `bitnami/kubectl` |
-| `crds.image.tag`        | Image tag                      | `1.23.1`          |
-| `crds.image.pullPolicy` | Image pull policy              | `IfNotPresent`    |
-| `crds.podAnnotations`   | Additional pod annotations     | `{}`              |
-| `crds.nodeSelector`     | Node labels for pod assignment | `{}`              |
-| `crds.tolerations`      | Tolerations for pod assignment | `[]`              |
-| `crds.affinity`         | Map of node/pod affinities     | `{}`              |
+ | Name                    | Description                    | Default           |
+ |-------------------------|--------------------------------|-------------------|
+ | `crds.image.registry`   | Image registry                 | `docker.io`       |
+ | `crds.image.repository` | Image repository               | `bitnami/kubectl` |
+ | `crds.image.tag`        | Image tag                      | `1.23.1`          |
+ | `crds.image.digest`     | Image digest                   | `""`              |
+ | `crds.image.pullPolicy` | Image pull policy              | `IfNotPresent`    |
+ | `crds.podAnnotations`   | Additional pod annotations     | `{}`              |
+ | `crds.nodeSelector`     | Node labels for pod assignment | `{}`              |
+ | `crds.tolerations`      | Tolerations for pod assignment | `[]`              |
+ | `crds.affinity`         | Map of node/pod affinities     | `{}`              |
 
 ### Tests parameters
 
-| Name                     | Description       | Default                      |
-|--------------------------|-------------------|------------------------------|
-| `tests.image.repository` | Image name        | `ghcr.io/cowboysysop/pytest` |
-| `tests.image.tag`        | Image tag         | `1.0.35`                    |
-| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
+| Name                     | Description       | Default              |
+|--------------------------|-------------------|----------------------|
+| `tests.image.registry`   | Image registry    | `ghcr.io`            |
+| `tests.image.repository` | Image repository  | `cowboysysop/pytest` |
+| `tests.image.tag`        | Image tag         | `1.0.35`             |
+| `tests.image.digest`     | Image digest      | `""`                 |
+| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`       |
 
 ### Setting parameters
 

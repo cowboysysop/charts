@@ -125,6 +125,9 @@ admissionController:
     # Minimum consecutive successes for the readiness probe to be considered successful after having failed
     successThreshold: 1
 
+  # Port used to communicate with the kube-apiserver
+  httpsContainerPort: 8000
+
   service:
     # Service annotations
     annotations: {}

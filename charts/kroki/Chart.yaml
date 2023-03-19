@@ -10,10 +10,10 @@ name: kroki
 sources:
   - https://github.com/yuzutech/kroki
   - https://github.com/cowboysysop/charts/tree/master/charts/kroki
-version: 1.4.0
+version: 1.5.0
 dependencies:
   - name: common
-    version: 1.16.1
+    version: 1.17.1
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

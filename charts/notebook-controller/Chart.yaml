@@ -9,10 +9,10 @@ name: notebook-controller
 sources:
   - https://github.com/kubeflow/kubeflow/tree/master/components/notebook-controller
   - https://github.com/cowboysysop/charts/tree/master/charts/notebook-controller
-version: 1.1.2
+version: 1.2.0
 dependencies:
   - name: common
-    version: 1.16.1
+    version: 1.17.1
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

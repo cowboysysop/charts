@@ -10,13 +10,13 @@ name: dolibarr
 sources:
   - https://github.com/Dolibarr/dolibarr
   - https://github.com/cowboysysop/charts/tree/master/charts/dolibarr
-version: 1.4.1
+version: 1.4.2
 dependencies:
   - name: common
     version: 1.16.1
     repository: https://charts.bitnami.com/bitnami/
   - name: mariadb
-    version: 11.5.3
+    version: 11.5.4
     repository: https://charts.bitnami.com/bitnami/
     condition: mariadb.enabled
 annotations:

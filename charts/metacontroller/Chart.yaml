@@ -9,10 +9,10 @@ name: metacontroller
 sources:
   - https://github.com/metacontroller/metacontroller
   - https://github.com/cowboysysop/charts/tree/master/charts/metacontroller
-version: 1.2.2
+version: 2.0.0
 dependencies:
   - name: common
-    version: 1.16.1
+    version: 2.2.4
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

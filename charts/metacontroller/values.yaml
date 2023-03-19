@@ -22,7 +22,7 @@ replicaCount: 1
 
 image:
   repository: metacontrollerio/metacontroller
-  tag: v2.1.1
+  tag: v4.7.9
   pullPolicy: IfNotPresent
 
 pdb:

@@ -1,6 +1,9 @@
 {
   "bumpVersion": "patch",
   "dependencyDashboard": true,
+  "ignorePaths": [
+    "archives/**"
+  ],
   "semanticCommits": "enabled",
   "semanticCommitScope": null,
   "semanticCommitType": "fix",

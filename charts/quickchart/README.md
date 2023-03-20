@@ -43,6 +43,13 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 2.0.0
+
+Some parameters related to image management have been modified:
+
+- Registry prefix in `image.repository` parameters is now configured in `image.registry`.
+- Parameter `imagePullSecrets` has been renamed `global.imagePullSecrets`.
+
 ## Uninstalling
 
 Uninstall the `my-release` deployment using:
@@ -59,12 +66,18 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 The following tables lists all the configurable parameters expose by the chart and their default values.
 
+### Global parameters
+
+| Name                      | Description                                     | Default |
+|---------------------------|-------------------------------------------------|---------|
+| `global.imageRegistry`    | Global Docker image registry                    | `""`    |
+| `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]`    |
+
 ### Common parameters
 
 | Name                | Description                                                                                     | Default |
 |---------------------|-------------------------------------------------------------------------------------------------|---------|
 | `kubeVersion`       | Override Kubernetes version                                                                     | `""`    |
-| `imagePullSecrets`  | Docker registry secret names as an array                                                        | `[]`    |
 | `nameOverride`      | Partially override `quickchart.fullname` template with a string (will prepend the release name) | `nil`   |
 | `fullnameOverride`  | Fully override `quickchart.fullname` template with a string                                     | `nil`   |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                      | `{}`    |
@@ -76,8 +89,10 @@ The following tables lists all the configurable parameters expose by the chart a
 | Name                                 | Description                                                                                           | Default                                            |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------|----------------------------------------------------|
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                                |
-| `image.repository`                   | Image name                                                                                            | `ianw/quickchart`                                  |
+| `image.registry`                     | Image registry                                                                                        | `docker.io`                                        |
+| `image.repository`                   | Image repository                                                                                      | `ianw/quickchart`                                  |
 | `image.tag`                          | Image tag                                                                                             | `v1.5.0`                                           |
+| `image.digest`                       | Image digest                                                                                          | `""`                                               |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                     |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                            |
 | `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                |
@@ -129,11 +144,13 @@ The following tables lists all the configurable parameters expose by the chart a
 
 ### Tests parameters
 
-| Name                     | Description       | Default                      |
-|--------------------------|-------------------|------------------------------|
-| `tests.image.repository` | Image name        | `ghcr.io/cowboysysop/pytest` |
-| `tests.image.tag`        | Image tag         | `1.0.35`                    |
-| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`               |
+| Name                     | Description       | Default              |
+|--------------------------|-------------------|----------------------|
+| `tests.image.registry`   | Image registry    | `ghcr.io`            |
+| `tests.image.repository` | Image repository  | `cowboysysop/pytest` |
+| `tests.image.tag`        | Image tag         | `1.0.35`             |
+| `tests.image.digest`     | Image digest      | `""`                 |
+| `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`       |
 
 ### Setting parameters
 

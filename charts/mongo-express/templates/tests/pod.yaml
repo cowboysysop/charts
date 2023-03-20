@@ -13,13 +13,10 @@ metadata:
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
     {{- end }}
 spec:
-  {{- with .Values.imagePullSecrets }}
-  imagePullSecrets:
-    {{- toYaml . | nindent 8 }}
-  {{- end }}
+  {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.tests.image ) "global" .Values.global ) | nindent 2 }}
   containers:
     - name: tests
-      image: "{{ .Values.tests.image.repository }}:{{ .Values.tests.image.tag }}"
+      image: {{ include "common.images.image" ( dict "imageRoot" .Values.tests.image "global" .Values.global ) }}
       imagePullPolicy: {{ .Values.tests.image.pullPolicy }}
       volumeMounts:
         - name: tests

@@ -13,18 +13,12 @@
 | Name                                                      | Description                                                                                                                  |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
 | [dolibarr](charts/dolibarr)                               | A modern software package to manage your company or foundation's activity                                                    |
-| [katib](charts/katib)                                     | A Kubernetes-native project for automated machine learning                                                                   |
-| [kfserving](charts/kfserving)                             | Highly scalable and standards based Model Inference Platform on Kubernetes                                                   |
 | [kroki](charts/kroki)                                     | Creates diagrams from textual descriptions                                                                                   |
 | [kubebox](charts/kubebox)                                 | Terminal and Web console for Kubernetes                                                                                      |
 | [kubeview](charts/kubeview)                               | Kubernetes cluster visualiser and graphical explorer                                                                         |
 | [lighthouse-ci](charts/lighthouse-ci)                     | Enables running a server to display Lighthouse CI results                                                                    |
-| [metacontroller](charts/metacontroller)                   | Add-on for Kubernetes that makes it easy to write and deploy custom controllers                                              |
 | [mongo-express](charts/mongo-express)                     | Web-based MongoDB admin interface, written with Node.js and express                                                          |
-| [mpi-operator](charts/mpi-operator)                       | Makes it easy to run allreduce-style distributed training on Kubernetes                                                      |
-| [notebook-controller](charts/notebook-controller)         | A Kubernetes controller that spawns a notebook for a user on Kubernetes                                                      |
 | [quickchart](charts/quickchart)                           | Chart image and QR code web API                                                                                              |
-| [training-operator](charts/training-operator)             | Makes it easy to run distributed or non-distributed TensorFlow/PyTorch/MXNet/XGBoost jobs on Kubernetes                      |
 | [vertical-pod-autoscaler](charts/vertical-pod-autoscaler) | Set of components that automatically adjust the amount of CPU and memory requested by pods running in the Kubernetes Cluster |
 | [whoami](charts/whoami)                                   | Tiny Go webserver that prints os information and HTTP request to output                                                      |
 

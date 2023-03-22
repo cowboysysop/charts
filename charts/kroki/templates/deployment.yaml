@@ -36,10 +36,7 @@ spec:
         {{- end }}
       {{- end }}
     spec:
-    {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+      {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.image ) "global" .Values.global ) | nindent 6 }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
@@ -50,7 +47,7 @@ spec:
         - name: kroki
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- with .Values.extraArgs }}
           args:
@@ -105,7 +102,7 @@ spec:
         - name: blockdiag
           securityContext:
             {{- toYaml .Values.blockdiag.securityContext | nindent 12 }}
-          image: "{{ .Values.blockdiag.image.repository }}:{{ .Values.blockdiag.image.tag }}"
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.blockdiag.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.blockdiag.image.pullPolicy }}
           {{- with .Values.blockdiag.extraArgs }}
           args:
@@ -139,7 +136,7 @@ spec:
         - name: bpmn
           securityContext:
             {{- toYaml .Values.bpmn.securityContext | nindent 12 }}
-          image: "{{ .Values.bpmn.image.repository }}:{{ .Values.bpmn.image.tag }}"
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.bpmn.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.bpmn.image.pullPolicy }}
           {{- with .Values.bpmn.extraArgs }}
           args:
@@ -173,7 +170,7 @@ spec:
         - name: diagramsnet
           securityContext:
             {{- toYaml .Values.diagramsnet.securityContext | nindent 12 }}
-          image: "{{ .Values.diagramsnet.image.repository }}:{{ .Values.diagramsnet.image.tag }}"
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.diagramsnet.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.diagramsnet.image.pullPolicy }}
           {{- with .Values.diagramsnet.extraArgs }}
           args:
@@ -207,7 +204,7 @@ spec:
         - name: excalidraw
           securityContext:
             {{- toYaml .Values.excalidraw.securityContext | nindent 12 }}
-          image: "{{ .Values.excalidraw.image.repository }}:{{ .Values.excalidraw.image.tag }}"
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.excalidraw.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.excalidraw.image.pullPolicy }}
           {{- with .Values.excalidraw.extraArgs }}
           args:
@@ -241,7 +238,7 @@ spec:
         - name: mermaid
           securityContext:
             {{- toYaml .Values.mermaid.securityContext | nindent 12 }}
-          image: "{{ .Values.mermaid.image.repository }}:{{ .Values.mermaid.image.tag }}"
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.mermaid.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.mermaid.image.pullPolicy }}
           {{- with .Values.mermaid.extraArgs }}
           args:

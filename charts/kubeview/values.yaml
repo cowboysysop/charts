@@ -2,10 +2,16 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+global:
+  # Global Docker image registry
+  imageRegistry: ""
+
+  # Global Docker registry secret names as an array
+  imagePullSecrets: []
+
 # Override Kubernetes version
 kubeVersion: ""
 
-imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
@@ -21,8 +27,19 @@ extraDeploy: []
 replicaCount: 1
 
 image:
-  repository: ghcr.io/benc-uk/kubeview
+  # Image registry
+  registry: ghcr.io
+
+  # Image repository
+  repository: benc-uk/kubeview
+
+  # Image tag
   tag: 0.1.31
+
+  # Image digest
+  digest: ""
+
+  # Image pull policy
   pullPolicy: IfNotPresent
 
 pdb:
@@ -180,11 +197,17 @@ extraEnvVarsSecret:
 
 tests:
   image:
-    # Image name
-    repository: ghcr.io/cowboysysop/pytest
+    # Image registry
+    registry: ghcr.io
+
+    # Image repository
+    repository: cowboysysop/pytest
 
     # Image tag
     tag: 1.0.35
+
+    # Image digest
+    digest: ""
 
     # Image pull policy
     pullPolicy: IfNotPresent

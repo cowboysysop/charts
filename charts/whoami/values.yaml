@@ -34,7 +34,7 @@ image:
   repository: traefik/whoami
 
   # Image tag
-  tag: v1.8.7
+  tag: v1.9.0
 
   # Image digest
   digest: ""

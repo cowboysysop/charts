@@ -97,7 +97,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                            |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`                                    |
 | `image.repository`                   | Image repository                                                                                      | `traefik/whoami`                               |
-| `image.tag`                          | Image tag                                                                                             | `v1.8.7`                                       |
+| `image.tag`                          | Image tag                                                                                             | `v1.9.0`                                       |
 | `image.digest`                       | Image digest                                                                                          | `""`                                           |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                 |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                        |

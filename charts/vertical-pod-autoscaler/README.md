@@ -304,7 +304,7 @@ The following tables lists all the configurable parameters expose by the chart a
  |-------------------------|--------------------------------|-------------------|
  | `crds.image.registry`   | Image registry                 | `docker.io`       |
  | `crds.image.repository` | Image repository               | `bitnami/kubectl` |
- | `crds.image.tag`        | Image tag                      | `1.23.1`          |
+ | `crds.image.tag`        | Image tag                      | `1.26.3`          |
  | `crds.image.digest`     | Image digest                   | `""`              |
  | `crds.image.pullPolicy` | Image pull policy              | `IfNotPresent`    |
  | `crds.podAnnotations`   | Additional pod annotations     | `{}`              |

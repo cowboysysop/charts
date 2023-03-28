@@ -39,7 +39,7 @@ jobs:
         run: |
           changed=$(ct list-changed)
           if [[ -n "$changed" ]]; then
-            echo "::set-output name=changed::true"
+            echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Run chart-testing (lint)
@@ -84,14 +84,14 @@ jobs:
         run: |
           pip install semantic_version
           excluded=$(python .github/excluded-charts.py --kube-version ${{ matrix.kubernetes }})
-          echo "::set-output name=excluded::$excluded"
+          echo "excluded=$excluded" >> $GITHUB_OUTPUT
 
       - name: Run chart-testing (list-changed)
         id: list-changed
         run: |
           changed=$(ct list-changed --config ct.yaml --excluded-charts "${{ steps.list-excluded.outputs.excluded }}")
           if [[ -n "$changed" ]]; then
-            echo "::set-output name=changed::true"
+            echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
       - name: Create kind cluster

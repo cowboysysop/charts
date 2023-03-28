@@ -32,7 +32,7 @@ jobs:
           python-version: 3.11.2 # renovate: python
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.3.1
+        uses: helm/chart-testing-action@v2.4.0
 
       - name: Run chart-testing (list-changed)
         id: list-changed
@@ -77,7 +77,7 @@ jobs:
           python-version: 3.11.2 # renovate: python
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.3.1
+        uses: helm/chart-testing-action@v2.4.0
 
       - name: List excluded charts
         id: list-excluded

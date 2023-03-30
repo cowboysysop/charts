@@ -10,21 +10,15 @@
   "packageRules": [
     {
       "matchPackagePrefixes": [
-        "kubeflowkatib/katib"
+        "docker.io/yuzutech/kroki"
       ],
-      "groupName": "kubeflowkatib/katib"
+      "groupName": "docker.io/yuzutech/kroki"
     },
     {
       "matchPackagePrefixes": [
-        "yuzutech/kroki"
+        "registry.k8s.io/autoscaling/vpa"
       ],
-      "groupName": "yuzutech/kroki"
-    },
-    {
-      "matchPackagePrefixes": [
-        "k8s.gcr.io/autoscaling/vpa"
-      ],
-      "groupName": "k8s.gcr.io/autoscaling/vpa"
+      "groupName": "registry.k8s.io/autoscaling/vpa"
     },
     {
       "matchPaths": [
@@ -89,7 +83,7 @@
       ],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "cert-manager",
-      "lookupNameTemplate": "jetstack/cert-manager"
+      "packageNameTemplate": "jetstack/cert-manager"
     },
     {
       "fileMatch": [
@@ -100,7 +94,7 @@
       ],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "helm",
-      "lookupNameTemplate": "helm/helm"
+      "packageNameTemplate": "helm/helm"
     },
     {
       "fileMatch": [
@@ -111,7 +105,7 @@
       ],
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "istio",
-      "lookupNameTemplate": "istio/istio"
+      "packageNameTemplate": "istio/istio"
     },
     {
       "fileMatch": [
@@ -133,7 +127,7 @@
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "knative-serving",
       "extractVersionTemplate": "^knative-(?<version>.+)$",
-      "lookupNameTemplate": "knative/serving"
+      "packageNameTemplate": "knative/serving"
     },
     {
       "fileMatch": [
@@ -145,7 +139,7 @@
       "datasourceTemplate": "github-releases",
       "depNameTemplate": "python",
       "extractVersionTemplate": "^(?<version>.+)-\\d+$",
-      "lookupNameTemplate": "actions/python-versions"
+      "packageNameTemplate": "actions/python-versions"
     }
   ]
 }

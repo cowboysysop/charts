@@ -2856,6 +2856,40 @@ entries:
       kubeVersion: '>=1.19'
     apiVersion: v2
     appVersion: 0.8.1
+    created: "2023-04-02T06:14:17.607513889Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 2.2.4
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 11.5.6
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami/
+      version: 12.2.7
+    description: Enables running a server to display Lighthouse CI results
+    digest: 74918d0daa8bfc8b36992c761674e70a19d3a3e5a6d15f4b54bcc30090aa81e2
+    home: https://github.com/GoogleChrome/lighthouse-ci
+    icon: https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/master/packages/server/src/ui/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: lighthouse-ci
+    sources:
+    - https://github.com/GoogleChrome/lighthouse-ci
+    - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/lighthouse-ci-5.1.2/lighthouse-ci-5.1.2.tgz
+    version: 5.1.2
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.8.1
     created: "2023-04-02T05:11:01.339361603Z"
     dependencies:
     - name: common
@@ -8079,4 +8113,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-04-02T05:11:01.340186712Z"
+generated: "2023-04-02T06:14:17.608141896Z"

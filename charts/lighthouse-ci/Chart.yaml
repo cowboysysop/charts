@@ -10,7 +10,7 @@ name: lighthouse-ci
 sources:
   - https://github.com/GoogleChrome/lighthouse-ci
   - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
-version: 5.1.1
+version: 5.1.2
 dependencies:
   - name: common
     version: 2.2.4
@@ -20,7 +20,7 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami/
     condition: mariadb.enabled
   - name: postgresql
-    version: 12.2.6
+    version: 12.2.7
     repository: https://charts.bitnami.com/bitnami/
     condition: postgresql.enabled
 annotations:

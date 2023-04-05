@@ -91,7 +91,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                           |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`                                   |
 | `image.repository`                   | Image repository                                                                                      | `yuzutech/kroki`                              |
-| `image.tag`                          | Image tag                                                                                             | `0.19.0`                                      |
+| `image.tag`                          | Image tag                                                                                             | `0.20.0`                                      |
 | `image.digest`                       | Image digest                                                                                          | `""`                                          |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                       |
@@ -149,7 +149,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `blockdiag.enabled`            | Enable BlockDiag diagrams                                                        | `true`                     |
 | `blockdiag.image.registry`     | Image registry                                                                   | `docker.io`                |
 | `blockdiag.image.repository`   | Image repository                                                                 | `yuzutech/kroki-blockdiag` |
-| `blockdiag.image.tag`          | Image tag                                                                        | `0.19.0`                   |
+| `blockdiag.image.tag`          | Image tag                                                                        | `0.20.0`                   |
 | `blockdiag.image.digest`       | Image digest                                                                     | `""`                       |
 | `blockdiag.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`             |
 | `blockdiag.securityContext`    | Container security context                                                       | `{}`                       |
@@ -166,7 +166,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `bpmn.enabled`            | Enable BPMN diagrams                                                             | `true`                |
 | `bpmn.image.registry`     | Image registry                                                                   | `docker.io`           |
 | `bpmn.image.repository`   | Image repository                                                                 | `yuzutech/kroki-bpmn` |
-| `bpmn.image.tag`          | Image tag                                                                        | `0.19.0`              |
+| `bpmn.image.tag`          | Image tag                                                                        | `0.20.0`              |
 | `bpmn.image.digest`       | Image digest                                                                     | `""`                  |
 | `bpmn.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`        |
 | `bpmn.securityContext`    | Container security context                                                       | `{}`                  |
@@ -183,7 +183,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `diagramsnet.enabled`            | Enable Diagrams.net diagrams                                                     | `true`                       |
 | `diagramsnet.image.registry`     | Image registry                                                                   | `docker.io`                  |
 | `diagramsnet.image.repository`   | Image repository                                                                 | `yuzutech/kroki-diagramsnet` |
-| `diagramsnet.image.tag`          | Image tag                                                                        | `0.19.0`                     |
+| `diagramsnet.image.tag`          | Image tag                                                                        | `0.20.0`                     |
 | `diagramsnet.image.digest`       | Image digest                                                                     | `""`                         |
 | `diagramsnet.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`               |
 | `diagramsnet.securityContext`    | Container security context                                                       | `{}`                         |
@@ -200,7 +200,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `excalidraw.enabled`            | Enable Excalidraw diagrams                                                       | `true`                      |
 | `excalidraw.image.registry`     | Image registry                                                                   | `docker.io`                 |
 | `excalidraw.image.repository`   | Image repository                                                                 | `yuzutech/kroki-excalidraw` |
-| `excalidraw.image.tag`          | Image tag                                                                        | `0.19.0`                    |
+| `excalidraw.image.tag`          | Image tag                                                                        | `0.20.0`                    |
 | `excalidraw.image.digest`       | Image digest                                                                     | `""`                        |
 | `excalidraw.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`              |
 | `excalidraw.securityContext`    | Container security context                                                       | `{}`                        |
@@ -217,7 +217,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `mermaid.enabled`            | Enable Mermaid diagrams                                                          | `true`                   |
 | `mermaid.image.registry`     | Image registry                                                                   | `docker.io`              |
 | `mermaid.image.repository`   | Image repository                                                                 | `yuzutech/kroki-mermaid` |
-| `mermaid.image.tag`          | Image tag                                                                        | `0.19.0`                 |
+| `mermaid.image.tag`          | Image tag                                                                        | `0.20.0`                 |
 | `mermaid.image.digest`       | Image digest                                                                     | `""`                     |
 | `mermaid.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`           |
 | `mermaid.securityContext`    | Container security context                                                       | `{}`                     |
@@ -226,6 +226,23 @@ The following tables lists all the configurable parameters expose by the chart a
 | `mermaid.extraEnvVars`       | Additional container environment variables                                       | `[]`                     |
 | `mermaid.extraEnvVarsCM`     | Name of existing ConfigMap containing additional container environment variables | `nil`                    |
 | `mermaid.extraEnvVarsSecret` | Name of existing Secret containing additional container environment variables    | `nil`                    |
+
+### WireViz parameters
+
+| Name                         | Description                                                                      | Default                  |
+|------------------------------|----------------------------------------------------------------------------------|--------------------------|
+| `wireviz.enabled`            | Enable WireViz diagrams                                                          | `true`                   |
+| `wireviz.image.registry`     | Image registry                                                                   | `docker.io`              |
+| `wireviz.image.repository`   | Image repository                                                                 | `yuzutech/kroki-wireviz` |
+| `wireviz.image.tag`          | Image tag                                                                        | `0.20.0`                 |
+| `wireviz.image.digest`       | Image digest                                                                     | `""`                     |
+| `wireviz.image.pullPolicy`   | Image pull policy                                                                | `IfNotPresent`           |
+| `wireviz.securityContext`    | Container security context                                                       | `{}`                     |
+| `wireviz.resources`          | CPU/Memory resource requests/limits                                              | `{}`                     |
+| `wireviz.extraArgs`          | Additional container arguments                                                   | `{}`                     |
+| `wireviz.extraEnvVars`       | Additional container environment variables                                       | `[]`                     |
+| `wireviz.extraEnvVarsCM`     | Name of existing ConfigMap containing additional container environment variables | `nil`                    |
+| `wireviz.extraEnvVarsSecret` | Name of existing Secret containing additional container environment variables    | `nil`                    |
 
 ### Tests parameters
 

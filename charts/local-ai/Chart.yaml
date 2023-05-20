@@ -1,0 +1,22 @@
+apiVersion: v2
+appVersion: 1.17.1
+description: A drop-in replacement REST API compatible with OpenAI API specifications for local inferencing
+home: https://github.com/go-skynet/LocalAI
+icon: https://user-images.githubusercontent.com/2420543/233147843-88697415-6dbf-4368-a862-ab217f9f7342.jpeg
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: local-ai
+sources:
+  - https://github.com/go-skynet/LocalAI
+  - https://github.com/cowboysysop/charts/tree/master/charts/local-ai
+version: 1.0.0
+dependencies:
+  - name: common
+    version: 2.2.4
+    repository: https://charts.bitnami.com/bitnami/
+annotations:
+  artifacthub.io/signKey: |
+    fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+    url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+  kubeVersion: ">=1.19"

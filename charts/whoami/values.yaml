@@ -15,6 +15,9 @@ kubeVersion: ""
 nameOverride: ""
 fullnameOverride: ""
 
+# Container Port
+containerPort: 80
+
 # Annotations to add to all deployed objects
 commonAnnotations: {}
 

@@ -55,10 +55,12 @@ spec:
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
-          {{- if .Values.extraEnvVars }}
           env:
+            - name: WHOAMI_PORT_NUMBER
+              value: {{ .Values.containerPorts.http | quote }}
+            {{- if .Values.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
-          {{- end }}
+            {{- end }}
           {{- if or .Values.extraEnvVarsCM .Values.extraEnvVarsSecret }}
           envFrom:
             {{- if .Values.extraEnvVarsCM }}
@@ -72,7 +74,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.containerPorts.http }}
               protocol: TCP
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:

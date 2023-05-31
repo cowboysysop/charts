@@ -81,6 +81,10 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+containerPorts:
+  # Container port for HTTP
+  http: 80
+
 livenessProbe:
   # Enable liveness probe
   enabled: true
@@ -139,11 +143,13 @@ service:
   # External traffic routing policy when service type is LoadBalancer or NodePort
   externalTrafficPolicy: Cluster
 
-  # Service port
-  port: 80
+  ports:
+    # Service port for HTTP
+    http: 80
 
-  # Service node port when service type is LoadBalancer or NodePort
-  # nodePort: 30000
+  nodePorts: {}
+    # Service node port for HTTP when service type is LoadBalancer or NodePort
+    # http: 30000
 
 ingress:
   enabled: false

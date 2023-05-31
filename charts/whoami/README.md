@@ -43,6 +43,13 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 4.0.0
+
+Some parameters related to port management have been modified:
+
+- Parameter `service.port` has been renamed `service.ports.http`.
+- Parameter `service.nodePort` has been renamed `service.nodePorts.http`.
+
 ### Upgrading to version 3.0.0
 
 Some parameters related to image management have been modified:
@@ -111,6 +118,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                                           |
 | `priorityClassName`                  | Priority class name                                                                                   | `nil`                                          |
 | `securityContext`                    | Container security context                                                                            | `{}`                                           |
+| `containerPorts.http`                | Container port for HTTP                                                                               | `80`                                           |
 | `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                                         |
 | `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `0`                                            |
 | `livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                               | `10`                                           |
@@ -129,8 +137,8 @@ The following tables lists all the configurable parameters expose by the chart a
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                                          |
 | `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                                          |
 | `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                                      |
-| `service.port`                       | Service port                                                                                          | `80`                                           |
-| `service.nodePort`                   | Service node port when service type is LoadBalancer or NodePort                                       | `nil`                                          |
+| `service.ports.http`                 | Service port for HTTP                                                                                 | `80`                                           |
+| `service.nodePorts.http`             | Service node port for HTTP when service type is LoadBalancer or NodePort                              | `nil`                                          |
 | `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                                        |
 | `ingress.ingressClassName`           | IngressClass that will be be used to implement the Ingress                                            | `""`                                           |
 | `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific`                       |

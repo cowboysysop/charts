@@ -1,6 +1,6 @@
 # LocalAI
 
-[LocalAI](https://github.com/go-skynet/LocalAI) is a drop-in replacement REST API compatible with OpenAI API specifications for local inferencing.
+[LocalAI](https://localai.io/) is a drop-in replacement REST API compatible with OpenAI API specifications for local inferencing.
 
 **DISCLAIMER**: This is an unofficial chart not supported by LocalAI authors.
 
@@ -144,6 +144,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `persistence.annotations`            | PVC annotations                                                                                       | `{}`                                             |
 | `persistence.size`                   | PVC size                                                                                              | `1Gi`                                            |
 | `persistence.storageClass`           | PVC storage class                                                                                     | `nil`                                            |
+| `config.preloadModels`               | Models to preload (configure liveness probe initial delay according to model download time)           | `[]`                                             |
 
 ### Tests parameters
 

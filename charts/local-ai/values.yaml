@@ -251,6 +251,16 @@ persistence:
   # PVC storage class
   # storageClass: -
 
+config:
+  # Models to preload (configure liveness probe initial delay according to model download time)
+  preloadModels: []
+    # - url: github:go-skynet/model-gallery/bert-embeddings.yaml
+    #   name: text-embedding-ada-002
+    # - url: github:go-skynet/model-gallery/gpt4all-j.yaml
+    #   name: gpt-3.5-turbo
+    # - url: github:go-skynet/model-gallery/stablediffusion.yaml
+    # - url: github:go-skynet/model-gallery/whisper-base.yaml
+    #   name: whisper-1
 tests:
   image:
     # Image registry

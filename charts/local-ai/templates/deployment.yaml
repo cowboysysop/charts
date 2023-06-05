@@ -30,6 +30,7 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
       annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         {{- if .Values.podAnnotations }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.podAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
@@ -80,6 +81,8 @@ spec:
               value: /data/generated-images
             - name: MODELS_PATH
               value: /data/models
+            - name: PRELOAD_MODELS_CONFIG
+              value: /config/preload-models.json
             - name: REBUILD
               value: "false"
             {{- if .Values.extraEnvVars }}
@@ -125,6 +128,9 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
+            - name: config
+              mountPath: /config/preload-models.json
+              subPath: preload-models.json
             - name: data
               mountPath: /data
       {{- with .Values.nodeSelector }}
@@ -140,6 +146,9 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:
+        - name: config
+          configMap:
+            name: {{ include "local-ai.fullname" . }}
         - name: data
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:

@@ -39,7 +39,7 @@ image:
   repository: go-skynet/local-ai
 
   # Image tag
-  tag: v1.17.1
+  tag: v1.18.0
 
   # Image digest
   digest: ""

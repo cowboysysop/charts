@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "qdrant.fullname" . }}
+  labels:
+    {{- include "qdrant.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+data:
+  production.yaml: |
+    service:
+      http_port: {{ .Values.containerPorts.http }}
+      grpc_port: {{ .Values.containerPorts.grpc }}
+    cluster:
+      enabled: true
+      p2p:
+        port: {{ .Values.containerPorts.p2p }}
+    telemetry_disabled: true

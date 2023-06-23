@@ -39,7 +39,7 @@ image:
   repository: go-skynet/local-ai
 
   # Image tag
-  tag: v1.18.0
+  tag: v1.19.2-ffmpeg
 
   # Image digest
   digest: ""

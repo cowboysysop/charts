@@ -38,7 +38,7 @@ admissionController:
     repository: autoscaling/vpa-admission-controller
 
     # Image tag
-    tag: 0.13.0
+    tag: 0.14.0
 
     # Image digest
     digest: ""
@@ -223,7 +223,7 @@ recommender:
     repository: autoscaling/vpa-recommender
 
     # Image tag
-    tag: 0.13.0
+    tag: 0.14.0
 
     # Image digest
     digest: ""
@@ -421,7 +421,7 @@ updater:
     repository: autoscaling/vpa-updater
 
     # Image tag
-    tag: 0.13.0
+    tag: 0.14.0
 
     # Image digest
     digest: ""

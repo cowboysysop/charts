@@ -84,7 +84,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                                            |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`                                    |
 | `image.repository`                   | Image repository                                                                                      | `qdrant/qdrant`                                |
-| `image.tag`                          | Image tag                                                                                             | `v1.2.2`                                       |
+| `image.tag`                          | Image tag                                                                                             | `v1.3.0`                                       |
 | `image.digest`                       | Image digest                                                                                          | `""`                                           |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                 |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                        |

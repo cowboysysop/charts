@@ -90,6 +90,30 @@ containerPorts:
   # Container port for HTTP
   http: 8080
 
+# With the startup probe, the application is given a default 5-minute window (300 seconds) to complete its startup process.
+# After a successful startup probe, the readiness and liveness probes become responsible for quickly detecting and responding
+# to container deadlocks.
+# If the startup probe does not succeed within (default) 300 seconds, the container is terminated and its restart behavior is
+# determined by the pod's restart policy.
+startupProbe:
+  # Enable startup probe
+  enabled: true
+
+  # Delay before the startup probe is initiated
+  initialDelaySeconds: 10
+
+  # How often to perform the startup probe
+  periodSeconds: 10
+
+  # When the startup probe times out
+  timeoutSeconds: 1
+
+  # Minimum consecutive failures for the startup probe to be considered failed after having succeeded
+  failureThreshold: 30
+
+  # Minimum consecutive successes for the startup probe to be considered successful after having failed
+  successThreshold: 1
+
 livenessProbe:
   # Enable liveness probe
   enabled: true

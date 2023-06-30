@@ -85,7 +85,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`                                       |
 | `image.registry`                     | Image registry                                                                                        | `quay.io`                                        |
 | `image.repository`                   | Image repository                                                                                      | `go-skynet/local-ai`                             |
-| `image.tag`                          | Image tag                                                                                             | `v1.19.2-ffmpeg`                                 |
+| `image.tag`                          | Image tag                                                                                             | `v1.20.1-ffmpeg`                                 |
 | `image.digest`                       | Image digest                                                                                          | `""`                                             |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                   |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                          |
@@ -144,6 +144,7 @@ The following tables lists all the configurable parameters expose by the chart a
 | `persistence.annotations`            | PVC annotations                                                                                       | `{}`                                             |
 | `persistence.size`                   | PVC size                                                                                              | `1Gi`                                            |
 | `persistence.storageClass`           | PVC storage class                                                                                     | `nil`                                            |
+| `config.galleries`                   | Model galleries                                                                                       | `[]`                                             |
 | `config.preloadModels`               | Models to preload (configure liveness probe initial delay according to model download time)           | `[]`                                             |
 
 ### Tests parameters

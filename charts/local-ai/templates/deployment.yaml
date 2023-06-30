@@ -55,6 +55,7 @@ spec:
             - /bin/bash
             - -ec
             - |
+              mkdir -p /data/generated-audio
               mkdir -p /data/generated-images
               mkdir -p /data/models
           resources:
@@ -77,10 +78,14 @@ spec:
           env:
             - name: ADDRESS
               value: ":{{ .Values.containerPorts.http }}"
+            - name: AUDIO_PATH
+              value: /data/generated-audio
             - name: IMAGE_PATH
               value: /data/generated-images
             - name: MODELS_PATH
               value: /data/models
+            - name: GALLERIES
+              value: {{ .Values.config.galleries | toJson | quote }}
             - name: PRELOAD_MODELS_CONFIG
               value: /config/preload-models.json
             - name: REBUILD

@@ -4609,6 +4609,33 @@ entries:
         url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
       kubeVersion: '>=1.19'
     apiVersion: v2
+    appVersion: 1.20.1
+    created: "2023-07-01T09:06:20.879790411Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 2.2.4
+    description: A drop-in replacement REST API compatible with OpenAI API specifications
+      for local inferencing
+    digest: b7adf2abc33537fa0a31e1ef916242c5d6b676a0263439205a34c0c743e38581
+    home: https://localai.io/
+    icon: https://user-images.githubusercontent.com/2420543/233147843-88697415-6dbf-4368-a862-ab217f9f7342.jpeg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: local-ai
+    sources:
+    - https://github.com/go-skynet/LocalAI
+    - https://github.com/cowboysysop/charts/tree/master/charts/local-ai
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/local-ai-1.3.0/local-ai-1.3.0.tgz
+    version: 1.3.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
     appVersion: 1.19.2
     created: "2023-06-23T16:54:30.099317461Z"
     dependencies:
@@ -8494,4 +8521,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-06-27T22:12:37.240797487Z"
+generated: "2023-07-01T09:06:20.880394119Z"

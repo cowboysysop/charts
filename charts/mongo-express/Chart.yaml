@@ -10,13 +10,13 @@ name: mongo-express
 sources:
   - https://github.com/mongo-express/mongo-express
   - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
-version: 3.1.1
+version: 3.2.0
 dependencies:
   - name: common
     version: 2.2.4
     repository: https://charts.bitnami.com/bitnami/
   - name: mongodb
-    version: 13.9.4
+    version: 13.15.3
     repository: https://charts.bitnami.com/bitnami/
     condition: mongodb.enabled
 annotations:

@@ -39,7 +39,7 @@ image:
   repository: go-skynet/local-ai
 
   # Image tag
-  tag: v1.19.2-ffmpeg
+  tag: v1.20.1-ffmpeg
 
   # Image digest
   digest: ""
@@ -252,15 +252,19 @@ persistence:
   # storageClass: -
 
 config:
+  # Model galleries
+  galleries: []
+    # - name: model-gallery
+    #   url: github:go-skynet/model-gallery/index.yaml
+
   # Models to preload (configure liveness probe initial delay according to model download time)
   preloadModels: []
-    # - url: github:go-skynet/model-gallery/bert-embeddings.yaml
-    #   name: text-embedding-ada-002
+    # - id: model-gallery@text-embedding-ada-002
     # - url: github:go-skynet/model-gallery/gpt4all-j.yaml
     #   name: gpt-3.5-turbo
-    # - url: github:go-skynet/model-gallery/stablediffusion.yaml
-    # - url: github:go-skynet/model-gallery/whisper-base.yaml
-    #   name: whisper-1
+    # - id: model-gallery@stablediffusion
+    # - id: model-gallery@whisper-1
+    # - id: model-gallery@voice-en-us-kathleen-low
 tests:
   image:
     # Image registry

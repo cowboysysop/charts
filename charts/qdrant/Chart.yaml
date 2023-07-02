@@ -10,10 +10,10 @@ name: qdrant
 sources:
   - https://github.com/qdrant/qdrant
   - https://github.com/cowboysysop/charts/tree/master/charts/qdrant
-version: 1.1.0
+version: 1.2.0
 dependencies:
   - name: common
-    version: 2.2.4
+    version: 2.5.0
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

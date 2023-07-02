@@ -9,10 +9,10 @@ name: quickchart
 sources:
   - https://github.com/typpo/quickchart
   - https://github.com/cowboysysop/charts/tree/master/charts/quickchart
-version: 2.0.0
+version: 2.1.0
 dependencies:
   - name: common
-    version: 2.2.4
+    version: 2.5.0
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

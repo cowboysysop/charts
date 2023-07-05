@@ -13,6 +13,7 @@
 | Name                                                      | Description                                                                                                                  |
 |-----------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
 | [dolibarr](charts/dolibarr)                               | A modern software package to manage your company or foundation's activity                                                    |
+| [flowise](charts/flowise)                                 | Drag & drop UI to build your customized LLM flow                                                                             |
 | [kroki](charts/kroki)                                     | Creates diagrams from textual descriptions                                                                                   |
 | [kubebox](charts/kubebox)                                 | Terminal and Web console for Kubernetes                                                                                      |
 | [kubeview](charts/kubeview)                               | Kubernetes cluster visualiser and graphical explorer                                                                         |

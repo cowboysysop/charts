@@ -683,6 +683,33 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/dolibarr-1.0.0/dolibarr-1.0.0.tgz
     version: 1.0.0
+  flowise:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 1.2.13
+    created: "2023-07-05T08:45:54.692367795Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 2.5.0
+    description: Drag & drop UI to build your customized LLM flow
+    digest: caab7610165e537ab693b9d818be2446ff674154e3f878ff293f8a62cb370774
+    home: https://flowiseai.com/
+    icon: https://avatars.githubusercontent.com/u/128289781
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: flowise
+    sources:
+    - https://github.com/FlowiseAI/Flowise
+    - https://github.com/cowboysysop/charts/tree/master/charts/flowise
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/flowise-1.0.0/flowise-1.0.0.tgz
+    version: 1.0.0
   katib:
   - annotations:
       artifacthub.io/signKey: |
@@ -8949,4 +8976,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-04T21:34:58.639531841Z"
+generated: "2023-07-05T08:45:54.693021207Z"

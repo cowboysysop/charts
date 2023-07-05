@@ -64,6 +64,8 @@ spec:
             {{- end }}
           {{- end }}
           env:
+            - name: APIKEY_PATH
+              value: /data
             - name: DATABASE_PATH
               value: /data
             - name: PORT

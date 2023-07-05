@@ -2563,6 +2563,32 @@ entries:
       kubeVersion: '>=1.19'
     apiVersion: v2
     appVersion: 0.1.31
+    created: "2023-07-05T19:06:25.756582006Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 2.5.0
+    description: Kubernetes cluster visualiser and graphical explorer
+    digest: c9ac1bb76a384a63fbca0f3b1f062d874a9c21f2878138fed6e309f9a1f20ef6
+    home: https://github.com/benc-uk/kubeview
+    icon: https://raw.githubusercontent.com/benc-uk/kubeview/master/web/client/public/favicon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubeview
+    sources:
+    - https://github.com/benc-uk/kubeview
+    - https://github.com/cowboysysop/charts/tree/master/charts/kubeview
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubeview-4.0.0/kubeview-4.0.0.tgz
+    version: 4.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 0.1.31
     created: "2023-07-02T10:17:23.394171602Z"
     dependencies:
     - name: common
@@ -9001,4 +9027,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-05T15:12:26.320649661Z"
+generated: "2023-07-05T19:06:25.75732092Z"

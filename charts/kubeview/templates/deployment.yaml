@@ -49,6 +49,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.extraArgs }}
+          args:
+            {{- range $key, $value := .Values.extraArgs }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
           env:
             - name: IN_CLUSTER
               value: "true"
@@ -68,7 +74,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 8000
+              containerPort: {{ .Values.containerPorts.http }}
               protocol: TCP
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:

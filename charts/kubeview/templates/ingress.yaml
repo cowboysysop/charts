@@ -42,7 +42,7 @@ spec:
             pathType: {{ $.Values.ingress.pathType }}
             {{- end }}
             backend:
-              {{- include "common.ingress.backend" (dict "serviceName" (include "kubeview.fullname" $) "servicePort" $.Values.service.port "context" $) | nindent 14 }}
+              {{- include "common.ingress.backend" (dict "serviceName" (include "kubeview.fullname" $) "servicePort" $.Values.service.ports.http "context" $) | nindent 14 }}
           {{- end }}
     {{- end }}
 {{- end }}

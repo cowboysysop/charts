@@ -32,12 +32,12 @@ spec:
   externalTrafficPolicy: {{ .Values.service.externalTrafficPolicy }}
   {{- end }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.service.ports.http }}
       targetPort: http
       protocol: TCP
       name: http
-      {{- if and (or (eq .Values.service.type "LoadBalancer") (eq .Values.service.type "NodePort")) .Values.service.nodePort }}
-      nodePort: {{ .Values.service.nodePort }}
+      {{- if and (or (eq .Values.service.type "LoadBalancer") (eq .Values.service.type "NodePort")) .Values.service.nodePorts.http }}
+      nodePort: {{ .Values.service.nodePorts.http }}
       {{- end }}
   selector:
     {{- include "kubeview.selectorLabels" . | nindent 4 }}

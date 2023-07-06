@@ -18,7 +18,7 @@ data:
 
 
     def test_service_connection():
-        url = "http://{{ include "lighthouse-ci.fullname" . }}:{{ .Values.service.port }}/"
+        url = "http://{{ include "lighthouse-ci.fullname" . }}:{{ .Values.service.ports.http }}/"
 
         response = requests.get(url)
 

@@ -16,7 +16,7 @@ data:
     {
       "ci": {
         "server": {
-          "port": 9001,
+          "port": {{ .Values.containerPorts.http }},
           "storage": {
             "storageMethod": "sql",
             "sqlDialect": "sqlite",

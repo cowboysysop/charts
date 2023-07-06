@@ -2,77 +2,96 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+## @section Global parameters
+
 global:
-  # Global Docker image registry
+  ## @param global.imageRegistry Global Docker image registry
   imageRegistry: ""
 
-  # Global Docker registry secret names as an array
+  ## @param global.imagePullSecrets Global Docker registry secret names as an array
   imagePullSecrets: []
 
-# Override Kubernetes version
+## @section Common parameters
+
+## @param kubeVersion Override Kubernetes version
 kubeVersion: ""
 
+## @param nameOverride Partially override `lighthouse-ci.fullname` template with a string (will prepend the release name)
 nameOverride: ""
+
+## @param fullnameOverride Fully override `lighthouse-ci.fullname` template with a string
 fullnameOverride: ""
 
-# Annotations to add to all deployed objects
+## @param commonAnnotations Annotations to add to all deployed objects
 commonAnnotations: {}
 
-# Labels to add to all deployed objects
+## @param commonLabels Labels to add to all deployed objects
 commonLabels: {}
 
-# Array of extra objects to deploy with the release
+## @param extraDeploy Array of extra objects to deploy with the release
 extraDeploy: []
 
+## @section Parameters
+
+## @param replicaCount Number of replicas (do not change it)
 replicaCount: 1
 
+updateStrategy:
+  ## @param updateStrategy.type Update strategy type (do not change it)
+  type: Recreate
+
 image:
-  # Image registry
+  ## @param image.registry Image registry
   registry: docker.io
 
-  # Image repository
+  ## @param image.repository Image repository
   repository: patrickhulce/lhci-server
 
-  # Image tag
+  ## @param image.tag Image tag
   tag: 0.8.1
 
-  # Image digest
+  ## @param image.digest Image digest
   digest: ""
 
-  # Image pull policy
+  ## @param image.pullPolicy Image pull policy
   pullPolicy: IfNotPresent
 
 pdb:
-  # Specifies whether a pod disruption budget should be created
+  ## @param pdb.create Specifies whether a pod disruption budget should be created
   create: false
 
-  # Minimum number/percentage of pods that should remain scheduled
+  ## @param pdb.minAvailable Minimum number/percentage of pods that should remain scheduled
   minAvailable: 1
 
-  # Maximum number/percentage of pods that may be made unavailable
+  ## @param pdb.maxUnavailable Maximum number/percentage of pods that may be made unavailable
+  maxUnavailable:
   # maxUnavailable: 1
 
 serviceAccount:
-  # Specifies whether a service account should be created
+  ## @param serviceAccount.create Specifies whether a service account should be created
   create: true
-  # Annotations to add to the service account
+
+  ## @param serviceAccount.annotations Service account annotations
   annotations: {}
-  # The name of the service account to use.
-  # If not set and create is true, a name is generated using the fullname template
+
+  ## @param serviceAccount.name The name of the service account to use (default value generated using the `lighthouse-ci.fullname` template)
   name:
 
-# Additional pod annotations
+## @param podAnnotations Additional pod annotations
 podAnnotations: {}
 
-# Additional pod labels
+## @param podLabels Additional pod labels
 podLabels: {}
 
+## @param podSecurityContext Pod security context
 podSecurityContext: {}
   # fsGroup: 2000
 
-# Priority class name
+## @param priorityClassName Priority class name
+priorityClassName:
 # priorityClassName : high-priority
 
+## @param securityContext Container security context
 securityContext: {}
   # capabilities:
   #   drop:
@@ -81,96 +100,109 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
+containerPorts:
+  ## @param containerPorts.http Container port for HTTP
+  http: 9001
+
 livenessProbe:
-  # Enable liveness probe
+  ## @param livenessProbe.enabled Enable liveness probe
   enabled: true
 
-  # Delay before the liveness probe is initiated
+  ## @param livenessProbe.initialDelaySeconds Delay before the liveness probe is initiated
   initialDelaySeconds: 0
 
-  # How often to perform the liveness probe
+  ## @param livenessProbe.periodSeconds How often to perform the liveness probe
   periodSeconds: 10
 
-  # When the liveness probe times out
+  ## @param livenessProbe.timeoutSeconds When the liveness probe times out
   timeoutSeconds: 1
 
-  # Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
+  ## @param livenessProbe.failureThreshold Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
   failureThreshold: 3
 
-  # Minimum consecutive successes for the liveness probe to be considered successful after having failed
+  ## @param livenessProbe.successThreshold Minimum consecutive successes for the liveness probe to be considered successful after having failed
   successThreshold: 1
 
 readinessProbe:
-  # Enable readiness probe
+  ## @param readinessProbe.enabled Enable readiness probe
   enabled: true
 
-  # Delay before the readiness probe is initiated
+  ## @param readinessProbe.initialDelaySeconds Delay before the readiness probe is initiated
   initialDelaySeconds: 0
 
-  # How often to perform the readiness probe
+  ## @param readinessProbe.periodSeconds How often to perform the readiness probe
   periodSeconds: 10
 
-  # When the readiness probe times out
+  ## @param readinessProbe.timeoutSeconds When the readiness probe times out
   timeoutSeconds: 1
 
-  # Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
+  ## @param readinessProbe.failureThreshold Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
   failureThreshold: 3
 
-  # Minimum consecutive successes for the readiness probe to be considered successful after having failed
+  ## @param readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
   successThreshold: 1
 
 service:
-  # Service annotations
+  ## @param service.annotations Service annotations
   annotations: {}
 
-  # Service type
+  ## @param service.type Service type
   type: ClusterIP
 
-  # Static cluster IP address or None for headless service when service type is ClusterIP
+  ## @param service.clusterIP Static cluster IP address or None for headless service when service type is ClusterIP
+  clusterIP:
   # clusterIP: 10.43.0.100
 
-  # Static load balancer IP address when service type is LoadBalancer
+  ## @param service.loadBalancerIP Static load balancer IP address when service type is LoadBalancer
+  loadBalancerIP:
   # loadBalancerIP: 10.0.0.100
 
-  # Source IP address ranges when service type is LoadBalancer
-  # loadBalancerSourceRanges:
-  #   - 10.0.0.0/24
+  ## @param service.loadBalancerSourceRanges Source IP address ranges when service type is LoadBalancer
+  loadBalancerSourceRanges:
+    # - 10.0.0.0/24
 
-  # External traffic routing policy when service type is LoadBalancer or NodePort
+  ## @param service.externalTrafficPolicy External traffic routing policy when service type is LoadBalancer or NodePort
   externalTrafficPolicy: Cluster
 
-  # Service port
-  port: 9001
+  ports:
+    ## @param service.ports.http Service port for HTTP
+    http: 9001
 
-  # Service node port when service type is LoadBalancer or NodePort
-  # nodePort: 30000
+  nodePorts:
+    ## @param service.nodePorts.http Service node port for HTTP when service type is LoadBalancer or NodePort
+    http:
+    # http: 30000
 
 ingress:
+  ## @param ingress.enabled Enable ingress controller resource
   enabled: false
 
-  # IngressClass that will be be used to implement the Ingress
+  ## @param ingress.ingressClassName IngressClass that will be be used to implement the Ingress
   ingressClassName: ""
 
-  # Ingress path type
+  ## @param ingress.pathType Ingress path type
   pathType: ImplementationSpecific
 
+  ## @param ingress.annotations Ingress annotations
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
+
+  ## @param ingress.hosts[0].host Hostname to your Lighthouse CI Server installation
+  ## @param ingress.hosts[0].paths Paths within the url structure
   hosts:
     - host: lighthouse-ci.local
       paths:
         - /
-  tls: []
-  #  - secretName: lighthouse-ci-tls
-  #    hosts:
-  #      - lighthouse-ci.local
 
+  ## @param ingress.tls TLS configuration
+  tls: []
+    # - secretName: lighthouse-ci-tls
+    #   hosts:
+    #     - lighthouse-ci.local
+
+## @param resources CPU/Memory resource requests/limits
 resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
   #   cpu: 100m
   #   memory: 128Mi
@@ -178,189 +210,204 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+## @param nodeSelector Node labels for pod assignment
 nodeSelector: {}
 
+## @param tolerations Tolerations for pod assignment
 tolerations: []
 
+## @param affinity Map of node/pod affinities
 affinity: {}
 
-# Additional container environment variables
-extraEnvVars: []
-#  - name: MY-NAME
-#    value: "MY-VALUE"
+## @param extraArgs Additional container arguments
+extraArgs: {}
+  # name: ""
 
-# Name of existing ConfigMap containing additional container environment variables
+## @param extraEnvVars Additional container environment variables
+extraEnvVars: []
+  # - name: MY-NAME
+  #   value: "MY-VALUE"
+
+## @param extraEnvVarsCM Name of existing ConfigMap containing additional container environment variables
 extraEnvVarsCM:
 
-# Name of existing Secret containing additional container environment variables
+## @param extraEnvVarsSecret Name of existing Secret containing additional container environment variables
 extraEnvVarsSecret:
 
 persistence:
-  # Enable persistence using PVC
+  ## @param persistence.enabled Enable persistence using PVC
   enabled: false
 
-  # Name of an existing PVC to use
+  ## @param persistence.existingClaim Name of an existing PVC to use
+  existingClaim:
   # existingClaim: my-pvc
 
-  # PVC access mode
+  ## @param persistence.accessMode PVC access mode
   accessMode: ReadWriteOnce
 
-  # PVC annotations
+  ## @param persistence.annotations PVC annotations
   annotations: {}
 
-  # PVC size
+  ## @param persistence.size PVC size
   size: 1Gi
 
-  # PVC storage class
+  ## @param persistence.storageClass PVC storage class
+  storageClass:
   # storageClass: -
 
-# Log level
+## @param logLevel Log level
 logLevel: verbose
 
-# The username to protect the server with HTTP Basic Authentication
+## @param basicAuthUsername The username to protect the server with HTTP Basic Authentication
 basicAuthUsername: ""
 
-# The password to protect the server with HTTP Basic Authentication
+## @param basicAuthPassword The password to protect the server with HTTP Basic Authentication
 basicAuthPassword: ""
 
-# Name of existing Secret to use
-existingSecret: ""
-
-# Name of the key in existing Secret that contains HTTP Basic Authentication password
-existingSecretKeyBasicAuthPassword: basic-auth-password
-
-# The configuration to automatically collect results using the PageSpeed Insights API
+## @extra psiCollectCron The configuration to automatically collect results using the PageSpeed Insights API
 psiCollectCron:
-  # The API key to use with the PageSpeed Insights API
+  ## @param psiCollectCron.psiApiKey The API key to use with the PageSpeed Insights API
   psiApiKey: ""
 
-  # The array of sites to collect results for
+  ## @param psiCollectCron.sites The array of sites to collect results for
   sites: []
     # - urls:
     #     - http://example.local/
     #   schedule: 0 * * * *
     #   projectSlug: example
 
-# The configuration to automatically delete old records
+## @param deleteOldBuildsCron The configuration to automatically delete old records
 deleteOldBuildsCron: []
   # - schedule: 0 * * * *
   #   maxAgeInDays: 30
 
+## @param existingSecret Name of existing Secret to use
+existingSecret: ""
+
+## @param existingSecretKeyBasicAuthPassword Name of the key in existing Secret that contains HTTP Basic Authentication password
+existingSecretKeyBasicAuthPassword: basic-auth-password
+
+## @section MariaDB parameters
+
 mariadb:
-  # Whether to use the MariaDB chart
+  ## @param mariadb.enabled Whether to use the MariaDB chart
   enabled: false
 
-  # MariaDB architecture
+  ## @param mariadb.architecture MariaDB architecture
   architecture: standalone
 
   auth:
-    # MariaDB database
+    ## @param mariadb.auth.database MariaDB database
     database: lighthouse-ci
 
-    # MariaDB user
+    ## @param mariadb.auth.username MariaDB user
     username: lighthouse-ci
 
-    # MariaDB password
+    ## @param mariadb.auth.password MariaDB password
     password: lighthouse-ci
 
-    # Name of existing Secret to use
+    ## @param mariadb.auth.existingSecret Name of existing Secret to use
     existingSecret: ""
 
   primary:
     service:
       ports:
-        # MariaDB port
+        ## @param mariadb.primary.service.ports.mysql MariaDB port
         mysql: 3306
 
 externalMariadb:
-  # Whether to use an external MariaDB
+  ## @param externalMariadb.enabled Whether to use an external MariaDB
   enabled: false
 
-  # External MariaDB host
+  ## @param externalMariadb.host External MariaDB host
   host: mariadb
 
-  # External MariaDB port
+  ## @param externalMariadb.port External MariaDB port
   port: 3306
 
-  # External MariaDB user
+  ## @param externalMariadb.username External MariaDB user
   username: lighthouse-ci
 
-  # External MariaDB password
+  ## @param externalMariadb.password External MariaDB password
   password: lighthouse-ci
 
-  # Name of existing Secret to use
+  ## @param externalMariadb.existingSecret Name of existing Secret to use
   existingSecret: ""
 
-  # Name of the key in existing Secret that contains MariaDB password
+  ## @param externalMariadb.existingSecretKeyPassword Name of the key in existing Secret that contains MariaDB password
   existingSecretKeyPassword: mariadb-password
 
-  # External MariaDB database
+  ## @param externalMariadb.database External MariaDB database
   database: lighthouse-ci
 
+## @section PostgreSQL parameters
+
 postgresql:
-  # Whether to use the PostgreSQL chart
+  ## @param postgresql.enabled Whether to use the PostgreSQL chart
   enabled: false
 
   auth:
-    # PostgreSQL user
+    ## @param postgresql.auth.username PostgreSQL user
     username: lighthouse-ci
 
-    # PostgreSQL password
+    ## @param postgresql.auth.password PostgreSQL password
     password: lighthouse-ci
 
-    # PostgreSQL database
+    ## @param postgresql.auth.database PostgreSQL database
     database: lighthouse-ci
 
-    # Name of existing Secret to use
+    ## @param postgresql.auth.existingSecret Name of existing Secret to use
     existingSecret: ""
 
-  # PostgreSQL architecture
+  ## @param postgresql.architecture PostgreSQL architecture
   architecture: standalone
 
   primary:
     service:
       ports:
-        # PostgreSQL port
+        ## @param postgresql.primary.service.ports.postgresql PostgreSQL port
         postgresql: 5432
 
 externalPostgresql:
-  # Whether to use an external PostgreSQL
+  ## @param externalPostgresql.enabled Whether to use an external PostgreSQL
   enabled: false
 
-  # External PostgreSQL host
+  ## @param externalPostgresql.host External PostgreSQL host
   host: postgresql
 
-  # External PostgreSQL port
+  ## @param externalPostgresql.port External PostgreSQL port
   port: 5432
 
-  # External PostgreSQL user
+  ## @param externalPostgresql.username External PostgreSQL user
   username: lighthouse-ci
 
-  # External PostgreSQL password
+  ## @param externalPostgresql.password External PostgreSQL password
   password: lighthouse-ci
 
-  # Name of existing Secret to use
+  ## @param externalPostgresql.existingSecret Name of existing Secret to use
   existingSecret: ""
 
-  # Name of the key in existing Secret that contains PostgreSQL password
+  ## @param externalPostgresql.existingSecretKeyPassword Name of the key in existing Secret that contains PostgreSQL password
   existingSecretKeyPassword: password
 
-  # External PostgreSQL database
+  ## @param externalPostgresql.database External PostgreSQL database
   database: lighthouse-ci
+
+## @section Tests parameters
 
 tests:
   image:
-    # Image registry
+    ## @param tests.image.registry Image registry
     registry: ghcr.io
 
-    # Image repository
+    ## @param tests.image.repository Image repository
     repository: cowboysysop/pytest
 
-    # Image tag
+    ## @param tests.image.tag Image tag
     tag: 1.0.35
 
-    # Image digest
+    ## @param tests.image.digest Image digest
     digest: ""
 
-    # Image pull policy
+    ## @param tests.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent

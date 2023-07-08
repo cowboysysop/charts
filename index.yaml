@@ -6974,6 +6974,31 @@ entries:
       kubeVersion: '>=1.19'
     apiVersion: v2
     appVersion: 1.7.1
+    created: "2023-07-08T09:42:39.843002518Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 2.5.0
+    description: Chart image and QR code web API
+    digest: 1bd0efde780c42b6ca93df32f071d0f42827d22fa523f80736adcbc36790e743
+    home: https://quickchart.io/
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: quickchart
+    sources:
+    - https://github.com/typpo/quickchart
+    - https://github.com/cowboysysop/charts/tree/master/charts/quickchart
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/quickchart-3.0.0/quickchart-3.0.0.tgz
+    version: 3.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.19'
+    apiVersion: v2
+    appVersion: 1.7.1
     created: "2023-07-02T10:17:24.515643205Z"
     dependencies:
     - name: common
@@ -9087,4 +9112,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-06T20:04:06.077614035Z"
+generated: "2023-07-08T09:42:39.84387974Z"

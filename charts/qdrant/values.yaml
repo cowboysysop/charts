@@ -35,7 +35,7 @@ image:
   repository: qdrant/qdrant
 
   # Image tag
-  tag: v1.3.0
+  tag: v1.3.1
 
   # Image digest
   digest: ""

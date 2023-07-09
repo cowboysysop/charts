@@ -49,9 +49,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.extraArgs }}
+          {{- if .Values.extraArgs }}
           args:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
@@ -72,7 +72,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 8000
+              containerPort: {{ .Values.containerPorts.http }}
               protocol: TCP
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
@@ -104,9 +104,9 @@ spec:
             {{- toYaml .Values.blockdiag.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.blockdiag.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.blockdiag.image.pullPolicy }}
-          {{- with .Values.blockdiag.extraArgs }}
+          {{- if .Values.blockdiag.extraArgs }}
           args:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.blockdiag.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
@@ -127,7 +127,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 8001
+              containerPort: {{ .Values.blockdiag.containerPorts.http }}
               protocol: TCP
           resources:
             {{- toYaml .Values.blockdiag.resources | nindent 12 }}
@@ -138,9 +138,9 @@ spec:
             {{- toYaml .Values.bpmn.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.bpmn.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.bpmn.image.pullPolicy }}
-          {{- with .Values.bpmn.extraArgs }}
+          {{- if .Values.bpmn.extraArgs }}
           args:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.bpmn.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
@@ -161,7 +161,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 8003
+              containerPort: {{ .Values.bpmn.containerPorts.http }}
               protocol: TCP
           resources:
             {{- toYaml .Values.bpmn.resources | nindent 12 }}
@@ -172,9 +172,9 @@ spec:
             {{- toYaml .Values.diagramsnet.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.diagramsnet.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.diagramsnet.image.pullPolicy }}
-          {{- with .Values.diagramsnet.extraArgs }}
+          {{- if .Values.diagramsnet.extraArgs }}
           args:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.diagramsnet.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
@@ -195,7 +195,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 8003
+              containerPort: {{ .Values.diagramsnet.containerPorts.http }}
               protocol: TCP
           resources:
             {{- toYaml .Values.diagramsnet.resources | nindent 12 }}
@@ -206,9 +206,9 @@ spec:
             {{- toYaml .Values.excalidraw.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.excalidraw.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.excalidraw.image.pullPolicy }}
-          {{- with .Values.excalidraw.extraArgs }}
+          {{- if .Values.excalidraw.extraArgs }}
           args:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.excalidraw.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
@@ -229,7 +229,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 8004
+              containerPort: {{ .Values.excalidraw.containerPorts.http }}
               protocol: TCP
           resources:
             {{- toYaml .Values.excalidraw.resources | nindent 12 }}
@@ -240,9 +240,9 @@ spec:
             {{- toYaml .Values.mermaid.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.mermaid.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.mermaid.image.pullPolicy }}
-          {{- with .Values.mermaid.extraArgs }}
+          {{- if .Values.mermaid.extraArgs }}
           args:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.mermaid.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
@@ -263,7 +263,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 8002
+              containerPort: {{ .Values.mermaid.containerPorts.http }}
               protocol: TCP
           resources:
             {{- toYaml .Values.mermaid.resources | nindent 12 }}
@@ -274,9 +274,9 @@ spec:
             {{- toYaml .Values.wireviz.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.wireviz.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.wireviz.image.pullPolicy }}
-          {{- with .Values.wireviz.extraArgs }}
+          {{- if .Values.wireviz.extraArgs }}
           args:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.wireviz.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
@@ -297,7 +297,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: 8006
+              containerPort: {{ .Values.wireviz.containerPorts.http }}
               protocol: TCP
           resources:
             {{- toYaml .Values.wireviz.resources | nindent 12 }}

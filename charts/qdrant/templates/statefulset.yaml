@@ -63,9 +63,9 @@ spec:
               fi
               ./entrypoint.sh "${args}" "$@"
             - $@
-          {{- with .Values.extraArgs }}
+          {{- if .Values.extraArgs }}
           args:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}

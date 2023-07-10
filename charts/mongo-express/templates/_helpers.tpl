@@ -74,6 +74,28 @@ Create the name of the secret to use
 {{- end -}}
 
 {{/*
+Administrator password secret key name
+*/}}
+{{- define "dolibarr.secretKeyAdminPassword" -}}
+{{- if .Values.existingSecret -}}
+    {{ .Values.existingSecretKeyAdminPassword }}
+{{- else -}}
+    dolibarr-admin-password
+{{- end -}}
+{{- end -}}
+
+{{/*
+Cron security key secret key name
+*/}}
+{{- define "dolibarr.secretKeyCronSecurityKey" -}}
+{{- if .Values.existingSecret -}}
+    {{ .Values.existingSecretKeyCronSecurityKey }}
+{{- else -}}
+    dolibarr-cron-security-key
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create the basic authentification HTTP header
 */}}
 {{- define "mongo-express.basicAuthHttpHeader" -}}

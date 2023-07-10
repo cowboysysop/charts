@@ -10,7 +10,7 @@ name: mongo-express
 sources:
   - https://github.com/mongo-express/mongo-express
   - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
-version: 3.3.0
+version: 4.0.0
 dependencies:
   - name: common
     version: 2.5.0

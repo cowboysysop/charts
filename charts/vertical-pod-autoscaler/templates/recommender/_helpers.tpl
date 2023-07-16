@@ -46,11 +46,3 @@ Create the name of the service account to use
     {{ default "default" .Values.recommender.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
-
-{{/*
-ServiceMonitor labels
-*/}}
-{{- define "vertical-pod-autoscaler.recommender.metrics.serviceMonitor.labels" -}}
-{{ include "vertical-pod-autoscaler.labels" . }}
-{{ include "vertical-pod-autoscaler.recommender.componentLabels" . }}
-{{- end -}}

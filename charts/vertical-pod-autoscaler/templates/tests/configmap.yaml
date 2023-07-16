@@ -18,8 +18,7 @@ data:
 
 
     def test_admission_controller_service_connection():
-        # url = "https://{{ include "vertical-pod-autoscaler.admissionController.fullname" . }}.{{ .Release.Namespace }}.svc:{{ .Values.admissionController.service.port }}/"
-        url = "https://vpa-webhook.{{ .Release.Namespace }}.svc:443/"
+        url = "https://vpa-webhook.{{ .Release.Namespace }}.svc:{{ .Values.admissionController.service.ports.https }}/"
         verify = "/admission-controller-tls-secret/ca.crt"
 
         response = requests.get(url, verify=verify)
@@ -28,7 +27,7 @@ data:
 
 
     def test_admission_controller_metrics_service_connection():
-        url = "http://{{ include "vertical-pod-autoscaler.admissionController.metrics.fullname" . }}:{{ .Values.admissionController.metrics.service.port }}/metrics"
+        url = "http://{{ include "vertical-pod-autoscaler.admissionController.metrics.fullname" . }}:{{ .Values.admissionController.metrics.service.ports.metrics }}/metrics"
 
         response = requests.get(url)
 
@@ -36,7 +35,7 @@ data:
 
 
     def test_recommender_metrics_service_connection():
-        url = "http://{{ include "vertical-pod-autoscaler.recommender.metrics.fullname" . }}:{{ .Values.recommender.metrics.service.port }}/metrics"
+        url = "http://{{ include "vertical-pod-autoscaler.recommender.metrics.fullname" . }}:{{ .Values.recommender.metrics.service.ports.metrics }}/metrics"
 
         response = requests.get(url)
 
@@ -44,7 +43,7 @@ data:
 
 
     def test_updater_metrics_service_connection():
-        url = "http://{{ include "vertical-pod-autoscaler.updater.metrics.fullname" . }}:{{ .Values.updater.metrics.service.port }}/metrics"
+        url = "http://{{ include "vertical-pod-autoscaler.updater.metrics.fullname" . }}:{{ .Values.updater.metrics.service.ports.metrics }}/metrics"
 
         response = requests.get(url)
 

@@ -50,6 +50,7 @@ spec:
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.recommender.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.recommender.image.pullPolicy }}
           args:
+            - --address=:{{ .Values.recommender.containerPorts.metrics }}
             {{- range $key, $value := .Values.recommender.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
@@ -70,7 +71,7 @@ spec:
           {{- end }}
           ports:
             - name: http-metrics
-              containerPort: 8942
+              containerPort: {{ .Values.recommender.containerPorts.metrics }}
               protocol: TCP
           {{- if .Values.recommender.livenessProbe.enabled }}
           livenessProbe:

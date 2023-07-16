@@ -23,7 +23,7 @@ spec:
   clusterIP: {{ .Values.admissionController.metrics.service.clusterIP }}
   {{- end }}
   ports:
-    - port: {{ .Values.admissionController.metrics.service.port }}
+    - port: {{ .Values.admissionController.metrics.service.ports.metrics }}
       targetPort: http-metrics
       protocol: TCP
       name: http-metrics

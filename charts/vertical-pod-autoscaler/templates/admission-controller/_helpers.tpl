@@ -57,11 +57,3 @@ Create the name of the tls secret to use
     {{- printf "%s-%s" (include "vertical-pod-autoscaler.admissionController.fullname" .) "tls" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- end -}}
-
-{{/*
-ServiceMonitor labels
-*/}}
-{{- define "vertical-pod-autoscaler.admissionController.metrics.serviceMonitor.labels" -}}
-{{ include "vertical-pod-autoscaler.labels" . }}
-{{ include "vertical-pod-autoscaler.admissionController.componentLabels" . }}
-{{- end -}}

@@ -51,6 +51,7 @@ spec:
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.updater.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.updater.image.pullPolicy }}
           args:
+            - --address=:{{ .Values.updater.containerPorts.metrics }}
             {{- range $key, $value := .Values.updater.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
@@ -73,7 +74,7 @@ spec:
           {{- end }}
           ports:
             - name: http-metrics
-              containerPort: 8943
+              containerPort: {{ .Values.updater.containerPorts.metrics }}
               protocol: TCP
           {{- if .Values.updater.livenessProbe.enabled }}
           livenessProbe:

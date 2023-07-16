@@ -77,96 +77,99 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ## Configuration
 
-The following tables lists all the configurable parameters expose by the chart and their default values.
-
 ### Global parameters
 
 | Name                      | Description                                     | Default |
-|---------------------------|-------------------------------------------------|---------|
+| ------------------------- | ----------------------------------------------- | ------- |
 | `global.imageRegistry`    | Global Docker image registry                    | `""`    |
 | `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]`    |
 
 ### Common parameters
 
 | Name                | Description                                                                                 | Default |
-|---------------------|---------------------------------------------------------------------------------------------|---------|
+| ------------------- | ------------------------------------------------------------------------------------------- | ------- |
 | `kubeVersion`       | Override Kubernetes version                                                                 | `""`    |
-| `nameOverride`      | Partially override `whoami.fullname` template with a string (will prepend the release name) | `nil`   |
-| `fullnameOverride`  | Fully override `whoami.fullname` template with a string                                     | `nil`   |
+| `nameOverride`      | Partially override `whoami.fullname` template with a string (will prepend the release name) | `""`    |
+| `fullnameOverride`  | Fully override `whoami.fullname` template with a string                                     | `""`    |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                  | `{}`    |
 | `commonLabels`      | Labels to add to all deployed objects                                                       | `{}`    |
 | `extraDeploy`       | Array of extra objects to deploy with the release                                           | `[]`    |
 
 ### Parameters
 
-| Name                                 | Description                                                                                           | Default                                        |
-|--------------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------|
-| `replicaCount`                       | Number of replicas                                                                                    | `1`                                            |
-| `image.registry`                     | Image registry                                                                                        | `docker.io`                                    |
-| `image.repository`                   | Image repository                                                                                      | `traefik/whoami`                               |
-| `image.tag`                          | Image tag                                                                                             | `v1.9.0`                                       |
-| `image.digest`                       | Image digest                                                                                          | `""`                                           |
-| `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`                                 |
-| `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                                        |
-| `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                            |
-| `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                                          |
-| `serviceAccount.create`              | Specify whether to create a ServiceAccount                                                            | `true`                                         |
-| `serviceAccount.annotations`         | ServiceAccount annotations                                                                            | `{}`                                           |
-| `serviceAccount.name`                | The name of the ServiceAccount to create                                                              | Generated using the `whoami.fullname` template |
-| `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                                           |
-| `podLabels`                          | Additional pod labels                                                                                 | `{}`                                           |
-| `podSecurityContext`                 | Pod security context                                                                                  | `{}`                                           |
-| `priorityClassName`                  | Priority class name                                                                                   | `nil`                                          |
-| `securityContext`                    | Container security context                                                                            | `{}`                                           |
-| `containerPorts.http`                | Container port for HTTP                                                                               | `80`                                           |
-| `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                                         |
-| `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `0`                                            |
-| `livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                               | `10`                                           |
-| `livenessProbe.timeoutSeconds`       | When the liveness probe times out                                                                     | `1`                                            |
-| `livenessProbe.failureThreshold`     | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                                            |
-| `livenessProbe.successThreshold`     | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                                            |
-| `readinessProbe.enabled`             | Enable readiness probe                                                                                | `true`                                         |
-| `readinessProbe.initialDelaySeconds` | Delay before the readiness probe is initiated                                                         | `0`                                            |
-| `readinessProbe.periodSeconds`       | How often to perform the readiness probe                                                              | `10`                                           |
-| `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                                            |
-| `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                            |
-| `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                            |
-| `service.annotations`                | Service annotations                                                                                   | `{}`                                           |
-| `service.type`                       | Service type                                                                                          | `ClusterIP`                                    |
-| `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                                          |
-| `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                                          |
-| `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                                          |
-| `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                                      |
-| `service.ports.http`                 | Service port for HTTP                                                                                 | `80`                                           |
-| `service.nodePorts.http`             | Service node port for HTTP when service type is LoadBalancer or NodePort                              | `nil`                                          |
-| `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                                        |
-| `ingress.ingressClassName`           | IngressClass that will be be used to implement the Ingress                                            | `""`                                           |
-| `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific`                       |
-| `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                                           |
-| `ingress.hosts[0].host`              | Hostname to your Whoami installation                                                                  | `whoami.local`                                 |
-| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `[/]`                                          |
-| `ingress.tls[0].secretName`          | TLS Secret (certificates)                                                                             | `nil`                                          |
-| `ingress.tls[0].hosts[0]`            | TLS hosts                                                                                             | `nil`                                          |
-| `resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                                           |
-| `nodeSelector`                       | Node labels for pod assignment                                                                        | `{}`                                           |
-| `tolerations`                        | Tolerations for pod assignment                                                                        | `[]`                                           |
-| `affinity`                           | Map of node/pod affinities                                                                            | `{}`                                           |
-| `extraArgs`                          | Additional container arguments                                                                        | `{}`                                           |
-| `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                                           |
-| `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                          |
-| `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                                          |
+| Name                                 | Description                                                                                           | Default                  |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------ |
+| `replicaCount`                       | Number of replicas                                                                                    | `1`                      |
+| `image.registry`                     | Image registry                                                                                        | `docker.io`              |
+| `image.repository`                   | Image repository                                                                                      | `traefik/whoami`         |
+| `image.tag`                          | Image tag                                                                                             | `v1.9.0`                 |
+| `image.digest`                       | Image digest                                                                                          | `""`                     |
+| `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
+| `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
+| `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                      |
+| `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                    |
+| `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
+| `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
+| `serviceAccount.name`                | The name of the service account to use (Generated using the `whoami.fullname` template if not set)    | `nil`                    |
+| `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
+| `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
+| `podSecurityContext`                 | Pod security context                                                                                  | `{}`                     |
+| `priorityClassName`                  | Priority class name                                                                                   | `nil`                    |
+| `securityContext`                    | Container security context                                                                            | `{}`                     |
+| `containerPorts.http`                | Container port for HTTP                                                                               | `80`                     |
+| `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                   |
+| `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `0`                      |
+| `livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                               | `10`                     |
+| `livenessProbe.timeoutSeconds`       | When the liveness probe times out                                                                     | `1`                      |
+| `livenessProbe.failureThreshold`     | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                      |
+| `livenessProbe.successThreshold`     | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                      |
+| `readinessProbe.enabled`             | Enable readiness probe                                                                                | `true`                   |
+| `readinessProbe.initialDelaySeconds` | Delay before the readiness probe is initiated                                                         | `0`                      |
+| `readinessProbe.periodSeconds`       | How often to perform the readiness probe                                                              | `10`                     |
+| `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                      |
+| `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                      |
+| `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                      |
+| `startupProbe.enabled`               | Enable startup probe                                                                                  | `false`                  |
+| `startupProbe.initialDelaySeconds`   | Delay before the startup probe is initiated                                                           | `0`                      |
+| `startupProbe.periodSeconds`         | How often to perform the startup probe                                                                | `10`                     |
+| `startupProbe.timeoutSeconds`        | When the startup probe times out                                                                      | `1`                      |
+| `startupProbe.failureThreshold`      | Minimum consecutive failures for the startup probe to be considered failed after having succeeded     | `3`                      |
+| `startupProbe.successThreshold`      | Minimum consecutive successes for the startup probe to be considered successful after having failed   | `1`                      |
+| `service.annotations`                | Service annotations                                                                                   | `{}`                     |
+| `service.type`                       | Service type                                                                                          | `ClusterIP`              |
+| `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
+| `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |
+| `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                    |
+| `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                |
+| `service.ports.http`                 | Service port for HTTP                                                                                 | `80`                     |
+| `service.nodePorts.http`             | Service node port for HTTP when service type is LoadBalancer or NodePort                              | `nil`                    |
+| `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                  |
+| `ingress.ingressClassName`           | IngressClass that will be be used to implement the Ingress                                            | `""`                     |
+| `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific` |
+| `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                     |
+| `ingress.hosts[0].host`              | Hostname to your Whoami installation                                                                  | `whoami.local`           |
+| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `["/"]`                  |
+| `ingress.tls`                        | TLS configuration                                                                                     | `[]`                     |
+| `resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                     |
+| `nodeSelector`                       | Node labels for pod assignment                                                                        | `{}`                     |
+| `tolerations`                        | Tolerations for pod assignment                                                                        | `[]`                     |
+| `affinity`                           | Map of node/pod affinities                                                                            | `{}`                     |
+| `extraArgs`                          | Additional container arguments                                                                        | `{}`                     |
+| `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                     |
+| `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
+| `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                    |
 
 ### Tests parameters
 
 | Name                     | Description       | Default              |
-|--------------------------|-------------------|----------------------|
+| ------------------------ | ----------------- | -------------------- |
 | `tests.image.registry`   | Image registry    | `ghcr.io`            |
 | `tests.image.repository` | Image repository  | `cowboysysop/pytest` |
 | `tests.image.tag`        | Image tag         | `1.0.35`             |
 | `tests.image.digest`     | Image digest      | `""`                 |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`       |
 
-### Setting parameters
+## Setting parameters
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

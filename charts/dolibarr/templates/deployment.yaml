@@ -30,7 +30,9 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
       annotations:
+        {{- if (not .Values.existingSecret) }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        {{- end }}
         {{- if .Values.podAnnotations }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.podAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
@@ -67,9 +69,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.extraArgs }}
+          {{- if .Values.extraArgs }}
           args:
-            {{- range $key, $value := . }}
+            {{- range $key, $value := .Values.extraArgs }}
             - --{{ $key }}={{ $value }}
             {{- end }}
           {{- end }}
@@ -80,7 +82,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "dolibarr.secretName" . }}
-                  key: dolibarr-admin-password
+                  key: {{ include "dolibarr.secretKeyAdminPassword" . }}
             - name: DOLI_DB_HOST
               value: {{ include "dolibarr.mariadb.host" . | quote }}
             - name: DOLI_DB_HOST_PORT
@@ -136,6 +138,17 @@ spec:
             failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
             successThreshold: {{ .Values.readinessProbe.successThreshold }}
           {{- end }}
+          {{- if .Values.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.startupProbe.failureThreshold }}
+            successThreshold: {{ .Values.startupProbe.successThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
@@ -147,6 +160,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.extraArgs }}
+          args:
+            {{- range $key, $value := .Values.extraArgs }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
           env:
             - name: DOLI_CRON
               value: "1"
@@ -156,7 +175,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "dolibarr.secretName" . }}
-                  key: dolibarr-cron-security-key
+                  key: {{ include "dolibarr.secretKeyCronSecurityKey" . }}
             - name: DOLI_DB_HOST
               value: {{ include "dolibarr.mariadb.host" . | quote }}
             - name: DOLI_DB_HOST_PORT
@@ -170,6 +189,20 @@ spec:
                   key: {{ include "dolibarr.mariadb.secretKeyNamePassword" . }}
             - name: DOLI_DB_NAME
               value: {{ include "dolibarr.mariadb.database" . | quote }}
+            {{- if .Values.extraEnvVars }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          {{- if or .Values.extraEnvVarsCM .Values.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

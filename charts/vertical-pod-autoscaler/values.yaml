@@ -149,6 +149,25 @@ admissionController:
     ## @param admissionController.readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
     successThreshold: 1
 
+  startupProbe:
+    ## @param admissionController.startupProbe.enabled Enable startup probe
+    enabled: false
+
+    ## @param admissionController.startupProbe.initialDelaySeconds Delay before the startup probe is initiated
+    initialDelaySeconds: 0
+
+    ## @param admissionController.startupProbe.periodSeconds How often to perform the startup probe
+    periodSeconds: 10
+
+    ## @param admissionController.startupProbe.timeoutSeconds When the startup probe times out
+    timeoutSeconds: 1
+
+    ## @param admissionController.startupProbe.failureThreshold Minimum consecutive failures for the startup probe to be considered failed after having succeeded
+    failureThreshold: 3
+
+    ## @param admissionController.startupProbe.successThreshold Minimum consecutive successes for the startup probe to be considered successful after having failed
+    successThreshold: 1
+
   service:
     ## @param admissionController.service.annotations Service annotations
     annotations: {}
@@ -372,6 +391,25 @@ recommender:
     failureThreshold: 3
 
     ## @param recommender.readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
+    successThreshold: 1
+
+  startupProbe:
+    ## @param recommender.startupProbe.enabled Enable startup probe
+    enabled: false
+
+    ## @param recommender.startupProbe.initialDelaySeconds Delay before the startup probe is initiated
+    initialDelaySeconds: 0
+
+    ## @param recommender.startupProbe.periodSeconds How often to perform the startup probe
+    periodSeconds: 10
+
+    ## @param recommender.startupProbe.timeoutSeconds When the startup probe times out
+    timeoutSeconds: 1
+
+    ## @param recommender.startupProbe.failureThreshold Minimum consecutive failures for the startup probe to be considered failed after having succeeded
+    failureThreshold: 3
+
+    ## @param recommender.startupProbe.successThreshold Minimum consecutive successes for the startup probe to be considered successful after having failed
     successThreshold: 1
 
   ## @param recommender.resources CPU/Memory resource requests/limits
@@ -601,6 +639,25 @@ updater:
     failureThreshold: 3
 
     ## @param updater.readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
+    successThreshold: 1
+
+  startupProbe:
+    ## @param updater.startupProbe.enabled Enable startup probe
+    enabled: false
+
+    ## @param updater.startupProbe.initialDelaySeconds Delay before the startup probe is initiated
+    initialDelaySeconds: 0
+
+    ## @param updater.startupProbe.periodSeconds How often to perform the startup probe
+    periodSeconds: 10
+
+    ## @param updater.startupProbe.timeoutSeconds When the startup probe times out
+    timeoutSeconds: 1
+
+    ## @param updater.startupProbe.failureThreshold Minimum consecutive failures for the startup probe to be considered failed after having succeeded
+    failureThreshold: 3
+
+    ## @param updater.startupProbe.successThreshold Minimum consecutive successes for the startup probe to be considered successful after having failed
     successThreshold: 1
 
   ## @param updater.resources CPU/Memory resource requests/limits

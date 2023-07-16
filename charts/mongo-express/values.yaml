@@ -138,6 +138,25 @@ readinessProbe:
   ## @param readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
   successThreshold: 1
 
+startupProbe:
+  ## @param startupProbe.enabled Enable startup probe
+  enabled: false
+
+  ## @param startupProbe.initialDelaySeconds Delay before the startup probe is initiated
+  initialDelaySeconds: 0
+
+  ## @param startupProbe.periodSeconds How often to perform the startup probe
+  periodSeconds: 10
+
+  ## @param startupProbe.timeoutSeconds When the startup probe times out
+  timeoutSeconds: 1
+
+  ## @param startupProbe.failureThreshold Minimum consecutive failures for the startup probe to be considered failed after having succeeded
+  failureThreshold: 3
+
+  ## @param startupProbe.successThreshold Minimum consecutive successes for the startup probe to be considered successful after having failed
+  successThreshold: 1
+
 service:
   ## @param service.annotations Service annotations
   annotations: {}

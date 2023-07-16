@@ -22,7 +22,7 @@ spec:
   clusterIP: {{ .Values.recommender.metrics.service.clusterIP }}
   {{- end }}
   ports:
-    - port: {{ .Values.recommender.metrics.service.port }}
+    - port: {{ .Values.recommender.metrics.service.ports.metrics }}
       targetPort: http-metrics
       protocol: TCP
       name: http-metrics

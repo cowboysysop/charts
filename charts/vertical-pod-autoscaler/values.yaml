@@ -2,83 +2,100 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+## @section Global parameters
+
 global:
-  # Global Docker image registry
+  ## @param global.imageRegistry Global Docker image registry
   imageRegistry: ""
 
-  # Global Docker registry secret names as an array
+  ## @param global.imagePullSecrets Global Docker registry secret names as an array
   imagePullSecrets: []
 
-# Override Kubernetes version
+## @section Common parameters
+
+## @param kubeVersion Override Kubernetes version
 kubeVersion: ""
 
+## @param nameOverride Partially override `vertical-pod-autoscaler.fullname` template with a string (will prepend the release name)
 nameOverride: ""
+
+## @param fullnameOverride Fully override `vertical-pod-autoscaler.fullname` template with a string
 fullnameOverride: ""
 
-# Annotations to add to all deployed objects
+## @param commonAnnotations Annotations to add to all deployed objects
 commonAnnotations: {}
 
-# Labels to add to all deployed objects
+## @param commonLabels Labels to add to all deployed objects
 commonLabels: {}
 
-# Array of extra objects to deploy with the release
+## @param extraDeploy Array of extra objects to deploy with the release
 extraDeploy: []
 
+## @section Admission controller parameters
+
 admissionController:
-  # Enable the component
+## @param admissionController.enabled Enable the component
   enabled: true
 
+  ## @param admissionController.replicaCount Number of replicas
   replicaCount: 1
 
   image:
-    # Image registry
+    ## @param admissionController.image.registry Image registry
     registry: registry.k8s.io
 
-    # Image repository
+    ## @param admissionController.image.repository Image repository
     repository: autoscaling/vpa-admission-controller
 
-    # Image tag
+    ## @param admissionController.image.tag Image tag
     tag: 0.14.0
 
-    # Image digest
+    ## @param admissionController.image.digest Image digest
     digest: ""
 
-    # Image pull policy
+    ## @param admissionController.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent
 
   pdb:
-    # Specifies whether a pod disruption budget should be created
+    ## @param admissionController.pdb.create Specifies whether a pod disruption budget should be created
     create: false
 
-    # Minimum number/percentage of pods that should remain scheduled
+    ## @param admissionController.pdb.minAvailable Minimum number/percentage of pods that should remain scheduled
     minAvailable: 1
 
-    # Maximum number/percentage of pods that may be made unavailable
+    ## @param admissionController.pdb.maxUnavailable Maximum number/percentage of pods that may be made unavailable
+    maxUnavailable:
     # maxUnavailable: 1
 
   serviceAccount:
-    # Specifies whether a service account should be created
+    ## @param admissionController.serviceAccount.create Specifies whether a service account should be created
     create: true
-    # Annotations to add to the service account
+
+    ## @param admissionController.serviceAccount.annotations Service account annotations
     annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
+
+    ## @param admissionController.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
 
-  # Additional pod annotations
+  ## @param admissionController.podAnnotations Additional pod annotations
   podAnnotations: {}
 
-  # Additional pod labels
+  ## @param admissionController.podLabels Additional pod labels
   podLabels: {}
 
+  ## @extra admissionController.podSecurityContext Pod security context
+  ## @param admissionController.podSecurityContext.runAsNonRoot Whether the container must run as a non-root user
+  ## @param admissionController.podSecurityContext.runAsUser The UID to run the entrypoint of the container process
   podSecurityContext:
     # fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 65534
 
-  # Priority class name
+  ## @param admissionController.priorityClassName Priority class name
+  priorityClassName:
   # priorityClassName : high-priority
 
+  ## @param admissionController.securityContext Container security context
   securityContext: {}
     # capabilities:
     #   drop:
@@ -87,62 +104,68 @@ admissionController:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  containerPorts:
+    ## @param admissionController.containerPorts.https Container port for HTTPS
+    https: 8000
+
+    ## @param admissionController.containerPorts.metrics Container port for Metrics
+    metrics: 8944
+
   livenessProbe:
-    # Enable liveness probe
+    ## @param admissionController.livenessProbe.enabled Enable liveness probe
     enabled: true
 
-    # Delay before the liveness probe is initiated
+    ## @param admissionController.livenessProbe.initialDelaySeconds Delay before the liveness probe is initiated
     initialDelaySeconds: 0
 
-    # How often to perform the liveness probe
+    ## @param admissionController.livenessProbe.periodSeconds How often to perform the liveness probe
     periodSeconds: 10
 
-    # When the liveness probe times out
+    ## @param admissionController.livenessProbe.timeoutSeconds When the liveness probe times out
     timeoutSeconds: 1
 
-    # Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
+    ## @param admissionController.livenessProbe.failureThreshold Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
     failureThreshold: 3
 
-    # Minimum consecutive successes for the liveness probe to be considered successful after having failed
+    ## @param admissionController.livenessProbe.successThreshold Minimum consecutive successes for the liveness probe to be considered successful after having failed
     successThreshold: 1
 
   readinessProbe:
-    # Enable readiness probe
+    ## @param admissionController.readinessProbe.enabled Enable readiness probe
     enabled: true
 
-    # Delay before the readiness probe is initiated
+    ## @param admissionController.readinessProbe.initialDelaySeconds Delay before the readiness probe is initiated
     initialDelaySeconds: 0
 
-    # How often to perform the readiness probe
+    ## @param admissionController.readinessProbe.periodSeconds How often to perform the readiness probe
     periodSeconds: 10
 
-    # When the readiness probe times out
+    ## @param admissionController.readinessProbe.timeoutSeconds When the readiness probe times out
     timeoutSeconds: 1
 
-    # Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
+    ## @param admissionController.readinessProbe.failureThreshold Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
     failureThreshold: 3
 
-    # Minimum consecutive successes for the readiness probe to be considered successful after having failed
+    ## @param admissionController.readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
     successThreshold: 1
 
   service:
-    # Service annotations
+    ## @param admissionController.service.annotations Service annotations
     annotations: {}
 
-    # Service type
+    ## @param admissionController.service.type Service type
     type: ClusterIP
 
-    # Static cluster IP address or None for headless service when service type is ClusterIP
+    ## @param admissionController.service.clusterIP Static cluster IP address or None for headless service when service type is ClusterIP
+    clusterIP:
     # clusterIP: 10.43.0.100
 
-    # Service port
-    # port: 8000
+    ports:
+      ## @param admissionController.service.ports.https Service port for HTTPS (do not change it)
+      https: 443
 
+  ## @param admissionController.resources CPU/Memory resource requests/limits
   resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
     # limits:
     #   cpu: 200m
     #   memory: 512Mi
@@ -150,12 +173,17 @@ admissionController:
     #   cpu: 50m
     #   memory: 256Mi
 
+  ## @param admissionController.nodeSelector Node labels for pod assignment
   nodeSelector: {}
 
+  ## @param admissionController.tolerations Tolerations for pod assignment
   tolerations: []
 
+  ## @param admissionController.affinity Map of node/pod affinities
   affinity: {}
 
+  ## @extra admissionController.extraArgs [object] Additional container arguments
+  ## @param admissionController.extraArgs.v Number for the log level verbosity
   extraArgs:
     # kube-api-burst: 10
     # kube-api-qps: 5
@@ -163,107 +191,139 @@ admissionController:
     # vpa-object-namespace: ""
     # webhook-timeout-seconds: 30
 
-  # Additional container environment variables
+  ## @param admissionController.extraEnvVars Additional container environment variables
   extraEnvVars: []
-  #  - name: MY-NAME
-  #    value: "MY-VALUE"
+    # - name: MY-NAME
+    #   value: "MY-VALUE"
 
-  # Name of existing ConfigMap containing additional container environment variables
+  ## @param admissionController.extraEnvVarsCM Name of existing ConfigMap containing additional container environment variables
   extraEnvVarsCM:
 
-  # Name of existing Secret containing additional container environment variables
+  ## @param admissionController.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
 
   metrics:
     service:
-      # Metrics service annotations
+      ## @param admissionController.metrics.service.annotations Metrics service annotations
       annotations: {}
 
-      # Metrics service type
+      ## @param admissionController.metrics.service.type Metrics service type
       type: ClusterIP
 
-      # Metrics static cluster IP address or None for headless service when service type is ClusterIP
+      ## @param admissionController.metrics.service.clusterIP Metrics static cluster IP address or None for headless service when service type is ClusterIP
+      clusterIP:
       # clusterIP: 10.43.0.100
 
-      # Metrics service port
-      port: 8944
+      ports:
+        ## @param admissionController.metrics.service.ports.metrics Metrics service port for Metrics
+        metrics: 8944
 
     serviceMonitor:
-      # Specifies whether a service monitor should be created
+      ## @param admissionController.metrics.serviceMonitor.enabled Specifies whether a service monitor should be created
       enabled: false
-      # Extra annotations for the ServiceMonitor
+
+      ## @param admissionController.metrics.serviceMonitor.namespace Namespace in which to create the service monitor
+      namespace: ""
+
+      ## @param admissionController.metrics.serviceMonitor.annotations Service monitor annotations
       annotations: {}
-      # Extra labels for the ServiceMonitor
+
+      ## @param admissionController.metrics.serviceMonitor.labels Additional service monitor labels
       labels: {}
-      # The name of the label on the target service to use as the job name in Prometheus
+
+      ## @param admissionController.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in Prometheus
       jobLabel: ""
-      # How frequently to scrape metrics
+
+      ## @param admissionController.metrics.serviceMonitor.honorLabels Whether to choose the metric’s labels on collisions with target labels
+      honorLabels: false
+
+      ## @param admissionController.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       interval: ""
-      # Timeout after which the scrape is ended
+
+      ## @param admissionController.metrics.serviceMonitor.scrapeTimeout Timeout after which the scrape is ended
       scrapeTimeout: ""
-      # Specify additional relabeling of metrics
+
+      ## @param admissionController.metrics.serviceMonitor.metricRelabelings Specify additional relabeling of metrics
       metricRelabelings: []
-      # Specify general relabeling
+
+      ## @param admissionController.metrics.serviceMonitor.relabelings Specify general relabeling
       relabelings: []
 
   tls:
+    ## @param admissionController.tls.caCert TLS CA certificate (Generated using the `genCA` function if not set)
     caCert: ""
+
+    ## @param admissionController.tls.cert TLS certificate (Generated using the `genSignedCert` function if not set)
     cert: ""
+
+    ## @param admissionController.tls.key TLS private key (Generated using the `genSignedCert` function if not set)
     key: ""
+
+    ## @param admissionController.tls.existingSecret Name of existing TLS Secret to use
     existingSecret: ""
 
+## @section Recommender parameters
+
 recommender:
+## @param recommender.replicaCount Number of replicas
   replicaCount: 1
 
   image:
-    # Image registry
+    ## @param recommender.image.registry Image registry
     registry: registry.k8s.io
 
-    # Image repository
+    ## @param recommender.image.repository Image repository
     repository: autoscaling/vpa-recommender
 
-    # Image tag
+    ## @param recommender.image.tag Image tag
     tag: 0.14.0
 
-    # Image digest
+    ## @param recommender.image.digest Image digest
     digest: ""
 
-    # Image pull policy
+    ## @param recommender.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent
 
   pdb:
-    # Specifies whether a pod disruption budget should be created
+    ## @param recommender.pdb.create Specifies whether a pod disruption budget should be created
     create: false
 
-    # Minimum number/percentage of pods that should remain scheduled
+    ## @param recommender.pdb.minAvailable Minimum number/percentage of pods that should remain scheduled
     minAvailable: 1
 
-    # Maximum number/percentage of pods that may be made unavailable
+    ## @param recommender.pdb.maxUnavailable Maximum number/percentage of pods that may be made unavailable
+    maxUnavailable:
     # maxUnavailable: 1
 
   serviceAccount:
-    # Specifies whether a service account should be created
+    ## @param recommender.serviceAccount.create Specifies whether a service account should be created
     create: true
-    # Annotations to add to the service account
+
+    ## @param recommender.serviceAccount.annotations Service account annotations
     annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
+
+    ## @param recommender.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
 
-  # Additional pod annotations
+  ## @param recommender.podAnnotations Additional pod annotations
   podAnnotations: {}
 
-  # Additional pod labels
+  ## @param recommender.podLabels Additional pod labels
   podLabels: {}
 
+  ## @extra recommender.podSecurityContext Pod security context
+  ## @param recommender.podSecurityContext.runAsNonRoot Whether the container must run as a non-root user
+  ## @param recommender.podSecurityContext.runAsUser The UID to run the entrypoint of the container process
   podSecurityContext:
     # fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 65534
 
-  # Priority class name
+  ## @param recommender.priorityClassName Priority class name
+  priorityClassName:
   # priorityClassName : high-priority
 
+  ## @param recommender.securityContext Container security context
   securityContext: {}
     # capabilities:
     #   drop:
@@ -272,49 +332,50 @@ recommender:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  containerPorts:
+    ## @param recommender.containerPorts.metrics Container port for Metrics
+    metrics: 8942
+
   livenessProbe:
-    # Enable liveness probe
+    ## @param recommender.livenessProbe.enabled Enable liveness probe
     enabled: true
 
-    # Delay before the liveness probe is initiated
+    ## @param recommender.livenessProbe.initialDelaySeconds Delay before the liveness probe is initiated
     initialDelaySeconds: 0
 
-    # How often to perform the liveness probe
+    ## @param recommender.livenessProbe.periodSeconds How often to perform the liveness probe
     periodSeconds: 10
 
-    # When the liveness probe times out
+    ## @param recommender.livenessProbe.timeoutSeconds When the liveness probe times out
     timeoutSeconds: 1
 
-    # Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
+    ## @param recommender.livenessProbe.failureThreshold Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
     failureThreshold: 3
 
-    # Minimum consecutive successes for the liveness probe to be considered successful after having failed
+    ## @param recommender.livenessProbe.successThreshold Minimum consecutive successes for the liveness probe to be considered successful after having failed
     successThreshold: 1
 
   readinessProbe:
-    # Enable readiness probe
+    ## @param recommender.readinessProbe.enabled Enable readiness probe
     enabled: true
 
-    # Delay before the readiness probe is initiated
+    ## @param recommender.readinessProbe.initialDelaySeconds Delay before the readiness probe is initiated
     initialDelaySeconds: 0
 
-    # How often to perform the readiness probe
+    ## @param recommender.readinessProbe.periodSeconds How often to perform the readiness probe
     periodSeconds: 10
 
-    # When the readiness probe times out
+    ## @param recommender.readinessProbe.timeoutSeconds When the readiness probe times out
     timeoutSeconds: 1
 
-    # Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
+    ## @param recommender.readinessProbe.failureThreshold Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
     failureThreshold: 3
 
-    # Minimum consecutive successes for the readiness probe to be considered successful after having failed
+    ## @param recommender.readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
     successThreshold: 1
 
+  ## @param recommender.resources CPU/Memory resource requests/limits
   resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
     # limits:
     #   cpu: 200m
     #   memory: 1024Mi
@@ -322,12 +383,17 @@ recommender:
     #   cpu: 50m
     #   memory: 512Mi
 
+  ## @param recommender.nodeSelector Node labels for pod assignment
   nodeSelector: {}
 
+  ## @param recommender.tolerations Tolerations for pod assignment
   tolerations: []
 
+  ## @param recommender.affinity Map of node/pod affinities
   affinity: {}
 
+  ## @extra recommender.extraArgs [object] Additional container arguments
+  ## @param recommender.extraArgs.v Number for the log level verbosity
   extraArgs:
     # checkpoints-gc-interval: 10m0s
     # checkpoints-timeout: 1m0s
@@ -364,104 +430,129 @@ recommender:
     v: 2
     # vpa-object-namespace: ""
 
-  # Additional container environment variables
+  ## @param recommender.extraEnvVars Additional container environment variables
   extraEnvVars: []
-  #  - name: MY-NAME
-  #    value: "MY-VALUE"
+    # - name: MY-NAME
+    #   value: "MY-VALUE"
 
-  # Name of existing ConfigMap containing additional container environment variables
+  ## @param recommender.extraEnvVarsCM Name of existing ConfigMap containing additional container environment variables
   extraEnvVarsCM:
 
-  # Name of existing Secret containing additional container environment variables
+  ## @param recommender.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
 
   metrics:
     service:
-      # Metrics service annotations
+      ## @param recommender.metrics.service.annotations Metrics service annotations
       annotations: {}
 
-      # Metrics service type
+      ## @param recommender.metrics.service.type Metrics service type
       type: ClusterIP
 
-      # Metrics static cluster IP address or None for headless service when service type is ClusterIP
+      ## @param recommender.metrics.service.clusterIP Metrics static cluster IP address or None for headless service when service type is ClusterIP
+      clusterIP:
       # clusterIP: 10.43.0.100
 
-      # Metrics service port
-      port: 8942
+      ports:
+        ## @param recommender.metrics.service.ports.metrics Metrics service port for Metrics
+        metrics: 8942
 
     serviceMonitor:
-      # Specifies whether a service monitor should be created
+      ## @param recommender.metrics.serviceMonitor.enabled Specifies whether a service monitor should be created
       enabled: false
-      # Extra annotations for the ServiceMonitor
+
+      ## @param recommender.metrics.serviceMonitor.namespace Namespace in which to create the service monitor
+      namespace: ""
+
+      ## @param recommender.metrics.serviceMonitor.annotations Service monitor annotations
       annotations: {}
-      # Extra labels for the ServiceMonitor
+
+      ## @param recommender.metrics.serviceMonitor.labels Additional service monitor labels
       labels: {}
-      # The name of the label on the target service to use as the job name in Prometheus
+
+      ## @param recommender.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in Prometheus
       jobLabel: ""
-      # How frequently to scrape metrics
+
+      ## @param recommender.metrics.serviceMonitor.honorLabels Whether to choose the metric’s labels on collisions with target labels
+      honorLabels: false
+
+      ## @param recommender.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       interval: ""
-      # Timeout after which the scrape is ended
+
+      ## @param recommender.metrics.serviceMonitor.scrapeTimeout Timeout after which the scrape is ended
       scrapeTimeout: ""
-      # Specify additional relabeling of metrics
+
+      ## @param recommender.metrics.serviceMonitor.metricRelabelings Specify additional relabeling of metrics
       metricRelabelings: []
-      # Specify general relabeling
+
+      ## @param recommender.metrics.serviceMonitor.relabelings Specify general relabeling
       relabelings: []
 
+## @section Updater parameters
+
 updater:
-  # Enable the component
+## @param updater.enabled Enable the component
   enabled: true
 
+  ## @param updater.replicaCount Number of replicas
   replicaCount: 1
 
   image:
-    # Image registry
+    ## @param updater.image.registry Image registry
     registry: registry.k8s.io
 
-    # Image repository
+    ## @param updater.image.repository Image repository
     repository: autoscaling/vpa-updater
 
-    # Image tag
+    ## @param updater.image.tag Image tag
     tag: 0.14.0
 
-    # Image digest
+    ## @param updater.image.digest Image digest
     digest: ""
 
-    # Image pull policy
+    ## @param updater.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent
 
   pdb:
-    # Specifies whether a pod disruption budget should be created
+    ## @param updater.pdb.create Specifies whether a pod disruption budget should be created
     create: false
 
-    # Minimum number/percentage of pods that should remain scheduled
+    ## @param updater.pdb.minAvailable Minimum number/percentage of pods that should remain scheduled
     minAvailable: 1
 
-    # Maximum number/percentage of pods that may be made unavailable
+    ## @param updater.pdb.maxUnavailable Maximum number/percentage of pods that may be made unavailable
+    maxUnavailable:
     # maxUnavailable: 1
 
   serviceAccount:
-    # Specifies whether a service account should be created
+    ## @param updater.serviceAccount.create Specifies whether a service account should be created
     create: true
-    # Annotations to add to the service account
+
+    ## @param updater.serviceAccount.annotations Service account annotations
     annotations: {}
-    # The name of the service account to use.
-    # If not set and create is true, a name is generated using the fullname template
+
+    ## @param updater.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
 
-  # Additional pod annotations
+  ## @param updater.podAnnotations Additional pod annotations
   podAnnotations: {}
 
-  # Additional pod labels
+  ## @param updater.podLabels Additional pod labels
   podLabels: {}
 
+  ## @extra updater.podSecurityContext Pod security context
+  ## @param updater.podSecurityContext.runAsNonRoot Whether the container must run as a non-root user
+  ## @param updater.podSecurityContext.runAsUser The UID to run the entrypoint of the container process
   podSecurityContext:
     # fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 65534
 
-  # Priority class name
+  ## @param updater.priorityClassName Priority class name
+  priorityClassName:
   # priorityClassName : high-priority
 
+  ## @param updater.securityContext Container security context
   securityContext: {}
     # capabilities:
     #   drop:
@@ -470,49 +561,50 @@ updater:
     # runAsNonRoot: true
     # runAsUser: 1000
 
+  containerPorts:
+    ## @param updater.containerPorts.metrics Container port for Metrics
+    metrics: 8943
+
   livenessProbe:
-    # Enable liveness probe
+    ## @param updater.livenessProbe.enabled Enable liveness probe
     enabled: true
 
-    # Delay before the liveness probe is initiated
+    ## @param updater.livenessProbe.initialDelaySeconds Delay before the liveness probe is initiated
     initialDelaySeconds: 0
 
-    # How often to perform the liveness probe
+    ## @param updater.livenessProbe.periodSeconds How often to perform the liveness probe
     periodSeconds: 10
 
-    # When the liveness probe times out
+    ## @param updater.livenessProbe.timeoutSeconds When the liveness probe times out
     timeoutSeconds: 1
 
-    # Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
+    ## @param updater.livenessProbe.failureThreshold Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
     failureThreshold: 3
 
-    # Minimum consecutive successes for the liveness probe to be considered successful after having failed
+    ## @param updater.livenessProbe.successThreshold Minimum consecutive successes for the liveness probe to be considered successful after having failed
     successThreshold: 1
 
   readinessProbe:
-    # Enable readiness probe
+    ## @param updater.readinessProbe.enabled Enable readiness probe
     enabled: true
 
-    # Delay before the readiness probe is initiated
+    ## @param updater.readinessProbe.initialDelaySeconds Delay before the readiness probe is initiated
     initialDelaySeconds: 0
 
-    # How often to perform the readiness probe
+    ## @param updater.readinessProbe.periodSeconds How often to perform the readiness probe
     periodSeconds: 10
 
-    # When the readiness probe times out
+    ## @param updater.readinessProbe.timeoutSeconds When the readiness probe times out
     timeoutSeconds: 1
 
-    # Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
+    ## @param updater.readinessProbe.failureThreshold Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
     failureThreshold: 3
 
-    # Minimum consecutive successes for the readiness probe to be considered successful after having failed
+    ## @param updater.readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
     successThreshold: 1
 
+  ## @param updater.resources CPU/Memory resource requests/limits
   resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
     # limits:
     #   cpu: 200m
     #   memory: 1024Mi
@@ -520,12 +612,17 @@ updater:
     #   cpu: 50m
     #   memory: 512Mi
 
+  ## @param updater.nodeSelector Node labels for pod assignment
   nodeSelector: {}
 
+  ## @param updater.tolerations Tolerations for pod assignment
   tolerations: []
 
+  ## @param updater.affinity Map of node/pod affinities
   affinity: {}
 
+  ## @extra updater.extraArgs [object] Additional container arguments
+  ## @param updater.extraArgs.v Number for the log level verbosity
   extraArgs:
     # evict-after-oom-threshold: 10m0s
     # eviction-rate-burst: 1
@@ -541,87 +638,110 @@ updater:
     v: 2
     # vpa-object-namespace: ""
 
-  # Additional container environment variables
+  ## @param updater.extraEnvVars Additional container environment variables
   extraEnvVars: []
-  #  - name: MY-NAME
-  #    value: "MY-VALUE"
+    # - name: MY-NAME
+    #   value: "MY-VALUE"
 
-  # Name of existing ConfigMap containing additional container environment variables
+  ## @param updater.extraEnvVarsCM Name of existing ConfigMap containing additional container environment variables
   extraEnvVarsCM:
 
-  # Name of existing Secret containing additional container environment variables
+  ## @param updater.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
 
   metrics:
     service:
-      # Metrics service annotations
+      ## @param updater.metrics.service.annotations Metrics service annotations
       annotations: {}
 
-      # Metrics service type
+      ## @param updater.metrics.service.type Metrics service type
       type: ClusterIP
 
-      # Metrics static cluster IP address or None for headless service when service type is ClusterIP
+      ## @param updater.metrics.service.clusterIP Metrics static cluster IP address or None for headless service when service type is ClusterIP
+      clusterIP:
       # clusterIP: 10.43.0.100
 
-      # Metrics service port
-      port: 8943
+      ports:
+        ## @param updater.metrics.service.ports.metrics Metrics service port for Metrics
+        metrics: 8943
+
     serviceMonitor:
-      # Specifies whether a service monitor should be created
+      ## @param updater.metrics.serviceMonitor.enabled Specifies whether a service monitor should be created
       enabled: false
-      # Extra annotations for the ServiceMonitor
+
+      ## @param updater.metrics.serviceMonitor.namespace Namespace in which to create the service monitor
+      namespace: ""
+
+      ## @param updater.metrics.serviceMonitor.annotations Service monitor annotations
       annotations: {}
-      # Extra labels for the ServiceMonitor
+
+      ## @param updater.metrics.serviceMonitor.labels Additional service monitor labels
       labels: {}
-      # The name of the label on the target service to use as the job name in Prometheus
+
+      ## @param updater.metrics.serviceMonitor.jobLabel The name of the label on the target service to use as the job name in Prometheus
       jobLabel: ""
-      # How frequently to scrape metrics
+
+      ## @param updater.metrics.serviceMonitor.honorLabels Whether to choose the metric’s labels on collisions with target labels
+      honorLabels: false
+
+      ## @param updater.metrics.serviceMonitor.interval Interval at which metrics should be scraped
       interval: ""
-      # Timeout after which the scrape is ended
+
+      ## @param updater.metrics.serviceMonitor.scrapeTimeout Timeout after which the scrape is ended
       scrapeTimeout: ""
-      # Specify additional relabeling of metrics
+
+      ## @param updater.metrics.serviceMonitor.metricRelabelings Specify additional relabeling of metrics
       metricRelabelings: []
-      # Specify general relabeling
+
+      ## @param updater.metrics.serviceMonitor.relabelings Specify general relabeling
       relabelings: []
+
+## @section CRDs parameters
 
 crds:
   image:
-    # Image registry
+    ## @param crds.image.registry Image registry
     registry: docker.io
 
-    # Image repository
+    ## @param crds.image.repository Image repository
     repository: bitnami/kubectl
 
-    # Image tag
+    ## @param crds.image.tag Image tag
     tag: 1.26.3
 
-    # Image digest
+    ## @param crds.image.digest Image digest
     digest: ""
 
-    # Image pull policy
+    ## @param crds.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent
 
-  # Additional pod annotations
+  ## @param crds.podAnnotations Additional pod annotations
   podAnnotations: {}
 
+  ## @param crds.nodeSelector Node labels for pod assignment
   nodeSelector: {}
 
+  ## @param crds.tolerations Tolerations for pod assignment
   tolerations: []
 
+  ## @param crds.affinity Map of node/pod affinities
   affinity: {}
+
+## @section Tests parameters
 
 tests:
   image:
-    # Image registry
+    ## @param tests.image.registry Image registry
     registry: ghcr.io
 
-    # Image repository
+    ## @param tests.image.repository Image repository
     repository: cowboysysop/pytest
 
-    # Image tag
+    ## @param tests.image.tag Image tag
     tag: 1.0.35
 
-    # Image digest
+    ## @param tests.image.digest Image digest
     digest: ""
 
-    # Image pull policy
+    ## @param tests.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent

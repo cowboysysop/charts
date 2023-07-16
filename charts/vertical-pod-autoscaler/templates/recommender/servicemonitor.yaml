@@ -3,8 +3,12 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: {{ include "vertical-pod-autoscaler.recommender.fullname" . }}
+  namespace: {{ default .Release.Namespace .Values.recommender.metrics.serviceMonitor.namespace | quote }}
   labels:
-    {{- include "vertical-pod-autoscaler.recommender.metrics.serviceMonitor.labels" . | nindent 4 }}
+    {{- include "vertical-pod-autoscaler.recommender.labels" . | nindent 4 }}
+    {{- if .Values.recommender.metrics.serviceMonitor.labels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.recommender.metrics.serviceMonitor.labels "context" $ ) | nindent 4 }}
+    {{- end }}
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
@@ -29,6 +33,9 @@ spec:
       {{- if .Values.recommender.metrics.serviceMonitor.scrapeTimeout }}
       scrapeTimeout: {{ .Values.recommender.metrics.serviceMonitor.scrapeTimeout }}
       {{- end}}
+      {{- if .Values.recommender.metrics.serviceMonitor.honorLabels }}
+      honorLabels: {{ .Values.recommender.metrics.serviceMonitor.honorLabels }}
+      {{- end}}
       {{- if .Values.recommender.metrics.serviceMonitor.metricRelabelings }}
       metricRelabelings: {{ toYaml .Values.recommender.metrics.serviceMonitor.metricRelabelings | nindent 8 }}
       {{- end }}
@@ -38,7 +45,7 @@ spec:
       path: /metrics
   namespaceSelector:
     matchNames:
-    - {{ .Release.Namespace | quote }}
+      - {{ .Release.Namespace | quote }}
   selector:
     matchLabels:
       {{- include "vertical-pod-autoscaler.recommender.selectorLabels" . | nindent 6 }}

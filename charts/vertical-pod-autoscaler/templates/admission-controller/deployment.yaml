@@ -28,7 +28,9 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
       annotations:
+        {{- if (not .Values.admissionController.tls.existingSecret) }}
         checksum/tls-secret: {{ include (print $.Template.BasePath "/admission-controller/tls-secret.yaml") . | sha256sum }}
+        {{- end }}
         {{- if .Values.admissionController.podAnnotations }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.admissionController.podAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
@@ -50,6 +52,8 @@ spec:
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.admissionController.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.admissionController.image.pullPolicy }}
           args:
+            - --address=:{{ .Values.admissionController.containerPorts.metrics }}
+            - --port={{ .Values.admissionController.containerPorts.https }}
             - --client-ca-file=/tls-secret/ca.crt
             - --tls-cert-file=/tls-secret/tls.crt
             - --tls-private-key=/tls-secret/tls.key
@@ -75,10 +79,10 @@ spec:
           {{- end }}
           ports:
             - name: https
-              containerPort: 8000
+              containerPort: {{ .Values.admissionController.containerPorts.https }}
               protocol: TCP
             - name: http-metrics
-              containerPort: 8944
+              containerPort: {{ .Values.admissionController.containerPorts.metrics }}
               protocol: TCP
           {{- if .Values.admissionController.livenessProbe.enabled }}
           livenessProbe:

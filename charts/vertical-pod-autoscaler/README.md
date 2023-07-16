@@ -44,6 +44,14 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 8.0.0
+
+Some parameters related to port management have been modified:
+
+- Parameter `admissionController.metrics.service.port` has been renamed `admissionController.metrics.service.ports.metrics`.
+- Parameter `recommender.metrics.service.port` has been renamed `recommender.metrics.service.ports.metrics`.
+- Parameter `updater.metrics.service.port` has been renamed `updater.metrics.service.ports.metrics`.
+
 ### Upgrading to version 7.0.0
 
 Some parameters related to image management have been modified:
@@ -80,12 +88,6 @@ The port names have been changed to be compatible with Istio service mesh.
 
 ## Uninstalling
 
-Delete the `vpa-webhook-config` mutating webhook configuration automatically created by Vertical Pod Autoscaler admission controller component using:
-
-```bash
-$ kubectl delete mutatingwebhookconfiguration vpa-webhook-config
-```
-
 Uninstall the `my-release` deployment using:
 
 ```bash
@@ -95,6 +97,12 @@ $ helm uninstall my-release
 The command deletes the release named `my-release` and frees all the kubernetes resources associated with the release.
 
 **TIP**: Specify the `--purge` argument to the above command to remove the release from the store and make its name free for later use.
+
+Delete the `vpa-webhook-config` mutating webhook configuration automatically created by Vertical Pod Autoscaler admission controller component using:
+
+```bash
+$ kubectl delete mutatingwebhookconfiguration vpa-webhook-config
+```
 
 Optionally, delete the custom resource definitions created by the chart using:
 
@@ -107,222 +115,240 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 
 ## Configuration
 
-The following tables lists all the configurable parameters expose by the chart and their default values.
-
 ### Global parameters
 
 | Name                      | Description                                     | Default |
-|---------------------------|-------------------------------------------------|---------|
+| ------------------------- | ----------------------------------------------- | ------- |
 | `global.imageRegistry`    | Global Docker image registry                    | `""`    |
 | `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]`    |
 
 ### Common parameters
 
 | Name                | Description                                                                                                  | Default |
-|---------------------|--------------------------------------------------------------------------------------------------------------|---------|
+| ------------------- | ------------------------------------------------------------------------------------------------------------ | ------- |
 | `kubeVersion`       | Override Kubernetes version                                                                                  | `""`    |
-| `nameOverride`      | Partially override `vertical-pod-autoscaler.fullname` template with a string (will prepend the release name) | `nil`   |
-| `fullnameOverride`  | Fully override `vertical-pod-autoscaler.fullname` template with a string                                     | `nil`   |
+| `nameOverride`      | Partially override `vertical-pod-autoscaler.fullname` template with a string (will prepend the release name) | `""`    |
+| `fullnameOverride`  | Fully override `vertical-pod-autoscaler.fullname` template with a string                                     | `""`    |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                                   | `{}`    |
 | `commonLabels`      | Labels to add to all deployed objects                                                                        | `{}`    |
 | `extraDeploy`       | Array of extra objects to deploy with the release                                                            | `[]`    |
 
 ### Admission controller parameters
 
-| Name                                                           | Description                                                                                           | Default                                                                             |
-|----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
-| `admissionController.enabled`                                  | Enable the component                                                                                  | `true`                                                                              |
-| `admissionController.replicaCount`                             | Number of replicas                                                                                    | `1`                                                                                 |
-| `admissionController.image.registry`                           | Image registry                                                                                        | `registry.k8s.io`                                                                   |
-| `admissionController.image.repository`                         | Image repository                                                                                      | `autoscaling/vpa-admission-controller`                                              |
-| `admissionController.image.tag`                                | Image tag                                                                                             | `0.14.0`                                                                            |
-| `admissionController.image.digest`                             | Image digest                                                                                          | `""`                                                                                |
-| `admissionController.image.pullPolicy`                         | Image pull policy                                                                                     | `IfNotPresent`                                                                      |
-| `admissionController.pdb.create`                               | Specifies whether a pod disruption budget should be created                                           | `false`                                                                             |
-| `admissionController.pdb.minAvailable`                         | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                                 |
-| `admissionController.pdb.maxUnavailable`                       | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                                                                               |
-| `admissionController.serviceAccount.create`                    | Specify whether to create a ServiceAccount                                                            | `true`                                                                              |
-| `admissionController.serviceAccount.annotations`               | ServiceAccount annotations                                                                            | `{}`                                                                                |
-| `admissionController.serviceAccount.name`                      | The name of the ServiceAccount to create                                                              | Generated using the `vertical-pod-autoscaler.admissionController.fullname` template |
-| `admissionController.podAnnotations`                           | Additional pod annotations                                                                            | `{}`                                                                                |
-| `admissionController.podLabels`                                | Additional pod labels                                                                                 | `{}`                                                                                |
-| `admissionController.podSecurityContext`                       | Pod security context                                                                                  | `{ runAsNonRoot: true, runAsUser: 65534 }`                                          |
-| `admissionController.priorityClassName`                        | Priority class name                                                                                   | `nil`                                                                               |
-| `admissionController.securityContext`                          | Container security context                                                                            | `{}`                                                                                |
-| `admissionController.livenessProbe.enabled`                    | Enable liveness probe                                                                                 | `true`                                                                              |
-| `admissionController.livenessProbe.initialDelaySeconds`        | Delay before the liveness probe is initiated                                                          | `0`                                                                                 |
-| `admissionController.livenessProbe.periodSeconds`              | How often to perform the liveness probe                                                               | `10`                                                                                |
-| `admissionController.livenessProbe.timeoutSeconds`             | When the liveness probe times out                                                                     | `1`                                                                                 |
-| `admissionController.livenessProbe.failureThreshold`           | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                                                                                 |
-| `admissionController.livenessProbe.successThreshold`           | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                                                                                 |
-| `admissionController.readinessProbe.enabled`                   | Enable readiness probe                                                                                | `true`                                                                              |
-| `admissionController.readinessProbe.initialDelaySeconds`       | Delay before the readiness probe is initiated                                                         | `0`                                                                                 |
-| `admissionController.readinessProbe.periodSeconds`             | How often to perform the readiness probe                                                              | `10`                                                                                |
-| `admissionController.readinessProbe.timeoutSeconds`            | When the readiness probe times out                                                                    | `1`                                                                                 |
-| `admissionController.readinessProbe.failureThreshold`          | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                                                                 |
-| `admissionController.readinessProbe.successThreshold`          | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                                                                 |
-| `admissionController.service.annotations`                      | Service annotations                                                                                   | `{}`                                                                                |
-| `admissionController.service.type`                             | Service type                                                                                          | `ClusterIP`                                                                         |
-| `admissionController.service.clusterIP`                        | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                                                                               |
-| `admissionController.resources`                                | CPU/Memory resource requests/limits                                                                   | `{}`                                                                                |
-| `admissionController.nodeSelector`                             | Node labels for pod assignment                                                                        | `{}`                                                                                |
-| `admissionController.tolerations`                              | Tolerations for pod assignment                                                                        | `[]`                                                                                |
-| `admissionController.affinity`                                 | Map of node/pod affinities                                                                            | `{}`                                                                                |
-| `admissionController.extraArgs`                                | Additional container arguments                                                                        | `{ v: 2 }`                                                                          |
-| `admissionController.extraEnvVars`                             | Additional container environment variables                                                            | `[]`                                                                                |
-| `admissionController.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                                               |
-| `admissionController.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables                         | `nil`                                                                               |
-| `admissionController.metrics.service.annotations`              | Metrics service annotations                                                                           | `{}`                                                                                |
-| `admissionController.metrics.service.type`                     | Metrics service type                                                                                  | `ClusterIP`                                                                         |
-| `admissionController.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                                               |
-| `admissionController.metrics.service.port`                     | Metrics service port                                                                                  | `8944`                                                                              |
-| `admissionController.metrics.serviceMonitor.enabled`           | Specifies whether a service monitor should be created                                                 | `false`                                                                             |
-| `admissionController.metrics.serviceMonitor.annotations`       | Extra annotations for the ServiceMonitor                                                              | `{}`                                                                                |
-| `admissionController.metrics.serviceMonitor.labels`            | Extra labels for the ServiceMonitor                                                                   | `{}`                                                                                |
-| `admissionController.metrics.serviceMonitor.jobLabel`          | The name of the label on the target service to use as the job name in Prometheus                      | `""`                                                                                |
-| `admissionController.metrics.serviceMonitor.interval`          | How frequently to scrape metrics                                                                      | `""`                                                                                |
-| `admissionController.metrics.serviceMonitor.scrapeTimeout`     | Timeout after which the scrape is ended                                                               | `""`                                                                                |
-| `admissionController.metrics.serviceMonitor.metricRelabelings` | Specify additional relabeling of metrics                                                              | `[]`                                                                                |
-| `admissionController.metrics.serviceMonitor.relabelings`       | Specify general relabeling                                                                            | `[]`                                                                                |
-| `admissionController.tls.caCert`                               | TLS CA certificate                                                                                    | Generated using the `genCA` function                                                |
-| `admissionController.tls.cert`                                 | TLS certificate                                                                                       | Generated using the `genSignedCert` function                                        |
-| `admissionController.tls.key`                                  | TLS private key                                                                                       | Generated using the `genSignedCert` function                                        |
-| `admissionController.tls.existingSecret`                       | Name of existing TLS Secret to use                                                                    | `nil`                                                                               |
+| Name                                                           | Description                                                                                                         | Default                                |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `admissionController.enabled`                                  | Enable the component                                                                                                | `true`                                 |
+| `admissionController.replicaCount`                             | Number of replicas                                                                                                  | `1`                                    |
+| `admissionController.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`                      |
+| `admissionController.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-admission-controller` |
+| `admissionController.image.tag`                                | Image tag                                                                                                           | `0.14.0`                               |
+| `admissionController.image.digest`                             | Image digest                                                                                                        | `""`                                   |
+| `admissionController.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`                         |
+| `admissionController.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                                |
+| `admissionController.pdb.minAvailable`                         | Minimum number/percentage of pods that should remain scheduled                                                      | `1`                                    |
+| `admissionController.pdb.maxUnavailable`                       | Maximum number/percentage of pods that may be made unavailable                                                      | `nil`                                  |
+| `admissionController.serviceAccount.create`                    | Specifies whether a service account should be created                                                               | `true`                                 |
+| `admissionController.serviceAccount.annotations`               | Service account annotations                                                                                         | `{}`                                   |
+| `admissionController.serviceAccount.name`                      | The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set) | `nil`                                  |
+| `admissionController.podAnnotations`                           | Additional pod annotations                                                                                          | `{}`                                   |
+| `admissionController.podLabels`                                | Additional pod labels                                                                                               | `{}`                                   |
+| `admissionController.podSecurityContext`                       | Pod security context                                                                                                |                                        |
+| `admissionController.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                                 |
+| `admissionController.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                                |
+| `admissionController.priorityClassName`                        | Priority class name                                                                                                 | `nil`                                  |
+| `admissionController.securityContext`                          | Container security context                                                                                          | `{}`                                   |
+| `admissionController.containerPorts.https`                     | Container port for HTTPS                                                                                            | `8000`                                 |
+| `admissionController.containerPorts.metrics`                   | Container port for Metrics                                                                                          | `8944`                                 |
+| `admissionController.livenessProbe.enabled`                    | Enable liveness probe                                                                                               | `true`                                 |
+| `admissionController.livenessProbe.initialDelaySeconds`        | Delay before the liveness probe is initiated                                                                        | `0`                                    |
+| `admissionController.livenessProbe.periodSeconds`              | How often to perform the liveness probe                                                                             | `10`                                   |
+| `admissionController.livenessProbe.timeoutSeconds`             | When the liveness probe times out                                                                                   | `1`                                    |
+| `admissionController.livenessProbe.failureThreshold`           | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded                  | `3`                                    |
+| `admissionController.livenessProbe.successThreshold`           | Minimum consecutive successes for the liveness probe to be considered successful after having failed                | `1`                                    |
+| `admissionController.readinessProbe.enabled`                   | Enable readiness probe                                                                                              | `true`                                 |
+| `admissionController.readinessProbe.initialDelaySeconds`       | Delay before the readiness probe is initiated                                                                       | `0`                                    |
+| `admissionController.readinessProbe.periodSeconds`             | How often to perform the readiness probe                                                                            | `10`                                   |
+| `admissionController.readinessProbe.timeoutSeconds`            | When the readiness probe times out                                                                                  | `1`                                    |
+| `admissionController.readinessProbe.failureThreshold`          | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded                 | `3`                                    |
+| `admissionController.readinessProbe.successThreshold`          | Minimum consecutive successes for the readiness probe to be considered successful after having failed               | `1`                                    |
+| `admissionController.service.annotations`                      | Service annotations                                                                                                 | `{}`                                   |
+| `admissionController.service.type`                             | Service type                                                                                                        | `ClusterIP`                            |
+| `admissionController.service.clusterIP`                        | Static cluster IP address or None for headless service when service type is ClusterIP                               | `nil`                                  |
+| `admissionController.service.ports.https`                      | Service port for HTTPS (do not change it)                                                                           | `443`                                  |
+| `admissionController.resources`                                | CPU/Memory resource requests/limits                                                                                 | `{}`                                   |
+| `admissionController.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                                   |
+| `admissionController.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                                   |
+| `admissionController.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                                   |
+| `admissionController.extraArgs`                                | Additional container arguments                                                                                      |                                        |
+| `admissionController.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                                    |
+| `admissionController.extraEnvVars`                             | Additional container environment variables                                                                          | `[]`                                   |
+| `admissionController.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables                                    | `nil`                                  |
+| `admissionController.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables                                       | `nil`                                  |
+| `admissionController.metrics.service.annotations`              | Metrics service annotations                                                                                         | `{}`                                   |
+| `admissionController.metrics.service.type`                     | Metrics service type                                                                                                | `ClusterIP`                            |
+| `admissionController.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP                       | `nil`                                  |
+| `admissionController.metrics.service.ports.metrics`            | Metrics service port for Metrics                                                                                    | `8944`                                 |
+| `admissionController.metrics.serviceMonitor.enabled`           | Specifies whether a service monitor should be created                                                               | `false`                                |
+| `admissionController.metrics.serviceMonitor.namespace`         | Namespace in which to create the service monitor                                                                    | `""`                                   |
+| `admissionController.metrics.serviceMonitor.annotations`       | Service monitor annotations                                                                                         | `{}`                                   |
+| `admissionController.metrics.serviceMonitor.labels`            | Additional service monitor labels                                                                                   | `{}`                                   |
+| `admissionController.metrics.serviceMonitor.jobLabel`          | The name of the label on the target service to use as the job name in Prometheus                                    | `""`                                   |
+| `admissionController.metrics.serviceMonitor.honorLabels`       | Whether to choose the metric’s labels on collisions with target labels                                              | `false`                                |
+| `admissionController.metrics.serviceMonitor.interval`          | Interval at which metrics should be scraped                                                                         | `""`                                   |
+| `admissionController.metrics.serviceMonitor.scrapeTimeout`     | Timeout after which the scrape is ended                                                                             | `""`                                   |
+| `admissionController.metrics.serviceMonitor.metricRelabelings` | Specify additional relabeling of metrics                                                                            | `[]`                                   |
+| `admissionController.metrics.serviceMonitor.relabelings`       | Specify general relabeling                                                                                          | `[]`                                   |
+| `admissionController.tls.caCert`                               | TLS CA certificate (Generated using the `genCA` function if not set)                                                | `""`                                   |
+| `admissionController.tls.cert`                                 | TLS certificate (Generated using the `genSignedCert` function if not set)                                           | `""`                                   |
+| `admissionController.tls.key`                                  | TLS private key (Generated using the `genSignedCert` function if not set)                                           | `""`                                   |
+| `admissionController.tls.existingSecret`                       | Name of existing TLS Secret to use                                                                                  | `""`                                   |
 
 ### Recommender parameters
 
-| Name                                                           | Description                                                                                           | Default                                                                     |
-|----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-| `recommender.replicaCount`                                     | Number of replicas                                                                                    | `1`                                                                         |
-| `recommender.image.registry`                                   | Image registry                                                                                        | `registry.k8s.io`                                                           |
-| `recommender.image.repository`                                 | Image repository                                                                                      | `autoscaling/vpa-recommender`                                               |
-| `recommender.image.tag`                                        | Image tag                                                                                             | `0.14.0`                                                                    |
-| `recommender.image.digest`                                     | Image digest                                                                                          | `""`                                                                        |
-| `recommender.image.pullPolicy`                                 | Image pull policy                                                                                     | `IfNotPresent`                                                              |
-| `recommender.pdb.create`                                       | Specifies whether a pod disruption budget should be created                                           | `false`                                                                     |
-| `recommender.pdb.minAvailable`                                 | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                         |
-| `recommender.pdb.maxUnavailable`                               | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                                                                       |
-| `recommender.serviceAccount.create`                            | Specify whether to create a ServiceAccount                                                            | `true`                                                                      |
-| `recommender.serviceAccount.annotations`                       | ServiceAccount annotations                                                                            | `{}`                                                                        |
-| `recommender.serviceAccount.name`                              | The name of the ServiceAccount to create                                                              | Generated using the `vertical-pod-autoscaler.recommender.fullname` template |
-| `recommender.podAnnotations`                                   | Additional pod annotations                                                                            | `{}`                                                                        |
-| `recommender.podLabels`                                        | Additional pod labels                                                                                 | `{}`                                                                        |
-| `recommender.podSecurityContext`                               | Pod security context                                                                                  | `{ runAsNonRoot: true, runAsUser: 65534 }`                                  |
-| `recommender.priorityClassName`                                | Priority class name                                                                                   | `nil`                                                                       |
-| `recommender.securityContext`                                  | Container security context                                                                            | `{}`                                                                        |
-| `recommender.livenessProbe.enabled`                            | Enable liveness probe                                                                                 | `true`                                                                      |
-| `recommender.livenessProbe.initialDelaySeconds`                | Delay before the liveness probe is initiated                                                          | `0`                                                                         |
-| `recommender.livenessProbe.periodSeconds`                      | How often to perform the liveness probe                                                               | `10`                                                                        |
-| `recommender.livenessProbe.timeoutSeconds`                     | When the liveness probe times out                                                                     | `1`                                                                         |
-| `recommender.livenessProbe.failureThreshold`                   | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                                                                         |
-| `recommender.livenessProbe.successThreshold`                   | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                                                                         |
-| `recommender.readinessProbe.enabled`                           | Enable readiness probe                                                                                | `true`                                                                      |
-| `recommender.readinessProbe.initialDelaySeconds`               | Delay before the readiness probe is initiated                                                         | `0`                                                                         |
-| `recommender.readinessProbe.periodSeconds`                     | How often to perform the readiness probe                                                              | `10`                                                                        |
-| `recommender.readinessProbe.timeoutSeconds`                    | When the readiness probe times out                                                                    | `1`                                                                         |
-| `recommender.readinessProbe.failureThreshold`                  | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                                                         |
-| `recommender.readinessProbe.successThreshold`                  | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                                                         |
-| `recommender.resources`                                        | CPU/Memory resource requests/limits                                                                   | `{}`                                                                        |
-| `recommender.nodeSelector`                                     | Node labels for pod assignment                                                                        | `{}`                                                                        |
-| `recommender.tolerations`                                      | Tolerations for pod assignment                                                                        | `[]`                                                                        |
-| `recommender.affinity`                                         | Map of node/pod affinities                                                                            | `{}`                                                                        |
-| `recommender.extraArgs`                                        | Additional container arguments                                                                        | `{ v: 2 }`                                                                  |
-| `recommender.extraEnvVars`                                     | Additional container environment variables                                                            | `[]`                                                                        |
-| `recommender.extraEnvVarsCM`                                   | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                                       |
-| `recommender.extraEnvVarsSecret`                               | Name of existing Secret containing additional container environment variables                         | `nil`                                                                       |
-| `recommender.metrics.service.annotations`                      | Metrics service annotations                                                                           | `{}`                                                                        |
-| `recommender.metrics.service.type`                             | Metrics service type                                                                                  | `ClusterIP`                                                                 |
-| `recommender.metrics.service.clusterIP`                        | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                                       |
-| `recommender.metrics.service.port`                             | Metrics service port                                                                                  | `8942`                                                                      |
-| `admissionController.metrics.serviceMonitor.enabled`           | Specifies whether a service monitor should be created                                                 | `false`                                                                     |
-| `admissionController.metrics.serviceMonitor.annotations`       | Extra annotations for the ServiceMonitor                                                              | `{}`                                                                        |
-| `admissionController.metrics.serviceMonitor.labels`            | Extra labels for the ServiceMonitor                                                                   | `{}`                                                                        |
-| `admissionController.metrics.serviceMonitor.jobLabel`          | The name of the label on the target service to use as the job name in Prometheus                      | `""`                                                                        |
-| `admissionController.metrics.serviceMonitor.interval`          | How frequently to scrape metrics                                                                      | `""`                                                                        |
-| `admissionController.metrics.serviceMonitor.scrapeTimeout`     | Timeout after which the scrape is ended                                                               | `""`                                                                        |
-| `admissionController.metrics.serviceMonitor.metricRelabelings` | Specify additional relabeling of metrics                                                              | `[]`                                                                        |
-| `admissionController.metrics.serviceMonitor.relabelings`       | Specify general relabeling                                                                            | `[]`                                                                        |
+| Name                                                   | Description                                                                                                         | Default                       |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `recommender.replicaCount`                             | Number of replicas                                                                                                  | `1`                           |
+| `recommender.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`             |
+| `recommender.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-recommender` |
+| `recommender.image.tag`                                | Image tag                                                                                                           | `0.14.0`                      |
+| `recommender.image.digest`                             | Image digest                                                                                                        | `""`                          |
+| `recommender.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`                |
+| `recommender.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                       |
+| `recommender.pdb.minAvailable`                         | Minimum number/percentage of pods that should remain scheduled                                                      | `1`                           |
+| `recommender.pdb.maxUnavailable`                       | Maximum number/percentage of pods that may be made unavailable                                                      | `nil`                         |
+| `recommender.serviceAccount.create`                    | Specifies whether a service account should be created                                                               | `true`                        |
+| `recommender.serviceAccount.annotations`               | Service account annotations                                                                                         | `{}`                          |
+| `recommender.serviceAccount.name`                      | The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set) | `nil`                         |
+| `recommender.podAnnotations`                           | Additional pod annotations                                                                                          | `{}`                          |
+| `recommender.podLabels`                                | Additional pod labels                                                                                               | `{}`                          |
+| `recommender.podSecurityContext`                       | Pod security context                                                                                                |                               |
+| `recommender.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                        |
+| `recommender.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                       |
+| `recommender.priorityClassName`                        | Priority class name                                                                                                 | `nil`                         |
+| `recommender.securityContext`                          | Container security context                                                                                          | `{}`                          |
+| `recommender.containerPorts.metrics`                   | Container port for Metrics                                                                                          | `8942`                        |
+| `recommender.livenessProbe.enabled`                    | Enable liveness probe                                                                                               | `true`                        |
+| `recommender.livenessProbe.initialDelaySeconds`        | Delay before the liveness probe is initiated                                                                        | `0`                           |
+| `recommender.livenessProbe.periodSeconds`              | How often to perform the liveness probe                                                                             | `10`                          |
+| `recommender.livenessProbe.timeoutSeconds`             | When the liveness probe times out                                                                                   | `1`                           |
+| `recommender.livenessProbe.failureThreshold`           | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded                  | `3`                           |
+| `recommender.livenessProbe.successThreshold`           | Minimum consecutive successes for the liveness probe to be considered successful after having failed                | `1`                           |
+| `recommender.readinessProbe.enabled`                   | Enable readiness probe                                                                                              | `true`                        |
+| `recommender.readinessProbe.initialDelaySeconds`       | Delay before the readiness probe is initiated                                                                       | `0`                           |
+| `recommender.readinessProbe.periodSeconds`             | How often to perform the readiness probe                                                                            | `10`                          |
+| `recommender.readinessProbe.timeoutSeconds`            | When the readiness probe times out                                                                                  | `1`                           |
+| `recommender.readinessProbe.failureThreshold`          | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded                 | `3`                           |
+| `recommender.readinessProbe.successThreshold`          | Minimum consecutive successes for the readiness probe to be considered successful after having failed               | `1`                           |
+| `recommender.resources`                                | CPU/Memory resource requests/limits                                                                                 | `{}`                          |
+| `recommender.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                          |
+| `recommender.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                          |
+| `recommender.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                          |
+| `recommender.extraArgs`                                | Additional container arguments                                                                                      |                               |
+| `recommender.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                           |
+| `recommender.extraEnvVars`                             | Additional container environment variables                                                                          | `[]`                          |
+| `recommender.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables                                    | `nil`                         |
+| `recommender.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables                                       | `nil`                         |
+| `recommender.metrics.service.annotations`              | Metrics service annotations                                                                                         | `{}`                          |
+| `recommender.metrics.service.type`                     | Metrics service type                                                                                                | `ClusterIP`                   |
+| `recommender.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP                       | `nil`                         |
+| `recommender.metrics.service.ports.metrics`            | Metrics service port for Metrics                                                                                    | `8942`                        |
+| `recommender.metrics.serviceMonitor.enabled`           | Specifies whether a service monitor should be created                                                               | `false`                       |
+| `recommender.metrics.serviceMonitor.namespace`         | Namespace in which to create the service monitor                                                                    | `""`                          |
+| `recommender.metrics.serviceMonitor.annotations`       | Service monitor annotations                                                                                         | `{}`                          |
+| `recommender.metrics.serviceMonitor.labels`            | Additional service monitor labels                                                                                   | `{}`                          |
+| `recommender.metrics.serviceMonitor.jobLabel`          | The name of the label on the target service to use as the job name in Prometheus                                    | `""`                          |
+| `recommender.metrics.serviceMonitor.honorLabels`       | Whether to choose the metric’s labels on collisions with target labels                                              | `false`                       |
+| `recommender.metrics.serviceMonitor.interval`          | Interval at which metrics should be scraped                                                                         | `""`                          |
+| `recommender.metrics.serviceMonitor.scrapeTimeout`     | Timeout after which the scrape is ended                                                                             | `""`                          |
+| `recommender.metrics.serviceMonitor.metricRelabelings` | Specify additional relabeling of metrics                                                                            | `[]`                          |
+| `recommender.metrics.serviceMonitor.relabelings`       | Specify general relabeling                                                                                          | `[]`                          |
 
 ### Updater parameters
 
-| Name                                                           | Description                                                                                           | Default                                                                 |
-|----------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------|
-| `updater.enabled`                                              | Enable the component                                                                                  | `true`                                                                  |
-| `updater.replicaCount`                                         | Number of replicas                                                                                    | `1`                                                                     |
-| `updater.image.registry`                                       | Image registry                                                                                        | `registry.k8s.io`                                                       |
-| `updater.image.repository`                                     | Image repository                                                                                      | `autoscaling/vpa-updater`                                               |
-| `updater.image.tag`                                            | Image tag                                                                                             | `0.14.0`                                                                |
-| `updater.image.digest`                                         | Image digest                                                                                          | `""`                                                                    |
-| `updater.image.pullPolicy`                                     | Image pull policy                                                                                     | `IfNotPresent`                                                          |
-| `updater.pdb.create`                                           | Specifies whether a pod disruption budget should be created                                           | `false`                                                                 |
-| `updater.pdb.minAvailable`                                     | Minimum number/percentage of pods that should remain scheduled                                        | `1`                                                                     |
-| `updater.pdb.maxUnavailable`                                   | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                                                                   |
-| `updater.serviceAccount.create`                                | Specify whether to create a ServiceAccount                                                            | `true`                                                                  |
-| `updater.serviceAccount.annotations`                           | ServiceAccount annotations                                                                            | `{}`                                                                    |
-| `updater.serviceAccount.name`                                  | The name of the ServiceAccount to create                                                              | Generated using the `vertical-pod-autoscaler.updater.fullname` template |
-| `updater.podAnnotations`                                       | Additional pod annotations                                                                            | `{}`                                                                    |
-| `updater.podLabels`                                            | Additional pod labels                                                                                 | `{}`                                                                    |
-| `updater.podSecurityContext`                                   | Pod security context                                                                                  | `{ runAsNonRoot: true, runAsUser: 65534 }`                              |
-| `updater.priorityClassName`                                    | Priority class name                                                                                   | `nil`                                                                   |
-| `updater.securityContext`                                      | Container security context                                                                            | `{}`                                                                    |
-| `updater.livenessProbe.enabled`                                | Enable liveness probe                                                                                 | `true`                                                                  |
-| `updater.livenessProbe.initialDelaySeconds`                    | Delay before the liveness probe is initiated                                                          | `0`                                                                     |
-| `updater.livenessProbe.periodSeconds`                          | How often to perform the liveness probe                                                               | `10`                                                                    |
-| `updater.livenessProbe.timeoutSeconds`                         | When the liveness probe times out                                                                     | `1`                                                                     |
-| `updater.livenessProbe.failureThreshold`                       | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                                                                     |
-| `updater.livenessProbe.successThreshold`                       | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                                                                     |
-| `updater.readinessProbe.enabled`                               | Enable readiness probe                                                                                | `true`                                                                  |
-| `updater.readinessProbe.initialDelaySeconds`                   | Delay before the readiness probe is initiated                                                         | `0`                                                                     |
-| `updater.readinessProbe.periodSeconds`                         | How often to perform the readiness probe                                                              | `10`                                                                    |
-| `updater.readinessProbe.timeoutSeconds`                        | When the readiness probe times out                                                                    | `1`                                                                     |
-| `updater.readinessProbe.failureThreshold`                      | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                                                                     |
-| `updater.readinessProbe.successThreshold`                      | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                                                                     |
-| `updater.resources`                                            | CPU/Memory resource requests/limits                                                                   | `{}`                                                                    |
-| `updater.nodeSelector`                                         | Node labels for pod assignment                                                                        | `{}`                                                                    |
-| `updater.tolerations`                                          | Tolerations for pod assignment                                                                        | `[]`                                                                    |
-| `updater.affinity`                                             | Map of node/pod affinities                                                                            | `{}`                                                                    |
-| `updater.extraArgs`                                            | Additional container arguments                                                                        | `{ v: 2 }`                                                              |
-| `updater.extraEnvVars`                                         | Additional container environment variables                                                            | `[]`                                                                    |
-| `updater.extraEnvVarsCM`                                       | Name of existing ConfigMap containing additional container environment variables                      | `nil`                                                                   |
-| `updater.extraEnvVarsSecret`                                   | Name of existing Secret containing additional container environment variables                         | `nil`                                                                   |
-| `updater.metrics.service.annotations`                          | Metrics service annotations                                                                           | `{}`                                                                    |
-| `updater.metrics.service.type`                                 | Metrics service type                                                                                  | `ClusterIP`                                                             |
-| `updater.metrics.service.clusterIP`                            | Metrics static cluster IP address or None for headless service when service type is ClusterIP         | `nil`                                                                   |
-| `updater.metrics.service.port`                                 | Metrics service port                                                                                  | `8943`                                                                  |
-| `admissionController.metrics.serviceMonitor.enabled`           | Specifies whether a service monitor should be created                                                 | `false`                                                                 |
-| `admissionController.metrics.serviceMonitor.annotations`       | Extra annotations for the ServiceMonitor                                                              | `{}`                                                                    |
-| `admissionController.metrics.serviceMonitor.labels`            | Extra labels for the ServiceMonitor                                                                   | `{}`                                                                    |
-| `admissionController.metrics.serviceMonitor.jobLabel`          | The name of the label on the target service to use as the job name in Prometheus                      | `""`                                                                    |
-| `admissionController.metrics.serviceMonitor.interval`          | How frequently to scrape metrics                                                                      | `""`                                                                    |
-| `admissionController.metrics.serviceMonitor.scrapeTimeout`     | Timeout after which the scrape is ended                                                               | `""`                                                                    |
-| `admissionController.metrics.serviceMonitor.metricRelabelings` | Specify additional relabeling of metrics                                                              | `[]`                                                                    |
-| `admissionController.metrics.serviceMonitor.relabelings`       | Specify general relabeling                                                                            | `[]`                                                                    |
+| Name                                               | Description                                                                                                         | Default                   |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------- |
+| `updater.enabled`                                  | Enable the component                                                                                                | `true`                    |
+| `updater.replicaCount`                             | Number of replicas                                                                                                  | `1`                       |
+| `updater.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`         |
+| `updater.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-updater` |
+| `updater.image.tag`                                | Image tag                                                                                                           | `0.14.0`                  |
+| `updater.image.digest`                             | Image digest                                                                                                        | `""`                      |
+| `updater.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`            |
+| `updater.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                   |
+| `updater.pdb.minAvailable`                         | Minimum number/percentage of pods that should remain scheduled                                                      | `1`                       |
+| `updater.pdb.maxUnavailable`                       | Maximum number/percentage of pods that may be made unavailable                                                      | `nil`                     |
+| `updater.serviceAccount.create`                    | Specifies whether a service account should be created                                                               | `true`                    |
+| `updater.serviceAccount.annotations`               | Service account annotations                                                                                         | `{}`                      |
+| `updater.serviceAccount.name`                      | The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set) | `nil`                     |
+| `updater.podAnnotations`                           | Additional pod annotations                                                                                          | `{}`                      |
+| `updater.podLabels`                                | Additional pod labels                                                                                               | `{}`                      |
+| `updater.podSecurityContext`                       | Pod security context                                                                                                |                           |
+| `updater.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                    |
+| `updater.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                   |
+| `updater.priorityClassName`                        | Priority class name                                                                                                 | `nil`                     |
+| `updater.securityContext`                          | Container security context                                                                                          | `{}`                      |
+| `updater.containerPorts.metrics`                   | Container port for Metrics                                                                                          | `8943`                    |
+| `updater.livenessProbe.enabled`                    | Enable liveness probe                                                                                               | `true`                    |
+| `updater.livenessProbe.initialDelaySeconds`        | Delay before the liveness probe is initiated                                                                        | `0`                       |
+| `updater.livenessProbe.periodSeconds`              | How often to perform the liveness probe                                                                             | `10`                      |
+| `updater.livenessProbe.timeoutSeconds`             | When the liveness probe times out                                                                                   | `1`                       |
+| `updater.livenessProbe.failureThreshold`           | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded                  | `3`                       |
+| `updater.livenessProbe.successThreshold`           | Minimum consecutive successes for the liveness probe to be considered successful after having failed                | `1`                       |
+| `updater.readinessProbe.enabled`                   | Enable readiness probe                                                                                              | `true`                    |
+| `updater.readinessProbe.initialDelaySeconds`       | Delay before the readiness probe is initiated                                                                       | `0`                       |
+| `updater.readinessProbe.periodSeconds`             | How often to perform the readiness probe                                                                            | `10`                      |
+| `updater.readinessProbe.timeoutSeconds`            | When the readiness probe times out                                                                                  | `1`                       |
+| `updater.readinessProbe.failureThreshold`          | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded                 | `3`                       |
+| `updater.readinessProbe.successThreshold`          | Minimum consecutive successes for the readiness probe to be considered successful after having failed               | `1`                       |
+| `updater.resources`                                | CPU/Memory resource requests/limits                                                                                 | `{}`                      |
+| `updater.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                      |
+| `updater.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                      |
+| `updater.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                      |
+| `updater.extraArgs`                                | Additional container arguments                                                                                      |                           |
+| `updater.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                       |
+| `updater.extraEnvVars`                             | Additional container environment variables                                                                          | `[]`                      |
+| `updater.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables                                    | `nil`                     |
+| `updater.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables                                       | `nil`                     |
+| `updater.metrics.service.annotations`              | Metrics service annotations                                                                                         | `{}`                      |
+| `updater.metrics.service.type`                     | Metrics service type                                                                                                | `ClusterIP`               |
+| `updater.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP                       | `nil`                     |
+| `updater.metrics.service.ports.metrics`            | Metrics service port for Metrics                                                                                    | `8943`                    |
+| `updater.metrics.serviceMonitor.enabled`           | Specifies whether a service monitor should be created                                                               | `false`                   |
+| `updater.metrics.serviceMonitor.namespace`         | Namespace in which to create the service monitor                                                                    | `""`                      |
+| `updater.metrics.serviceMonitor.annotations`       | Service monitor annotations                                                                                         | `{}`                      |
+| `updater.metrics.serviceMonitor.labels`            | Additional service monitor labels                                                                                   | `{}`                      |
+| `updater.metrics.serviceMonitor.jobLabel`          | The name of the label on the target service to use as the job name in Prometheus                                    | `""`                      |
+| `updater.metrics.serviceMonitor.honorLabels`       | Whether to choose the metric’s labels on collisions with target labels                                              | `false`                   |
+| `updater.metrics.serviceMonitor.interval`          | Interval at which metrics should be scraped                                                                         | `""`                      |
+| `updater.metrics.serviceMonitor.scrapeTimeout`     | Timeout after which the scrape is ended                                                                             | `""`                      |
+| `updater.metrics.serviceMonitor.metricRelabelings` | Specify additional relabeling of metrics                                                                            | `[]`                      |
+| `updater.metrics.serviceMonitor.relabelings`       | Specify general relabeling                                                                                          | `[]`                      |
 
 ### CRDs parameters
 
- | Name                    | Description                    | Default           |
- |-------------------------|--------------------------------|-------------------|
- | `crds.image.registry`   | Image registry                 | `docker.io`       |
- | `crds.image.repository` | Image repository               | `bitnami/kubectl` |
- | `crds.image.tag`        | Image tag                      | `1.26.3`          |
- | `crds.image.digest`     | Image digest                   | `""`              |
- | `crds.image.pullPolicy` | Image pull policy              | `IfNotPresent`    |
- | `crds.podAnnotations`   | Additional pod annotations     | `{}`              |
- | `crds.nodeSelector`     | Node labels for pod assignment | `{}`              |
- | `crds.tolerations`      | Tolerations for pod assignment | `[]`              |
- | `crds.affinity`         | Map of node/pod affinities     | `{}`              |
+| Name                    | Description                    | Default           |
+| ----------------------- | ------------------------------ | ----------------- |
+| `crds.image.registry`   | Image registry                 | `docker.io`       |
+| `crds.image.repository` | Image repository               | `bitnami/kubectl` |
+| `crds.image.tag`        | Image tag                      | `1.26.3`          |
+| `crds.image.digest`     | Image digest                   | `""`              |
+| `crds.image.pullPolicy` | Image pull policy              | `IfNotPresent`    |
+| `crds.podAnnotations`   | Additional pod annotations     | `{}`              |
+| `crds.nodeSelector`     | Node labels for pod assignment | `{}`              |
+| `crds.tolerations`      | Tolerations for pod assignment | `[]`              |
+| `crds.affinity`         | Map of node/pod affinities     | `{}`              |
 
 ### Tests parameters
 
 | Name                     | Description       | Default              |
-|--------------------------|-------------------|----------------------|
+| ------------------------ | ----------------- | -------------------- |
 | `tests.image.registry`   | Image registry    | `ghcr.io`            |
 | `tests.image.repository` | Image repository  | `cowboysysop/pytest` |
 | `tests.image.tag`        | Image tag         | `1.0.35`             |
 | `tests.image.digest`     | Image digest      | `""`                 |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`       |
 
-### Setting parameters
+## Setting parameters
 
 Specify the parameters you which to customize using the `--set` argument to the `helm install` command. For instance,
 

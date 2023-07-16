@@ -46,11 +46,3 @@ Create the name of the service account to use
     {{ default "default" .Values.updater.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
-
-{{/*
-ServiceMonitor labels
-*/}}
-{{- define "vertical-pod-autoscaler.updater.metrics.serviceMonitor.labels" -}}
-{{ include "vertical-pod-autoscaler.labels" . }}
-{{ include "vertical-pod-autoscaler.updater.componentLabels" . }}
-{{- end -}}

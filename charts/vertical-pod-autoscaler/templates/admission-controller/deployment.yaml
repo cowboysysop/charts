@@ -106,6 +106,17 @@ spec:
             failureThreshold: {{ .Values.admissionController.readinessProbe.failureThreshold }}
             successThreshold: {{ .Values.admissionController.readinessProbe.successThreshold }}
           {{- end }}
+          {{- if .Values.admissionController.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: /health-check
+              port: http-metrics
+            initialDelaySeconds: {{ .Values.admissionController.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.admissionController.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.admissionController.startupProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.admissionController.startupProbe.failureThreshold }}
+            successThreshold: {{ .Values.admissionController.startupProbe.successThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.admissionController.resources | nindent 12 }}
           volumeMounts:

@@ -129,6 +129,12 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                                                | `1`                          |
 | `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded                               | `3`                          |
 | `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed                             | `1`                          |
+| `startupProbe.enabled`               | Enable startup probe                                                                                                              | `false`                      |
+| `startupProbe.initialDelaySeconds`   | Delay before the startup probe is initiated                                                                                       | `0`                          |
+| `startupProbe.periodSeconds`         | How often to perform the startup probe                                                                                            | `10`                         |
+| `startupProbe.timeoutSeconds`        | When the startup probe times out                                                                                                  | `1`                          |
+| `startupProbe.failureThreshold`      | Minimum consecutive failures for the startup probe to be considered failed after having succeeded                                 | `3`                          |
+| `startupProbe.successThreshold`      | Minimum consecutive successes for the startup probe to be considered successful after having failed                               | `1`                          |
 | `service.annotations`                | Service annotations                                                                                                               | `{}`                         |
 | `service.type`                       | Service type                                                                                                                      | `ClusterIP`                  |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                                             | `nil`                        |

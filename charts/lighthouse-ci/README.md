@@ -111,77 +111,83 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ### Parameters
 
-| Name                                 | Description                                                                                                  | Default                    |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------ | -------------------------- |
-| `replicaCount`                       | Number of replicas (do not change it)                                                                        | `1`                        |
-| `updateStrategy.type`                | Update strategy type (do not change it)                                                                      | `Recreate`                 |
-| `image.registry`                     | Image registry                                                                                               | `docker.io`                |
-| `image.repository`                   | Image repository                                                                                             | `patrickhulce/lhci-server` |
-| `image.tag`                          | Image tag                                                                                                    | `0.8.1`                    |
-| `image.digest`                       | Image digest                                                                                                 | `""`                       |
-| `image.pullPolicy`                   | Image pull policy                                                                                            | `IfNotPresent`             |
-| `pdb.create`                         | Specifies whether a pod disruption budget should be created                                                  | `false`                    |
-| `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                               | `1`                        |
-| `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                               | `nil`                      |
-| `serviceAccount.create`              | Specifies whether a service account should be created                                                        | `true`                     |
-| `serviceAccount.annotations`         | Service account annotations                                                                                  | `{}`                       |
-| `serviceAccount.name`                | The name of the service account to use (default value generated using the `lighthouse-ci.fullname` template) | `nil`                      |
-| `podAnnotations`                     | Additional pod annotations                                                                                   | `{}`                       |
-| `podLabels`                          | Additional pod labels                                                                                        | `{}`                       |
-| `podSecurityContext`                 | Pod security context                                                                                         | `{}`                       |
-| `priorityClassName`                  | Priority class name                                                                                          | `nil`                      |
-| `securityContext`                    | Container security context                                                                                   | `{}`                       |
-| `containerPorts.http`                | Container port for HTTP                                                                                      | `9001`                     |
-| `livenessProbe.enabled`              | Enable liveness probe                                                                                        | `true`                     |
-| `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                                 | `0`                        |
-| `livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                                      | `10`                       |
-| `livenessProbe.timeoutSeconds`       | When the liveness probe times out                                                                            | `1`                        |
-| `livenessProbe.failureThreshold`     | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded           | `3`                        |
-| `livenessProbe.successThreshold`     | Minimum consecutive successes for the liveness probe to be considered successful after having failed         | `1`                        |
-| `readinessProbe.enabled`             | Enable readiness probe                                                                                       | `true`                     |
-| `readinessProbe.initialDelaySeconds` | Delay before the readiness probe is initiated                                                                | `0`                        |
-| `readinessProbe.periodSeconds`       | How often to perform the readiness probe                                                                     | `10`                       |
-| `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                           | `1`                        |
-| `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded          | `3`                        |
-| `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed        | `1`                        |
-| `service.annotations`                | Service annotations                                                                                          | `{}`                       |
-| `service.type`                       | Service type                                                                                                 | `ClusterIP`                |
-| `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                        | `nil`                      |
-| `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                            | `nil`                      |
-| `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                                   | `nil`                      |
-| `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                                | `Cluster`                  |
-| `service.ports.http`                 | Service port for HTTP                                                                                        | `9001`                     |
-| `service.nodePorts.http`             | Service node port for HTTP when service type is LoadBalancer or NodePort                                     | `nil`                      |
-| `ingress.enabled`                    | Enable ingress controller resource                                                                           | `false`                    |
-| `ingress.ingressClassName`           | IngressClass that will be be used to implement the Ingress                                                   | `""`                       |
-| `ingress.pathType`                   | Ingress path type                                                                                            | `ImplementationSpecific`   |
-| `ingress.annotations`                | Ingress annotations                                                                                          | `{}`                       |
-| `ingress.hosts[0].host`              | Hostname to your Lighthouse CI Server installation                                                           | `lighthouse-ci.local`      |
-| `ingress.hosts[0].paths`             | Paths within the url structure                                                                               | `["/"]`                    |
-| `ingress.tls`                        | TLS configuration                                                                                            | `[]`                       |
-| `resources`                          | CPU/Memory resource requests/limits                                                                          | `{}`                       |
-| `nodeSelector`                       | Node labels for pod assignment                                                                               | `{}`                       |
-| `tolerations`                        | Tolerations for pod assignment                                                                               | `[]`                       |
-| `affinity`                           | Map of node/pod affinities                                                                                   | `{}`                       |
-| `extraArgs`                          | Additional container arguments                                                                               | `{}`                       |
-| `extraEnvVars`                       | Additional container environment variables                                                                   | `[]`                       |
-| `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                             | `nil`                      |
-| `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                                | `nil`                      |
-| `persistence.enabled`                | Enable persistence using PVC                                                                                 | `false`                    |
-| `persistence.existingClaim`          | Name of an existing PVC to use                                                                               | `nil`                      |
-| `persistence.accessMode`             | PVC access mode                                                                                              | `ReadWriteOnce`            |
-| `persistence.annotations`            | PVC annotations                                                                                              | `{}`                       |
-| `persistence.size`                   | PVC size                                                                                                     | `1Gi`                      |
-| `persistence.storageClass`           | PVC storage class                                                                                            | `nil`                      |
-| `logLevel`                           | Log level                                                                                                    | `verbose`                  |
-| `basicAuthUsername`                  | The username to protect the server with HTTP Basic Authentication                                            | `""`                       |
-| `basicAuthPassword`                  | The password to protect the server with HTTP Basic Authentication                                            | `""`                       |
-| `psiCollectCron`                     | The configuration to automatically collect results using the PageSpeed Insights API                          |                            |
-| `psiCollectCron.psiApiKey`           | The API key to use with the PageSpeed Insights API                                                           | `""`                       |
-| `psiCollectCron.sites`               | The array of sites to collect results for                                                                    | `[]`                       |
-| `deleteOldBuildsCron`                | The configuration to automatically delete old records                                                        | `[]`                       |
-| `existingSecret`                     | Name of existing Secret to use                                                                               | `""`                       |
-| `existingSecretKeyBasicAuthPassword` | Name of the key in existing Secret that contains HTTP Basic Authentication password                          | `basic-auth-password`      |
+| Name                                 | Description                                                                                               | Default                    |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `replicaCount`                       | Number of replicas (do not change it)                                                                     | `1`                        |
+| `updateStrategy.type`                | Update strategy type (do not change it)                                                                   | `Recreate`                 |
+| `image.registry`                     | Image registry                                                                                            | `docker.io`                |
+| `image.repository`                   | Image repository                                                                                          | `patrickhulce/lhci-server` |
+| `image.tag`                          | Image tag                                                                                                 | `0.8.1`                    |
+| `image.digest`                       | Image digest                                                                                              | `""`                       |
+| `image.pullPolicy`                   | Image pull policy                                                                                         | `IfNotPresent`             |
+| `pdb.create`                         | Specifies whether a pod disruption budget should be created                                               | `false`                    |
+| `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                            | `1`                        |
+| `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                            | `nil`                      |
+| `serviceAccount.create`              | Specifies whether a service account should be created                                                     | `true`                     |
+| `serviceAccount.annotations`         | Service account annotations                                                                               | `{}`                       |
+| `serviceAccount.name`                | The name of the service account to use (Generated using the `lighthouse-ci.fullname` template if not set) | `nil`                      |
+| `podAnnotations`                     | Additional pod annotations                                                                                | `{}`                       |
+| `podLabels`                          | Additional pod labels                                                                                     | `{}`                       |
+| `podSecurityContext`                 | Pod security context                                                                                      | `{}`                       |
+| `priorityClassName`                  | Priority class name                                                                                       | `nil`                      |
+| `securityContext`                    | Container security context                                                                                | `{}`                       |
+| `containerPorts.http`                | Container port for HTTP                                                                                   | `9001`                     |
+| `livenessProbe.enabled`              | Enable liveness probe                                                                                     | `true`                     |
+| `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                              | `0`                        |
+| `livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                                   | `10`                       |
+| `livenessProbe.timeoutSeconds`       | When the liveness probe times out                                                                         | `1`                        |
+| `livenessProbe.failureThreshold`     | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded        | `3`                        |
+| `livenessProbe.successThreshold`     | Minimum consecutive successes for the liveness probe to be considered successful after having failed      | `1`                        |
+| `readinessProbe.enabled`             | Enable readiness probe                                                                                    | `true`                     |
+| `readinessProbe.initialDelaySeconds` | Delay before the readiness probe is initiated                                                             | `0`                        |
+| `readinessProbe.periodSeconds`       | How often to perform the readiness probe                                                                  | `10`                       |
+| `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                        | `1`                        |
+| `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded       | `3`                        |
+| `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed     | `1`                        |
+| `startupProbe.enabled`               | Enable startup probe                                                                                      | `false`                    |
+| `startupProbe.initialDelaySeconds`   | Delay before the startup probe is initiated                                                               | `0`                        |
+| `startupProbe.periodSeconds`         | How often to perform the startup probe                                                                    | `10`                       |
+| `startupProbe.timeoutSeconds`        | When the startup probe times out                                                                          | `1`                        |
+| `startupProbe.failureThreshold`      | Minimum consecutive failures for the startup probe to be considered failed after having succeeded         | `3`                        |
+| `startupProbe.successThreshold`      | Minimum consecutive successes for the startup probe to be considered successful after having failed       | `1`                        |
+| `service.annotations`                | Service annotations                                                                                       | `{}`                       |
+| `service.type`                       | Service type                                                                                              | `ClusterIP`                |
+| `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                     | `nil`                      |
+| `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                         | `nil`                      |
+| `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                                | `nil`                      |
+| `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                             | `Cluster`                  |
+| `service.ports.http`                 | Service port for HTTP                                                                                     | `9001`                     |
+| `service.nodePorts.http`             | Service node port for HTTP when service type is LoadBalancer or NodePort                                  | `nil`                      |
+| `ingress.enabled`                    | Enable ingress controller resource                                                                        | `false`                    |
+| `ingress.ingressClassName`           | IngressClass that will be be used to implement the Ingress                                                | `""`                       |
+| `ingress.pathType`                   | Ingress path type                                                                                         | `ImplementationSpecific`   |
+| `ingress.annotations`                | Ingress annotations                                                                                       | `{}`                       |
+| `ingress.hosts[0].host`              | Hostname to your Lighthouse CI Server installation                                                        | `lighthouse-ci.local`      |
+| `ingress.hosts[0].paths`             | Paths within the url structure                                                                            | `["/"]`                    |
+| `ingress.tls`                        | TLS configuration                                                                                         | `[]`                       |
+| `resources`                          | CPU/Memory resource requests/limits                                                                       | `{}`                       |
+| `nodeSelector`                       | Node labels for pod assignment                                                                            | `{}`                       |
+| `tolerations`                        | Tolerations for pod assignment                                                                            | `[]`                       |
+| `affinity`                           | Map of node/pod affinities                                                                                | `{}`                       |
+| `extraArgs`                          | Additional container arguments                                                                            | `{}`                       |
+| `extraEnvVars`                       | Additional container environment variables                                                                | `[]`                       |
+| `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                          | `nil`                      |
+| `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                             | `nil`                      |
+| `persistence.enabled`                | Enable persistence using PVC                                                                              | `false`                    |
+| `persistence.existingClaim`          | Name of an existing PVC to use                                                                            | `nil`                      |
+| `persistence.accessMode`             | PVC access mode                                                                                           | `ReadWriteOnce`            |
+| `persistence.annotations`            | PVC annotations                                                                                           | `{}`                       |
+| `persistence.size`                   | PVC size                                                                                                  | `1Gi`                      |
+| `persistence.storageClass`           | PVC storage class                                                                                         | `nil`                      |
+| `logLevel`                           | Log level                                                                                                 | `verbose`                  |
+| `basicAuthUsername`                  | The username to protect the server with HTTP Basic Authentication                                         | `""`                       |
+| `basicAuthPassword`                  | The password to protect the server with HTTP Basic Authentication                                         | `""`                       |
+| `psiCollectCron`                     | The configuration to automatically collect results using the PageSpeed Insights API                       |                            |
+| `psiCollectCron.psiApiKey`           | The API key to use with the PageSpeed Insights API                                                        | `""`                       |
+| `psiCollectCron.sites`               | The array of sites to collect results for                                                                 | `[]`                       |
+| `deleteOldBuildsCron`                | The configuration to automatically delete old records                                                     | `[]`                       |
+| `existingSecret`                     | Name of existing Secret to use                                                                            | `""`                       |
+| `existingSecretKeyBasicAuthPassword` | Name of the key in existing Secret that contains HTTP Basic Authentication password                       | `basic-auth-password`      |
 
 ### MariaDB parameters
 

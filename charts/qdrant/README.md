@@ -90,7 +90,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                    |
 | `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
 | `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
-| `serviceAccount.name`                | The name of the service account to use (default value generated using the `qdrant.fullname` template) | `nil`                    |
+| `serviceAccount.name`                | The name of the service account to use (Generated using the `qdrant.fullname` template if not set)    | `nil`                    |
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                     |
@@ -111,6 +111,12 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                      |
 | `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                      |
 | `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                      |
+| `startupProbe.enabled`               | Enable startup probe                                                                                  | `false`                  |
+| `startupProbe.initialDelaySeconds`   | Delay before the startup probe is initiated                                                           | `0`                      |
+| `startupProbe.periodSeconds`         | How often to perform the startup probe                                                                | `10`                     |
+| `startupProbe.timeoutSeconds`        | When the startup probe times out                                                                      | `1`                      |
+| `startupProbe.failureThreshold`      | Minimum consecutive failures for the startup probe to be considered failed after having succeeded     | `3`                      |
+| `startupProbe.successThreshold`      | Minimum consecutive successes for the startup probe to be considered successful after having failed   | `1`                      |
 | `service.annotations`                | Service annotations                                                                                   | `{}`                     |
 | `service.type`                       | Service type                                                                                          | `ClusterIP`              |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |

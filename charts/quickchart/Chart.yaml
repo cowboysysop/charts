@@ -9,7 +9,7 @@ name: quickchart
 sources:
   - https://github.com/typpo/quickchart
   - https://github.com/cowboysysop/charts/tree/master/charts/quickchart
-version: 3.0.0
+version: 3.1.0
 dependencies:
   - name: common
     version: 2.5.0

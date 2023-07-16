@@ -98,6 +98,17 @@ spec:
             failureThreshold: {{ .Values.updater.readinessProbe.failureThreshold }}
             successThreshold: {{ .Values.updater.readinessProbe.successThreshold }}
           {{- end }}
+          {{- if .Values.updater.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: /health-check
+              port: http-metrics
+            initialDelaySeconds: {{ .Values.updater.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.updater.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.updater.startupProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.updater.startupProbe.failureThreshold }}
+            successThreshold: {{ .Values.updater.startupProbe.successThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.updater.resources | nindent 12 }}
       {{- with .Values.updater.nodeSelector }}

@@ -95,6 +95,17 @@ spec:
             failureThreshold: {{ .Values.recommender.readinessProbe.failureThreshold }}
             successThreshold: {{ .Values.recommender.readinessProbe.successThreshold }}
           {{- end }}
+          {{- if .Values.recommender.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: /health-check
+              port: http-metrics
+            initialDelaySeconds: {{ .Values.recommender.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.recommender.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.recommender.startupProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.recommender.startupProbe.failureThreshold }}
+            successThreshold: {{ .Values.recommender.startupProbe.successThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.recommender.resources | nindent 12 }}
       {{- with .Values.recommender.nodeSelector }}

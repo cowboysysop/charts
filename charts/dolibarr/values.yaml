@@ -74,7 +74,7 @@ serviceAccount:
   ## @param serviceAccount.annotations Service account annotations
   annotations: {}
 
-  ## @param serviceAccount.name The name of the service account to use (default value generated using the `dolibarr.fullname` template)
+  ## @param serviceAccount.name The name of the service account to use (Generated using the `dolibarr.fullname` template if not set)
   name:
 
 ## @param podAnnotations Additional pod annotations
@@ -140,6 +140,25 @@ readinessProbe:
   failureThreshold: 3
 
   ## @param readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
+  successThreshold: 1
+
+startupProbe:
+  ## @param startupProbe.enabled Enable startup probe
+  enabled: false
+
+  ## @param startupProbe.initialDelaySeconds Delay before the startup probe is initiated
+  initialDelaySeconds: 0
+
+  ## @param startupProbe.periodSeconds How often to perform the startup probe
+  periodSeconds: 10
+
+  ## @param startupProbe.timeoutSeconds When the startup probe times out
+  timeoutSeconds: 1
+
+  ## @param startupProbe.failureThreshold Minimum consecutive failures for the startup probe to be considered failed after having succeeded
+  failureThreshold: 3
+
+  ## @param startupProbe.successThreshold Minimum consecutive successes for the startup probe to be considered successful after having failed
   successThreshold: 1
 
 service:
@@ -297,6 +316,12 @@ dolibarr:
 
 ## @param existingSecret Name of existing Secret to use
 existingSecret: ""
+
+## @param existingSecretKeyAdminPassword Name of the key in existing Secret that contains administrator password
+existingSecretKeyAdminPassword: dolibarr-admin-password
+
+## @param existingSecretKeyCronSecurityKey Name of the key in existing Secret that contains cron security key
+existingSecretKeyCronSecurityKey: dolibarr-cron-security-key
 
 ## @section MariaDB parameters
 

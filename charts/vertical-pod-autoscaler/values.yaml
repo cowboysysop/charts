@@ -775,6 +775,15 @@ crds:
   ## @param crds.podAnnotations Additional pod annotations
   podAnnotations: {}
 
+  ## @param crds.resources CPU/Memory resource requests/limits
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
   ## @param crds.nodeSelector Node labels for pod assignment
   nodeSelector: {}
 

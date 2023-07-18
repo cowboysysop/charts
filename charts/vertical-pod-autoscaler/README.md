@@ -344,17 +344,18 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 
 ### CRDs parameters
 
-| Name                    | Description                    | Default           |
-| ----------------------- | ------------------------------ | ----------------- |
-| `crds.image.registry`   | Image registry                 | `docker.io`       |
-| `crds.image.repository` | Image repository               | `bitnami/kubectl` |
-| `crds.image.tag`        | Image tag                      | `1.26.3`          |
-| `crds.image.digest`     | Image digest                   | `""`              |
-| `crds.image.pullPolicy` | Image pull policy              | `IfNotPresent`    |
-| `crds.podAnnotations`   | Additional pod annotations     | `{}`              |
-| `crds.nodeSelector`     | Node labels for pod assignment | `{}`              |
-| `crds.tolerations`      | Tolerations for pod assignment | `[]`              |
-| `crds.affinity`         | Map of node/pod affinities     | `{}`              |
+| Name                    | Description                         | Default           |
+| ----------------------- | ----------------------------------- | ----------------- |
+| `crds.image.registry`   | Image registry                      | `docker.io`       |
+| `crds.image.repository` | Image repository                    | `bitnami/kubectl` |
+| `crds.image.tag`        | Image tag                           | `1.26.3`          |
+| `crds.image.digest`     | Image digest                        | `""`              |
+| `crds.image.pullPolicy` | Image pull policy                   | `IfNotPresent`    |
+| `crds.podAnnotations`   | Additional pod annotations          | `{}`              |
+| `crds.resources`        | CPU/Memory resource requests/limits | `{}`              |
+| `crds.nodeSelector`     | Node labels for pod assignment      | `{}`              |
+| `crds.tolerations`      | Tolerations for pod assignment      | `[]`              |
+| `crds.affinity`         | Map of node/pod affinities          | `{}`              |
 
 ### Tests parameters
 

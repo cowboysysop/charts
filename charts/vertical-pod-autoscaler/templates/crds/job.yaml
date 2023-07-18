@@ -37,6 +37,8 @@ spec:
             {{- range $path, $_ := .Files.Glob  "files/crds/*" }}
             - --filename=/config/{{ base $path }}
             {{- end }}
+          resources:
+            {{- toYaml .Values.crds.resources | nindent 12 }}
           volumeMounts:
             - name: config
               mountPath: /config

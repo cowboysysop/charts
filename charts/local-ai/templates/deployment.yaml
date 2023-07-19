@@ -88,8 +88,6 @@ spec:
               value: {{ .Values.config.galleries | toJson | quote }}
             - name: PRELOAD_MODELS_CONFIG
               value: /config/preload-models.json
-            - name: REBUILD
-              value: "false"
             {{- if .Values.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}

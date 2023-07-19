@@ -48,7 +48,7 @@ image:
   repository: go-skynet/local-ai
 
   ## @param image.tag Image tag
-  tag: v1.20.1-ffmpeg
+  tag: v1.21.0-ffmpeg
 
   ## @param image.digest Image digest
   digest: ""
@@ -299,7 +299,7 @@ config:
     # - name: model-gallery
     #   url: github:go-skynet/model-gallery/index.yaml
 
-  ## @param config.preloadModels Models to preload (configure liveness probe initial delay according to model download time)
+  ## @param config.preloadModels Models to preload (enable and configure startup probe according to model download time)
   preloadModels: []
     # - id: model-gallery@text-embedding-ada-002
     # - url: github:go-skynet/model-gallery/gpt4all-j.yaml

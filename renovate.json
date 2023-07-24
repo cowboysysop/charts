@@ -140,6 +140,16 @@
       "depNameTemplate": "python",
       "extractVersionTemplate": "^(?<version>.+)-\\d+$",
       "packageNameTemplate": "actions/python-versions"
+    },
+    {
+      "fileMatch": [
+        "^\\.github\\/workflows\\/.*$"
+      ],
+      "matchStrings": [
+        "(:|-) (?<currentValue>.+?) # renovate: ghcr.io\\/renovate\\/renovate\\n"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "ghcr.io/renovate/renovate"
     }
   ]
 }

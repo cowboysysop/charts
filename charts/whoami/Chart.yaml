@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 1.9.0
+appVersion: 1.10.1
 description: Tiny Go webserver that prints os information and HTTP request to output
 home: https://github.com/traefik/whoami
 maintainers:
@@ -9,7 +9,7 @@ name: whoami
 sources:
   - https://github.com/traefik/whoami
   - https://github.com/cowboysysop/charts/tree/master/charts/whoami
-version: 4.2.0
+version: 4.3.0
 dependencies:
   - name: common
     version: 2.5.0

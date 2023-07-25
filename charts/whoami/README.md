@@ -102,7 +102,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                      |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `traefik/whoami`         |
-| `image.tag`                          | Image tag                                                                                             | `v1.9.0`                 |
+| `image.tag`                          | Image tag                                                                                             | `v1.10.1`                |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |

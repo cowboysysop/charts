@@ -17,8 +17,8 @@ This chart bootstraps a QuickChart deployment on a [Kubernetes](http://kubernete
 
 ## Prerequisites
 
-- Kubernetes >= 1.19
-- Helm >= 3.1
+- Kubernetes >= 1.24
+- Helm >= 3.9
 
 ## Installing
 

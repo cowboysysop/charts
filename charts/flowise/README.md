@@ -17,8 +17,8 @@ This chart bootstraps a Flowise deployment on a [Kubernetes](http://kubernetes.i
 
 ## Prerequisites
 
-- Kubernetes >= 1.19
-- Helm >= 3.1
+- Kubernetes >= 1.24
+- Helm >= 3.9
 
 ## Installing
 

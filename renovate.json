@@ -146,10 +146,10 @@
         "^\\.github\\/workflows\\/.*$"
       ],
       "matchStrings": [
-        "(:|-) (?<currentValue>.+?) # renovate: ghcr.io\\/renovate\\/renovate\\n"
+        "(:|-) (?<currentValue>.+?) # renovate: ghcr.io\\/renovatebot\\/renovate\\n"
       ],
       "datasourceTemplate": "docker",
-      "depNameTemplate": "ghcr.io/renovate/renovate"
+      "depNameTemplate": "ghcr.io/renovatebot/renovate"
     }
   ]
 }

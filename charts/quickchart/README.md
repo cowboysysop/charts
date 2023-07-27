@@ -17,8 +17,8 @@ This chart bootstraps a QuickChart deployment on a [Kubernetes](http://kubernete
 
 ## Prerequisites
 
-- Kubernetes >= 1.19
-- Helm >= 3.1
+- Kubernetes >= 1.24
+- Helm >= 3.9
 
 ## Installing
 
@@ -42,6 +42,12 @@ $ helm upgrade my-release cowboysysop/quickchart
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
+
+### Upgrading to version 4.0.0
+
+The chart is now tested with Kubernetes >= 1.24 and Helm >= 3.9.
+
+Future upgrades may introduce undetected breaking changes if you continue to use older versions.
 
 ### Upgrading to version 3.0.0
 

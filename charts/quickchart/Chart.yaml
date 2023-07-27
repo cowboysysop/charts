@@ -9,7 +9,7 @@ name: quickchart
 sources:
   - https://github.com/typpo/quickchart
   - https://github.com/cowboysysop/charts/tree/master/charts/quickchart
-version: 3.1.0
+version: 4.0.0
 dependencies:
   - name: common
     version: 2.5.0
@@ -18,4 +18,4 @@ annotations:
   artifacthub.io/signKey: |
     fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
     url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
-  kubeVersion: ">=1.19"
+  kubeVersion: ">=1.24"

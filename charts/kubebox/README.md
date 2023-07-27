@@ -17,9 +17,9 @@ This chart bootstraps a Kubebox deployment on a [Kubernetes](http://kubernetes.i
 
 ## Prerequisites
 
-- Kubernetes >= 1.19
+- Kubernetes >= 1.24
 - cAdvisor >= 0.36 (you can use the [ckotzbauer/cadvisor](https://artifacthub.io/packages/helm/ckotzbauer/cadvisor) chart)
-- Helm >= 3.1
+- Helm >= 3.9
 
 ## Installing
 
@@ -43,6 +43,12 @@ $ helm upgrade my-release cowboysysop/kubebox
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
+
+### Upgrading to version 5.0.0
+
+The chart is now tested with Kubernetes >= 1.24 and Helm >= 3.9.
+
+Future upgrades may introduce undetected breaking changes if you continue to use older versions.
 
 ### Upgrading to version 4.0.0
 

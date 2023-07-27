@@ -44,6 +44,12 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 5.0.0
+
+The chart is now tested with Kubernetes >= 1.24 and Helm >= 3.9.
+
+Future upgrades may introduce undetected breaking changes if you continue to use older versions.
+
 ### Upgrading to version 4.0.0
 
 Some parameters related to port management have been modified:

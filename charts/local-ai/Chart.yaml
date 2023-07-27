@@ -10,7 +10,7 @@ name: local-ai
 sources:
   - https://github.com/go-skynet/LocalAI
   - https://github.com/cowboysysop/charts/tree/master/charts/local-ai
-version: 1.6.1
+version: 2.0.0
 dependencies:
   - name: common
     version: 2.5.0

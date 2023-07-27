@@ -10,7 +10,7 @@ name: kroki
 sources:
   - https://github.com/yuzutech/kroki
   - https://github.com/cowboysysop/charts/tree/master/charts/kroki
-version: 3.2.1
+version: 4.0.0
 dependencies:
   - name: common
     version: 2.5.0

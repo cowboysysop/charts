@@ -1,0 +1,4 @@
+fullnameOverride: flowise
+mariadb:
+  enabled: true
+  fullnameOverride: mariadb

@@ -48,7 +48,7 @@ image:
   repository: flowiseai/flowise
 
   ## @param image.tag Image tag
-  tag: 1.2.16
+  tag: 1.3.1
 
   ## @param image.digest Image digest
   digest: ""
@@ -273,6 +273,173 @@ persistence:
   ## @param persistence.storageClass PVC storage class
   storageClass:
   # storageClass: -
+
+## @section Config parameters
+
+config:
+  ## @param config.username Username to login
+  username: ""
+
+  ## @param config.password Password to login
+  password: ""
+
+  ## @param config.passphrase Passphrase used to create encryption key
+  passphrase: MYPASSPHRASE
+
+  ## @param config.executionMode Whether predictions run in their own process or the main process
+  executionMode: main
+
+## @param existingSecret Name of existing Secret to use
+existingSecret: ""
+
+## @param existingSecretKeyPassword Key in existing Secret that contains password
+existingSecretKeyPassword: password
+
+## @param existingSecretKeyPassphrase Key in existing Secret that contains passphrase
+existingSecretKeyPassphrase: passphrase
+
+## @section MariaDB parameters
+
+mariadb:
+  ## @param mariadb.enabled Whether to use the MariaDB chart
+  enabled: false
+
+  ## @param mariadb.architecture MariaDB architecture
+  architecture: standalone
+
+  auth:
+    ## @param mariadb.auth.database MariaDB database
+    database: flowise
+
+    ## @param mariadb.auth.username MariaDB user
+    username: flowise
+
+    ## @param mariadb.auth.password MariaDB password
+    password: flowise
+
+    ## @param mariadb.auth.existingSecret Name of existing Secret to use
+    existingSecret: ""
+
+  primary:
+    service:
+      ports:
+        ## @param mariadb.primary.service.ports.mysql MariaDB port
+        mysql: 3306
+
+externalMariadb:
+  ## @param externalMariadb.enabled Whether to use an external MariaDB
+  enabled: false
+
+  ## @param externalMariadb.host External MariaDB host
+  host: mariadb
+
+  ## @param externalMariadb.port External MariaDB port
+  port: 3306
+
+  ## @param externalMariadb.username External MariaDB user
+  username: flowise
+
+  ## @param externalMariadb.password External MariaDB password
+  password: flowise
+
+  ## @param externalMariadb.existingSecret Name of existing Secret to use
+  existingSecret: ""
+
+  ## @param externalMariadb.existingSecretKeyPassword Key in existing Secret that contains MariaDB password
+  existingSecretKeyPassword: mariadb-password
+
+  ## @param externalMariadb.database External MariaDB database
+  database: flowise
+
+## @section PostgreSQL parameters
+
+postgresql:
+  ## @param postgresql.enabled Whether to use the PostgreSQL chart
+  enabled: false
+
+  auth:
+    ## @param postgresql.auth.username PostgreSQL user
+    username: flowise
+
+    ## @param postgresql.auth.password PostgreSQL password
+    password: flowise
+
+    ## @param postgresql.auth.database PostgreSQL database
+    database: flowise
+
+    ## @param postgresql.auth.existingSecret Name of existing Secret to use
+    existingSecret: ""
+
+  ## @param postgresql.architecture PostgreSQL architecture
+  architecture: standalone
+
+  primary:
+    service:
+      ports:
+        ## @param postgresql.primary.service.ports.postgresql PostgreSQL port
+        postgresql: 5432
+
+externalPostgresql:
+  ## @param externalPostgresql.enabled Whether to use an external PostgreSQL
+  enabled: false
+
+  ## @param externalPostgresql.host External PostgreSQL host
+  host: postgresql
+
+  ## @param externalPostgresql.port External PostgreSQL port
+  port: 5432
+
+  ## @param externalPostgresql.username External PostgreSQL user
+  username: flowise
+
+  ## @param externalPostgresql.password External PostgreSQL password
+  password: flowise
+
+  ## @param externalPostgresql.existingSecret Name of existing Secret to use
+  existingSecret: ""
+
+  ## @param externalPostgresql.existingSecretKeyPassword Key in existing Secret that contains PostgreSQL password
+  existingSecretKeyPassword: password
+
+  ## @param externalPostgresql.database External PostgreSQL database
+  database: flowise
+
+## @section Wait parameters
+
+wait:
+  image:
+    ## @param wait.image.registry Image registry
+    registry: docker.io
+
+    ## @param wait.image.repository Image repository
+    repository: atkrad/wait4x
+
+    ## @param wait.image.tag Image tag
+    tag: 2.13.0
+
+    ## @param wait.image.digest Image digest
+    digest: ""
+
+    ## @param wait.image.pullPolicy Image pull policy
+    pullPolicy: IfNotPresent
+
+  ## @param wait.securityContext Container security context
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  ## @param wait.resources CPU/Memory resource requests/limits
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
 
 ## @section Tests parameters
 

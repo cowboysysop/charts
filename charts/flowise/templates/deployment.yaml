@@ -29,15 +29,16 @@ spec:
         {{- if .Values.commonLabels }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
-      {{- if or .Values.podAnnotations .Values.commonAnnotations }}
       annotations:
+        {{- if (not .Values.existingSecret) }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        {{- end }}
         {{- if .Values.podAnnotations }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.podAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
         {{- if .Values.commonAnnotations }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
-      {{- end }}
     spec:
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.image ) "global" .Values.global ) | nindent 6 }}
       {{- if .Values.priorityClassName }}
@@ -46,6 +47,63 @@ spec:
       serviceAccountName: {{ include "flowise.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        {{- if or .Values.mariadb.enabled .Values.externalMariadb.enabled }}
+        - name: wait-mariadb
+          securityContext:
+            {{- toYaml .Values.wait.securityContext | nindent 12 }}
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.wait.image "global" .Values.global ) }}
+          imagePullPolicy: {{ .Values.wait.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              wait4x mysql "${MARIADB_USERNAME}:${MARIADB_PASSWORD}@tcp(${MARIADB_HOST}:${MARIADB_PORT})/${MARIADB_DATABASE}" --timeout 0
+          env:
+            - name: MARIADB_HOST
+              value: {{ include "flowise.mariadb.host" . | quote }}
+            - name: MARIADB_PORT
+              value: {{ include "flowise.mariadb.port" . | quote }}
+            - name: MARIADB_USERNAME
+              value: {{ include "flowise.mariadb.username" . | quote }}
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.mariadb.secretName" . }}
+                  key: {{ include "flowise.mariadb.secretKeyPassword" . }}
+            - name: MARIADB_DATABASE
+              value: {{ include "flowise.mariadb.database" . | quote }}
+          resources:
+            {{- toYaml .Values.wait.resources | nindent 12 }}
+        {{- end }}
+        {{- if or .Values.postgresql.enabled .Values.externalPostgresql.enabled }}
+        - name: wait-postgresql
+          securityContext:
+            {{- toYaml .Values.wait.securityContext | nindent 12 }}
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.wait.image "global" .Values.global ) }}
+          imagePullPolicy: {{ .Values.wait.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              wait4x postgresql "postgres://${POSTGRESQL_USERNAME}:${POSTGRESQL_PASSWORD}@${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${POSTGRESQL_DATABASE}?sslmode=disable" --timeout 0
+          env:
+            - name: POSTGRESQL_HOST
+              value: {{ include "flowise.postgresql.host" . | quote }}
+            - name: POSTGRESQL_PORT
+              value: {{ include "flowise.postgresql.port" . | quote }}
+            - name: POSTGRESQL_USERNAME
+              value: {{ include "flowise.postgresql.username" . | quote }}
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.postgresql.secretName" . }}
+                  key: {{ include "flowise.postgresql.secretKeyPassword" . }}
+            - name: POSTGRESQL_DATABASE
+              value: {{ include "flowise.postgresql.database" . | quote }}
+          resources:
+            {{- toYaml .Values.wait.resources | nindent 12 }}
+        {{- end }}
       containers:
         - name: flowise
           securityContext:
@@ -64,12 +122,64 @@ spec:
             {{- end }}
           {{- end }}
           env:
-            - name: APIKEY_PATH
-              value: /data
-            - name: DATABASE_PATH
-              value: /data
             - name: PORT
               value: {{ .Values.containerPorts.http | quote }}
+            {{- if and .Values.config.username .Values.config.password }}
+            - name: FLOWISE_USERNAME
+              value: {{ .Values.config.username | quote }}
+            - name: FLOWISE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.secretName" . }}
+                  key: {{ include "flowise.secretKeyPassword" . }}
+            {{- end }}
+            - name: APIKEY_PATH
+              value: /data
+            - name: SECRETKEY_PATH
+              value: /data
+            - name: PASSPHRASE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.secretName" . }}
+                  key: {{ include "flowise.secretKeyPassphrase" . }}
+            - name: EXECUTION_MODE
+              value: {{ .Values.config.executionMode | quote }}
+            - name: DATABASE_PATH
+              value: /data
+            {{- if or .Values.mariadb.enabled .Values.externalMariadb.enabled }}
+            - name: DATABASE_TYPE
+              value: mysql
+            - name: DATABASE_HOST
+              value: {{ include "flowise.mariadb.host" . | quote }}
+            - name: DATABASE_PORT
+              value: {{ include "flowise.mariadb.port" . | quote }}
+            - name: DATABASE_USER
+              value: {{ include "flowise.mariadb.username" . | quote }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.mariadb.secretName" . }}
+                  key: {{ include "flowise.mariadb.secretKeyPassword" . }}
+            - name: DATABASE_NAME
+              value: {{ include "flowise.mariadb.database" . | quote }}
+            {{- end }}
+            {{- if or .Values.postgresql.enabled .Values.externalPostgresql.enabled }}
+            - name: DATABASE_TYPE
+              value: postgres
+            - name: DATABASE_HOST
+              value: {{ include "flowise.postgresql.host" . | quote }}
+            - name: DATABASE_PORT
+              value: {{ include "flowise.postgresql.port" . | quote }}
+            - name: DATABASE_USER
+              value: {{ include "flowise.postgresql.username" . | quote }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.postgresql.secretName" . }}
+                  key: {{ include "flowise.postgresql.secretKeyPassword" . }}
+            - name: DATABASE_NAME
+              value: {{ include "flowise.postgresql.database" . | quote }}
+            {{- end }}
             {{- if .Values.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}

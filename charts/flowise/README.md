@@ -89,7 +89,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `flowiseai/flowise`      |
-| `image.tag`                          | Image tag                                                                                             | `1.2.16`                 |
+| `image.tag`                          | Image tag                                                                                             | `1.3.1`                  |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -151,6 +151,70 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `persistence.annotations`            | PVC annotations                                                                                       | `{}`                     |
 | `persistence.size`                   | PVC size                                                                                              | `1Gi`                    |
 | `persistence.storageClass`           | PVC storage class                                                                                     | `nil`                    |
+
+### Config parameters
+
+| Name                          | Description                                                      | Default        |
+| ----------------------------- | ---------------------------------------------------------------- | -------------- |
+| `config.username`             | Username to login                                                | `""`           |
+| `config.password`             | Password to login                                                | `""`           |
+| `config.passphrase`           | Passphrase used to create encryption key                         | `MYPASSPHRASE` |
+| `config.executionMode`        | Whether predictions run in their own process or the main process | `main`         |
+| `existingSecret`              | Name of existing Secret to use                                   | `""`           |
+| `existingSecretKeyPassword`   | Key in existing Secret that contains password                    | `password`     |
+| `existingSecretKeyPassphrase` | Key in existing Secret that contains passphrase                  | `passphrase`   |
+
+### MariaDB parameters
+
+| Name                                        | Description                                           | Default            |
+| ------------------------------------------- | ----------------------------------------------------- | ------------------ |
+| `mariadb.enabled`                           | Whether to use the MariaDB chart                      | `false`            |
+| `mariadb.architecture`                      | MariaDB architecture                                  | `standalone`       |
+| `mariadb.auth.database`                     | MariaDB database                                      | `flowise`          |
+| `mariadb.auth.username`                     | MariaDB user                                          | `flowise`          |
+| `mariadb.auth.password`                     | MariaDB password                                      | `flowise`          |
+| `mariadb.auth.existingSecret`               | Name of existing Secret to use                        | `""`               |
+| `mariadb.primary.service.ports.mysql`       | MariaDB port                                          | `3306`             |
+| `externalMariadb.enabled`                   | Whether to use an external MariaDB                    | `false`            |
+| `externalMariadb.host`                      | External MariaDB host                                 | `mariadb`          |
+| `externalMariadb.port`                      | External MariaDB port                                 | `3306`             |
+| `externalMariadb.username`                  | External MariaDB user                                 | `flowise`          |
+| `externalMariadb.password`                  | External MariaDB password                             | `flowise`          |
+| `externalMariadb.existingSecret`            | Name of existing Secret to use                        | `""`               |
+| `externalMariadb.existingSecretKeyPassword` | Key in existing Secret that contains MariaDB password | `mariadb-password` |
+| `externalMariadb.database`                  | External MariaDB database                             | `flowise`          |
+
+### PostgreSQL parameters
+
+| Name                                           | Description                                              | Default      |
+| ---------------------------------------------- | -------------------------------------------------------- | ------------ |
+| `postgresql.enabled`                           | Whether to use the PostgreSQL chart                      | `false`      |
+| `postgresql.auth.username`                     | PostgreSQL user                                          | `flowise`    |
+| `postgresql.auth.password`                     | PostgreSQL password                                      | `flowise`    |
+| `postgresql.auth.database`                     | PostgreSQL database                                      | `flowise`    |
+| `postgresql.auth.existingSecret`               | Name of existing Secret to use                           | `""`         |
+| `postgresql.architecture`                      | PostgreSQL architecture                                  | `standalone` |
+| `postgresql.primary.service.ports.postgresql`  | PostgreSQL port                                          | `5432`       |
+| `externalPostgresql.enabled`                   | Whether to use an external PostgreSQL                    | `false`      |
+| `externalPostgresql.host`                      | External PostgreSQL host                                 | `postgresql` |
+| `externalPostgresql.port`                      | External PostgreSQL port                                 | `5432`       |
+| `externalPostgresql.username`                  | External PostgreSQL user                                 | `flowise`    |
+| `externalPostgresql.password`                  | External PostgreSQL password                             | `flowise`    |
+| `externalPostgresql.existingSecret`            | Name of existing Secret to use                           | `""`         |
+| `externalPostgresql.existingSecretKeyPassword` | Key in existing Secret that contains PostgreSQL password | `password`   |
+| `externalPostgresql.database`                  | External PostgreSQL database                             | `flowise`    |
+
+### Wait parameters
+
+| Name                    | Description                         | Default         |
+| ----------------------- | ----------------------------------- | --------------- |
+| `wait.image.registry`   | Image registry                      | `docker.io`     |
+| `wait.image.repository` | Image repository                    | `atkrad/wait4x` |
+| `wait.image.tag`        | Image tag                           | `2.13.0`        |
+| `wait.image.digest`     | Image digest                        | `""`            |
+| `wait.image.pullPolicy` | Image pull policy                   | `IfNotPresent`  |
+| `wait.securityContext`  | Container security context          | `{}`            |
+| `wait.resources`        | CPU/Memory resource requests/limits | `{}`            |
 
 ### Tests parameters
 

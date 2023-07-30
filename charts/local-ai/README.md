@@ -89,7 +89,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `quay.io`                |
 | `image.repository`                   | Image repository                                                                                      | `go-skynet/local-ai`     |
-| `image.tag`                          | Image tag                                                                                             | `v1.21.0-ffmpeg`         |
+| `image.tag`                          | Image tag                                                                                             | `v1.22.0-ffmpeg`         |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |

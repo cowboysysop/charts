@@ -7657,6 +7657,32 @@ entries:
         url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
       kubeVersion: '>=1.24'
     apiVersion: v2
+    appVersion: 1.4.0
+    created: "2023-08-05T13:16:21.420071396Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 2.5.0
+    description: Vector similarity search engine and vector database
+    digest: c7094701a751d1be49e02b894e866043f49a95c0e9ef0069603ff5c6a45b8d8b
+    home: https://qdrant.tech/
+    icon: https://raw.githubusercontent.com/cowboysysop/charts/master/charts/qdrant/icon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: qdrant
+    sources:
+    - https://github.com/qdrant/qdrant
+    - https://github.com/cowboysysop/charts/tree/master/charts/qdrant
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/qdrant-2.1.0/qdrant-2.1.0.tgz
+    version: 2.1.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
     appVersion: 1.3.2
     created: "2023-07-27T17:34:20.933946405Z"
     dependencies:
@@ -10215,4 +10241,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2023-07-30T15:07:31.742691234Z"
+generated: "2023-08-05T13:16:21.421041706Z"

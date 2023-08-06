@@ -293,6 +293,8 @@ persistence:
   storageClass:
   # storageClass: -
 
+## @section Config parameters
+
 config:
   ## @param config.galleries Model galleries
   galleries: []

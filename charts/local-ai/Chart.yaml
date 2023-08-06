@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 1.22.0
+appVersion: 1.23.2
 description: A drop-in replacement REST API compatible with OpenAI API specifications for local inferencing
 home: https://localai.io/
 icon: https://user-images.githubusercontent.com/2420543/233147843-88697415-6dbf-4368-a862-ab217f9f7342.jpeg
@@ -10,7 +10,7 @@ name: local-ai
 sources:
   - https://github.com/go-skynet/LocalAI
   - https://github.com/cowboysysop/charts/tree/master/charts/local-ai
-version: 2.1.0
+version: 2.2.0
 dependencies:
   - name: common
     version: 2.5.0

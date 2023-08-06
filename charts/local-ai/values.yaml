@@ -48,7 +48,7 @@ image:
   repository: go-skynet/local-ai
 
   ## @param image.tag Image tag
-  tag: v1.22.0-ffmpeg
+  tag: v1.23.2-ffmpeg
 
   ## @param image.digest Image digest
   digest: ""
@@ -292,6 +292,8 @@ persistence:
   ## @param persistence.storageClass PVC storage class
   storageClass:
   # storageClass: -
+
+## @section Config parameters
 
 config:
   ## @param config.galleries Model galleries

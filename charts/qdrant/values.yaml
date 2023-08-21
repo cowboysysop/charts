@@ -44,7 +44,7 @@ image:
   repository: qdrant/qdrant
 
   ## @param image.tag Image tag
-  tag: v1.4.0
+  tag: v1.4.1
 
   ## @param image.digest Image digest
   digest: ""

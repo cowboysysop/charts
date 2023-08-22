@@ -358,6 +358,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `crds.image.digest`     | Image digest                        | `""`              |
 | `crds.image.pullPolicy` | Image pull policy                   | `IfNotPresent`    |
 | `crds.podAnnotations`   | Additional pod annotations          | `{}`              |
+| `crds.podLabels`        | Additional pod labels               | `{}`              |
 | `crds.resources`        | CPU/Memory resource requests/limits | `{}`              |
 | `crds.nodeSelector`     | Node labels for pod assignment      | `{}`              |
 | `crds.tolerations`      | Tolerations for pod assignment      | `[]`              |

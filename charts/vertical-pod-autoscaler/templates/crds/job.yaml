@@ -15,8 +15,16 @@ metadata:
     {{- end }}
 spec:
   template:
-    {{- if or .Values.crds.podAnnotations .Values.commonAnnotations }}
     metadata:
+      labels:
+        {{- include "vertical-pod-autoscaler.crds.selectorLabels" . | nindent 8 }}
+        {{- if .Values.crds.podLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.crds.podLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- if or .Values.crds.podAnnotations .Values.commonAnnotations }}
       annotations:
         {{- if .Values.crds.podAnnotations }}
         {{- include "common.tplvalues.render" ( dict "value" .Values.crds.podAnnotations "context" $ ) | nindent 8 }}

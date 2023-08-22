@@ -775,6 +775,9 @@ crds:
   ## @param crds.podAnnotations Additional pod annotations
   podAnnotations: {}
 
+  ## @param crds.podLabels Additional pod labels
+  podLabels: {}
+
   ## @param crds.resources CPU/Memory resource requests/limits
   resources: {}
     # limits:

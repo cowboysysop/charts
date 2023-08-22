@@ -20,3 +20,11 @@ Common labels
 {{ include "vertical-pod-autoscaler.labels" . }}
 {{ include "vertical-pod-autoscaler.crds.componentLabels" . }}
 {{- end -}}
+
+{{/*
+Selector labels
+*/}}
+{{- define "vertical-pod-autoscaler.crds.selectorLabels" -}}
+{{ include "vertical-pod-autoscaler.selectorLabels" . }}
+{{ include "vertical-pod-autoscaler.crds.componentLabels" . }}
+{{- end -}}

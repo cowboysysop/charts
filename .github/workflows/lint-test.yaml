@@ -93,24 +93,6 @@ jobs:
         with:
           node_image: kindest/node:${{ matrix.kubernetes }}
 
-      - name: Install cert-manager
-        run: |
-          kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.1/cert-manager.crds.yaml # renovate: cert-manager
-          helm repo add jetstack https://charts.jetstack.io/
-          helm install cert-manager jetstack/cert-manager -n cert-manager --create-namespace --version v1.6.1 --wait # renovate: cert-manager
-        if: steps.list-changed.outputs.changed == 'true'
-
-      - name: Install Istio
-        run: |
-          helm repo add istio https://istio-release.storage.googleapis.com/charts/
-          helm install istio-base istio/base -n istio-system --create-namespace --version v1.12.2 --wait # renovate: istio
-        if: steps.list-changed.outputs.changed == 'true'
-
-      - name: Install Knative Serving
-        run: |
-          kubectl apply -f https://github.com/knative/serving/releases/download/knative-v1.2.0/serving-crds.yaml # renovate: knative-serving
-        if: steps.list-changed.outputs.changed == 'true'
-
       - name: Run chart-testing (install)
         run: ct install --config ct.yaml --excluded-charts "${{ steps.list-excluded.outputs.excluded }}"
         if: steps.list-changed.outputs.changed == 'true'

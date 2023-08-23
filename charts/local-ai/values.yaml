@@ -300,6 +300,8 @@ config:
   galleries: []
     # - name: model-gallery
     #   url: github:go-skynet/model-gallery/index.yaml
+    # - name: huggingface
+    #   url: github:go-skynet/model-gallery/huggingface.yaml
 
   ## @param config.preloadModels Models to preload (enable and configure startup probe according to model download time)
   preloadModels: []

@@ -79,17 +79,6 @@
         "^\\.github\\/workflows\\/.*$"
       ],
       "matchStrings": [
-        "(?<currentValue>v\\d+\\.\\d+\\.\\d+).* # renovate: cert-manager\\n"
-      ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "cert-manager",
-      "packageNameTemplate": "jetstack/cert-manager"
-    },
-    {
-      "fileMatch": [
-        "^\\.github\\/workflows\\/.*$"
-      ],
-      "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: helm\\n"
       ],
       "datasourceTemplate": "github-releases",
@@ -101,33 +90,10 @@
         "^\\.github\\/workflows\\/.*$"
       ],
       "matchStrings": [
-        "v(?<currentValue>\\d+\\.\\d+\\.\\d+).* # renovate: istio\\n"
-      ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "istio",
-      "packageNameTemplate": "istio/istio"
-    },
-    {
-      "fileMatch": [
-        "^\\.github\\/workflows\\/.*$"
-      ],
-      "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: kindest\\/node\\n"
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "kindest/node"
-    },
-    {
-      "fileMatch": [
-        "^\\.github\\/workflows\\/.*$"
-      ],
-      "matchStrings": [
-        "(?<currentValue>v\\d+\\.\\d+\\.\\d+).* # renovate: knative-serving\\n"
-      ],
-      "datasourceTemplate": "github-releases",
-      "depNameTemplate": "knative-serving",
-      "extractVersionTemplate": "^knative-(?<version>.+)$",
-      "packageNameTemplate": "knative/serving"
     },
     {
       "fileMatch": [

@@ -30,7 +30,7 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
       annotations:
-        {{- if (not .Values.existingSecret) }}
+        {{- if not .Values.existingSecret }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         {{- end }}
         {{- if .Values.podAnnotations }}
@@ -142,8 +142,6 @@ spec:
                 secretKeyRef:
                   name: {{ include "flowise.secretName" . }}
                   key: {{ include "flowise.secretKeyPassphrase" . }}
-            - name: EXECUTION_MODE
-              value: {{ .Values.config.executionMode | quote }}
             - name: DATABASE_PATH
               value: /data
             {{- if or .Values.mariadb.enabled .Values.externalMariadb.enabled }}

@@ -48,7 +48,7 @@ image:
   repository: flowiseai/flowise
 
   ## @param image.tag Image tag
-  tag: 1.3.1
+  tag: 1.3.4
 
   ## @param image.digest Image digest
   digest: ""
@@ -285,9 +285,6 @@ config:
 
   ## @param config.passphrase Passphrase used to create encryption key
   passphrase: MYPASSPHRASE
-
-  ## @param config.executionMode Whether predictions run in their own process or the main process
-  executionMode: main
 
 ## @param existingSecret Name of existing Secret to use
 existingSecret: ""

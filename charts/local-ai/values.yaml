@@ -48,7 +48,7 @@ image:
   repository: go-skynet/local-ai
 
   ## @param image.tag Image tag
-  tag: v1.23.2-ffmpeg
+  tag: v1.24.1-ffmpeg
 
   ## @param image.digest Image digest
   digest: ""
@@ -300,6 +300,8 @@ config:
   galleries: []
     # - name: model-gallery
     #   url: github:go-skynet/model-gallery/index.yaml
+    # - name: huggingface
+    #   url: github:go-skynet/model-gallery/huggingface.yaml
 
   ## @param config.preloadModels Models to preload (enable and configure startup probe according to model download time)
   preloadModels: []

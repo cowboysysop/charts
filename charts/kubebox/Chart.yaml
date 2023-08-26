@@ -9,10 +9,10 @@ name: kubebox
 sources:
   - https://github.com/astefanutti/kubebox
   - https://github.com/cowboysysop/charts/tree/master/charts/kubebox
-version: 5.0.0
+version: 5.1.0
 dependencies:
   - name: common
-    version: 2.5.0
+    version: 2.9.0
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

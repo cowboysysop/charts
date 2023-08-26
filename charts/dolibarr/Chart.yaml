@@ -10,10 +10,10 @@ name: dolibarr
 sources:
   - https://github.com/Dolibarr/dolibarr
   - https://github.com/cowboysysop/charts/tree/master/charts/dolibarr
-version: 4.0.0
+version: 4.1.0
 dependencies:
   - name: common
-    version: 2.5.0
+    version: 2.9.0
     repository: https://charts.bitnami.com/bitnami/
   - name: mariadb
     version: 11.5.7

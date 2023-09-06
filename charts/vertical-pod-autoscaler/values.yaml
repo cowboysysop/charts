@@ -198,6 +198,9 @@ admissionController:
   ## @param admissionController.tolerations Tolerations for pod assignment
   tolerations: []
 
+  ## @param admissionController.topologySpreadConstraints Topology spread constraints for pod assignment
+  topologySpreadConstraints: []
+
   ## @param admissionController.affinity Map of node/pod affinities
   affinity: {}
 
@@ -426,6 +429,9 @@ recommender:
 
   ## @param recommender.tolerations Tolerations for pod assignment
   tolerations: []
+
+  ## @param recommender.topologySpreadConstraints Topology spread constraints for pod assignment
+  topologySpreadConstraints: []
 
   ## @param recommender.affinity Map of node/pod affinities
   affinity: {}
@@ -674,6 +680,9 @@ updater:
 
   ## @param updater.tolerations Tolerations for pod assignment
   tolerations: []
+
+    ## @param updater.topologySpreadConstraints Topology spread constraints for pod assignment
+  topologySpreadConstraints: []
 
   ## @param updater.affinity Map of node/pod affinities
   affinity: {}

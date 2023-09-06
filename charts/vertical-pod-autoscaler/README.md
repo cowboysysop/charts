@@ -190,6 +190,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.resources`                                | CPU/Memory resource requests/limits                                                                                 | `{}`                                   |
 | `admissionController.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                                   |
 | `admissionController.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                                   |
+| `admissionController.topologySpreadConstraints`                | Topology spread constraints for pod assignment                                                                      | `[]`                                   |
 | `admissionController.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                                   |
 | `admissionController.extraArgs`                                | Additional container arguments                                                                                      |                                        |
 | `admissionController.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                                    |
@@ -260,6 +261,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.resources`                                | CPU/Memory resource requests/limits                                                                                 | `{}`                          |
 | `recommender.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                          |
 | `recommender.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                          |
+| `recommender.topologySpreadConstraints`                | Topology spread constraints for pod assignment                                                                      | `[]`                          |
 | `recommender.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                          |
 | `recommender.extraArgs`                                | Additional container arguments                                                                                      |                               |
 | `recommender.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                           |
@@ -327,6 +329,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.resources`                                | CPU/Memory resource requests/limits                                                                                 | `{}`                      |
 | `updater.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                      |
 | `updater.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                      |
+| `updater.topologySpreadConstraints`                | Topology spread constraints for pod assignment                                                                      | `[]`                      |
 | `updater.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                      |
 | `updater.extraArgs`                                | Additional container arguments                                                                                      |                           |
 | `updater.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                       |

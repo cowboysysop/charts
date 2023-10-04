@@ -43,6 +43,10 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 3.0.0
+
+The llama backend now uses the GGUF model format. Migrate to the llama-stable backend to continue using the GGML model format.
+
 ### Upgrading to version 2.0.0
 
 The chart is now tested with Kubernetes >= 1.24 and Helm >= 3.9.
@@ -89,7 +93,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `quay.io`                |
 | `image.repository`                   | Image repository                                                                                      | `go-skynet/local-ai`     |
-| `image.tag`                          | Image tag                                                                                             | `v1.24.1-ffmpeg`         |
+| `image.tag`                          | Image tag                                                                                             | `v1.25.0-ffmpeg`         |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |

@@ -109,40 +109,6 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-        {{- if .Values.blockdiag.enabled }}
-        - name: blockdiag
-          securityContext:
-            {{- toYaml .Values.blockdiag.securityContext | nindent 12 }}
-          image: {{ include "common.images.image" ( dict "imageRoot" .Values.blockdiag.image "global" .Values.global ) }}
-          imagePullPolicy: {{ .Values.blockdiag.image.pullPolicy }}
-          {{- if .Values.blockdiag.extraArgs }}
-          args:
-            {{- range $key, $value := .Values.blockdiag.extraArgs }}
-            - --{{ $key }}={{ $value }}
-            {{- end }}
-          {{- end }}
-          {{- if .Values.blockdiag.extraEnvVars }}
-          env:
-            {{- include "common.tplvalues.render" (dict "value" .Values.blockdiag.extraEnvVars "context" $) | nindent 12 }}
-          {{- end }}
-          {{- if or .Values.blockdiag.extraEnvVarsCM .Values.blockdiag.extraEnvVarsSecret }}
-          envFrom:
-            {{- if .Values.blockdiag.extraEnvVarsCM }}
-            - configMapRef:
-                name: {{ include "common.tplvalues.render" (dict "value" .Values.blockdiag.extraEnvVarsCM "context" $) }}
-            {{- end }}
-            {{- if .Values.blockdiag.extraEnvVarsSecret }}
-            - secretRef:
-                name: {{ include "common.tplvalues.render" (dict "value" .Values.blockdiag.extraEnvVarsSecret "context" $) }}
-            {{- end }}
-          {{- end }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.blockdiag.containerPorts.http }}
-              protocol: TCP
-          resources:
-            {{- toYaml .Values.blockdiag.resources | nindent 12 }}
-        {{- end }}
         {{- if .Values.bpmn.enabled }}
         - name: bpmn
           securityContext:
@@ -278,40 +244,6 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.mermaid.resources | nindent 12 }}
-        {{- end }}
-        {{- if .Values.wireviz.enabled }}
-        - name: wireviz
-          securityContext:
-            {{- toYaml .Values.wireviz.securityContext | nindent 12 }}
-          image: {{ include "common.images.image" ( dict "imageRoot" .Values.wireviz.image "global" .Values.global ) }}
-          imagePullPolicy: {{ .Values.wireviz.image.pullPolicy }}
-          {{- if .Values.wireviz.extraArgs }}
-          args:
-            {{- range $key, $value := .Values.wireviz.extraArgs }}
-            - --{{ $key }}={{ $value }}
-            {{- end }}
-          {{- end }}
-          {{- if .Values.wireviz.extraEnvVars }}
-          env:
-            {{- include "common.tplvalues.render" (dict "value" .Values.wireviz.extraEnvVars "context" $) | nindent 12 }}
-          {{- end }}
-          {{- if or .Values.wireviz.extraEnvVarsCM .Values.wireviz.extraEnvVarsSecret }}
-          envFrom:
-            {{- if .Values.wireviz.extraEnvVarsCM }}
-            - configMapRef:
-                name: {{ include "common.tplvalues.render" (dict "value" .Values.wireviz.extraEnvVarsCM "context" $) }}
-            {{- end }}
-            {{- if .Values.wireviz.extraEnvVarsSecret }}
-            - secretRef:
-                name: {{ include "common.tplvalues.render" (dict "value" .Values.wireviz.extraEnvVarsSecret "context" $) }}
-            {{- end }}
-          {{- end }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.wireviz.containerPorts.http }}
-              protocol: TCP
-          resources:
-            {{- toYaml .Values.wireviz.resources | nindent 12 }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:

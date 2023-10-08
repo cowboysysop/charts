@@ -44,7 +44,7 @@ image:
   repository: yuzutech/kroki
 
   ## @param image.tag Image tag
-  tag: 0.21.3
+  tag: 0.23.0
 
   ## @param image.digest Image digest
   digest: ""
@@ -249,65 +249,6 @@ extraEnvVarsCM:
 ## @param extraEnvVarsSecret Name of existing Secret containing additional container environment variables
 extraEnvVarsSecret:
 
-## @section BlockDiag parameters
-
-blockdiag:
-  ## @param blockdiag.enabled Enable BlockDiag
-  enabled: true
-
-  image:
-    ## @param blockdiag.image.registry Image registry
-    registry: docker.io
-
-    ## @param blockdiag.image.repository Image repository
-    repository: yuzutech/kroki-blockdiag
-
-    ## @param blockdiag.image.tag Image tag
-    tag: 0.21.3
-
-    ## @param blockdiag.image.digest Image digest
-    digest: ""
-
-    ## @param blockdiag.image.pullPolicy Image pull policy
-    pullPolicy: IfNotPresent
-
-  ## @param blockdiag.securityContext Container security context
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
-  containerPorts:
-    ## @param blockdiag.containerPorts.http Container port for HTTP
-    http: 8001
-
-  ## @param blockdiag.resources CPU/Memory resource requests/limits
-  resources: {}
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
-
-  ## @param blockdiag.extraArgs Additional container arguments
-  extraArgs: {}
-    # name: ""
-
-  ## @param blockdiag.extraEnvVars Additional container environment variables
-  extraEnvVars: []
-    # - name: MY-NAME
-    #   value: "MY-VALUE"
-
-  ## @param blockdiag.extraEnvVarsCM Name of existing ConfigMap containing additional container environment variables
-  extraEnvVarsCM:
-
-  ## @param blockdiag.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
-  extraEnvVarsSecret:
-
 ## @section BPMN parameters
 
 bpmn:
@@ -322,7 +263,7 @@ bpmn:
     repository: yuzutech/kroki-bpmn
 
     ## @param bpmn.image.tag Image tag
-    tag: 0.21.3
+    tag: 0.23.0
 
     ## @param bpmn.image.digest Image digest
     digest: ""
@@ -381,7 +322,7 @@ diagramsnet:
     repository: yuzutech/kroki-diagramsnet
 
     ## @param diagramsnet.image.tag Image tag
-    tag: 0.21.3
+    tag: 0.23.0
 
     ## @param diagramsnet.image.digest Image digest
     digest: ""
@@ -440,7 +381,7 @@ excalidraw:
     repository: yuzutech/kroki-excalidraw
 
     ## @param excalidraw.image.tag Image tag
-    tag: 0.21.3
+    tag: 0.23.0
 
     ## @param excalidraw.image.digest Image digest
     digest: ""
@@ -499,7 +440,7 @@ mermaid:
     repository: yuzutech/kroki-mermaid
 
     ## @param mermaid.image.tag Image tag
-    tag: 0.21.3
+    tag: 0.23.0
 
     ## @param mermaid.image.digest Image digest
     digest: ""
@@ -542,65 +483,6 @@ mermaid:
   extraEnvVarsCM:
 
   ## @param mermaid.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
-  extraEnvVarsSecret:
-
-## @section WireViz parameters
-
-wireviz:
-  ## @param wireviz.enabled Enable WireViz
-  enabled: true
-
-  image:
-    ## @param wireviz.image.registry Image registry
-    registry: docker.io
-
-    ## @param wireviz.image.repository Image repository
-    repository: yuzutech/kroki-wireviz
-
-    ## @param wireviz.image.tag Image tag
-    tag: 0.21.3
-
-    ## @param wireviz.image.digest Image digest
-    digest: ""
-
-    ## @param wireviz.image.pullPolicy Image pull policy
-    pullPolicy: IfNotPresent
-
-  ## @param wireviz.securityContext Container security context
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
-
-  containerPorts:
-    ## @param wireviz.containerPorts.http Container port for HTTP
-    http: 8006
-
-  ## @param wireviz.resources CPU/Memory resource requests/limits
-  resources: {}
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
-
-  ## @param wireviz.extraArgs Additional container arguments
-  extraArgs: {}
-    # name: ""
-
-  ## @param wireviz.extraEnvVars Additional container environment variables
-  extraEnvVars: []
-    # - name: MY-NAME
-    #   value: "MY-VALUE"
-
-  ## @param wireviz.extraEnvVarsCM Name of existing ConfigMap containing additional container environment variables
-  extraEnvVarsCM:
-
-  ## @param wireviz.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
 
 ## @section Tests parameters

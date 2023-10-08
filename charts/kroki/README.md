@@ -43,6 +43,12 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 5.0.0
+
+BlockDiag and WireViz are now available in the main Kroki container.
+
+All parameters related to BlockDiag and WireViz have been removed.
+
 ### Upgrading to version 4.0.0
 
 The chart is now tested with Kubernetes >= 1.24 and Helm >= 3.9.
@@ -102,7 +108,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                      |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `yuzutech/kroki`         |
-| `image.tag`                          | Image tag                                                                                             | `0.21.3`                 |
+| `image.tag`                          | Image tag                                                                                             | `0.23.0`                 |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -159,24 +165,6 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                    |
 
-### BlockDiag parameters
-
-| Name                            | Description                                                                      | Default                    |
-| ------------------------------- | -------------------------------------------------------------------------------- | -------------------------- |
-| `blockdiag.enabled`             | Enable BlockDiag                                                                 | `true`                     |
-| `blockdiag.image.registry`      | Image registry                                                                   | `docker.io`                |
-| `blockdiag.image.repository`    | Image repository                                                                 | `yuzutech/kroki-blockdiag` |
-| `blockdiag.image.tag`           | Image tag                                                                        | `0.21.3`                   |
-| `blockdiag.image.digest`        | Image digest                                                                     | `""`                       |
-| `blockdiag.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`             |
-| `blockdiag.securityContext`     | Container security context                                                       | `{}`                       |
-| `blockdiag.containerPorts.http` | Container port for HTTP                                                          | `8001`                     |
-| `blockdiag.resources`           | CPU/Memory resource requests/limits                                              | `{}`                       |
-| `blockdiag.extraArgs`           | Additional container arguments                                                   | `{}`                       |
-| `blockdiag.extraEnvVars`        | Additional container environment variables                                       | `[]`                       |
-| `blockdiag.extraEnvVarsCM`      | Name of existing ConfigMap containing additional container environment variables | `nil`                      |
-| `blockdiag.extraEnvVarsSecret`  | Name of existing Secret containing additional container environment variables    | `nil`                      |
-
 ### BPMN parameters
 
 | Name                       | Description                                                                      | Default               |
@@ -184,7 +172,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `bpmn.enabled`             | Enable BPMN                                                                      | `true`                |
 | `bpmn.image.registry`      | Image registry                                                                   | `docker.io`           |
 | `bpmn.image.repository`    | Image repository                                                                 | `yuzutech/kroki-bpmn` |
-| `bpmn.image.tag`           | Image tag                                                                        | `0.21.3`              |
+| `bpmn.image.tag`           | Image tag                                                                        | `0.23.0`              |
 | `bpmn.image.digest`        | Image digest                                                                     | `""`                  |
 | `bpmn.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`        |
 | `bpmn.securityContext`     | Container security context                                                       | `{}`                  |
@@ -202,7 +190,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `diagramsnet.enabled`             | Enable Diagrams.net                                                              | `true`                       |
 | `diagramsnet.image.registry`      | Image registry                                                                   | `docker.io`                  |
 | `diagramsnet.image.repository`    | Image repository                                                                 | `yuzutech/kroki-diagramsnet` |
-| `diagramsnet.image.tag`           | Image tag                                                                        | `0.21.3`                     |
+| `diagramsnet.image.tag`           | Image tag                                                                        | `0.23.0`                     |
 | `diagramsnet.image.digest`        | Image digest                                                                     | `""`                         |
 | `diagramsnet.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`               |
 | `diagramsnet.securityContext`     | Container security context                                                       | `{}`                         |
@@ -220,7 +208,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `excalidraw.enabled`             | Enable Excalidraw                                                                | `true`                      |
 | `excalidraw.image.registry`      | Image registry                                                                   | `docker.io`                 |
 | `excalidraw.image.repository`    | Image repository                                                                 | `yuzutech/kroki-excalidraw` |
-| `excalidraw.image.tag`           | Image tag                                                                        | `0.21.3`                    |
+| `excalidraw.image.tag`           | Image tag                                                                        | `0.23.0`                    |
 | `excalidraw.image.digest`        | Image digest                                                                     | `""`                        |
 | `excalidraw.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`              |
 | `excalidraw.securityContext`     | Container security context                                                       | `{}`                        |
@@ -238,7 +226,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `mermaid.enabled`             | Enable Mermaid                                                                   | `true`                   |
 | `mermaid.image.registry`      | Image registry                                                                   | `docker.io`              |
 | `mermaid.image.repository`    | Image repository                                                                 | `yuzutech/kroki-mermaid` |
-| `mermaid.image.tag`           | Image tag                                                                        | `0.21.3`                 |
+| `mermaid.image.tag`           | Image tag                                                                        | `0.23.0`                 |
 | `mermaid.image.digest`        | Image digest                                                                     | `""`                     |
 | `mermaid.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`           |
 | `mermaid.securityContext`     | Container security context                                                       | `{}`                     |
@@ -248,24 +236,6 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `mermaid.extraEnvVars`        | Additional container environment variables                                       | `[]`                     |
 | `mermaid.extraEnvVarsCM`      | Name of existing ConfigMap containing additional container environment variables | `nil`                    |
 | `mermaid.extraEnvVarsSecret`  | Name of existing Secret containing additional container environment variables    | `nil`                    |
-
-### WireViz parameters
-
-| Name                          | Description                                                                      | Default                  |
-| ----------------------------- | -------------------------------------------------------------------------------- | ------------------------ |
-| `wireviz.enabled`             | Enable WireViz                                                                   | `true`                   |
-| `wireviz.image.registry`      | Image registry                                                                   | `docker.io`              |
-| `wireviz.image.repository`    | Image repository                                                                 | `yuzutech/kroki-wireviz` |
-| `wireviz.image.tag`           | Image tag                                                                        | `0.21.3`                 |
-| `wireviz.image.digest`        | Image digest                                                                     | `""`                     |
-| `wireviz.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`           |
-| `wireviz.securityContext`     | Container security context                                                       | `{}`                     |
-| `wireviz.containerPorts.http` | Container port for HTTP                                                          | `8006`                   |
-| `wireviz.resources`           | CPU/Memory resource requests/limits                                              | `{}`                     |
-| `wireviz.extraArgs`           | Additional container arguments                                                   | `{}`                     |
-| `wireviz.extraEnvVars`        | Additional container environment variables                                       | `[]`                     |
-| `wireviz.extraEnvVarsCM`      | Name of existing ConfigMap containing additional container environment variables | `nil`                    |
-| `wireviz.extraEnvVarsSecret`  | Name of existing Secret containing additional container environment variables    | `nil`                    |
 
 ### Tests parameters
 

@@ -48,7 +48,7 @@ admissionController:
     repository: autoscaling/vpa-admission-controller
 
     ## @param admissionController.image.tag Image tag
-    tag: 0.14.0
+    tag: 1.0.0
 
     ## @param admissionController.image.digest Image digest
     digest: ""
@@ -94,6 +94,12 @@ admissionController:
   ## @param admissionController.priorityClassName Priority class name
   priorityClassName:
   # priorityClassName : high-priority
+
+  ## @param admissionController.runtimeClassName Runtime class name
+  runtimeClassName: ""
+
+  ## @param admissionController.topologySpreadConstraints Topology Spread Constraints for pod assignment
+  topologySpreadConstraints: []
 
   ## @param admissionController.securityContext Container security context
   securityContext: {}
@@ -198,9 +204,6 @@ admissionController:
   ## @param admissionController.tolerations Tolerations for pod assignment
   tolerations: []
 
-  ## @param admissionController.topologySpreadConstraints Topology spread constraints for pod assignment
-  topologySpreadConstraints: []
-
   ## @param admissionController.affinity Map of node/pod affinities
   affinity: {}
 
@@ -298,7 +301,7 @@ recommender:
     repository: autoscaling/vpa-recommender
 
     ## @param recommender.image.tag Image tag
-    tag: 0.14.0
+    tag: 1.0.0
 
     ## @param recommender.image.digest Image digest
     digest: ""
@@ -344,6 +347,12 @@ recommender:
   ## @param recommender.priorityClassName Priority class name
   priorityClassName:
   # priorityClassName : high-priority
+
+  ## @param recommender.runtimeClassName Runtime class name
+  runtimeClassName: ""
+
+  ## @param recommender.topologySpreadConstraints Topology Spread Constraints for pod assignment
+  topologySpreadConstraints: []
 
   ## @param recommender.securityContext Container security context
   securityContext: {}
@@ -430,9 +439,6 @@ recommender:
   ## @param recommender.tolerations Tolerations for pod assignment
   tolerations: []
 
-  ## @param recommender.topologySpreadConstraints Topology spread constraints for pod assignment
-  topologySpreadConstraints: []
-
   ## @param recommender.affinity Map of node/pod affinities
   affinity: {}
 
@@ -446,6 +452,8 @@ recommender:
     # container-pod-name-label: pod_name
     # cpu-histogram-decay-half-life: 24h0m0s
     # cpu-integer-post-processor-enabled: false
+    # external-metrics-cpu-metric: ""
+    # external-metrics-memory-metric: ""
     # history-length: 8d
     # history-resolution: 1h
     # kube-api-burst: 10
@@ -458,6 +466,7 @@ recommender:
     # min-checkpoints: 10
     # oom-bump-up-ratio: 1.2
     # oom-min-bump-up-bytes: 104857600
+    # password: ""
     # pod-label-prefix: pod_label_
     # pod-name-label: kubernetes_pod_name
     # pod-namespace-label: kubernetes_namespace
@@ -471,6 +480,8 @@ recommender:
     # recommender-name: default
     # storage: checkpoint
     # target-cpu-percentile: 0.9
+    # use-external-metrics: false
+    # username: ""
     v: 2
     # vpa-object-namespace: ""
 
@@ -549,7 +560,7 @@ updater:
     repository: autoscaling/vpa-updater
 
     ## @param updater.image.tag Image tag
-    tag: 0.14.0
+    tag: 1.0.0
 
     ## @param updater.image.digest Image digest
     digest: ""
@@ -595,6 +606,12 @@ updater:
   ## @param updater.priorityClassName Priority class name
   priorityClassName:
   # priorityClassName : high-priority
+
+  ## @param updater.runtimeClassName Runtime class name
+  runtimeClassName: ""
+
+  ## @param updater.topologySpreadConstraints Topology Spread Constraints for pod assignment
+  topologySpreadConstraints: []
 
   ## @param updater.securityContext Container security context
   securityContext: {}
@@ -680,9 +697,6 @@ updater:
 
   ## @param updater.tolerations Tolerations for pod assignment
   tolerations: []
-
-    ## @param updater.topologySpreadConstraints Topology spread constraints for pod assignment
-  topologySpreadConstraints: []
 
   ## @param updater.affinity Map of node/pod affinities
   affinity: {}

@@ -48,7 +48,6 @@ rules:
       - get
       - list
       - watch
-      - patch
   - apiGroups:
       - "autoscaling.k8s.io"
     resources:
@@ -57,6 +56,13 @@ rules:
       - get
       - list
       - watch
+  # system:vpa-status-actor
+  - apiGroups:
+      - "autoscaling.k8s.io"
+    resources:
+      - verticalpodautoscalers/status
+    verbs:
+      - get
       - patch
   # system:vpa-checkpoint-actor
   - apiGroups:

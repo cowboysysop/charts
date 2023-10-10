@@ -40,7 +40,13 @@ spec:
       {{- if .Values.recommender.priorityClassName }}
       priorityClassName: {{ .Values.recommender.priorityClassName | quote }}
       {{- end }}
+      {{- if .Values.recommender.runtimeClassName }}
+      runtimeClassName: {{ .Values.recommender.runtimeClassName | quote }}
+      {{- end }}
       serviceAccountName: {{ include "vertical-pod-autoscaler.recommender.serviceAccountName" . }}
+      {{- if .Values.recommender.topologySpreadConstraints }}
+      topologySpreadConstraints: {{- include "common.tplvalues.render" (dict "value" .Values.recommender.topologySpreadConstraints "context" .) | nindent 8 }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.recommender.podSecurityContext | nindent 8 }}
       containers:
@@ -118,9 +124,5 @@ spec:
     {{- end }}
     {{- with .Values.recommender.tolerations }}
       tolerations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.recommender.topologySpreadConstraints }}
-      topologySpreadConstraints:
         {{- toYaml . | nindent 8 }}
     {{- end }}

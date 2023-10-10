@@ -147,7 +147,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.replicaCount`                             | Number of replicas                                                                                                  | `1`                                    |
 | `admissionController.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`                      |
 | `admissionController.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-admission-controller` |
-| `admissionController.image.tag`                                | Image tag                                                                                                           | `0.14.0`                               |
+| `admissionController.image.tag`                                | Image tag                                                                                                           | `1.0.0`                                |
 | `admissionController.image.digest`                             | Image digest                                                                                                        | `""`                                   |
 | `admissionController.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`                         |
 | `admissionController.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                                |
@@ -162,6 +162,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                                 |
 | `admissionController.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                                |
 | `admissionController.priorityClassName`                        | Priority class name                                                                                                 | `nil`                                  |
+| `admissionController.runtimeClassName`                         | Runtime class name                                                                                                  | `""`                                   |
+| `admissionController.topologySpreadConstraints`                | Topology Spread Constraints for pod assignment                                                                      | `[]`                                   |
 | `admissionController.securityContext`                          | Container security context                                                                                          | `{}`                                   |
 | `admissionController.containerPorts.https`                     | Container port for HTTPS                                                                                            | `8000`                                 |
 | `admissionController.containerPorts.metrics`                   | Container port for Metrics                                                                                          | `8944`                                 |
@@ -190,7 +192,6 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.resources`                                | CPU/Memory resource requests/limits                                                                                 | `{}`                                   |
 | `admissionController.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                                   |
 | `admissionController.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                                   |
-| `admissionController.topologySpreadConstraints`                | Topology spread constraints for pod assignment                                                                      | `[]`                                   |
 | `admissionController.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                                   |
 | `admissionController.extraArgs`                                | Additional container arguments                                                                                      |                                        |
 | `admissionController.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                                    |
@@ -223,7 +224,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.replicaCount`                             | Number of replicas                                                                                                  | `1`                           |
 | `recommender.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`             |
 | `recommender.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-recommender` |
-| `recommender.image.tag`                                | Image tag                                                                                                           | `0.14.0`                      |
+| `recommender.image.tag`                                | Image tag                                                                                                           | `1.0.0`                       |
 | `recommender.image.digest`                             | Image digest                                                                                                        | `""`                          |
 | `recommender.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`                |
 | `recommender.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                       |
@@ -238,6 +239,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                        |
 | `recommender.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                       |
 | `recommender.priorityClassName`                        | Priority class name                                                                                                 | `nil`                         |
+| `recommender.runtimeClassName`                         | Runtime class name                                                                                                  | `""`                          |
+| `recommender.topologySpreadConstraints`                | Topology Spread Constraints for pod assignment                                                                      | `[]`                          |
 | `recommender.securityContext`                          | Container security context                                                                                          | `{}`                          |
 | `recommender.containerPorts.metrics`                   | Container port for Metrics                                                                                          | `8942`                        |
 | `recommender.livenessProbe.enabled`                    | Enable liveness probe                                                                                               | `true`                        |
@@ -261,7 +264,6 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.resources`                                | CPU/Memory resource requests/limits                                                                                 | `{}`                          |
 | `recommender.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                          |
 | `recommender.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                          |
-| `recommender.topologySpreadConstraints`                | Topology spread constraints for pod assignment                                                                      | `[]`                          |
 | `recommender.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                          |
 | `recommender.extraArgs`                                | Additional container arguments                                                                                      |                               |
 | `recommender.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                           |
@@ -291,7 +293,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.replicaCount`                             | Number of replicas                                                                                                  | `1`                       |
 | `updater.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`         |
 | `updater.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-updater` |
-| `updater.image.tag`                                | Image tag                                                                                                           | `0.14.0`                  |
+| `updater.image.tag`                                | Image tag                                                                                                           | `1.0.0`                   |
 | `updater.image.digest`                             | Image digest                                                                                                        | `""`                      |
 | `updater.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`            |
 | `updater.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                   |
@@ -306,6 +308,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                    |
 | `updater.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                   |
 | `updater.priorityClassName`                        | Priority class name                                                                                                 | `nil`                     |
+| `updater.runtimeClassName`                         | Runtime class name                                                                                                  | `""`                      |
+| `updater.topologySpreadConstraints`                | Topology Spread Constraints for pod assignment                                                                      | `[]`                      |
 | `updater.securityContext`                          | Container security context                                                                                          | `{}`                      |
 | `updater.containerPorts.metrics`                   | Container port for Metrics                                                                                          | `8943`                    |
 | `updater.livenessProbe.enabled`                    | Enable liveness probe                                                                                               | `true`                    |
@@ -329,7 +333,6 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.resources`                                | CPU/Memory resource requests/limits                                                                                 | `{}`                      |
 | `updater.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                      |
 | `updater.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                      |
-| `updater.topologySpreadConstraints`                | Topology spread constraints for pod assignment                                                                      | `[]`                      |
 | `updater.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                      |
 | `updater.extraArgs`                                | Additional container arguments                                                                                      |                           |
 | `updater.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                       |

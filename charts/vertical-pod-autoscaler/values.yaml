@@ -95,6 +95,12 @@ admissionController:
   priorityClassName:
   # priorityClassName : high-priority
 
+  ## @param admissionController.runtimeClassName Runtime class name
+  runtimeClassName: ""
+
+  ## @param admissionController.topologySpreadConstraints Topology Spread Constraints for pod assignment
+  topologySpreadConstraints: []
+
   ## @param admissionController.securityContext Container security context
   securityContext: {}
     # capabilities:
@@ -197,9 +203,6 @@ admissionController:
 
   ## @param admissionController.tolerations Tolerations for pod assignment
   tolerations: []
-
-  ## @param admissionController.topologySpreadConstraints Topology spread constraints for pod assignment
-  topologySpreadConstraints: []
 
   ## @param admissionController.affinity Map of node/pod affinities
   affinity: {}
@@ -345,6 +348,12 @@ recommender:
   priorityClassName:
   # priorityClassName : high-priority
 
+  ## @param recommender.runtimeClassName Runtime class name
+  runtimeClassName: ""
+
+  ## @param recommender.topologySpreadConstraints Topology Spread Constraints for pod assignment
+  topologySpreadConstraints: []
+
   ## @param recommender.securityContext Container security context
   securityContext: {}
     # capabilities:
@@ -430,9 +439,6 @@ recommender:
   ## @param recommender.tolerations Tolerations for pod assignment
   tolerations: []
 
-  ## @param recommender.topologySpreadConstraints Topology spread constraints for pod assignment
-  topologySpreadConstraints: []
-
   ## @param recommender.affinity Map of node/pod affinities
   affinity: {}
 
@@ -446,6 +452,8 @@ recommender:
     # container-pod-name-label: pod_name
     # cpu-histogram-decay-half-life: 24h0m0s
     # cpu-integer-post-processor-enabled: false
+    # external-metrics-cpu-metric: ""
+    # external-metrics-memory-metric: ""
     # history-length: 8d
     # history-resolution: 1h
     # kube-api-burst: 10
@@ -458,6 +466,7 @@ recommender:
     # min-checkpoints: 10
     # oom-bump-up-ratio: 1.2
     # oom-min-bump-up-bytes: 104857600
+    # password: ""
     # pod-label-prefix: pod_label_
     # pod-name-label: kubernetes_pod_name
     # pod-namespace-label: kubernetes_namespace
@@ -471,6 +480,8 @@ recommender:
     # recommender-name: default
     # storage: checkpoint
     # target-cpu-percentile: 0.9
+    # use-external-metrics: false
+    # username: ""
     v: 2
     # vpa-object-namespace: ""
 
@@ -596,6 +607,12 @@ updater:
   priorityClassName:
   # priorityClassName : high-priority
 
+  ## @param updater.runtimeClassName Runtime class name
+  runtimeClassName: ""
+
+  ## @param updater.topologySpreadConstraints Topology Spread Constraints for pod assignment
+  topologySpreadConstraints: []
+
   ## @param updater.securityContext Container security context
   securityContext: {}
     # capabilities:
@@ -680,9 +697,6 @@ updater:
 
   ## @param updater.tolerations Tolerations for pod assignment
   tolerations: []
-
-    ## @param updater.topologySpreadConstraints Topology spread constraints for pod assignment
-  topologySpreadConstraints: []
 
   ## @param updater.affinity Map of node/pod affinities
   affinity: {}

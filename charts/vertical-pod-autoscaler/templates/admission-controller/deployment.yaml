@@ -42,7 +42,13 @@ spec:
       {{- if .Values.admissionController.priorityClassName }}
       priorityClassName: {{ .Values.admissionController.priorityClassName | quote }}
       {{- end }}
+      {{- if .Values.admissionController.runtimeClassName }}
+      runtimeClassName: {{ .Values.admissionController.runtimeClassName | quote }}
+      {{- end }}
       serviceAccountName: {{ include "vertical-pod-autoscaler.admissionController.serviceAccountName" . }}
+      {{- if .Values.admissionController.topologySpreadConstraints }}
+      topologySpreadConstraints: {{- include "common.tplvalues.render" (dict "value" .Values.admissionController.topologySpreadConstraints "context" .) | nindent 8 }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.admissionController.podSecurityContext | nindent 8 }}
       containers:
@@ -133,10 +139,6 @@ spec:
     {{- end }}
     {{- with .Values.admissionController.tolerations }}
       tolerations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.admissionController.topologySpreadConstraints }}
-      topologySpreadConstraints:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       volumes:

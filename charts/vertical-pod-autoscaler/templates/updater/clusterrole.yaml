@@ -41,7 +41,6 @@ rules:
       - get
       - list
       - watch
-      - patch
   - apiGroups:
       - "autoscaling.k8s.io"
     resources:
@@ -50,7 +49,6 @@ rules:
       - get
       - list
       - watch
-      - patch
   # system:vpa-target-reader
   - apiGroups:
       - "*"

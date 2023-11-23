@@ -77,6 +77,9 @@ admissionController:
     ## @param admissionController.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
 
+  ## @param admissionController.deploymentAnnotations Additional deployment annotations
+  deploymentAnnotations: {}
+
   ## @param admissionController.podAnnotations Additional pod annotations
   podAnnotations: {}
 
@@ -329,6 +332,9 @@ recommender:
 
     ## @param recommender.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
+
+  ## @param recommender.deploymentAnnotations Additional deployment annotations
+  deploymentAnnotations: {}
 
   ## @param recommender.podAnnotations Additional pod annotations
   podAnnotations: {}
@@ -588,6 +594,9 @@ updater:
 
     ## @param updater.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
+
+  ## @param updater.deploymentAnnotations Additional deployment annotations
+  deploymentAnnotations: {}
 
   ## @param updater.podAnnotations Additional pod annotations
   podAnnotations: {}

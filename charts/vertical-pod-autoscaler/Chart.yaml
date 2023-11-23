@@ -10,10 +10,10 @@ name: vertical-pod-autoscaler
 sources:
   - https://github.com/kubernetes/autoscaler
   - https://github.com/cowboysysop/charts/tree/master/charts/vertical-pod-autoscaler
-version: 9.4.0
+version: 9.5.0
 dependencies:
   - name: common
-    version: 2.9.0
+    version: 2.13.3
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

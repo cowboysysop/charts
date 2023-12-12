@@ -47,6 +47,8 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.crds.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.crds.securityContext | nindent 12 }}
           volumeMounts:
             - name: config
               mountPath: /config
@@ -59,6 +61,8 @@ spec:
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      securityContext:
+        {{- toYaml .Values.crds.podSecurityContext | nindent 8 }}
       {{- with .Values.crds.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}

@@ -36,6 +36,9 @@ extraDeploy: []
 ## @param replicaCount Number of replicas
 replicaCount: 1
 
+## @param automountServiceAccountToken Specifies whether a service account token should be automatically mounted in the pod
+automountServiceAccountToken: true
+
 image:
   ## @param image.registry Image registry
   registry: docker.io
@@ -72,6 +75,9 @@ serviceAccount:
 
   ## @param serviceAccount.name The name of the service account to use (Generated using the `kroki.fullname` template if not set)
   name:
+
+  ## @param serviceAccount.automountServiceAccountToken Specifies whether a service account token should be automatically mounted
+  automountServiceAccountToken: true
 
 ## @param podAnnotations Additional pod annotations
 podAnnotations: {}
@@ -191,6 +197,9 @@ service:
 ingress:
   ## @param ingress.enabled Enable ingress controller resource
   enabled: false
+
+  ## @param ingress.kind Ingress controller resource kind
+  kind: Ingress
 
   ## @param ingress.ingressClassName IngressClass that will be be used to implement the Ingress
   ingressClassName: ""

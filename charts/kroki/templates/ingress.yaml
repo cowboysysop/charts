@@ -1,6 +1,6 @@
 {{- if .Values.ingress.enabled -}}
 apiVersion: {{ include "common.capabilities.ingress.apiVersion" . }}
-kind: Ingress
+kind: {{ .Values.ingress.kind }}
 metadata:
   name: {{ include "kroki.fullname" . }}
   labels:

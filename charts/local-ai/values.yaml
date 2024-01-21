@@ -48,7 +48,7 @@ image:
   repository: go-skynet/local-ai
 
   ## @param image.tag Image tag
-  tag: v1.25.0-ffmpeg
+  tag: v1.40.0-ffmpeg
 
   ## @param image.digest Image digest
   digest: ""

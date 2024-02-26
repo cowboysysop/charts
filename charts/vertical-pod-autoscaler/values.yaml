@@ -40,6 +40,9 @@ admissionController:
   ## @param admissionController.replicaCount Number of replicas
   replicaCount: 1
 
+  ## @param admissionController.hostNetwork Enable and configure hostNetwork
+  hostNetwork: false
+
   image:
     ## @param admissionController.image.registry Image registry
     registry: registry.k8s.io

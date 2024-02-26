@@ -51,6 +51,7 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.admissionController.podSecurityContext | nindent 8 }}
+      hostNetwork: {{.Values.admissionController.hostNetwork}}
       containers:
         - name: admission-controller
           securityContext:

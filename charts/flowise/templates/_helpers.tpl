@@ -85,17 +85,6 @@ Key in Secret that contains password
 {{- end -}}
 
 {{/*
-Key in Secret that contains passphrase
-*/}}
-{{- define "flowise.secretKeyPassphrase" -}}
-{{- if .Values.existingSecret -}}
-    {{ .Values.existingSecretKeyPassphrase }}
-{{- else -}}
-    passphrase
-{{- end -}}
-{{- end -}}
-
-{{/*
 MariaDB fully qualified app name
 */}}
 {{- define "flowise.mariadb.fullname" -}}

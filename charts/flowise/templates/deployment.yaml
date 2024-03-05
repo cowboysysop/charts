@@ -44,7 +44,13 @@ spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ .Values.runtimeClassName | quote }}
+      {{- end }}
       serviceAccountName: {{ include "flowise.serviceAccountName" . }}
+      {{- if .Values.topologySpreadConstraints }}
+      topologySpreadConstraints: {{- include "common.tplvalues.render" (dict "value" .Values.topologySpreadConstraints "context" .) | nindent 8 }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
@@ -135,13 +141,10 @@ spec:
             {{- end }}
             - name: APIKEY_PATH
               value: /data
+            - name: BLOB_STORAGE_PATH
+              value: /data/storage
             - name: SECRETKEY_PATH
               value: /data
-            - name: PASSPHRASE
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "flowise.secretName" . }}
-                  key: {{ include "flowise.secretKeyPassphrase" . }}
             - name: DATABASE_PATH
               value: /data
             {{- if or .Values.mariadb.enabled .Values.externalMariadb.enabled }}
@@ -178,6 +181,8 @@ spec:
             - name: DATABASE_NAME
               value: {{ include "flowise.postgresql.database" . | quote }}
             {{- end }}
+            - name: DISABLE_FLOWISE_TELEMETRY
+              value: "true"
             {{- if .Values.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}

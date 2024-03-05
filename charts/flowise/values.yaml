@@ -91,6 +91,12 @@ podSecurityContext: {}
 priorityClassName:
 # priorityClassName : high-priority
 
+## @param runtimeClassName Runtime class name
+runtimeClassName: ""
+
+## @param topologySpreadConstraints Topology Spread Constraints for pod assignment
+topologySpreadConstraints: []
+
 ## @param securityContext Container security context
 securityContext: {}
   # capabilities:
@@ -283,17 +289,11 @@ config:
   ## @param config.password Password to login
   password: ""
 
-  ## @param config.passphrase Passphrase used to create encryption key
-  passphrase: MYPASSPHRASE
-
 ## @param existingSecret Name of existing Secret to use
 existingSecret: ""
 
 ## @param existingSecretKeyPassword Key in existing Secret that contains password
 existingSecretKeyPassword: password
-
-## @param existingSecretKeyPassphrase Key in existing Secret that contains passphrase
-existingSecretKeyPassphrase: passphrase
 
 ## @section MariaDB parameters
 

@@ -89,7 +89,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `flowiseai/flowise`      |
-| `image.tag`                          | Image tag                                                                                             | `1.3.4`                  |
+| `image.tag`                          | Image tag                                                                                             | `1.6.0`                  |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -102,6 +102,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                     |
 | `priorityClassName`                  | Priority class name                                                                                   | `nil`                    |
+| `runtimeClassName`                   | Runtime class name                                                                                    | `""`                     |
+| `topologySpreadConstraints`          | Topology Spread Constraints for pod assignment                                                        | `[]`                     |
 | `securityContext`                    | Container security context                                                                            | `{}`                     |
 | `containerPorts.http`                | Container port for HTTP                                                                               | `3000`                   |
 | `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                   |
@@ -154,14 +156,12 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ### Config parameters
 
-| Name                          | Description                                     | Default        |
-| ----------------------------- | ----------------------------------------------- | -------------- |
-| `config.username`             | Username to login                               | `""`           |
-| `config.password`             | Password to login                               | `""`           |
-| `config.passphrase`           | Passphrase used to create encryption key        | `MYPASSPHRASE` |
-| `existingSecret`              | Name of existing Secret to use                  | `""`           |
-| `existingSecretKeyPassword`   | Key in existing Secret that contains password   | `password`     |
-| `existingSecretKeyPassphrase` | Key in existing Secret that contains passphrase | `passphrase`   |
+| Name                        | Description                                   | Default    |
+| --------------------------- | --------------------------------------------- | ---------- |
+| `config.username`           | Username to login                             | `""`       |
+| `config.password`           | Password to login                             | `""`       |
+| `existingSecret`            | Name of existing Secret to use                | `""`       |
+| `existingSecretKeyPassword` | Key in existing Secret that contains password | `password` |
 
 ### MariaDB parameters
 

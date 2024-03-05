@@ -52,7 +52,7 @@ jobs:
           - v1.24.15 # renovate: kindest/node
           - v1.25.11 # renovate: kindest/node
           - v1.26.6 # renovate: kindest/node
-          - v1.27.3 # renovate: kindest/node
+          - v1.27.11 # renovate: kindest/node
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1

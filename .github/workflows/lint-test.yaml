@@ -49,7 +49,7 @@ jobs:
     strategy:
       matrix:
         kubernetes:
-          - v1.24.15 # renovate: kindest/node
+          - v1.24.17 # renovate: kindest/node
           - v1.25.11 # renovate: kindest/node
           - v1.26.14 # renovate: kindest/node
           - v1.27.11 # renovate: kindest/node

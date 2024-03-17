@@ -412,7 +412,7 @@ wait:
     repository: atkrad/wait4x
 
     ## @param wait.image.tag Image tag
-    tag: 2.13.0
+    tag: 2.14.0
 
     ## @param wait.image.digest Image digest
     digest: ""

@@ -91,6 +91,12 @@ podSecurityContext: {}
 priorityClassName:
 # priorityClassName : high-priority
 
+## @param runtimeClassName Runtime class name
+runtimeClassName: ""
+
+## @param topologySpreadConstraints Topology Spread Constraints for pod assignment
+topologySpreadConstraints: []
+
 ## @param securityContext Container security context
 securityContext: {}
   # capabilities:
@@ -274,6 +280,8 @@ persistence:
   storageClass:
   # storageClass: -
 
+## @section Config parameters
+
 ## @param logLevel Log level
 logLevel: verbose
 
@@ -303,7 +311,7 @@ deleteOldBuildsCron: []
 ## @param existingSecret Name of existing Secret to use
 existingSecret: ""
 
-## @param existingSecretKeyBasicAuthPassword Name of the key in existing Secret that contains HTTP Basic Authentication password
+## @param existingSecretKeyBasicAuthPassword Key in existing Secret that contains HTTP Basic Authentication password
 existingSecretKeyBasicAuthPassword: basic-auth-password
 
 ## @section MariaDB parameters
@@ -353,7 +361,7 @@ externalMariadb:
   ## @param externalMariadb.existingSecret Name of existing Secret to use
   existingSecret: ""
 
-  ## @param externalMariadb.existingSecretKeyPassword Name of the key in existing Secret that contains MariaDB password
+  ## @param externalMariadb.existingSecretKeyPassword Key in existing Secret that contains MariaDB password
   existingSecretKeyPassword: mariadb-password
 
   ## @param externalMariadb.database External MariaDB database
@@ -406,11 +414,48 @@ externalPostgresql:
   ## @param externalPostgresql.existingSecret Name of existing Secret to use
   existingSecret: ""
 
-  ## @param externalPostgresql.existingSecretKeyPassword Name of the key in existing Secret that contains PostgreSQL password
+  ## @param externalPostgresql.existingSecretKeyPassword Key in existing Secret that contains PostgreSQL password
   existingSecretKeyPassword: password
 
   ## @param externalPostgresql.database External PostgreSQL database
   database: lighthouse-ci
+
+## @section Wait parameters
+
+wait:
+  image:
+    ## @param wait.image.registry Image registry
+    registry: docker.io
+
+    ## @param wait.image.repository Image repository
+    repository: atkrad/wait4x
+
+    ## @param wait.image.tag Image tag
+    tag: 2.14.0
+
+    ## @param wait.image.digest Image digest
+    digest: ""
+
+    ## @param wait.image.pullPolicy Image pull policy
+    pullPolicy: IfNotPresent
+
+  ## @param wait.securityContext Container security context
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  ## @param wait.resources CPU/Memory resource requests/limits
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
 
 ## @section Tests parameters
 

@@ -43,6 +43,15 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 5.0.0
+
+The MariaDB subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1700
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1600
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1400
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1300
+
 ### Upgrading to version 4.0.0
 
 The chart is now tested with Kubernetes >= 1.24 and Helm >= 3.9.
@@ -97,105 +106,124 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ### Parameters
 
-| Name                                 | Description                                                                                           | Default                      |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `replicaCount`                       | Number of replicas (do not change it)                                                                 | `1`                          |
-| `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`                   |
-| `image.registry`                     | Image registry                                                                                        | `docker.io`                  |
-| `image.repository`                   | Image repository                                                                                      | `tuxgasy/dolibarr`           |
-| `image.tag`                          | Image tag                                                                                             | `17.0.2`                     |
-| `image.digest`                       | Image digest                                                                                          | `""`                         |
-| `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`               |
-| `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                      |
-| `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                          |
-| `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                        |
-| `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                       |
-| `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                         |
-| `serviceAccount.name`                | The name of the service account to use (Generated using the `dolibarr.fullname` template if not set)  | `nil`                        |
-| `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                         |
-| `podLabels`                          | Additional pod labels                                                                                 | `{}`                         |
-| `podSecurityContext`                 | Pod security context                                                                                  | `{}`                         |
-| `priorityClassName`                  | Priority class name                                                                                   | `nil`                        |
-| `securityContext`                    | Container security context                                                                            | `{}`                         |
-| `containerPorts.http`                | Container port for HTTP                                                                               | `80`                         |
-| `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                       |
-| `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `180`                        |
-| `livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                               | `10`                         |
-| `livenessProbe.timeoutSeconds`       | When the liveness probe times out                                                                     | `1`                          |
-| `livenessProbe.failureThreshold`     | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                          |
-| `livenessProbe.successThreshold`     | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                          |
-| `readinessProbe.enabled`             | Enable readiness probe                                                                                | `true`                       |
-| `readinessProbe.initialDelaySeconds` | Delay before the readiness probe is initiated                                                         | `0`                          |
-| `readinessProbe.periodSeconds`       | How often to perform the readiness probe                                                              | `10`                         |
-| `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                          |
-| `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                          |
-| `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                          |
-| `startupProbe.enabled`               | Enable startup probe                                                                                  | `false`                      |
-| `startupProbe.initialDelaySeconds`   | Delay before the startup probe is initiated                                                           | `0`                          |
-| `startupProbe.periodSeconds`         | How often to perform the startup probe                                                                | `10`                         |
-| `startupProbe.timeoutSeconds`        | When the startup probe times out                                                                      | `1`                          |
-| `startupProbe.failureThreshold`      | Minimum consecutive failures for the startup probe to be considered failed after having succeeded     | `3`                          |
-| `startupProbe.successThreshold`      | Minimum consecutive successes for the startup probe to be considered successful after having failed   | `1`                          |
-| `service.annotations`                | Service annotations                                                                                   | `{}`                         |
-| `service.type`                       | Service type                                                                                          | `ClusterIP`                  |
-| `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                        |
-| `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                        |
-| `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                        |
-| `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                    |
-| `service.ports.http`                 | Service port for HTTP                                                                                 | `80`                         |
-| `service.nodePorts.http`             | Service node port for HTTP when service type is LoadBalancer or NodePort                              | `nil`                        |
-| `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                      |
-| `ingress.ingressClassName`           | IngressClass that will be be used to implement the Ingress                                            | `""`                         |
-| `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific`     |
-| `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                         |
-| `ingress.hosts[0].host`              | Hostname to your Dolibarr installation                                                                | `dolibarr.local`             |
-| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `["/"]`                      |
-| `ingress.tls`                        | TLS configuration                                                                                     | `[]`                         |
-| `resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                         |
-| `nodeSelector`                       | Node labels for pod assignment                                                                        | `{}`                         |
-| `tolerations`                        | Tolerations for pod assignment                                                                        | `[]`                         |
-| `affinity`                           | Map of node/pod affinities                                                                            | `{}`                         |
-| `extraArgs`                          | Additional container arguments                                                                        | `{}`                         |
-| `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                         |
-| `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                        |
-| `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                        |
-| `init.securityContext`               | Init security context                                                                                 | `{}`                         |
-| `init.resources`                     | Init CPU/Memory resource requests/limits                                                              | `{}`                         |
-| `persistence.enabled`                | Enable persistence using PVC                                                                          | `false`                      |
-| `persistence.existingClaim`          | Name of an existing PVC to use                                                                        | `nil`                        |
-| `persistence.accessMode`             | PVC access mode                                                                                       | `ReadWriteOnce`              |
-| `persistence.annotations`            | PVC annotations                                                                                       | `{}`                         |
-| `persistence.size`                   | PVC size                                                                                              | `1Gi`                        |
-| `persistence.storageClass`           | PVC storage class                                                                                     | `nil`                        |
-| `dolibarr.admin.username`            | Administrator username                                                                                | `admin`                      |
-| `dolibarr.admin.password`            | Administrator password                                                                                | `admin`                      |
-| `dolibarr.externalUrl`               | External URL                                                                                          | `http://dolibarr.local`      |
-| `dolibarr.cron.enabled`              | Enable cron for scheduled jobs                                                                        | `false`                      |
-| `dolibarr.cron.username`             | Cron username                                                                                         | `admin`                      |
-| `dolibarr.cron.securityKey`          | Cron security key                                                                                     | `""`                         |
-| `existingSecret`                     | Name of existing Secret to use                                                                        | `""`                         |
-| `existingSecretKeyAdminPassword`     | Name of the key in existing Secret that contains administrator password                               | `dolibarr-admin-password`    |
-| `existingSecretKeyCronSecurityKey`   | Name of the key in existing Secret that contains cron security key                                    | `dolibarr-cron-security-key` |
+| Name                                 | Description                                                                                           | Default                  |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------ |
+| `replicaCount`                       | Number of replicas (do not change it)                                                                 | `1`                      |
+| `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
+| `image.registry`                     | Image registry                                                                                        | `docker.io`              |
+| `image.repository`                   | Image repository                                                                                      | `tuxgasy/dolibarr`       |
+| `image.tag`                          | Image tag                                                                                             | `17.0.2`                 |
+| `image.digest`                       | Image digest                                                                                          | `""`                     |
+| `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
+| `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
+| `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                      |
+| `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                    |
+| `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
+| `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
+| `serviceAccount.name`                | The name of the service account to use (Generated using the `dolibarr.fullname` template if not set)  | `nil`                    |
+| `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
+| `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
+| `podSecurityContext`                 | Pod security context                                                                                  | `{}`                     |
+| `priorityClassName`                  | Priority class name                                                                                   | `nil`                    |
+| `runtimeClassName`                   | Runtime class name                                                                                    | `""`                     |
+| `topologySpreadConstraints`          | Topology Spread Constraints for pod assignment                                                        | `[]`                     |
+| `securityContext`                    | Container security context                                                                            | `{}`                     |
+| `containerPorts.http`                | Container port for HTTP                                                                               | `80`                     |
+| `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                   |
+| `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `180`                    |
+| `livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                               | `10`                     |
+| `livenessProbe.timeoutSeconds`       | When the liveness probe times out                                                                     | `1`                      |
+| `livenessProbe.failureThreshold`     | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                      |
+| `livenessProbe.successThreshold`     | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                      |
+| `readinessProbe.enabled`             | Enable readiness probe                                                                                | `true`                   |
+| `readinessProbe.initialDelaySeconds` | Delay before the readiness probe is initiated                                                         | `0`                      |
+| `readinessProbe.periodSeconds`       | How often to perform the readiness probe                                                              | `10`                     |
+| `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                      |
+| `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                      |
+| `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                      |
+| `startupProbe.enabled`               | Enable startup probe                                                                                  | `false`                  |
+| `startupProbe.initialDelaySeconds`   | Delay before the startup probe is initiated                                                           | `0`                      |
+| `startupProbe.periodSeconds`         | How often to perform the startup probe                                                                | `10`                     |
+| `startupProbe.timeoutSeconds`        | When the startup probe times out                                                                      | `1`                      |
+| `startupProbe.failureThreshold`      | Minimum consecutive failures for the startup probe to be considered failed after having succeeded     | `3`                      |
+| `startupProbe.successThreshold`      | Minimum consecutive successes for the startup probe to be considered successful after having failed   | `1`                      |
+| `service.annotations`                | Service annotations                                                                                   | `{}`                     |
+| `service.type`                       | Service type                                                                                          | `ClusterIP`              |
+| `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
+| `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |
+| `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                    |
+| `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                |
+| `service.ports.http`                 | Service port for HTTP                                                                                 | `80`                     |
+| `service.nodePorts.http`             | Service node port for HTTP when service type is LoadBalancer or NodePort                              | `nil`                    |
+| `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                  |
+| `ingress.ingressClassName`           | IngressClass that will be be used to implement the Ingress                                            | `""`                     |
+| `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific` |
+| `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                     |
+| `ingress.hosts[0].host`              | Hostname to your Dolibarr installation                                                                | `dolibarr.local`         |
+| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `["/"]`                  |
+| `ingress.tls`                        | TLS configuration                                                                                     | `[]`                     |
+| `resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                     |
+| `nodeSelector`                       | Node labels for pod assignment                                                                        | `{}`                     |
+| `tolerations`                        | Tolerations for pod assignment                                                                        | `[]`                     |
+| `affinity`                           | Map of node/pod affinities                                                                            | `{}`                     |
+| `extraArgs`                          | Additional container arguments                                                                        | `{}`                     |
+| `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                     |
+| `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
+| `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                    |
+| `init.securityContext`               | Init security context                                                                                 | `{}`                     |
+| `init.resources`                     | Init CPU/Memory resource requests/limits                                                              | `{}`                     |
+| `persistence.enabled`                | Enable persistence using PVC                                                                          | `false`                  |
+| `persistence.existingClaim`          | Name of an existing PVC to use                                                                        | `nil`                    |
+| `persistence.accessMode`             | PVC access mode                                                                                       | `ReadWriteOnce`          |
+| `persistence.annotations`            | PVC annotations                                                                                       | `{}`                     |
+| `persistence.size`                   | PVC size                                                                                              | `1Gi`                    |
+| `persistence.storageClass`           | PVC storage class                                                                                     | `nil`                    |
+
+### Config parameters
+
+| Name                               | Description                                                 | Default                      |
+| ---------------------------------- | ----------------------------------------------------------- | ---------------------------- |
+| `dolibarr.admin.username`          | Administrator username                                      | `admin`                      |
+| `dolibarr.admin.password`          | Administrator password                                      | `admin`                      |
+| `dolibarr.externalUrl`             | External URL                                                | `http://dolibarr.local`      |
+| `dolibarr.cron.enabled`            | Enable cron for scheduled jobs                              | `false`                      |
+| `dolibarr.cron.username`           | Cron username                                               | `admin`                      |
+| `dolibarr.cron.securityKey`        | Cron security key                                           | `""`                         |
+| `existingSecret`                   | Name of existing Secret to use                              | `""`                         |
+| `existingSecretKeyAdminPassword`   | Key in existing Secret that contains administrator password | `dolibarr-admin-password`    |
+| `existingSecretKeyCronSecurityKey` | Key in existing Secret that contains cron security key      | `dolibarr-cron-security-key` |
 
 ### MariaDB parameters
 
-| Name                                        | Description                                                       | Default            |
-| ------------------------------------------- | ----------------------------------------------------------------- | ------------------ |
-| `mariadb.enabled`                           | Whether to use the MariaDB chart                                  | `true`             |
-| `mariadb.architecture`                      | MariaDB architecture                                              | `standalone`       |
-| `mariadb.auth.database`                     | MariaDB database                                                  | `dolibarr`         |
-| `mariadb.auth.username`                     | MariaDB user                                                      | `dolibarr`         |
-| `mariadb.auth.password`                     | MariaDB password                                                  | `dolibarr`         |
-| `mariadb.auth.existingSecret`               | Name of existing Secret to use                                    | `""`               |
-| `mariadb.primary.service.ports.mysql`       | MariaDB port                                                      | `3306`             |
-| `externalMariadb.enabled`                   | Whether to use an external MariaDB                                | `false`            |
-| `externalMariadb.host`                      | External MariaDB host                                             | `mariadb`          |
-| `externalMariadb.port`                      | External MariaDB port                                             | `3306`             |
-| `externalMariadb.username`                  | External MariaDB user                                             | `dolibarr`         |
-| `externalMariadb.password`                  | External MariaDB password                                         | `dolibarr`         |
-| `externalMariadb.existingSecret`            | Name of existing Secret to use                                    | `""`               |
-| `externalMariadb.existingSecretKeyPassword` | Name of the key in existing Secret that contains MariaDB password | `mariadb-password` |
-| `externalMariadb.database`                  | External MariaDB database                                         | `dolibarr`         |
+| Name                                        | Description                                           | Default            |
+| ------------------------------------------- | ----------------------------------------------------- | ------------------ |
+| `mariadb.enabled`                           | Whether to use the MariaDB chart                      | `true`             |
+| `mariadb.architecture`                      | MariaDB architecture                                  | `standalone`       |
+| `mariadb.auth.database`                     | MariaDB database                                      | `dolibarr`         |
+| `mariadb.auth.username`                     | MariaDB user                                          | `dolibarr`         |
+| `mariadb.auth.password`                     | MariaDB password                                      | `dolibarr`         |
+| `mariadb.auth.existingSecret`               | Name of existing Secret to use                        | `""`               |
+| `mariadb.primary.service.ports.mysql`       | MariaDB port                                          | `3306`             |
+| `externalMariadb.enabled`                   | Whether to use an external MariaDB                    | `false`            |
+| `externalMariadb.host`                      | External MariaDB host                                 | `mariadb`          |
+| `externalMariadb.port`                      | External MariaDB port                                 | `3306`             |
+| `externalMariadb.username`                  | External MariaDB user                                 | `dolibarr`         |
+| `externalMariadb.password`                  | External MariaDB password                             | `dolibarr`         |
+| `externalMariadb.existingSecret`            | Name of existing Secret to use                        | `""`               |
+| `externalMariadb.existingSecretKeyPassword` | Key in existing Secret that contains MariaDB password | `mariadb-password` |
+| `externalMariadb.database`                  | External MariaDB database                             | `dolibarr`         |
+
+### Wait parameters
+
+| Name                    | Description                         | Default         |
+| ----------------------- | ----------------------------------- | --------------- |
+| `wait.image.registry`   | Image registry                      | `docker.io`     |
+| `wait.image.repository` | Image repository                    | `atkrad/wait4x` |
+| `wait.image.tag`        | Image tag                           | `2.14.0`        |
+| `wait.image.digest`     | Image digest                        | `""`            |
+| `wait.image.pullPolicy` | Image pull policy                   | `IfNotPresent`  |
+| `wait.securityContext`  | Container security context          | `{}`            |
+| `wait.resources`        | CPU/Memory resource requests/limits | `{}`            |
 
 ### Tests parameters
 

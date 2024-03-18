@@ -30,7 +30,7 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
       annotations:
-        {{- if (not .Values.existingSecret) }}
+        {{- if not .Values.existingSecret }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         {{- end }}
         {{- if .Values.podAnnotations }}
@@ -44,7 +44,13 @@ spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ .Values.runtimeClassName | quote }}
+      {{- end }}
       serviceAccountName: {{ include "dolibarr.serviceAccountName" . }}
+      {{- if .Values.topologySpreadConstraints }}
+      topologySpreadConstraints: {{- include "common.tplvalues.render" (dict "value" .Values.topologySpreadConstraints "context" .) | nindent 8 }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
@@ -93,7 +99,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "dolibarr.mariadb.secretName" . }}
-                  key: {{ include "dolibarr.mariadb.secretKeyNamePassword" . }}
+                  key: {{ include "dolibarr.mariadb.secretKeyPassword" . }}
             - name: DOLI_DB_NAME
               value: {{ include "dolibarr.mariadb.database" . | quote }}
             - name: DOLI_URL_ROOT
@@ -186,7 +192,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "dolibarr.mariadb.secretName" . }}
-                  key: {{ include "dolibarr.mariadb.secretKeyNamePassword" . }}
+                  key: {{ include "dolibarr.mariadb.secretKeyPassword" . }}
             - name: DOLI_DB_NAME
               value: {{ include "dolibarr.mariadb.database" . | quote }}
             {{- if .Values.extraEnvVars }}

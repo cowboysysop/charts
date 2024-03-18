@@ -74,7 +74,7 @@ Create the name of the secret to use
 {{- end -}}
 
 {{/*
-Administrator password secret key name
+Key in Secret that contains administrator password
 */}}
 {{- define "dolibarr.secretKeyAdminPassword" -}}
 {{- if .Values.existingSecret -}}
@@ -85,7 +85,7 @@ Administrator password secret key name
 {{- end -}}
 
 {{/*
-Cron security key secret key name
+Key in Secret that contains cron security key
 */}}
 {{- define "dolibarr.secretKeyCronSecurityKey" -}}
 {{- if .Values.existingSecret -}}
@@ -163,9 +163,9 @@ MariaDB secret name
 {{- end -}}
 
 {{/*
-MariaDB password secret key name
+Key in Secret that contains MariaDB password
 */}}
-{{- define "dolibarr.mariadb.secretKeyNamePassword" -}}
+{{- define "dolibarr.mariadb.secretKeyPassword" -}}
 {{- if .Values.externalMariadb.existingSecret -}}
     {{ .Values.externalMariadb.existingSecretKeyPassword }}
 {{- else -}}

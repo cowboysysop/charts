@@ -43,6 +43,21 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 8.0.0
+
+The MariaDB subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1700
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1600
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1400
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1300
+
+The PostgreSQL subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1500
+- https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1400
+- https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1300
+
 ### Upgrading to version 7.0.0
 
 The chart is now tested with Kubernetes >= 1.24 and Helm >= 3.9.
@@ -68,7 +83,7 @@ Some parameters related to image management have been modified:
 The PostgreSQL subchart has been updated to a major release, see these upgrade instructions:
 
 - https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1200
-- https://docs.bitnami.com/kubernetes/infrastructure/postgresql/administration/upgrade/#to-1100
+- https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1100
 
 ### Upgrading to version 3.0.0
 
@@ -136,6 +151,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `podLabels`                          | Additional pod labels                                                                                     | `{}`                       |
 | `podSecurityContext`                 | Pod security context                                                                                      | `{}`                       |
 | `priorityClassName`                  | Priority class name                                                                                       | `nil`                      |
+| `runtimeClassName`                   | Runtime class name                                                                                        | `""`                       |
+| `topologySpreadConstraints`          | Topology Spread Constraints for pod assignment                                                            | `[]`                       |
 | `securityContext`                    | Container security context                                                                                | `{}`                       |
 | `containerPorts.http`                | Container port for HTTP                                                                                   | `9001`                     |
 | `livenessProbe.enabled`              | Enable liveness probe                                                                                     | `true`                     |
@@ -185,55 +202,72 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `persistence.annotations`            | PVC annotations                                                                                           | `{}`                       |
 | `persistence.size`                   | PVC size                                                                                                  | `1Gi`                      |
 | `persistence.storageClass`           | PVC storage class                                                                                         | `nil`                      |
-| `logLevel`                           | Log level                                                                                                 | `verbose`                  |
-| `basicAuthUsername`                  | The username to protect the server with HTTP Basic Authentication                                         | `""`                       |
-| `basicAuthPassword`                  | The password to protect the server with HTTP Basic Authentication                                         | `""`                       |
-| `psiCollectCron`                     | The configuration to automatically collect results using the PageSpeed Insights API                       |                            |
-| `psiCollectCron.psiApiKey`           | The API key to use with the PageSpeed Insights API                                                        | `""`                       |
-| `psiCollectCron.sites`               | The array of sites to collect results for                                                                 | `[]`                       |
-| `deleteOldBuildsCron`                | The configuration to automatically delete old records                                                     | `[]`                       |
-| `existingSecret`                     | Name of existing Secret to use                                                                            | `""`                       |
-| `existingSecretKeyBasicAuthPassword` | Name of the key in existing Secret that contains HTTP Basic Authentication password                       | `basic-auth-password`      |
+
+### Config parameters
+
+| Name                                 | Description                                                                         | Default               |
+| ------------------------------------ | ----------------------------------------------------------------------------------- | --------------------- |
+| `logLevel`                           | Log level                                                                           | `verbose`             |
+| `basicAuthUsername`                  | The username to protect the server with HTTP Basic Authentication                   | `""`                  |
+| `basicAuthPassword`                  | The password to protect the server with HTTP Basic Authentication                   | `""`                  |
+| `psiCollectCron`                     | The configuration to automatically collect results using the PageSpeed Insights API |                       |
+| `psiCollectCron.psiApiKey`           | The API key to use with the PageSpeed Insights API                                  | `""`                  |
+| `psiCollectCron.sites`               | The array of sites to collect results for                                           | `[]`                  |
+| `deleteOldBuildsCron`                | The configuration to automatically delete old records                               | `[]`                  |
+| `existingSecret`                     | Name of existing Secret to use                                                      | `""`                  |
+| `existingSecretKeyBasicAuthPassword` | Key in existing Secret that contains HTTP Basic Authentication password             | `basic-auth-password` |
 
 ### MariaDB parameters
 
-| Name                                        | Description                                                       | Default            |
-| ------------------------------------------- | ----------------------------------------------------------------- | ------------------ |
-| `mariadb.enabled`                           | Whether to use the MariaDB chart                                  | `false`            |
-| `mariadb.architecture`                      | MariaDB architecture                                              | `standalone`       |
-| `mariadb.auth.database`                     | MariaDB database                                                  | `lighthouse-ci`    |
-| `mariadb.auth.username`                     | MariaDB user                                                      | `lighthouse-ci`    |
-| `mariadb.auth.password`                     | MariaDB password                                                  | `lighthouse-ci`    |
-| `mariadb.auth.existingSecret`               | Name of existing Secret to use                                    | `""`               |
-| `mariadb.primary.service.ports.mysql`       | MariaDB port                                                      | `3306`             |
-| `externalMariadb.enabled`                   | Whether to use an external MariaDB                                | `false`            |
-| `externalMariadb.host`                      | External MariaDB host                                             | `mariadb`          |
-| `externalMariadb.port`                      | External MariaDB port                                             | `3306`             |
-| `externalMariadb.username`                  | External MariaDB user                                             | `lighthouse-ci`    |
-| `externalMariadb.password`                  | External MariaDB password                                         | `lighthouse-ci`    |
-| `externalMariadb.existingSecret`            | Name of existing Secret to use                                    | `""`               |
-| `externalMariadb.existingSecretKeyPassword` | Name of the key in existing Secret that contains MariaDB password | `mariadb-password` |
-| `externalMariadb.database`                  | External MariaDB database                                         | `lighthouse-ci`    |
+| Name                                        | Description                                           | Default            |
+| ------------------------------------------- | ----------------------------------------------------- | ------------------ |
+| `mariadb.enabled`                           | Whether to use the MariaDB chart                      | `false`            |
+| `mariadb.architecture`                      | MariaDB architecture                                  | `standalone`       |
+| `mariadb.auth.database`                     | MariaDB database                                      | `lighthouse-ci`    |
+| `mariadb.auth.username`                     | MariaDB user                                          | `lighthouse-ci`    |
+| `mariadb.auth.password`                     | MariaDB password                                      | `lighthouse-ci`    |
+| `mariadb.auth.existingSecret`               | Name of existing Secret to use                        | `""`               |
+| `mariadb.primary.service.ports.mysql`       | MariaDB port                                          | `3306`             |
+| `externalMariadb.enabled`                   | Whether to use an external MariaDB                    | `false`            |
+| `externalMariadb.host`                      | External MariaDB host                                 | `mariadb`          |
+| `externalMariadb.port`                      | External MariaDB port                                 | `3306`             |
+| `externalMariadb.username`                  | External MariaDB user                                 | `lighthouse-ci`    |
+| `externalMariadb.password`                  | External MariaDB password                             | `lighthouse-ci`    |
+| `externalMariadb.existingSecret`            | Name of existing Secret to use                        | `""`               |
+| `externalMariadb.existingSecretKeyPassword` | Key in existing Secret that contains MariaDB password | `mariadb-password` |
+| `externalMariadb.database`                  | External MariaDB database                             | `lighthouse-ci`    |
 
 ### PostgreSQL parameters
 
-| Name                                           | Description                                                          | Default         |
-| ---------------------------------------------- | -------------------------------------------------------------------- | --------------- |
-| `postgresql.enabled`                           | Whether to use the PostgreSQL chart                                  | `false`         |
-| `postgresql.auth.username`                     | PostgreSQL user                                                      | `lighthouse-ci` |
-| `postgresql.auth.password`                     | PostgreSQL password                                                  | `lighthouse-ci` |
-| `postgresql.auth.database`                     | PostgreSQL database                                                  | `lighthouse-ci` |
-| `postgresql.auth.existingSecret`               | Name of existing Secret to use                                       | `""`            |
-| `postgresql.architecture`                      | PostgreSQL architecture                                              | `standalone`    |
-| `postgresql.primary.service.ports.postgresql`  | PostgreSQL port                                                      | `5432`          |
-| `externalPostgresql.enabled`                   | Whether to use an external PostgreSQL                                | `false`         |
-| `externalPostgresql.host`                      | External PostgreSQL host                                             | `postgresql`    |
-| `externalPostgresql.port`                      | External PostgreSQL port                                             | `5432`          |
-| `externalPostgresql.username`                  | External PostgreSQL user                                             | `lighthouse-ci` |
-| `externalPostgresql.password`                  | External PostgreSQL password                                         | `lighthouse-ci` |
-| `externalPostgresql.existingSecret`            | Name of existing Secret to use                                       | `""`            |
-| `externalPostgresql.existingSecretKeyPassword` | Name of the key in existing Secret that contains PostgreSQL password | `password`      |
-| `externalPostgresql.database`                  | External PostgreSQL database                                         | `lighthouse-ci` |
+| Name                                           | Description                                              | Default         |
+| ---------------------------------------------- | -------------------------------------------------------- | --------------- |
+| `postgresql.enabled`                           | Whether to use the PostgreSQL chart                      | `false`         |
+| `postgresql.auth.username`                     | PostgreSQL user                                          | `lighthouse-ci` |
+| `postgresql.auth.password`                     | PostgreSQL password                                      | `lighthouse-ci` |
+| `postgresql.auth.database`                     | PostgreSQL database                                      | `lighthouse-ci` |
+| `postgresql.auth.existingSecret`               | Name of existing Secret to use                           | `""`            |
+| `postgresql.architecture`                      | PostgreSQL architecture                                  | `standalone`    |
+| `postgresql.primary.service.ports.postgresql`  | PostgreSQL port                                          | `5432`          |
+| `externalPostgresql.enabled`                   | Whether to use an external PostgreSQL                    | `false`         |
+| `externalPostgresql.host`                      | External PostgreSQL host                                 | `postgresql`    |
+| `externalPostgresql.port`                      | External PostgreSQL port                                 | `5432`          |
+| `externalPostgresql.username`                  | External PostgreSQL user                                 | `lighthouse-ci` |
+| `externalPostgresql.password`                  | External PostgreSQL password                             | `lighthouse-ci` |
+| `externalPostgresql.existingSecret`            | Name of existing Secret to use                           | `""`            |
+| `externalPostgresql.existingSecretKeyPassword` | Key in existing Secret that contains PostgreSQL password | `password`      |
+| `externalPostgresql.database`                  | External PostgreSQL database                             | `lighthouse-ci` |
+
+### Wait parameters
+
+| Name                    | Description                         | Default         |
+| ----------------------- | ----------------------------------- | --------------- |
+| `wait.image.registry`   | Image registry                      | `docker.io`     |
+| `wait.image.repository` | Image repository                    | `atkrad/wait4x` |
+| `wait.image.tag`        | Image tag                           | `2.14.0`        |
+| `wait.image.digest`     | Image digest                        | `""`            |
+| `wait.image.pullPolicy` | Image pull policy                   | `IfNotPresent`  |
+| `wait.securityContext`  | Container security context          | `{}`            |
+| `wait.resources`        | CPU/Memory resource requests/limits | `{}`            |
 
 ### Tests parameters
 

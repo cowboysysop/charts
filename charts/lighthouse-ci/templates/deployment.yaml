@@ -31,7 +31,7 @@ spec:
         {{- end }}
       annotations:
         checksum/configmap: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
-        {{- if (not .Values.existingSecret) }}
+        {{- if not .Values.existingSecret }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         {{- end }}
         {{- if .Values.podAnnotations }}
@@ -45,7 +45,13 @@ spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ .Values.runtimeClassName | quote }}
+      {{- end }}
       serviceAccountName: {{ include "lighthouse-ci.serviceAccountName" . }}
+      {{- if .Values.topologySpreadConstraints }}
+      topologySpreadConstraints: {{- include "common.tplvalues.render" (dict "value" .Values.topologySpreadConstraints "context" .) | nindent 8 }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -70,7 +76,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "lighthouse-ci.secretName" . }}
-                  key: {{ include "lighthouse-ci.secretKeyNameBasicAuthPassword" . }}
+                  key: {{ include "lighthouse-ci.secretKeyBasicAuthPassword" . }}
             {{- end }}
             {{- if or .Values.mariadb.enabled .Values.externalMariadb.enabled }}
             - name: LHCI_STORAGE__SQL_DIALECT
@@ -85,7 +91,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "lighthouse-ci.mariadb.secretName" . }}
-                  key: {{ include "lighthouse-ci.mariadb.secretKeyNamePassword" . }}
+                  key: {{ include "lighthouse-ci.mariadb.secretKeyPassword" . }}
             - name: MARIADB_DATABASE
               value: {{ include "lighthouse-ci.mariadb.database" . | quote }}
             - name: LHCI_STORAGE__SQL_CONNECTION_URL
@@ -104,7 +110,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "lighthouse-ci.postgresql.secretName" . }}
-                  key: {{ include "lighthouse-ci.postgresql.secretKeyNamePassword" . }}
+                  key: {{ include "lighthouse-ci.postgresql.secretKeyPassword" . }}
             - name: POSTGRESQL_DATABASE
               value: {{ include "lighthouse-ci.postgresql.database" . | quote }}
             - name: LHCI_STORAGE__SQL_CONNECTION_URL

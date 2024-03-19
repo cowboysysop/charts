@@ -43,6 +43,21 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 3.0.0
+
+The MariaDB subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1700
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1600
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1400
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1300
+
+The PostgreSQL subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1500
+- https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1400
+- https://github.com/bitnami/charts/tree/main/bitnami/postgresql#to-1300
+
 ### Upgrading to version 2.0.0
 
 The chart is now tested with Kubernetes >= 1.24 and Helm >= 3.9.
@@ -209,7 +224,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | ----------------------- | ----------------------------------- | --------------- |
 | `wait.image.registry`   | Image registry                      | `docker.io`     |
 | `wait.image.repository` | Image repository                    | `atkrad/wait4x` |
-| `wait.image.tag`        | Image tag                           | `2.13.0`        |
+| `wait.image.tag`        | Image tag                           | `2.14.0`        |
 | `wait.image.digest`     | Image digest                        | `""`            |
 | `wait.image.pullPolicy` | Image pull policy                   | `IfNotPresent`  |
 | `wait.securityContext`  | Container security context          | `{}`            |

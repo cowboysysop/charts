@@ -13,7 +13,7 @@ sources:
 version: 3.0.0
 dependencies:
   - name: common
-    version: 2.9.0
+    version: 2.19.0
     repository: https://charts.bitnami.com/bitnami/
   - name: mariadb
     version: 17.0.0

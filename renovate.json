@@ -9,6 +9,20 @@
   "semanticCommitType": "fix",
   "packageRules": [
     {
+      "matchManagers": [
+	"helm-values"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "bash .github/bump-chart-version.sh '{{{parentDir}}}' '{{{isMajor}}}' '{{{isMinor}}}' '{{{isPatch}}}'"
+        ],
+        "fileFilters": [
+          "charts/*/Chart.yaml"
+	],
+        "executionMode": "branch"
+      }
+    },
+    {
       "matchPackagePrefixes": [
         "docker.io/yuzutech/kroki"
       ],

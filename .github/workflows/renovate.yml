@@ -17,7 +17,7 @@ jobs:
       - name: Renovate
         uses: renovatebot/github-action@v40.1.5
         with:
-          renovate-version: 37.57.1 # renovate: ghcr.io/renovatebot/renovate
+          renovate-version: 37.262.2 # renovate: ghcr.io/renovatebot/renovate
         env:
           RENOVATE_CONFIG_FILE: renovate.json
           RENOVATE_REPOSITORIES: ${{ github.repository }}

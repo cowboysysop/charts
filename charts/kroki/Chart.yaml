@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 0.23.0
+appVersion: 0.24.1
 description: Creates diagrams from textual descriptions
 home: https://kroki.io/
 icon: https://raw.githubusercontent.com/yuzutech/kroki.io/master/assets/favicon-196x196.png
@@ -10,10 +10,10 @@ name: kroki
 sources:
   - https://github.com/yuzutech/kroki
   - https://github.com/cowboysysop/charts/tree/master/charts/kroki
-version: 5.0.0
+version: 5.1.0
 dependencies:
   - name: common
-    version: 2.9.0
+    version: 2.19.0
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

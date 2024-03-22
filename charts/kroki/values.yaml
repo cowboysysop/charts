@@ -44,7 +44,7 @@ image:
   repository: yuzutech/kroki
 
   ## @param image.tag Image tag
-  tag: 0.23.0
+  tag: 0.24.1
 
   ## @param image.digest Image digest
   digest: ""
@@ -86,6 +86,12 @@ podSecurityContext: {}
 ## @param priorityClassName Priority class name
 priorityClassName:
 # priorityClassName : high-priority
+
+## @param runtimeClassName Runtime class name
+runtimeClassName: ""
+
+## @param topologySpreadConstraints Topology Spread Constraints for pod assignment
+topologySpreadConstraints: []
 
 ## @param securityContext Container security context
 securityContext: {}
@@ -263,7 +269,7 @@ bpmn:
     repository: yuzutech/kroki-bpmn
 
     ## @param bpmn.image.tag Image tag
-    tag: 0.23.0
+    tag: 0.24.1
 
     ## @param bpmn.image.digest Image digest
     digest: ""
@@ -322,7 +328,7 @@ diagramsnet:
     repository: yuzutech/kroki-diagramsnet
 
     ## @param diagramsnet.image.tag Image tag
-    tag: 0.23.0
+    tag: 0.24.1
 
     ## @param diagramsnet.image.digest Image digest
     digest: ""
@@ -381,7 +387,7 @@ excalidraw:
     repository: yuzutech/kroki-excalidraw
 
     ## @param excalidraw.image.tag Image tag
-    tag: 0.23.0
+    tag: 0.24.1
 
     ## @param excalidraw.image.digest Image digest
     digest: ""
@@ -440,7 +446,7 @@ mermaid:
     repository: yuzutech/kroki-mermaid
 
     ## @param mermaid.image.tag Image tag
-    tag: 0.23.0
+    tag: 0.24.1
 
     ## @param mermaid.image.digest Image digest
     digest: ""
@@ -496,7 +502,7 @@ tests:
     repository: cowboysysop/pytest
 
     ## @param tests.image.tag Image tag
-    tag: 1.0.35
+    tag: 1.0.41
 
     ## @param tests.image.digest Image digest
     digest: ""

@@ -331,6 +331,12 @@ existingSecretKeyAdminPassword: dolibarr-admin-password
 ## @param existingSecretKeyCronSecurityKey Key in existing Secret that contains cron security key
 existingSecretKeyCronSecurityKey: dolibarr-cron-security-key
 
+## @param extraInitContainers Containers that run runs before pods starts
+extraInitContainers: []
+  #  - name: do-something
+  #    image: busybox
+  #    command: ['do', 'something']
+
 ## @section MariaDB parameters
 
 mariadb:

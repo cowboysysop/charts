@@ -10,7 +10,7 @@ name: flowise
 sources:
   - https://github.com/FlowiseAI/Flowise
   - https://github.com/cowboysysop/charts/tree/master/charts/flowise
-version: 3.0.1
+version: 3.1.0
 dependencies:
   - name: common
     version: 2.19.0
@@ -20,7 +20,7 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami/
     condition: mariadb.enabled
   - name: postgresql
-    version: 15.0.0
+    version: 15.1.4
     repository: https://charts.bitnami.com/bitnami/
     condition: postgresql.enabled
 annotations:

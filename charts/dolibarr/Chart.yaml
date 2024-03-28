@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 19.0.0
+appVersion: 19.0.1
 description: A modern software package to manage your company or foundation's activity
 home: https://www.dolibarr.org/
 icon: https://raw.githubusercontent.com/Dolibarr/dolibarr/develop/doc/images/dolibarr_256x256_color.svg
@@ -10,7 +10,7 @@ name: dolibarr
 sources:
   - https://github.com/Dolibarr/dolibarr
   - https://github.com/cowboysysop/charts/tree/master/charts/dolibarr
-version: 5.1.0
+version: 5.2.0
 dependencies:
   - name: common
     version: 2.19.0

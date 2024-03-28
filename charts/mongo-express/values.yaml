@@ -44,7 +44,7 @@ image:
   repository: mongo-express
 
   ## @param image.tag Image tag
-  tag: 0.54.0
+  tag: 1.0.2
 
   ## @param image.digest Image digest
   digest: ""

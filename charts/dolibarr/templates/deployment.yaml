@@ -54,6 +54,32 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
+        - name: wait-mariadb
+          securityContext:
+            {{- toYaml .Values.wait.securityContext | nindent 12 }}
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.wait.image "global" .Values.global ) }}
+          imagePullPolicy: {{ .Values.wait.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              wait4x mysql "${MARIADB_USERNAME}:${MARIADB_PASSWORD}@tcp(${MARIADB_HOST}:${MARIADB_PORT})/${MARIADB_DATABASE}" --timeout 0
+          env:
+            - name: MARIADB_HOST
+              value: {{ include "dolibarr.mariadb.host" . | quote }}
+            - name: MARIADB_PORT
+              value: {{ include "dolibarr.mariadb.port" . | quote }}
+            - name: MARIADB_USERNAME
+              value: {{ include "dolibarr.mariadb.username" . | quote }}
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "dolibarr.mariadb.secretName" . }}
+                  key: {{ include "dolibarr.mariadb.secretKeyPassword" . }}
+            - name: MARIADB_DATABASE
+              value: {{ include "dolibarr.mariadb.database" . | quote }}
+          resources:
+            {{- toYaml .Values.wait.resources | nindent 12 }}
         - name: init
           securityContext:
             {{- toYaml .Values.init.securityContext | nindent 12 }}

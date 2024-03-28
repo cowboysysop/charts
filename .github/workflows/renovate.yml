@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
 
       - name: Renovate
-        uses: renovatebot/github-action@v40.1.5
+        uses: renovatebot/github-action@v40.1.7
         with:
           renovate-version: 37.273.0 # renovate: ghcr.io/renovatebot/renovate
         env:

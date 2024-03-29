@@ -83,7 +83,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `ollama/ollama`          |
-| `image.tag`                          | Image tag                                                                                             | `0.1.29`                 |
+| `image.tag`                          | Image tag                                                                                             | `0.1.30`                 |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -154,7 +154,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | ------------------------ | ----------------- | -------------------- |
 | `tests.image.registry`   | Image registry    | `ghcr.io`            |
 | `tests.image.repository` | Image repository  | `cowboysysop/pytest` |
-| `tests.image.tag`        | Image tag         | `1.0.35`             |
+| `tests.image.tag`        | Image tag         | `1.0.41`             |
 | `tests.image.digest`     | Image digest      | `""`                 |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`       |
 

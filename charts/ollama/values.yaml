@@ -48,7 +48,7 @@ image:
   repository: ollama/ollama
 
   ## @param image.tag Image tag
-  tag: 0.1.29
+  tag: 0.1.30
 
   ## @param image.digest Image digest
   digest: ""
@@ -291,7 +291,7 @@ tests:
     repository: cowboysysop/pytest
 
     ## @param tests.image.tag Image tag
-    tag: 1.0.35
+    tag: 1.0.41
 
     ## @param tests.image.digest Image digest
     digest: ""

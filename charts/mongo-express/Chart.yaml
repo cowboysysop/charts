@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 0.54.0
+appVersion: 1.0.2
 description: Web-based MongoDB admin interface, written with Node.js and express
 home: https://github.com/mongo-express/mongo-express
 icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
@@ -10,13 +10,13 @@ name: mongo-express
 sources:
   - https://github.com/mongo-express/mongo-express
   - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
-version: 6.3.0
+version: 6.4.0
 dependencies:
   - name: common
-    version: 2.9.0
+    version: 2.19.0
     repository: https://charts.bitnami.com/bitnami/
   - name: mongodb
-    version: 14.13.0
+    version: 15.1.1
     repository: https://charts.bitnami.com/bitnami/
     condition: mongodb.enabled
 annotations:

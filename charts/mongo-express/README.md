@@ -169,22 +169,27 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ### Config parameters
 
-| Name                   | Description                                                                                                                       | Default   |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `mongodbServer`        | MongoDB host name or IP address                                                                                                   | `mongodb` |
-| `mongodbPort`          | MongoDB port                                                                                                                      | `27017`   |
-| `mongodbEnableAdmin`   | Enable administrator access                                                                                                       | `false`   |
-| `mongodbAdminUsername` | Administrator username                                                                                                            | `root`    |
-| `mongodbAdminPassword` | Administrator password                                                                                                            | `""`      |
-| `mongodbAuthUsername`  | Database username (only needed if `mongodbEnableAdmin` is `false`)                                                                | `""`      |
-| `mongodbAuthPassword`  | Database password (only needed if `mongodbEnableAdmin` is `false`)                                                                | `""`      |
-| `mongodbAuthDatabase`  | Database name (only needed if `mongodbEnableAdmin` is `false`)                                                                    | `""`      |
-| `siteBaseUrl`          | Set the express baseUrl to ease mounting at a subdirectory                                                                        | `/`       |
-| `siteCookieSecret`     | String used by cookie-parser middleware to sign cookies (Random 32 character long alphanumeric string if not set)                 | `""`      |
-| `siteSessionSecret`    | String used to sign the session ID cookie by express-session middleware (Random 32 character long alphanumeric string if not set) | `""`      |
-| `basicAuthUsername`    | Mongo Express web login name                                                                                                      | `""`      |
-| `basicAuthPassword`    | Mongo Express Web login password                                                                                                  | `""`      |
-| `existingSecret`       | Name of existing Secret to use                                                                                                    | `""`      |
+| Name                                    | Description                                                                                                                       | Default                  |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| `mongodbServer`                         | MongoDB host name or IP address                                                                                                   | `mongodb`                |
+| `mongodbPort`                           | MongoDB port                                                                                                                      | `27017`                  |
+| `mongodbEnableAdmin`                    | Enable administrator access                                                                                                       | `false`                  |
+| `mongodbAdminUsername`                  | Administrator username                                                                                                            | `root`                   |
+| `mongodbAdminPassword`                  | Administrator password                                                                                                            | `""`                     |
+| `mongodbAuthUsername`                   | Database username (only needed if `mongodbEnableAdmin` is `false`)                                                                | `""`                     |
+| `mongodbAuthPassword`                   | Database password (only needed if `mongodbEnableAdmin` is `false`)                                                                | `""`                     |
+| `mongodbAuthDatabase`                   | Database name (only needed if `mongodbEnableAdmin` is `false`)                                                                    | `""`                     |
+| `siteBaseUrl`                           | Set the express baseUrl to ease mounting at a subdirectory                                                                        | `/`                      |
+| `siteCookieSecret`                      | String used by cookie-parser middleware to sign cookies (Random 32 character long alphanumeric string if not set)                 | `""`                     |
+| `siteSessionSecret`                     | String used to sign the session ID cookie by express-session middleware (Random 32 character long alphanumeric string if not set) | `""`                     |
+| `basicAuthUsername`                     | Mongo Express web login name                                                                                                      | `""`                     |
+| `basicAuthPassword`                     | Mongo Express web login password                                                                                                  | `""`                     |
+| `existingSecret`                        | Name of existing Secret to use                                                                                                    | `""`                     |
+| `existingSecretKeyMongodbAdminPassword` | Key in existing Secret that contains administrator password                                                                       | `mongodb-admin-password` |
+| `existingSecretKeyMongodbAuthPassword`  | Key in existing Secret that contains database password                                                                            | `mongodb-auth-password`  |
+| `existingSecretKeySiteCookieSecret`     | Key in existing Secret that contains string used by cookie-parser middleware to sign cookies                                      | `site-cookie-secret`     |
+| `existingSecretKeySiteSessionSecret`    | Key in existing Secret that contains string used to sign the session ID cookie by express-session middleware                      | `site-session-secret`    |
+| `existingSecretKeyBasicAuthPassword`    | Key in existing Secret that contains Mongo Express web login password                                                             | `basic-auth-password`    |
 
 ### MongoDB parameters
 

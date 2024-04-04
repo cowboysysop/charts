@@ -79,7 +79,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: mongodb-admin-password
+                  key: {{ include "mongo-express.secretKeyMongodbAdminPassword" . }}
             - name: ME_CONFIG_MONGODB_URL
               value: "mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@$(MONGODB_SERVER):$(MONGODB_PORT)/"
             {{- else }}
@@ -96,7 +96,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: mongodb-auth-password
+                  key: {{ include "mongo-express.secretKeyMongodbAuthPassword" . }}
             - name: ME_CONFIG_MONGODB_URL
               value: "mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@$(MONGODB_SERVER):$(MONGODB_PORT)/$(MONGODB_DATABASE)"
             {{- else }}
@@ -110,12 +110,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: site-cookie-secret
+                  key: {{ include "mongo-express.secretKeySiteCookieSecret" . }}
             - name: ME_CONFIG_SITE_SESSIONSECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: site-session-secret
+                  key: {{ include "mongo-express.secretKeySiteSessionSecret" . }}
             {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
             - name: ME_CONFIG_BASICAUTH
               value: "true"
@@ -125,7 +125,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: basic-auth-password
+                  key: {{ include "mongo-express.secretKeyBasicAuthPassword" . }}
             {{- else }}
             - name: ME_CONFIG_BASICAUTH
               value: "false"

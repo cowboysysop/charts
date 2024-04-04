@@ -2,3 +2,5 @@ fullnameOverride: mongo-express
 mongodb:
   enabled: true
   fullnameOverride: mongodb
+  auth:
+    enabled: false

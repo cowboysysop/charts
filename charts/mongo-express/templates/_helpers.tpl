@@ -73,7 +73,60 @@ Create the name of the secret to use
 {{- end -}}
 {{- end -}}
 
+{{/*
+Key in Secret that contains administrator password
+*/}}
+{{- define "mongo-express.secretKeyMongodbAdminPassword" -}}
+{{- if .Values.existingSecret -}}
+    {{ .Values.existingSecretKeyMongodbAdminPassword }}
+{{- else -}}
+    mongodb-admin-password
+{{- end -}}
+{{- end -}}
 
+{{/*
+Key in Secret that contains database password
+*/}}
+{{- define "mongo-express.secretKeyMongodbAuthPassword" -}}
+{{- if .Values.existingSecret -}}
+    {{ .Values.existingSecretKeyMongodbAuthPassword }}
+{{- else -}}
+    mongodb-auth-password
+{{- end -}}
+{{- end -}}
+
+{{/*
+Key in Secret that contains string used by cookie-parser middleware to sign cookies
+*/}}
+{{- define "mongo-express.secretKeySiteCookieSecret" -}}
+{{- if .Values.existingSecret -}}
+    {{ .Values.existingSecretKeySiteCookieSecret }}
+{{- else -}}
+    site-cookie-secret
+{{- end -}}
+{{- end -}}
+
+{{/*
+Key in Secret that contains string used to sign the session ID cookie by express-session middleware
+*/}}
+{{- define "mongo-express.secretKeySiteSessionSecret" -}}
+{{- if .Values.existingSecret -}}
+    {{ .Values.existingSecretKeySiteSessionSecret }}
+{{- else -}}
+    site-session-secret
+{{- end -}}
+{{- end -}}
+
+{{/*
+Key in Secret that contains Mongo Express web login password
+*/}}
+{{- define "mongo-express.secretKeyBasicAuthPassword" -}}
+{{- if .Values.existingSecret -}}
+    {{ .Values.existingSecretKeyBasicAuthPassword }}
+{{- else -}}
+    basic-auth-password
+{{- end -}}
+{{- end -}}
 
 {{/*
 Create the basic authentification HTTP header

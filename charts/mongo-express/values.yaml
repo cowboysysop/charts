@@ -44,7 +44,7 @@ image:
   repository: mongo-express
 
   ## @param image.tag Image tag
-  tag: 0.54.0
+  tag: 1.0.2
 
   ## @param image.digest Image digest
   digest: ""
@@ -86,6 +86,12 @@ podSecurityContext: {}
 ## @param priorityClassName Priority class name
 priorityClassName:
 # priorityClassName : high-priority
+
+## @param runtimeClassName Runtime class name
+runtimeClassName: ""
+
+## @param topologySpreadConstraints Topology Spread Constraints for pod assignment
+topologySpreadConstraints: []
 
 ## @param securityContext Container security context
 securityContext: {}
@@ -249,6 +255,8 @@ extraEnvVarsCM:
 ## @param extraEnvVarsSecret Name of existing Secret containing additional container environment variables
 extraEnvVarsSecret:
 
+## @section Config parameters
+
 ## @param mongodbServer MongoDB host name or IP address
 mongodbServer: mongodb
 
@@ -264,14 +272,14 @@ mongodbAdminUsername: root
 ## @param mongodbAdminPassword Administrator password
 mongodbAdminPassword: ""
 
-## @param mongodbAuthDatabase Database name (only needed if `mongodbEnableAdmin` is `false`)
-mongodbAuthDatabase: ""
-
 ## @param mongodbAuthUsername Database username (only needed if `mongodbEnableAdmin` is `false`)
 mongodbAuthUsername: ""
 
 ## @param mongodbAuthPassword Database password (only needed if `mongodbEnableAdmin` is `false`)
 mongodbAuthPassword: ""
+
+## @param mongodbAuthDatabase Database name (only needed if `mongodbEnableAdmin` is `false`)
+mongodbAuthDatabase: ""
 
 ## @param siteBaseUrl Set the express baseUrl to ease mounting at a subdirectory
 siteBaseUrl: /
@@ -285,17 +293,26 @@ siteSessionSecret: ""
 ## @param basicAuthUsername Mongo Express web login name
 basicAuthUsername: ""
 
-## @param basicAuthPassword Mongo Express Web login password
+## @param basicAuthPassword Mongo Express web login password
 basicAuthPassword: ""
 
 ## @param existingSecret Name of existing Secret to use
 existingSecret: ""
 
-## @param existingSecretKeyAdminPassword Name of the key in existing Secret that contains administrator password
-existingSecretKeyAdminPassword: dolibarr-admin-password
+## @param existingSecretKeyMongodbAdminPassword Key in existing Secret that contains administrator password
+existingSecretKeyMongodbAdminPassword: mongodb-admin-password
 
-## @param existingSecretKeyCronSecurityKey Name of the key in existing Secret that contains cron security key
-existingSecretKeyCronSecurityKey: dolibarr-cron-security-key
+## @param existingSecretKeyMongodbAuthPassword Key in existing Secret that contains database password
+existingSecretKeyMongodbAuthPassword: mongodb-auth-password
+
+## @param existingSecretKeySiteCookieSecret Key in existing Secret that contains string used by cookie-parser middleware to sign cookies
+existingSecretKeySiteCookieSecret: site-cookie-secret
+
+## @param existingSecretKeySiteSessionSecret Key in existing Secret that contains string used to sign the session ID cookie by express-session middleware
+existingSecretKeySiteSessionSecret: site-session-secret
+
+## @param existingSecretKeyBasicAuthPassword Key in existing Secret that contains Mongo Express web login password
+existingSecretKeyBasicAuthPassword: basic-auth-password
 
 ## @section MongoDB parameters
 
@@ -314,7 +331,7 @@ tests:
     repository: cowboysysop/pytest
 
     ## @param tests.image.tag Image tag
-    tag: 1.0.35
+    tag: 1.0.41
 
     ## @param tests.image.digest Image digest
     digest: ""

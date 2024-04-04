@@ -27,7 +27,7 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
       annotations:
-        {{- if (not .Values.existingSecret) }}
+        {{- if not .Values.existingSecret }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
         {{- end }}
         {{- if .Values.podAnnotations }}
@@ -41,7 +41,13 @@ spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
+      {{- if .Values.runtimeClassName }}
+      runtimeClassName: {{ .Values.runtimeClassName | quote }}
+      {{- end }}
       serviceAccountName: {{ include "mongo-express.serviceAccountName" . }}
+      {{- if .Values.topologySpreadConstraints }}
+      topologySpreadConstraints: {{- include "common.tplvalues.render" (dict "value" .Values.topologySpreadConstraints "context" .) | nindent 8 }}
+      {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -57,30 +63,46 @@ spec:
             {{- end }}
           {{- end }}
           env:
-            - name: ME_CONFIG_MONGODB_SERVER
+            - name: PORT
+              value: {{ .Values.containerPorts.http | quote }}
+            - name: MONGODB_SERVER
               value: {{ .Values.mongodbServer | quote }}
-            - name: ME_CONFIG_MONGODB_PORT
+            - name: MONGODB_PORT
               value: {{ .Values.mongodbPort | quote }}
             - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
               value: {{ .Values.mongodbEnableAdmin | quote }}
             {{- if .Values.mongodbEnableAdmin }}
-            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+            {{- if and .Values.mongodbAdminUsername .Values.mongodbAdminPassword}}
+            - name: MONGODB_USERNAME
               value: {{ .Values.mongodbAdminUsername | quote }}
-            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+            - name: MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: mongodb-admin-password
+                  key: {{ include "mongo-express.secretKeyMongodbAdminPassword" . }}
+            - name: ME_CONFIG_MONGODB_URL
+              value: "mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@$(MONGODB_SERVER):$(MONGODB_PORT)/"
             {{- else }}
-            - name: ME_CONFIG_MONGODB_AUTH_DATABASE
+            - name: ME_CONFIG_MONGODB_URL
+              value: "mongodb://$(MONGODB_SERVER):$(MONGODB_PORT)/"
+            {{- end }}
+            {{- else }}
+            - name: MONGODB_DATABASE
               value: {{ .Values.mongodbAuthDatabase | quote }}
-            - name: ME_CONFIG_MONGODB_AUTH_USERNAME
+            {{- if and .Values.mongodbAuthUsername .Values.mongodbAuthPassword}}
+            - name: MONGODB_USERNAME
               value: {{ .Values.mongodbAuthUsername | quote }}
-            - name: ME_CONFIG_MONGODB_AUTH_PASSWORD
+            - name: MONGODB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: mongodb-auth-password
+                  key: {{ include "mongo-express.secretKeyMongodbAuthPassword" . }}
+            - name: ME_CONFIG_MONGODB_URL
+              value: "mongodb://$(MONGODB_USERNAME):$(MONGODB_PASSWORD)@$(MONGODB_SERVER):$(MONGODB_PORT)/$(MONGODB_DATABASE)"
+            {{- else }}
+            - name: ME_CONFIG_MONGODB_URL
+              value: "mongodb://$(MONGODB_SERVER):$(MONGODB_PORT)/$(MONGODB_DATABASE)"
+            {{- end }}
             {{- end }}
             - name: ME_CONFIG_SITE_BASEURL
               value: {{ .Values.siteBaseUrl | quote }}
@@ -88,20 +110,25 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: site-cookie-secret
+                  key: {{ include "mongo-express.secretKeySiteCookieSecret" . }}
             - name: ME_CONFIG_SITE_SESSIONSECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: site-session-secret
+                  key: {{ include "mongo-express.secretKeySiteSessionSecret" . }}
             {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
+            - name: ME_CONFIG_BASICAUTH
+              value: "true"
             - name: ME_CONFIG_BASICAUTH_USERNAME
               value: {{ .Values.basicAuthUsername | quote }}
             - name: ME_CONFIG_BASICAUTH_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "mongo-express.secretName" . }}
-                  key: basic-auth-password
+                  key: {{ include "mongo-express.secretKeyBasicAuthPassword" . }}
+            {{- else }}
+            - name: ME_CONFIG_BASICAUTH
+              value: "false"
             {{- end }}
             {{- if .Values.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
@@ -124,7 +151,7 @@ spec:
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
-              path: {{ .Values.siteBaseUrl }}
+              path: {{ .Values.siteBaseUrl | trimSuffix "/" }}/status
               port: http
               {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
               httpHeaders:
@@ -140,7 +167,7 @@ spec:
           {{- if .Values.readinessProbe.enabled }}
           readinessProbe:
             httpGet:
-              path: {{ .Values.siteBaseUrl }}
+              path: {{ .Values.siteBaseUrl | trimSuffix "/" }}/status
               port: http
               {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
               httpHeaders:
@@ -156,7 +183,7 @@ spec:
           {{- if .Values.startupProbe.enabled }}
           startupProbe:
             httpGet:
-              path: {{ .Values.siteBaseUrl }}
+              path: {{ .Values.siteBaseUrl | trimSuffix "/" }}/status
               port: http
               {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
               httpHeaders:

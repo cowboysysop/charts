@@ -25,19 +25,18 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
         {{- end }}
       {{- if or .Values.crds.podAnnotations .Values.commonAnnotations }}
-      annotations:
-        {{- if .Values.crds.podAnnotations }}
-        {{- include "common.tplvalues.render" ( dict "value" .Values.crds.podAnnotations "context" $ ) | nindent 8 }}
-        {{- end }}
-        {{- if .Values.commonAnnotations }}
-        {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
-        {{- end }}
+      {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.crds.podAnnotations .Values.commonAnnotations ) "context" . ) }}
+      annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $ ) | nindent 8 }}
       {{- end }}
     spec:
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.crds.image ) "global" .Values.global ) | nindent 6 }}
       serviceAccountName: {{ include "vertical-pod-autoscaler.crds.fullname" . }}
+      securityContext:
+        {{- toYaml .Values.crds.podSecurityContext | nindent 8 }}
       containers:
         - name: kubectl
+          securityContext:
+            {{- toYaml .Values.crds.securityContext | nindent 12 }}
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.crds.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.crds.image.pullPolicy }}
           args:
@@ -47,8 +46,6 @@ spec:
             {{- end }}
           resources:
             {{- toYaml .Values.crds.resources | nindent 12 }}
-          securityContext:
-            {{- toYaml .Values.crds.securityContext | nindent 12 }}
           volumeMounts:
             - name: config
               mountPath: /config
@@ -61,8 +58,6 @@ spec:
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      securityContext:
-        {{- toYaml .Values.crds.podSecurityContext | nindent 8 }}
       {{- with .Values.crds.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}

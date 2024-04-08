@@ -94,6 +94,9 @@ admissionController:
     runAsNonRoot: true
     runAsUser: 65534
 
+  ## @param admissionController.hostNetwork Use the host network
+  hostNetwork: false
+
   ## @param admissionController.priorityClassName Priority class name
   priorityClassName:
   # priorityClassName : high-priority
@@ -816,7 +819,16 @@ crds:
   podSecurityContext:
     # fsGroup: 2000
     runAsNonRoot: true
-    runAsUser: 65534
+    runAsUser: 1001
+
+  ## @param crds.securityContext Container security context
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
 
   ## @param crds.resources CPU/Memory resource requests/limits
   resources: {}
@@ -829,15 +841,6 @@ crds:
 
   ## @param crds.nodeSelector Node labels for pod assignment
   nodeSelector: {}
-
-  ## @param crds.securityContext Container security context
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
 
   ## @param crds.tolerations Tolerations for pod assignment
   tolerations: []
@@ -856,7 +859,7 @@ tests:
     repository: cowboysysop/pytest
 
     ## @param tests.image.tag Image tag
-    tag: 1.0.35
+    tag: 1.0.41
 
     ## @param tests.image.digest Image digest
     digest: ""

@@ -14,13 +14,8 @@ metadata:
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
   {{- if or .Values.updater.metrics.serviceMonitor.annotations .Values.commonAnnotations }}
-  annotations:
-    {{- if .Values.updater.metrics.serviceMonitor.annotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.updater.metrics.serviceMonitor.annotations "context" $ ) | nindent 4 }}
-    {{- end }}
-    {{- if .Values.commonAnnotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-    {{- end }}
+  {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.updater.metrics.serviceMonitor.annotations .Values.commonAnnotations ) "context" . ) }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
   {{- if .Values.updater.metrics.serviceMonitor.jobLabel }}

@@ -156,11 +156,13 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.serviceAccount.create`                    | Specifies whether a service account should be created                                                               | `true`                                 |
 | `admissionController.serviceAccount.annotations`               | Service account annotations                                                                                         | `{}`                                   |
 | `admissionController.serviceAccount.name`                      | The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set) | `nil`                                  |
+| `admissionController.deploymentAnnotations`                    | Additional deployment annotations                                                                                   | `{}`                                   |
 | `admissionController.podAnnotations`                           | Additional pod annotations                                                                                          | `{}`                                   |
 | `admissionController.podLabels`                                | Additional pod labels                                                                                               | `{}`                                   |
 | `admissionController.podSecurityContext`                       | Pod security context                                                                                                |                                        |
 | `admissionController.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                                 |
 | `admissionController.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                                |
+| `admissionController.hostNetwork`                              | Use the host network                                                                                                | `false`                                |
 | `admissionController.priorityClassName`                        | Priority class name                                                                                                 | `nil`                                  |
 | `admissionController.runtimeClassName`                         | Runtime class name                                                                                                  | `""`                                   |
 | `admissionController.topologySpreadConstraints`                | Topology Spread Constraints for pod assignment                                                                      | `[]`                                   |
@@ -233,6 +235,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.serviceAccount.create`                    | Specifies whether a service account should be created                                                               | `true`                        |
 | `recommender.serviceAccount.annotations`               | Service account annotations                                                                                         | `{}`                          |
 | `recommender.serviceAccount.name`                      | The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set) | `nil`                         |
+| `recommender.deploymentAnnotations`                    | Additional deployment annotations                                                                                   | `{}`                          |
 | `recommender.podAnnotations`                           | Additional pod annotations                                                                                          | `{}`                          |
 | `recommender.podLabels`                                | Additional pod labels                                                                                               | `{}`                          |
 | `recommender.podSecurityContext`                       | Pod security context                                                                                                |                               |
@@ -302,6 +305,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.serviceAccount.create`                    | Specifies whether a service account should be created                                                               | `true`                    |
 | `updater.serviceAccount.annotations`               | Service account annotations                                                                                         | `{}`                      |
 | `updater.serviceAccount.name`                      | The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set) | `nil`                     |
+| `updater.deploymentAnnotations`                    | Additional deployment annotations                                                                                   | `{}`                      |
 | `updater.podAnnotations`                           | Additional pod annotations                                                                                          | `{}`                      |
 | `updater.podLabels`                                | Additional pod labels                                                                                               | `{}`                      |
 | `updater.podSecurityContext`                       | Pod security context                                                                                                |                           |
@@ -356,23 +360,23 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 
 ### CRDs parameters
 
-| Name                                   | Description                                             | Default           |
-| -------------------------------------- | ------------------------------------------------------- | ----------------- |
-| `crds.image.registry`                  | Image registry                                          | `docker.io`       |
-| `crds.image.repository`                | Image repository                                        | `bitnami/kubectl` |
-| `crds.image.tag`                       | Image tag                                               | `1.26.3`          |
-| `crds.image.digest`                    | Image digest                                            | `""`              |
-| `crds.image.pullPolicy`                | Image pull policy                                       | `IfNotPresent`    |
-| `crds.podAnnotations`                  | Additional pod annotations                              | `{}`              |
-| `crds.podLabels`                       | Additional pod labels                                   | `{}`              |
-| `crds.podSecurityContext`              | Pod security context                                    |                   |
-| `crds.podSecurityContext.runAsNonRoot` | Whether the container must run as a non-root user       | `true`            |
-| `crds.podSecurityContext.runAsUser`    | The UID to run the entrypoint of the container process  | `65534`           |
-| `crds.resources`                       | CPU/Memory resource requests/limits                     | `{}`              |
-| `crds.nodeSelector`                    | Node labels for pod assignment                          | `{}`              |
-| `crds.crds.securityContext`            | Container security context                              |                   |
-| `crds.tolerations`                     | Tolerations for pod assignment                          | `[]`              |
-| `crds.affinity`                        | Map of node/pod affinities                              | `{}`              |
+| Name                                   | Description                                            | Default           |
+| -------------------------------------- | ------------------------------------------------------ | ----------------- |
+| `crds.image.registry`                  | Image registry                                         | `docker.io`       |
+| `crds.image.repository`                | Image repository                                       | `bitnami/kubectl` |
+| `crds.image.tag`                       | Image tag                                              | `1.26.3`          |
+| `crds.image.digest`                    | Image digest                                           | `""`              |
+| `crds.image.pullPolicy`                | Image pull policy                                      | `IfNotPresent`    |
+| `crds.podAnnotations`                  | Additional pod annotations                             | `{}`              |
+| `crds.podLabels`                       | Additional pod labels                                  | `{}`              |
+| `crds.podSecurityContext`              | Pod security context                                   |                   |
+| `crds.podSecurityContext.runAsNonRoot` | Whether the container must run as a non-root user      | `true`            |
+| `crds.podSecurityContext.runAsUser`    | The UID to run the entrypoint of the container process | `1001`            |
+| `crds.securityContext`                 | Container security context                             | `{}`              |
+| `crds.resources`                       | CPU/Memory resource requests/limits                    | `{}`              |
+| `crds.nodeSelector`                    | Node labels for pod assignment                         | `{}`              |
+| `crds.tolerations`                     | Tolerations for pod assignment                         | `[]`              |
+| `crds.affinity`                        | Map of node/pod affinities                             | `{}`              |
 
 ### Tests parameters
 
@@ -380,7 +384,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | ------------------------ | ----------------- | -------------------- |
 | `tests.image.registry`   | Image registry    | `ghcr.io`            |
 | `tests.image.repository` | Image repository  | `cowboysysop/pytest` |
-| `tests.image.tag`        | Image tag         | `1.0.35`             |
+| `tests.image.tag`        | Image tag         | `1.0.41`             |
 | `tests.image.digest`     | Image digest      | `""`                 |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`       |
 

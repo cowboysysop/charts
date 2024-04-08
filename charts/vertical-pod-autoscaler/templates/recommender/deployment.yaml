@@ -8,7 +8,7 @@ metadata:
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
   {{- if or .Values.recommender.deploymentAnnotations .Values.commonAnnotations }}
-  {{- $annotations := include "common.tplvalues.merge" (dict "values" ( list .Values.recommender.deploymentAnnotations .Values.commonAnnotations ) "context" .) }}
+  {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.recommender.deploymentAnnotations .Values.commonAnnotations ) "context" . ) }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:

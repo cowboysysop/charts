@@ -9,7 +9,7 @@ metadata:
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
   {{- if or .Values.admissionController.deploymentAnnotations .Values.commonAnnotations }}
-  {{- $annotations := include "common.tplvalues.merge" (dict "values" ( list .Values.admissionController.deploymentAnnotations .Values.commonAnnotations ) "context" .) }}
+  {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.admissionController.deploymentAnnotations .Values.commonAnnotations ) "context" . ) }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
@@ -39,6 +39,10 @@ spec:
         {{- end }}
     spec:
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.admissionController.image ) "global" .Values.global ) | nindent 6 }}
+      {{- if .Values.admissionController.hostNetwork }}
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      {{- end }}
       {{- if .Values.admissionController.priorityClassName }}
       priorityClassName: {{ .Values.admissionController.priorityClassName | quote }}
       {{- end }}

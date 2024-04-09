@@ -7,9 +7,9 @@ metadata:
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
-  {{- if .Values.commonAnnotations }}
-  annotations:
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- if or .Values.deploymentAnnotations .Values.commonAnnotations }}
+  {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.deploymentAnnotations .Values.commonAnnotations ) "context" . ) }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
@@ -153,11 +153,6 @@ spec:
             httpGet:
               path: {{ .Values.siteBaseUrl | trimSuffix "/" }}/status
               port: http
-              {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
-              httpHeaders:
-                - name: Authorization
-                  value: {{ include "mongo-express.basicAuthHttpHeader" . }}
-              {{- end }}
             initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
@@ -169,11 +164,6 @@ spec:
             httpGet:
               path: {{ .Values.siteBaseUrl | trimSuffix "/" }}/status
               port: http
-              {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
-              httpHeaders:
-                - name: Authorization
-                  value: {{ include "mongo-express.basicAuthHttpHeader" . }}
-              {{- end }}
             initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
@@ -185,11 +175,6 @@ spec:
             httpGet:
               path: {{ .Values.siteBaseUrl | trimSuffix "/" }}/status
               port: http
-              {{- if and .Values.basicAuthUsername .Values.basicAuthPassword }}
-              httpHeaders:
-                - name: Authorization
-                  value: {{ include "mongo-express.basicAuthHttpHeader" . }}
-              {{- end }}
             initialDelaySeconds: {{ .Values.startupProbe.initialDelaySeconds }}
             periodSeconds: {{ .Values.startupProbe.periodSeconds }}
             timeoutSeconds: {{ .Values.startupProbe.timeoutSeconds }}

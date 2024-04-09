@@ -10,10 +10,10 @@ name: mongo-express
 sources:
   - https://github.com/mongo-express/mongo-express
   - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
-version: 6.4.2
+version: 6.5.0
 dependencies:
   - name: common
-    version: 2.19.0
+    version: 2.19.1
     repository: https://charts.bitnami.com/bitnami/
   - name: mongodb
     version: 15.1.3

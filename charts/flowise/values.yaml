@@ -48,7 +48,7 @@ image:
   repository: flowiseai/flowise
 
   ## @param image.tag Image tag
-  tag: 1.6.3
+  tag: 1.6.4
 
   ## @param image.digest Image digest
   digest: ""
@@ -76,6 +76,9 @@ serviceAccount:
 
   ## @param serviceAccount.name The name of the service account to use (Generated using the `flowise.fullname` template if not set)
   name:
+
+## @param deploymentAnnotations Additional deployment annotations
+deploymentAnnotations: {}
 
 ## @param podAnnotations Additional pod annotations
 podAnnotations: {}

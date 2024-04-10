@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 1.6.3
+appVersion: 1.6.4
 description: Drag & drop UI to build your customized LLM flow
 home: https://flowiseai.com/
 icon: https://avatars.githubusercontent.com/u/128289781
@@ -10,17 +10,17 @@ name: flowise
 sources:
   - https://github.com/FlowiseAI/Flowise
   - https://github.com/cowboysysop/charts/tree/master/charts/flowise
-version: 3.1.2
+version: 3.2.0
 dependencies:
   - name: common
-    version: 2.19.0
+    version: 2.19.1
     repository: https://charts.bitnami.com/bitnami/
   - name: mariadb
-    version: 17.0.1
+    version: 18.0.1
     repository: https://charts.bitnami.com/bitnami/
     condition: mariadb.enabled
   - name: postgresql
-    version: 15.1.4
+    version: 15.2.5
     repository: https://charts.bitnami.com/bitnami/
     condition: postgresql.enabled
 annotations:

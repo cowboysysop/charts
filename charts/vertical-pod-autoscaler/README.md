@@ -147,7 +147,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.replicaCount`                             | Number of replicas                                                                                                  | `1`                                    |
 | `admissionController.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`                      |
 | `admissionController.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-admission-controller` |
-| `admissionController.image.tag`                                | Image tag                                                                                                           | `1.0.0`                                |
+| `admissionController.image.tag`                                | Image tag                                                                                                           | `1.1.0`                                |
 | `admissionController.image.digest`                             | Image digest                                                                                                        | `""`                                   |
 | `admissionController.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`                         |
 | `admissionController.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                                |
@@ -226,7 +226,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.replicaCount`                             | Number of replicas                                                                                                  | `1`                           |
 | `recommender.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`             |
 | `recommender.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-recommender` |
-| `recommender.image.tag`                                | Image tag                                                                                                           | `1.0.0`                       |
+| `recommender.image.tag`                                | Image tag                                                                                                           | `1.1.0`                       |
 | `recommender.image.digest`                             | Image digest                                                                                                        | `""`                          |
 | `recommender.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`                |
 | `recommender.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                       |
@@ -296,7 +296,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.replicaCount`                             | Number of replicas                                                                                                  | `1`                       |
 | `updater.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`         |
 | `updater.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-updater` |
-| `updater.image.tag`                                | Image tag                                                                                                           | `1.0.0`                   |
+| `updater.image.tag`                                | Image tag                                                                                                           | `1.1.0`                   |
 | `updater.image.digest`                             | Image digest                                                                                                        | `""`                      |
 | `updater.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`            |
 | `updater.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                   |
@@ -364,7 +364,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | -------------------------------------- | ------------------------------------------------------ | ----------------- |
 | `crds.image.registry`                  | Image registry                                         | `docker.io`       |
 | `crds.image.repository`                | Image repository                                       | `bitnami/kubectl` |
-| `crds.image.tag`                       | Image tag                                              | `1.26.3`          |
+| `crds.image.tag`                       | Image tag                                              | `1.29.3`          |
 | `crds.image.digest`                    | Image digest                                           | `""`              |
 | `crds.image.pullPolicy`                | Image pull policy                                      | `IfNotPresent`    |
 | `crds.podAnnotations`                  | Additional pod annotations                             | `{}`              |

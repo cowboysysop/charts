@@ -118,7 +118,7 @@ livenessProbe:
   enabled: true
 
   ## @param livenessProbe.initialDelaySeconds Delay before the liveness probe is initiated
-  initialDelaySeconds: 0
+  initialDelaySeconds: 5
 
   ## @param livenessProbe.periodSeconds How often to perform the liveness probe
   periodSeconds: 10
@@ -137,7 +137,7 @@ readinessProbe:
   enabled: true
 
   ## @param readinessProbe.initialDelaySeconds Delay before the readiness probe is initiated
-  initialDelaySeconds: 0
+  initialDelaySeconds: 5
 
   ## @param readinessProbe.periodSeconds How often to perform the readiness probe
   periodSeconds: 10

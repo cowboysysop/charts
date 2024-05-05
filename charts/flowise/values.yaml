@@ -33,7 +33,7 @@ extraDeploy: []
 
 ## @section Parameters
 
-## @param replicaCount Number of replicas (do not change it)
+## @param replicaCount Number of replicas (change just if you are using service.type LoadBalancer)
 replicaCount: 1
 
 updateStrategy:
@@ -180,6 +180,12 @@ service:
   ## @param service.clusterIP Static cluster IP address or None for headless service when service type is ClusterIP
   clusterIP:
   # clusterIP: 10.43.0.100
+
+  ## @param service.sessionAffinity when service type is LoadBalancer 
+  sessionAffinity:
+  # sessionAffinity: ClientIP
+  
+
 
   ## @param service.loadBalancerIP Static load balancer IP address when service type is LoadBalancer
   loadBalancerIP:

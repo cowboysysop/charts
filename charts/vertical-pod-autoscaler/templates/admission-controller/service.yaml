@@ -17,6 +17,12 @@ spec:
   {{- if and (eq .Values.admissionController.service.type "ClusterIP") .Values.admissionController.service.clusterIP }}
   clusterIP: {{ .Values.admissionController.service.clusterIP }}
   {{- end }}
+  {{- if .Values.admissionController.service.sessionAffinity }}
+  sessionAffinity: {{ .Values.admissionController.service.sessionAffinity }}
+  {{- end }}
+  {{- if .Values.admissionController.service.sessionAffinityConfig }}
+  sessionAffinityConfig: {{- include "common.tplvalues.render" (dict "value" .Values.admissionController.service.sessionAffinityConfig "context" $) | nindent 4 }}
+  {{- end }}
   ports:
     - port: {{ .Values.admissionController.service.ports.https }}
       targetPort: https

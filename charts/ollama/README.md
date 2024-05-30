@@ -83,7 +83,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `ollama/ollama`          |
-| `image.tag`                          | Image tag                                                                                             | `0.1.31`                 |
+| `image.tag`                          | Image tag                                                                                             | `0.1.39`                 |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -92,6 +92,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
 | `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
 | `serviceAccount.name`                | The name of the service account to use (Generated using the `ollama.fullname` template if not set)    | `nil`                    |
+| `deploymentAnnotations`              | Additional deployment annotations                                                                     | `{}`                     |
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                     |
@@ -121,6 +122,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `service.annotations`                | Service annotations                                                                                   | `{}`                     |
 | `service.type`                       | Service type                                                                                          | `ClusterIP`              |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
+| `service.sessionAffinity`            | Control where client requests go, to the same pod or round-robin                                      | `None`                   |
+| `service.sessionAffinityConfig`      | Additional settings for the sessionAffinity                                                           | `{}`                     |
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |
 | `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                    |
 | `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                |

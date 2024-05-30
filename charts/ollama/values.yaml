@@ -77,6 +77,9 @@ serviceAccount:
   ## @param serviceAccount.name The name of the service account to use (Generated using the `ollama.fullname` template if not set)
   name:
 
+## @param deploymentAnnotations Additional deployment annotations
+deploymentAnnotations: {}
+
 ## @param podAnnotations Additional pod annotations
 podAnnotations: {}
 
@@ -177,6 +180,12 @@ service:
   ## @param service.clusterIP Static cluster IP address or None for headless service when service type is ClusterIP
   clusterIP:
   # clusterIP: 10.43.0.100
+
+  ## @param service.sessionAffinity Control where client requests go, to the same pod or round-robin
+  sessionAffinity: None
+
+  ## @param service.sessionAffinityConfig Additional settings for the sessionAffinity
+  sessionAffinityConfig: {}
 
   ## @param service.loadBalancerIP Static load balancer IP address when service type is LoadBalancer
   loadBalancerIP:

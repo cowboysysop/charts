@@ -48,7 +48,7 @@ image:
   repository: flowiseai/flowise
 
   ## @param image.tag Image tag
-  tag: 1.6.4
+  tag: 1.8.1
 
   ## @param image.digest Image digest
   digest: ""
@@ -112,6 +112,12 @@ securityContext: {}
 containerPorts:
   ## @param containerPorts.http Container port for HTTP
   http: 3000
+
+containerCommand:
+  - /bin/sh
+  - -ec
+  - | 
+    flowise start
 
 livenessProbe:
   ## @param livenessProbe.enabled Enable liveness probe

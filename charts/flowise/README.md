@@ -122,6 +122,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `topologySpreadConstraints`          | Topology Spread Constraints for pod assignment                                                        | `[]`                     |
 | `securityContext`                    | Container security context                                                                            | `{}`                     |
 | `containerPorts.http`                | Container port for HTTP                                                                               | `3000`                   |
+| `containerCommand`                   | Container command overriding container image                                                          |  `/bin/sh`<br>`-ec`<br>`flowise start` |
 | `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                   |
 | `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `0`                      |
 | `livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                               | `10`                     |

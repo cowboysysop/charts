@@ -117,10 +117,9 @@ spec:
           image: {{ include "common.images.image" ( dict "imageRoot" .Values.image "global" .Values.global ) }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
-            - /bin/sh
-            - -ec
-            - |
-              flowise start
+           {{- range .Values.containerCommand }}
+            - {{ . }}
+           {{- end }}           
           {{- if .Values.extraArgs }}
           args:
             {{- range $key, $value := .Values.extraArgs }}

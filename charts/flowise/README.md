@@ -171,6 +171,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `persistence.annotations`            | PVC annotations                                                                                       | `{}`                     |
 | `persistence.size`                   | PVC size                                                                                              | `1Gi`                    |
 | `persistence.storageClass`           | PVC storage class                                                                                     | `nil`                    |
+| `extraVolumes`                       | Additional pod volumes                                                                                | `[]`                     |
+| `extraVolumeMounts`                  | Additional container volume mounts                                                                    | `[]`                     |
 
 ### Config parameters
 

@@ -117,6 +117,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
 | `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
 | `serviceAccount.name`                | The name of the service account to use (Generated using the `kroki.fullname` template if not set)     | `nil`                    |
+| `deploymentAnnotations`              | Additional deployment annotations                                                                     | `{}`                     |
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                     |
@@ -146,6 +147,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `service.annotations`                | Service annotations                                                                                   | `{}`                     |
 | `service.type`                       | Service type                                                                                          | `ClusterIP`              |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
+| `service.sessionAffinity`            | Control where client requests go, to the same pod or round-robin                                      | `None`                   |
+| `service.sessionAffinityConfig`      | Additional settings for the sessionAffinity                                                           | `{}`                     |
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |
 | `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                    |
 | `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                |
@@ -166,6 +169,11 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                     |
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                    |
+| `autoscaling.hpa.enabled`            | Enable HPA                                                                                            | `false`                  |
+| `autoscaling.hpa.minReplicas`        | Minimum number of replicas                                                                            | `""`                     |
+| `autoscaling.hpa.maxReplicas`        | Maximum number of replicas                                                                            | `""`                     |
+| `autoscaling.hpa.targetCPU`          | Target CPU utilization percentage                                                                     | `""`                     |
+| `autoscaling.hpa.targetMemory`       | Target Memory utilization percentage                                                                  | `""`                     |
 
 ### BPMN parameters
 

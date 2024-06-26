@@ -104,7 +104,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `flowiseai/flowise`      |
-| `image.tag`                          | Image tag                                                                                             | `1.8.2`                  |
+| `image.tag`                          | Image tag                                                                                             | `1.8.3`                  |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -165,6 +165,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                     |
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                    |
+| `extraVolumes`                       | Optionally specify extra list of additional volumes                                                   | `[]`                     |
+| `extraVolumeMounts`                  | Optionally specify extra list of additional volumeMounts                                              | `[]`                     |
 | `persistence.enabled`                | Enable persistence using PVC                                                                          | `false`                  |
 | `persistence.existingClaim`          | Name of an existing PVC to use                                                                        | `nil`                    |
 | `persistence.accessMode`             | PVC access mode                                                                                       | `ReadWriteOnce`          |
@@ -223,15 +225,16 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ### Wait parameters
 
-| Name                    | Description                         | Default         |
-| ----------------------- | ----------------------------------- | --------------- |
-| `wait.image.registry`   | Image registry                      | `docker.io`     |
-| `wait.image.repository` | Image repository                    | `atkrad/wait4x` |
-| `wait.image.tag`        | Image tag                           | `2.14.0`        |
-| `wait.image.digest`     | Image digest                        | `""`            |
-| `wait.image.pullPolicy` | Image pull policy                   | `IfNotPresent`  |
-| `wait.securityContext`  | Container security context          | `{}`            |
-| `wait.resources`        | CPU/Memory resource requests/limits | `{}`            |
+| Name                     | Description                                              | Default         |
+| ------------------------ | -------------------------------------------------------- | --------------- |
+| `wait.image.registry`    | Image registry                                           | `docker.io`     |
+| `wait.image.repository`  | Image repository                                         | `atkrad/wait4x` |
+| `wait.image.tag`         | Image tag                                                | `2.14.0`        |
+| `wait.image.digest`      | Image digest                                             | `""`            |
+| `wait.image.pullPolicy`  | Image pull policy                                        | `IfNotPresent`  |
+| `wait.securityContext`   | Container security context                               | `{}`            |
+| `wait.resources`         | CPU/Memory resource requests/limits                      | `{}`            |
+| `wait.extraVolumeMounts` | Optionally specify extra list of additional volumeMounts | `[]`            |
 
 ### Tests parameters
 
@@ -262,3 +265,9 @@ $ helm install my-release \
 ```
 
 **TIP**: You can use the default [values.yaml](values.yaml).
+
+## License
+
+The source code of this chart is under [MIT License](LICENSE).
+
+It also uses source code under Apache 2.0 License from the [Bitnami repository](https://github.com/bitnami/charts).

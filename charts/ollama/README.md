@@ -83,7 +83,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `ollama/ollama`          |
-| `image.tag`                          | Image tag                                                                                             | `0.1.42`                 |
+| `image.tag`                          | Image tag                                                                                             | `0.1.48`                 |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -144,6 +144,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                     |
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                    |
+| `extraVolumes`                       | Optionally specify extra list of additional volumes                                                   | `[]`                     |
+| `extraVolumeMounts`                  | Optionally specify extra list of additional volumeMounts                                              | `[]`                     |
 | `persistence.enabled`                | Enable persistence using PVC                                                                          | `false`                  |
 | `persistence.existingClaim`          | Name of an existing PVC to use                                                                        | `nil`                    |
 | `persistence.accessMode`             | PVC access mode                                                                                       | `ReadWriteOnce`          |
@@ -180,3 +182,9 @@ $ helm install my-release \
 ```
 
 **TIP**: You can use the default [values.yaml](values.yaml).
+
+## License
+
+The source code of this chart is under [MIT License](LICENSE).
+
+It also uses source code under Apache 2.0 License from the [Bitnami repository](https://github.com/bitnami/charts).

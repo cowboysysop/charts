@@ -1,6 +1,6 @@
 {
   "allowedPostUpgradeCommands": [
-    "^bash .github/bump-chart-version.sh$"
+    "bump-chart-version.sh"
   ],
   "bumpVersion": "patch",
   "dependencyDashboard": true,

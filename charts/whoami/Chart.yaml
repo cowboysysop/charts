@@ -9,7 +9,7 @@ name: whoami
 sources:
   - https://github.com/traefik/whoami
   - https://github.com/cowboysysop/charts/tree/master/charts/whoami
-version: 5.1.1
+version: 5.1.2
 dependencies:
   - name: common
     version: 2.9.0

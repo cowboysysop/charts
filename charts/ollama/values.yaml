@@ -48,7 +48,7 @@ image:
   repository: ollama/ollama
 
   ## @param image.tag Image tag
-  tag: 0.1.42
+  tag: 0.1.48
 
   ## @param image.digest Image digest
   digest: ""
@@ -267,6 +267,12 @@ extraEnvVarsCM:
 
 ## @param extraEnvVarsSecret Name of existing Secret containing additional container environment variables
 extraEnvVarsSecret:
+
+## @param extraVolumes Optionally specify extra list of additional volumes
+extraVolumes: []
+
+## @param extraVolumeMounts Optionally specify extra list of additional volumeMounts
+extraVolumeMounts: []
 
 persistence:
   ## @param persistence.enabled Enable persistence using PVC

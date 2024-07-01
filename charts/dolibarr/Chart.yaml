@@ -10,7 +10,7 @@ name: dolibarr
 sources:
   - https://github.com/Dolibarr/dolibarr
   - https://github.com/cowboysysop/charts/tree/master/charts/dolibarr
-version: 5.2.0
+version: 5.2.1
 dependencies:
   - name: common
     version: 2.19.0

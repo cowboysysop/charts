@@ -48,7 +48,7 @@ image:
   repository: tuxgasy/dolibarr
 
   ## @param image.tag Image tag
-  tag: 19.0.1
+  tag: 19.0.2
 
   ## @param image.digest Image digest
   digest: ""

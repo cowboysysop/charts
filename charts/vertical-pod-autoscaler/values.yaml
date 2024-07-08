@@ -89,10 +89,12 @@ admissionController:
   ## @extra admissionController.podSecurityContext Pod security context
   ## @param admissionController.podSecurityContext.runAsNonRoot Whether the container must run as a non-root user
   ## @param admissionController.podSecurityContext.runAsUser The UID to run the entrypoint of the container process
+  ## @param admissionController.podSecurityContext.runAsGroup The GID to run the entrypoint of the container process
   podSecurityContext:
     # fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 65534
+    runAsGroup: 65534
 
   ## @param admissionController.hostNetwork Use the host network
   hostNetwork: false
@@ -354,10 +356,12 @@ recommender:
   ## @extra recommender.podSecurityContext Pod security context
   ## @param recommender.podSecurityContext.runAsNonRoot Whether the container must run as a non-root user
   ## @param recommender.podSecurityContext.runAsUser The UID to run the entrypoint of the container process
+  ## @param recommender.podSecurityContext.runAsGroup The GID to run the entrypoint of the container process
   podSecurityContext:
     # fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 65534
+    runAsGroup: 65534
 
   ## @param recommender.priorityClassName Priority class name
   priorityClassName:
@@ -616,10 +620,12 @@ updater:
   ## @extra updater.podSecurityContext Pod security context
   ## @param updater.podSecurityContext.runAsNonRoot Whether the container must run as a non-root user
   ## @param updater.podSecurityContext.runAsUser The UID to run the entrypoint of the container process
+  ## @param updater.podSecurityContext.runAsGroup The GID to run the entrypoint of the container process
   podSecurityContext:
     # fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 65534
+    runAsGroup: 65534
 
   ## @param updater.priorityClassName Priority class name
   priorityClassName:
@@ -822,10 +828,12 @@ crds:
   ## @extra crds.podSecurityContext Pod security context
   ## @param crds.podSecurityContext.runAsNonRoot Whether the container must run as a non-root user
   ## @param crds.podSecurityContext.runAsUser The UID to run the entrypoint of the container process
+  ## @param crds.podSecurityContext.runAsGroup The GID to run the entrypoint of the container process
   podSecurityContext:
     # fsGroup: 2000
     runAsNonRoot: true
     runAsUser: 1001
+    runAsGroup: 1001
 
   ## @param crds.securityContext Container security context
   securityContext: {}

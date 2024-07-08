@@ -162,6 +162,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.podSecurityContext`                       | Pod security context                                                                                                |                                        |
 | `admissionController.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                                 |
 | `admissionController.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                                |
+| `admissionController.podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                                                              | `65534`                                |
 | `admissionController.hostNetwork`                              | Use the host network                                                                                                | `false`                                |
 | `admissionController.priorityClassName`                        | Priority class name                                                                                                 | `nil`                                  |
 | `admissionController.runtimeClassName`                         | Runtime class name                                                                                                  | `""`                                   |
@@ -243,6 +244,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.podSecurityContext`                       | Pod security context                                                                                                |                               |
 | `recommender.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                        |
 | `recommender.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                       |
+| `recommender.podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                                                              | `65534`                       |
 | `recommender.priorityClassName`                        | Priority class name                                                                                                 | `nil`                         |
 | `recommender.runtimeClassName`                         | Runtime class name                                                                                                  | `""`                          |
 | `recommender.topologySpreadConstraints`                | Topology Spread Constraints for pod assignment                                                                      | `[]`                          |
@@ -313,6 +315,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.podSecurityContext`                       | Pod security context                                                                                                |                           |
 | `updater.podSecurityContext.runAsNonRoot`          | Whether the container must run as a non-root user                                                                   | `true`                    |
 | `updater.podSecurityContext.runAsUser`             | The UID to run the entrypoint of the container process                                                              | `65534`                   |
+| `updater.podSecurityContext.runAsGroup`            | The GID to run the entrypoint of the container process                                                              | `65534`                   |
 | `updater.priorityClassName`                        | Priority class name                                                                                                 | `nil`                     |
 | `updater.runtimeClassName`                         | Runtime class name                                                                                                  | `""`                      |
 | `updater.topologySpreadConstraints`                | Topology Spread Constraints for pod assignment                                                                      | `[]`                      |
@@ -374,6 +377,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `crds.podSecurityContext`              | Pod security context                                   |                   |
 | `crds.podSecurityContext.runAsNonRoot` | Whether the container must run as a non-root user      | `true`            |
 | `crds.podSecurityContext.runAsUser`    | The UID to run the entrypoint of the container process | `1001`            |
+| `crds.podSecurityContext.runAsGroup`   | The GID to run the entrypoint of the container process | `1001`            |
 | `crds.securityContext`                 | Container security context                             | `{}`              |
 | `crds.resources`                       | CPU/Memory resource requests/limits                    | `{}`              |
 | `crds.nodeSelector`                    | Node labels for pod assignment                         | `{}`              |

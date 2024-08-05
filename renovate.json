@@ -7,6 +7,8 @@
   "ignorePaths": [
     "archives/**"
   ],
+  "prConcurrentLimit": 0,
+  "prHourlyLimit": 0,
   "semanticCommits": "enabled",
   "semanticCommitScope": null,
   "semanticCommitType": "fix",

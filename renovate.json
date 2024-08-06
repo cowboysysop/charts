@@ -15,7 +15,7 @@
   "packageRules": [
     {
       "matchManagers": [
-	"helm-values"
+        "helm-values"
       ],
       "postUpgradeTasks": {
         "commands": [
@@ -46,14 +46,14 @@
       "semanticCommitType": "ci"
     },
     {
-      "matchPackageNames": [
+      "matchDepNames": [
         "helm",
         "kindest/node"
       ],
       "separateMinorPatch": true
     },
     {
-      "matchPackageNames": [
+      "matchDepNames": [
         "helm",
         "kindest/node"
       ],

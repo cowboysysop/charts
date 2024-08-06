@@ -104,7 +104,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `flowiseai/flowise`      |
-| `image.tag`                          | Image tag                                                                                             | `1.8.3`                  |
+| `image.tag`                          | Image tag                                                                                             | `2.0.2`                  |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -229,7 +229,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | ------------------------ | -------------------------------------------------------- | --------------- |
 | `wait.image.registry`    | Image registry                                           | `docker.io`     |
 | `wait.image.repository`  | Image repository                                         | `atkrad/wait4x` |
-| `wait.image.tag`         | Image tag                                                | `2.14.0`        |
+| `wait.image.tag`         | Image tag                                                | `2.14.1`        |
 | `wait.image.digest`      | Image digest                                             | `""`            |
 | `wait.image.pullPolicy`  | Image pull policy                                        | `IfNotPresent`  |
 | `wait.securityContext`   | Container security context                               | `{}`            |

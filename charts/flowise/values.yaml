@@ -48,7 +48,7 @@ image:
   repository: flowiseai/flowise
 
   ## @param image.tag Image tag
-  tag: 1.8.4
+  tag: 2.0.2
 
   ## @param image.digest Image digest
   digest: ""
@@ -427,7 +427,7 @@ wait:
     repository: atkrad/wait4x
 
     ## @param wait.image.tag Image tag
-    tag: 2.14.0
+    tag: 2.14.1
 
     ## @param wait.image.digest Image digest
     digest: ""

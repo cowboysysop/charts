@@ -970,6 +970,40 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: 2.0.2
+    created: "2024-08-18T05:15:07.964831379Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 2.21.0
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com/bitnami/
+      version: 18.2.6
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami/
+      version: 15.5.7
+    description: Drag & drop UI to build your customized LLM flow
+    digest: 8e9f8aa3d6564a21fde1540ae590ceb178d9461e37e23a536833834e2bebf267
+    home: https://flowiseai.com/
+    icon: https://avatars.githubusercontent.com/u/128289781
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: flowise
+    sources:
+    - https://github.com/FlowiseAI/Flowise
+    - https://github.com/cowboysysop/charts/tree/master/charts/flowise
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/flowise-3.7.2/flowise-3.7.2.tgz
+    version: 3.7.2
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 2.0.2
     created: "2024-08-11T02:37:54.390228447Z"
     dependencies:
     - name: common
@@ -12741,4 +12775,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2024-08-11T19:11:53.030789826Z"
+generated: "2024-08-18T05:15:07.96564032Z"

@@ -48,7 +48,7 @@ admissionController:
     repository: autoscaling/vpa-admission-controller
 
     ## @param admissionController.image.tag Image tag
-    tag: 1.1.2
+    tag: 1.2.1
 
     ## @param admissionController.image.digest Image digest
     digest: ""
@@ -76,6 +76,9 @@ admissionController:
 
     ## @param admissionController.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
+
+  ## @param admissionController.hostAliases Pod host aliases
+  hostAliases: []
 
   ## @param admissionController.deploymentAnnotations Additional deployment annotations
   deploymentAnnotations: {}
@@ -241,6 +244,12 @@ admissionController:
   ## @param admissionController.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
 
+  ## @param admissionController.extraVolumes Optionally specify extra list of additional volumes
+  extraVolumes: []
+
+  ## @param admissionController.extraVolumeMounts Optionally specify extra list of additional volumeMounts
+  extraVolumeMounts: []
+
   metrics:
     service:
       ## @param admissionController.metrics.service.annotations Metrics service annotations
@@ -315,7 +324,7 @@ recommender:
     repository: autoscaling/vpa-recommender
 
     ## @param recommender.image.tag Image tag
-    tag: 1.1.2
+    tag: 1.2.1
 
     ## @param recommender.image.digest Image digest
     digest: ""
@@ -343,6 +352,9 @@ recommender:
 
     ## @param recommender.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
+
+  ## @param recommender.hostAliases Pod host aliases
+  hostAliases: []
 
   ## @param recommender.deploymentAnnotations Additional deployment annotations
   deploymentAnnotations: {}
@@ -475,8 +487,16 @@ recommender:
     # external-metrics-memory-metric: ""
     # history-length: 8d
     # history-resolution: 1h
+    # ignored-vpa-object-namespaces: ""
     # kube-api-burst: 10
     # kube-api-qps: 5
+    # leader-elect: false
+    # leader-elect-lease-duration: 15s
+    # leader-elect-renew-deadline: 10s
+    # leader-elect-resource-lock: leases
+    # leader-elect-resource-name: vpa-recommender
+    # leader-elect-resource-namespace: kube-system
+    # leader-elect-retry-period: 2s
     # memory-aggregation-interval: 24h0m0s
     # memory-aggregation-interval-count: 8
     # memory-histogram-decay-half-life: 24h0m0s
@@ -494,11 +514,16 @@ recommender:
     # prometheus-address: ""
     # prometheus-cadvisor-job-name: kubernetes-cadvisor
     # prometheus-query-timeout: 5m
+    # recommendation-lower-bound-cpu-percentile: 0.5
+    # recommendation-lower-bound-memory-percentile: 0.5
     # recommendation-margin-fraction: 0.15
+    # recommendation-upper-bound-cpu-percentile: 0.95
+    # recommendation-upper-bound-memory-percentile: 0.95
     # recommender-interval: 1m0s
     # recommender-name: default
     # storage: checkpoint
     # target-cpu-percentile: 0.9
+    # target-memory-percentile: 0.9
     # use-external-metrics: false
     # username: ""
     v: 2
@@ -514,6 +539,12 @@ recommender:
 
   ## @param recommender.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
+
+  ## @param recommender.extraVolumes Optionally specify extra list of additional volumes
+  extraVolumes: []
+
+  ## @param recommender.extraVolumeMounts Optionally specify extra list of additional volumeMounts
+  extraVolumeMounts: []
 
   metrics:
     service:
@@ -579,7 +610,7 @@ updater:
     repository: autoscaling/vpa-updater
 
     ## @param updater.image.tag Image tag
-    tag: 1.1.2
+    tag: 1.2.1
 
     ## @param updater.image.digest Image digest
     digest: ""
@@ -607,6 +638,9 @@ updater:
 
     ## @param updater.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
+
+  ## @param updater.hostAliases Pod host aliases
+  hostAliases: []
 
   ## @param updater.deploymentAnnotations Additional deployment annotations
   deploymentAnnotations: {}
@@ -732,9 +766,17 @@ updater:
     # eviction-rate-burst: 1
     # eviction-rate-limit: -1
     # eviction-tolerance: 0.5
+    # ignored-vpa-object-namespaces: ""
     # in-recommendation-bounds-eviction-lifetime-threshold: 12h0m0s
     # kube-api-burst: 10
     # kube-api-qps: 5
+    # leader-elect: false
+    # leader-elect-lease-duration: 15s
+    # leader-elect-renew-deadline: 10s
+    # leader-elect-resource-lock: leases
+    # leader-elect-resource-name: vpa-updater
+    # leader-elect-resource-namespace: kube-system
+    # leader-elect-retry-period: 2s
     # min-replicas: 2
     # pod-update-threshold: 0.1
     # updater-interval: 1m0s
@@ -752,6 +794,12 @@ updater:
 
   ## @param updater.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
+
+  ## @param updater.extraVolumes Optionally specify extra list of additional volumes
+  extraVolumes: []
+
+  ## @param updater.extraVolumeMounts Optionally specify extra list of additional volumeMounts
+  extraVolumeMounts: []
 
   metrics:
     service:

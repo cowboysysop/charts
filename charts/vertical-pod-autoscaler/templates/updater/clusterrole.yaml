@@ -9,8 +9,7 @@ metadata:
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
   {{- if .Values.commonAnnotations }}
-  annotations:
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
 rules:
   # system:vpa-actor
@@ -108,4 +107,21 @@ rules:
       - get
       - list
       - watch
+  # system:leader-locking-vpa-updater
+  - apiGroups:
+      - "coordination.k8s.io"
+    resources:
+      - leases
+    verbs:
+      - create
+  - apiGroups:
+      - "coordination.k8s.io"
+    resourceNames:
+      - vpa-updater
+    resources:
+      - leases
+    verbs:
+      - get
+      - watch
+      - update
 {{- end }}

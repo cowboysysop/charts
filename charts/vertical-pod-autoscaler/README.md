@@ -147,7 +147,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.replicaCount`                             | Number of replicas                                                                                                  | `1`                                    |
 | `admissionController.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`                      |
 | `admissionController.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-admission-controller` |
-| `admissionController.image.tag`                                | Image tag                                                                                                           | `1.1.2`                                |
+| `admissionController.image.tag`                                | Image tag                                                                                                           | `1.2.1`                                |
 | `admissionController.image.digest`                             | Image digest                                                                                                        | `""`                                   |
 | `admissionController.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`                         |
 | `admissionController.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                                |
@@ -156,6 +156,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.serviceAccount.create`                    | Specifies whether a service account should be created                                                               | `true`                                 |
 | `admissionController.serviceAccount.annotations`               | Service account annotations                                                                                         | `{}`                                   |
 | `admissionController.serviceAccount.name`                      | The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set) | `nil`                                  |
+| `admissionController.hostAliases`                              | Pod host aliases                                                                                                    | `[]`                                   |
 | `admissionController.deploymentAnnotations`                    | Additional deployment annotations                                                                                   | `{}`                                   |
 | `admissionController.podAnnotations`                           | Additional pod annotations                                                                                          | `{}`                                   |
 | `admissionController.podLabels`                                | Additional pod labels                                                                                               | `{}`                                   |
@@ -203,6 +204,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.extraEnvVars`                             | Additional container environment variables                                                                          | `[]`                                   |
 | `admissionController.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables                                    | `nil`                                  |
 | `admissionController.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables                                       | `nil`                                  |
+| `admissionController.extraVolumes`                             | Optionally specify extra list of additional volumes                                                                 | `[]`                                   |
+| `admissionController.extraVolumeMounts`                        | Optionally specify extra list of additional volumeMounts                                                            | `[]`                                   |
 | `admissionController.metrics.service.annotations`              | Metrics service annotations                                                                                         | `{}`                                   |
 | `admissionController.metrics.service.type`                     | Metrics service type                                                                                                | `ClusterIP`                            |
 | `admissionController.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP                       | `nil`                                  |
@@ -229,7 +232,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.replicaCount`                             | Number of replicas                                                                                                  | `1`                           |
 | `recommender.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`             |
 | `recommender.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-recommender` |
-| `recommender.image.tag`                                | Image tag                                                                                                           | `1.1.2`                       |
+| `recommender.image.tag`                                | Image tag                                                                                                           | `1.2.1`                       |
 | `recommender.image.digest`                             | Image digest                                                                                                        | `""`                          |
 | `recommender.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`                |
 | `recommender.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                       |
@@ -238,6 +241,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.serviceAccount.create`                    | Specifies whether a service account should be created                                                               | `true`                        |
 | `recommender.serviceAccount.annotations`               | Service account annotations                                                                                         | `{}`                          |
 | `recommender.serviceAccount.name`                      | The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set) | `nil`                         |
+| `recommender.hostAliases`                              | Pod host aliases                                                                                                    | `[]`                          |
 | `recommender.deploymentAnnotations`                    | Additional deployment annotations                                                                                   | `{}`                          |
 | `recommender.podAnnotations`                           | Additional pod annotations                                                                                          | `{}`                          |
 | `recommender.podLabels`                                | Additional pod labels                                                                                               | `{}`                          |
@@ -277,6 +281,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.extraEnvVars`                             | Additional container environment variables                                                                          | `[]`                          |
 | `recommender.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables                                    | `nil`                         |
 | `recommender.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables                                       | `nil`                         |
+| `recommender.extraVolumes`                             | Optionally specify extra list of additional volumes                                                                 | `[]`                          |
+| `recommender.extraVolumeMounts`                        | Optionally specify extra list of additional volumeMounts                                                            | `[]`                          |
 | `recommender.metrics.service.annotations`              | Metrics service annotations                                                                                         | `{}`                          |
 | `recommender.metrics.service.type`                     | Metrics service type                                                                                                | `ClusterIP`                   |
 | `recommender.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP                       | `nil`                         |
@@ -300,7 +306,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.replicaCount`                             | Number of replicas                                                                                                  | `1`                       |
 | `updater.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`         |
 | `updater.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-updater` |
-| `updater.image.tag`                                | Image tag                                                                                                           | `1.1.2`                   |
+| `updater.image.tag`                                | Image tag                                                                                                           | `1.2.1`                   |
 | `updater.image.digest`                             | Image digest                                                                                                        | `""`                      |
 | `updater.image.pullPolicy`                         | Image pull policy                                                                                                   | `IfNotPresent`            |
 | `updater.pdb.create`                               | Specifies whether a pod disruption budget should be created                                                         | `false`                   |
@@ -309,6 +315,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.serviceAccount.create`                    | Specifies whether a service account should be created                                                               | `true`                    |
 | `updater.serviceAccount.annotations`               | Service account annotations                                                                                         | `{}`                      |
 | `updater.serviceAccount.name`                      | The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set) | `nil`                     |
+| `updater.hostAliases`                              | Pod host aliases                                                                                                    | `[]`                      |
 | `updater.deploymentAnnotations`                    | Additional deployment annotations                                                                                   | `{}`                      |
 | `updater.podAnnotations`                           | Additional pod annotations                                                                                          | `{}`                      |
 | `updater.podLabels`                                | Additional pod labels                                                                                               | `{}`                      |
@@ -348,6 +355,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.extraEnvVars`                             | Additional container environment variables                                                                          | `[]`                      |
 | `updater.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables                                    | `nil`                     |
 | `updater.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables                                       | `nil`                     |
+| `updater.extraVolumes`                             | Optionally specify extra list of additional volumes                                                                 | `[]`                      |
+| `updater.extraVolumeMounts`                        | Optionally specify extra list of additional volumeMounts                                                            | `[]`                      |
 | `updater.metrics.service.annotations`              | Metrics service annotations                                                                                         | `{}`                      |
 | `updater.metrics.service.type`                     | Metrics service type                                                                                                | `ClusterIP`               |
 | `updater.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP                       | `nil`                     |
@@ -421,3 +430,9 @@ Due to hard-coded values in Vertical Pod Autoscaler, the chart configuration has
 - Admission controller component service name is `vpa-webhook`
 - Admission controller component service port is `443`
 - Mutating webhook configuration name automatically created by admission controller component is `vpa-webhook-config`
+
+## License
+
+The source code of this chart is under [MIT License](LICENSE).
+
+It also uses source code under Apache 2.0 License from the [Bitnami repository](https://github.com/bitnami/charts).

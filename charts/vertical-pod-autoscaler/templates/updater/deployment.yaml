@@ -38,6 +38,9 @@ spec:
       {{- end }}
     spec:
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.updater.image ) "global" .Values.global ) | nindent 6 }}
+      {{- if .Values.updater.hostAliases }}
+      hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.updater.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
       {{- if .Values.updater.priorityClassName }}
       priorityClassName: {{ .Values.updater.priorityClassName | quote }}
       {{- end }}
@@ -117,6 +120,10 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.updater.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.updater.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.updater.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
       {{- with .Values.updater.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -129,4 +136,8 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+        {{- if .Values.updater.extraVolumes }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.updater.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}
 {{- end }}

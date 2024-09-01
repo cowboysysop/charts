@@ -39,6 +39,9 @@ spec:
         {{- end }}
     spec:
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.admissionController.image ) "global" .Values.global ) | nindent 6 }}
+      {{- if .Values.admissionController.hostAliases }}
+      hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.admissionController.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
       {{- if .Values.admissionController.hostNetwork }}
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
@@ -133,6 +136,9 @@ spec:
             - name: tls-secret
               mountPath: /tls-secret
               readOnly: true
+            {{- if .Values.admissionController.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.admissionController.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
       {{- with .Values.admissionController.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -149,4 +155,7 @@ spec:
         - name: tls-secret
           secret:
             secretName: {{ include "vertical-pod-autoscaler.admissionController.tls.secretName" . }}
+        {{- if .Values.admissionController.extraVolumes }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.admissionController.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}
 {{- end }}

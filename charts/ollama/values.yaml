@@ -48,7 +48,7 @@ image:
   repository: ollama/ollama
 
   ## @param image.tag Image tag
-  tag: 0.3.10
+  tag: 0.3.11
 
   ## @param image.digest Image digest
   digest: ""

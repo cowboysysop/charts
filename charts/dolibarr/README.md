@@ -111,8 +111,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `replicaCount`                       | Number of replicas (do not change it)                                                                 | `1`                      |
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
-| `image.repository`                   | Image repository                                                                                      | `tuxgasy/dolibarr`       |
-| `image.tag`                          | Image tag                                                                                             | `19.0.1`                 |
+| `image.repository`                   | Image repository                                                                                      | `dolibarr/dolibarr`      |
+| `image.tag`                          | Image tag                                                                                             | `19.0.3`                 |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -121,6 +121,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
 | `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
 | `serviceAccount.name`                | The name of the service account to use (Generated using the `dolibarr.fullname` template if not set)  | `nil`                    |
+| `hostAliases`                        | Pod host aliases                                                                                      | `[]`                     |
+| `deploymentAnnotations`              | Additional deployment annotations                                                                     | `{}`                     |
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                     |
@@ -150,6 +152,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `service.annotations`                | Service annotations                                                                                   | `{}`                     |
 | `service.type`                       | Service type                                                                                          | `ClusterIP`              |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
+| `service.sessionAffinity`            | Control where client requests go, to the same pod or round-robin                                      | `None`                   |
+| `service.sessionAffinityConfig`      | Additional settings for the sessionAffinity                                                           | `{}`                     |
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |
 | `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                    |
 | `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                |
@@ -170,8 +174,11 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                     |
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                    |
+| `extraVolumes`                       | Optionally specify extra list of additional volumes                                                   | `[]`                     |
+| `extraVolumeMounts`                  | Optionally specify extra list of additional volumeMounts                                              | `[]`                     |
 | `init.securityContext`               | Init security context                                                                                 | `{}`                     |
 | `init.resources`                     | Init CPU/Memory resource requests/limits                                                              | `{}`                     |
+| `init.extraVolumeMounts`             | Optionally specify extra list of additional volumeMounts                                              | `[]`                     |
 | `persistence.enabled`                | Enable persistence using PVC                                                                          | `false`                  |
 | `persistence.existingClaim`          | Name of an existing PVC to use                                                                        | `nil`                    |
 | `persistence.accessMode`             | PVC access mode                                                                                       | `ReadWriteOnce`          |
@@ -215,15 +222,16 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ### Wait parameters
 
-| Name                    | Description                         | Default         |
-| ----------------------- | ----------------------------------- | --------------- |
-| `wait.image.registry`   | Image registry                      | `docker.io`     |
-| `wait.image.repository` | Image repository                    | `atkrad/wait4x` |
-| `wait.image.tag`        | Image tag                           | `2.14.0`        |
-| `wait.image.digest`     | Image digest                        | `""`            |
-| `wait.image.pullPolicy` | Image pull policy                   | `IfNotPresent`  |
-| `wait.securityContext`  | Container security context          | `{}`            |
-| `wait.resources`        | CPU/Memory resource requests/limits | `{}`            |
+| Name                     | Description                                              | Default         |
+| ------------------------ | -------------------------------------------------------- | --------------- |
+| `wait.image.registry`    | Image registry                                           | `docker.io`     |
+| `wait.image.repository`  | Image repository                                         | `atkrad/wait4x` |
+| `wait.image.tag`         | Image tag                                                | `2.14.1`        |
+| `wait.image.digest`      | Image digest                                             | `""`            |
+| `wait.image.pullPolicy`  | Image pull policy                                        | `IfNotPresent`  |
+| `wait.securityContext`   | Container security context                               | `{}`            |
+| `wait.resources`         | CPU/Memory resource requests/limits                      | `{}`            |
+| `wait.extraVolumeMounts` | Optionally specify extra list of additional volumeMounts | `[]`            |
 
 ### Tests parameters
 
@@ -254,3 +262,9 @@ $ helm install my-release \
 ```
 
 **TIP**: You can use the default [values.yaml](values.yaml).
+
+## License
+
+The source code of this chart is under [MIT License](LICENSE).
+
+It also uses source code under Apache 2.0 License from the [Bitnami repository](https://github.com/bitnami/charts).

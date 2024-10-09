@@ -223,6 +223,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `externalPostgresql.existingSecret`            | Name of existing Secret to use                           | `""`         |
 | `externalPostgresql.existingSecretKeyPassword` | Key in existing Secret that contains PostgreSQL password | `password`   |
 | `externalPostgresql.database`                  | External PostgreSQL database                             | `flowise`    |
+| `externalPostgresql.ssl`                       | Whether to connect using SSL                             | `false`      |
 
 ### Wait parameters
 

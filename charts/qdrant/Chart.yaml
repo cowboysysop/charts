@@ -10,7 +10,7 @@ name: qdrant
 sources:
   - https://github.com/qdrant/qdrant
   - https://github.com/cowboysysop/charts/tree/master/charts/qdrant
-version: 2.2.0
+version: 2.3.0
 dependencies:
   - name: common
     version: 2.9.0

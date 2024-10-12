@@ -1,7 +1,4 @@
 {
-  "allowedPostUpgradeCommands": [
-    "bump-chart-version.sh"
-  ],
   "bumpVersion": "patch",
   "dependencyDashboard": true,
   "ignorePaths": [

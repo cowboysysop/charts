@@ -19,6 +19,7 @@ jobs:
         with:
           renovate-version: 38.119.0 # renovate: ghcr.io/renovatebot/renovate
         env:
+          RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: "[\"bump-chart-version.sh\"]"
           RENOVATE_CONFIG_FILE: renovate.json
           RENOVATE_REPOSITORIES: ${{ github.repository }}
           RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}

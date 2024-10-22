@@ -73,6 +73,12 @@ serviceAccount:
   ## @param serviceAccount.name The name of the service account to use (Generated using the `whoami.fullname` template if not set)
   name:
 
+## @param hostAliases Pod host aliases
+hostAliases: []
+
+## @param deploymentAnnotations Additional deployment annotations
+deploymentAnnotations: {}
+
 ## @param podAnnotations Additional pod annotations
 podAnnotations: {}
 
@@ -86,6 +92,12 @@ podSecurityContext: {}
 ## @param priorityClassName Priority class name
 priorityClassName:
 # priorityClassName : high-priority
+
+## @param runtimeClassName Runtime class name
+runtimeClassName: ""
+
+## @param topologySpreadConstraints Topology Spread Constraints for pod assignment
+topologySpreadConstraints: []
 
 ## @param securityContext Container security context
 securityContext: {}
@@ -168,6 +180,18 @@ service:
   clusterIP:
   # clusterIP: 10.43.0.100
 
+  ## @param service.ipFamilyPolicy Service IP family policy
+  ipFamilyPolicy: ""
+
+  ## @param service.ipFamilies Service IP families
+  ipFamilies: []
+
+  ## @param service.sessionAffinity Control where client requests go, to the same pod or round-robin
+  sessionAffinity: None
+
+  ## @param service.sessionAffinityConfig Additional settings for the sessionAffinity
+  sessionAffinityConfig: {}
+
   ## @param service.loadBalancerIP Static load balancer IP address when service type is LoadBalancer
   loadBalancerIP:
   # loadBalancerIP: 10.0.0.100
@@ -249,6 +273,12 @@ extraEnvVarsCM:
 ## @param extraEnvVarsSecret Name of existing Secret containing additional container environment variables
 extraEnvVarsSecret:
 
+## @param extraVolumes Optionally specify extra list of additional volumes
+extraVolumes: []
+
+## @param extraVolumeMounts Optionally specify extra list of additional volumeMounts
+extraVolumeMounts: []
+
 ## @section Tests parameters
 
 tests:
@@ -260,7 +290,7 @@ tests:
     repository: cowboysysop/pytest
 
     ## @param tests.image.tag Image tag
-    tag: 1.0.35
+    tag: 1.0.41
 
     ## @param tests.image.digest Image digest
     digest: ""

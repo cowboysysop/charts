@@ -108,7 +108,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `replicaCount`                       | Number of replicas                                                                                    | `1`                      |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `traefik/whoami`         |
-| `image.tag`                          | Image tag                                                                                             | `v1.10.1`                |
+| `image.tag`                          | Image tag                                                                                             | `v1.10.3`                |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -117,10 +117,14 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
 | `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
 | `serviceAccount.name`                | The name of the service account to use (Generated using the `whoami.fullname` template if not set)    | `nil`                    |
+| `hostAliases`                        | Pod host aliases                                                                                      | `[]`                     |
+| `deploymentAnnotations`              | Additional deployment annotations                                                                     | `{}`                     |
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
 | `podSecurityContext`                 | Pod security context                                                                                  | `{}`                     |
 | `priorityClassName`                  | Priority class name                                                                                   | `nil`                    |
+| `runtimeClassName`                   | Runtime class name                                                                                    | `""`                     |
+| `topologySpreadConstraints`          | Topology Spread Constraints for pod assignment                                                        | `[]`                     |
 | `securityContext`                    | Container security context                                                                            | `{}`                     |
 | `containerPorts.http`                | Container port for HTTP                                                                               | `80`                     |
 | `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                   |
@@ -144,6 +148,10 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `service.annotations`                | Service annotations                                                                                   | `{}`                     |
 | `service.type`                       | Service type                                                                                          | `ClusterIP`              |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
+| `service.ipFamilyPolicy`             | Service IP family policy                                                                              | `""`                     |
+| `service.ipFamilies`                 | Service IP families                                                                                   | `[]`                     |
+| `service.sessionAffinity`            | Control where client requests go, to the same pod or round-robin                                      | `None`                   |
+| `service.sessionAffinityConfig`      | Additional settings for the sessionAffinity                                                           | `{}`                     |
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |
 | `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                    |
 | `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                |
@@ -164,6 +172,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                     |
 | `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
 | `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                    |
+| `extraVolumes`                       | Optionally specify extra list of additional volumes                                                   | `[]`                     |
+| `extraVolumeMounts`                  | Optionally specify extra list of additional volumeMounts                                              | `[]`                     |
 
 ### Tests parameters
 
@@ -171,7 +181,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | ------------------------ | ----------------- | -------------------- |
 | `tests.image.registry`   | Image registry    | `ghcr.io`            |
 | `tests.image.repository` | Image repository  | `cowboysysop/pytest` |
-| `tests.image.tag`        | Image tag         | `1.0.35`             |
+| `tests.image.tag`        | Image tag         | `1.0.41`             |
 | `tests.image.digest`     | Image digest      | `""`                 |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`       |
 
@@ -194,3 +204,9 @@ $ helm install my-release \
 ```
 
 **TIP**: You can use the default [values.yaml](values.yaml).
+
+## License
+
+The source code of this chart is under [MIT License](LICENSE).
+
+It also uses source code under Apache 2.0 License from the [Bitnami repository](https://github.com/bitnami/charts).

@@ -17,7 +17,7 @@ jobs:
       - name: Renovate
         uses: renovatebot/github-action@v40.3.5
         with:
-          renovate-version: 38.132.3 # renovate: ghcr.io/renovatebot/renovate
+          renovate-version: 39.7.5 # renovate: ghcr.io/renovatebot/renovate
         env:
           RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: "[\"bump-chart-version.sh\"]"
           RENOVATE_CONFIG_FILE: renovate.json

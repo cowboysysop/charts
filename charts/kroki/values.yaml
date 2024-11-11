@@ -44,7 +44,7 @@ image:
   repository: yuzutech/kroki
 
   ## @param image.tag Image tag
-  tag: 0.25.0
+  tag: 0.26.0
 
   ## @param image.digest Image digest
   digest: ""

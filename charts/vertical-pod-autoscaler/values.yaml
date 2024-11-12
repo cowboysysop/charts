@@ -196,6 +196,12 @@ admissionController:
     clusterIP:
     # clusterIP: 10.43.0.100
 
+    ## @param admissionController.service.ipFamilyPolicy Service IP family policy
+    ipFamilyPolicy: ""
+
+    ## @param admissionController.service.ipFamilies Service IP families
+    ipFamilies: []
+
     ## @param admissionController.service.sessionAffinity Control where client requests go, to the same pod or round-robin
     sessionAffinity: None
 
@@ -223,6 +229,9 @@ admissionController:
 
   ## @param admissionController.affinity Map of node/pod affinities
   affinity: {}
+
+  ## @param admissionController.lifecycleHooks Container lifecycle hooks
+  lifecycleHooks: {}
 
   ## @extra admissionController.extraArgs [object] Additional container arguments
   ## @param admissionController.extraArgs.v Number for the log level verbosity
@@ -261,6 +270,12 @@ admissionController:
       ## @param admissionController.metrics.service.clusterIP Metrics static cluster IP address or None for headless service when service type is ClusterIP
       clusterIP:
       # clusterIP: 10.43.0.100
+
+      ## @param admissionController.metrics.service.ipFamilyPolicy Metrics service IP family policy
+      ipFamilyPolicy: ""
+
+      ## @param admissionController.metrics.service.ipFamilies Metrics service IP families
+      ipFamilies: []
 
       ports:
         ## @param admissionController.metrics.service.ports.metrics Metrics service port for Metrics
@@ -473,6 +488,9 @@ recommender:
   ## @param recommender.affinity Map of node/pod affinities
   affinity: {}
 
+  ## @param recommender.lifecycleHooks Container lifecycle hooks
+  lifecycleHooks: {}
+
   ## @extra recommender.extraArgs [object] Additional container arguments
   ## @param recommender.extraArgs.v Number for the log level verbosity
   extraArgs:
@@ -557,6 +575,12 @@ recommender:
       ## @param recommender.metrics.service.clusterIP Metrics static cluster IP address or None for headless service when service type is ClusterIP
       clusterIP:
       # clusterIP: 10.43.0.100
+
+      ## @param recommender.metrics.service.ipFamilyPolicy Metrics service IP family policy
+      ipFamilyPolicy: ""
+
+      ## @param recommender.metrics.service.ipFamilies Metrics service IP families
+      ipFamilies: []
 
       ports:
         ## @param recommender.metrics.service.ports.metrics Metrics service port for Metrics
@@ -759,6 +783,9 @@ updater:
   ## @param updater.affinity Map of node/pod affinities
   affinity: {}
 
+  ## @param updater.lifecycleHooks Container lifecycle hooks
+  lifecycleHooks: {}
+
   ## @extra updater.extraArgs [object] Additional container arguments
   ## @param updater.extraArgs.v Number for the log level verbosity
   extraArgs:
@@ -813,6 +840,12 @@ updater:
       clusterIP:
       # clusterIP: 10.43.0.100
 
+      ## @param updater.metrics.service.ipFamilyPolicy Metrics service IP family policy
+      ipFamilyPolicy: ""
+
+      ## @param updater.metrics.service.ipFamilies Metrics service IP families
+      ipFamilies: []
+
       ports:
         ## @param updater.metrics.service.ports.metrics Metrics service port for Metrics
         metrics: 8943
@@ -851,6 +884,9 @@ updater:
 ## @section CRDs parameters
 
 crds:
+  ## @param crds.enabled Enable CRDs
+  enabled: true
+
   image:
     ## @param crds.image.registry Image registry
     registry: docker.io

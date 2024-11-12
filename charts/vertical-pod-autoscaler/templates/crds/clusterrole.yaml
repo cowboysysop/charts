@@ -1,3 +1,4 @@
+{{- if .Values.crds.enabled }}
 apiVersion: {{ include "common.capabilities.rbac.apiVersion" . }}
 kind: ClusterRole
 metadata:
@@ -22,3 +23,4 @@ rules:
       - create
       - get
       - patch
+{{- end }}

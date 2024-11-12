@@ -192,6 +192,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.service.annotations`                      | Service annotations                                                                                                 | `{}`                                   |
 | `admissionController.service.type`                             | Service type                                                                                                        | `ClusterIP`                            |
 | `admissionController.service.clusterIP`                        | Static cluster IP address or None for headless service when service type is ClusterIP                               | `nil`                                  |
+| `admissionController.service.ipFamilyPolicy`                   | Service IP family policy                                                                                            | `""`                                   |
+| `admissionController.service.ipFamilies`                       | Service IP families                                                                                                 | `[]`                                   |
 | `admissionController.service.sessionAffinity`                  | Control where client requests go, to the same pod or round-robin                                                    | `None`                                 |
 | `admissionController.service.sessionAffinityConfig`            | Additional settings for the sessionAffinity                                                                         | `{}`                                   |
 | `admissionController.service.ports.https`                      | Service port for HTTPS (do not change it)                                                                           | `443`                                  |
@@ -199,6 +201,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                                   |
 | `admissionController.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                                   |
 | `admissionController.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                                   |
+| `admissionController.lifecycleHooks`                           | Container lifecycle hooks                                                                                           | `{}`                                   |
 | `admissionController.extraArgs`                                | Additional container arguments                                                                                      |                                        |
 | `admissionController.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                                    |
 | `admissionController.extraEnvVars`                             | Additional container environment variables                                                                          | `[]`                                   |
@@ -209,6 +212,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `admissionController.metrics.service.annotations`              | Metrics service annotations                                                                                         | `{}`                                   |
 | `admissionController.metrics.service.type`                     | Metrics service type                                                                                                | `ClusterIP`                            |
 | `admissionController.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP                       | `nil`                                  |
+| `admissionController.metrics.service.ipFamilyPolicy`           | Metrics service IP family policy                                                                                    | `""`                                   |
+| `admissionController.metrics.service.ipFamilies`               | Metrics service IP families                                                                                         | `[]`                                   |
 | `admissionController.metrics.service.ports.metrics`            | Metrics service port for Metrics                                                                                    | `8944`                                 |
 | `admissionController.metrics.serviceMonitor.enabled`           | Specifies whether a service monitor should be created                                                               | `false`                                |
 | `admissionController.metrics.serviceMonitor.namespace`         | Namespace in which to create the service monitor                                                                    | `""`                                   |
@@ -276,6 +281,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                          |
 | `recommender.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                          |
 | `recommender.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                          |
+| `recommender.lifecycleHooks`                           | Container lifecycle hooks                                                                                           | `{}`                          |
 | `recommender.extraArgs`                                | Additional container arguments                                                                                      |                               |
 | `recommender.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                           |
 | `recommender.extraEnvVars`                             | Additional container environment variables                                                                          | `[]`                          |
@@ -286,6 +292,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `recommender.metrics.service.annotations`              | Metrics service annotations                                                                                         | `{}`                          |
 | `recommender.metrics.service.type`                     | Metrics service type                                                                                                | `ClusterIP`                   |
 | `recommender.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP                       | `nil`                         |
+| `recommender.metrics.service.ipFamilyPolicy`           | Metrics service IP family policy                                                                                    | `""`                          |
+| `recommender.metrics.service.ipFamilies`               | Metrics service IP families                                                                                         | `[]`                          |
 | `recommender.metrics.service.ports.metrics`            | Metrics service port for Metrics                                                                                    | `8942`                        |
 | `recommender.metrics.serviceMonitor.enabled`           | Specifies whether a service monitor should be created                                                               | `false`                       |
 | `recommender.metrics.serviceMonitor.namespace`         | Namespace in which to create the service monitor                                                                    | `""`                          |
@@ -350,6 +358,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.nodeSelector`                             | Node labels for pod assignment                                                                                      | `{}`                      |
 | `updater.tolerations`                              | Tolerations for pod assignment                                                                                      | `[]`                      |
 | `updater.affinity`                                 | Map of node/pod affinities                                                                                          | `{}`                      |
+| `updater.lifecycleHooks`                           | Container lifecycle hooks                                                                                           | `{}`                      |
 | `updater.extraArgs`                                | Additional container arguments                                                                                      |                           |
 | `updater.extraArgs.v`                              | Number for the log level verbosity                                                                                  | `2`                       |
 | `updater.extraEnvVars`                             | Additional container environment variables                                                                          | `[]`                      |
@@ -360,6 +369,8 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | `updater.metrics.service.annotations`              | Metrics service annotations                                                                                         | `{}`                      |
 | `updater.metrics.service.type`                     | Metrics service type                                                                                                | `ClusterIP`               |
 | `updater.metrics.service.clusterIP`                | Metrics static cluster IP address or None for headless service when service type is ClusterIP                       | `nil`                     |
+| `updater.metrics.service.ipFamilyPolicy`           | Metrics service IP family policy                                                                                    | `""`                      |
+| `updater.metrics.service.ipFamilies`               | Metrics service IP families                                                                                         | `[]`                      |
 | `updater.metrics.service.ports.metrics`            | Metrics service port for Metrics                                                                                    | `8943`                    |
 | `updater.metrics.serviceMonitor.enabled`           | Specifies whether a service monitor should be created                                                               | `false`                   |
 | `updater.metrics.serviceMonitor.namespace`         | Namespace in which to create the service monitor                                                                    | `""`                      |
@@ -376,6 +387,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 
 | Name                                   | Description                                            | Default           |
 | -------------------------------------- | ------------------------------------------------------ | ----------------- |
+| `crds.enabled`                         | Enable CRDs                                            | `true`            |
 | `crds.image.registry`                  | Image registry                                         | `docker.io`       |
 | `crds.image.repository`                | Image repository                                       | `bitnami/kubectl` |
 | `crds.image.tag`                       | Image tag                                              | `1.29.3`          |

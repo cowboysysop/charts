@@ -48,7 +48,7 @@ image:
   repository: dolibarr/dolibarr
 
   ## @param image.tag Image tag
-  tag: 19.0.3
+  tag: 19.0.4
 
   ## @param image.digest Image digest
   digest: ""

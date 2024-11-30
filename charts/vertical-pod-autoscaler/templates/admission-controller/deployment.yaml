@@ -132,6 +132,9 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.admissionController.resources | nindent 12 }}
+          {{- if .Values.admissionController.lifecycleHooks }}
+          lifecycle: {{- include "common.tplvalues.render" (dict "value" .Values.admissionController.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - name: tls-secret
               mountPath: /tls-secret

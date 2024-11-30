@@ -117,6 +117,9 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.recommender.resources | nindent 12 }}
+          {{- if .Values.recommender.lifecycleHooks }}
+          lifecycle: {{- include "common.tplvalues.render" (dict "value" .Values.recommender.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
           volumeMounts:
             {{- if .Values.recommender.extraVolumeMounts }}
             {{- include "common.tplvalues.render" (dict "value" .Values.recommender.extraVolumeMounts "context" $) | nindent 12 }}

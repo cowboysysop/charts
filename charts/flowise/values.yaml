@@ -419,6 +419,9 @@ externalPostgresql:
   ## @param externalPostgresql.database External PostgreSQL database
   database: flowise
 
+  ## @param externalPostgresql.ssl Whether to connect using SSL
+  ssl: false
+
 ## @section Wait parameters
 
 wait:

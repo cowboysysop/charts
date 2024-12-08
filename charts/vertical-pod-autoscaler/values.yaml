@@ -494,7 +494,7 @@ recommender:
     # leader-elect-lease-duration: 15s
     # leader-elect-renew-deadline: 10s
     # leader-elect-resource-lock: leases
-    # leader-elect-resource-name: vpa-recommender
+    # leader-elect-resource-name: vpa-recommender-lease
     # leader-elect-resource-namespace: kube-system
     # leader-elect-retry-period: 2s
     # memory-aggregation-interval: 24h0m0s

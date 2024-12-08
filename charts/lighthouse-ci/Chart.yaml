@@ -10,10 +10,10 @@ name: lighthouse-ci
 sources:
   - https://github.com/GoogleChrome/lighthouse-ci
   - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
-version: 8.1.0
+version: 8.2.0
 dependencies:
   - name: common
-    version: 2.19.0
+    version: 2.27.0
     repository: https://charts.bitnami.com/bitnami/
   - name: mariadb
     version: 17.0.1

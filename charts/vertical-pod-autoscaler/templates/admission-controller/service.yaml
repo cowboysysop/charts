@@ -17,6 +17,12 @@ spec:
   {{- if and (eq .Values.admissionController.service.type "ClusterIP") .Values.admissionController.service.clusterIP }}
   clusterIP: {{ .Values.admissionController.service.clusterIP }}
   {{- end }}
+  {{- if .Values.admissionController.service.ipFamilyPolicy }}
+  ipFamilyPolicy: {{ .Values.admissionController.service.ipFamilyPolicy }}
+  {{- end }}
+  {{- if not (empty .Values.admissionController.service.ipFamilies)}}
+  ipFamilies: {{- toYaml .Values.admissionController.service.ipFamilies | nindent 4 }}
+  {{- end }}
   {{- if .Values.admissionController.service.sessionAffinity }}
   sessionAffinity: {{ .Values.admissionController.service.sessionAffinity }}
   {{- end }}

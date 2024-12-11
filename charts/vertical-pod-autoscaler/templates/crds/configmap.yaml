@@ -1,3 +1,4 @@
+{{- if .Values.crds.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -18,3 +19,4 @@ data:
   {{ base $path }}: |
     {{- tpl ($.Files.Get $path) $ | nindent 4 }}
   {{- end }}
+{{- end }}

@@ -120,6 +120,9 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.updater.resources | nindent 12 }}
+          {{- if .Values.updater.lifecycleHooks }}
+          lifecycle: {{- include "common.tplvalues.render" (dict "value" .Values.updater.lifecycleHooks "context" $) | nindent 12 }}
+          {{- end }}
           volumeMounts:
             {{- if .Values.updater.extraVolumeMounts }}
             {{- include "common.tplvalues.render" (dict "value" .Values.updater.extraVolumeMounts "context" $) | nindent 12 }}

@@ -16,6 +16,12 @@ spec:
   {{- if and (eq .Values.recommender.metrics.service.type "ClusterIP") .Values.recommender.metrics.service.clusterIP }}
   clusterIP: {{ .Values.recommender.metrics.service.clusterIP }}
   {{- end }}
+  {{- if .Values.recommender.metrics.service.ipFamilyPolicy }}
+  ipFamilyPolicy: {{ .Values.recommender.metrics.service.ipFamilyPolicy }}
+  {{- end }}
+  {{- if not (empty .Values.recommender.metrics.service.ipFamilies)}}
+  ipFamilies: {{- toYaml .Values.recommender.metrics.service.ipFamilies | nindent 4 }}
+  {{- end }}
   ports:
     - port: {{ .Values.recommender.metrics.service.ports.metrics }}
       targetPort: http-metrics

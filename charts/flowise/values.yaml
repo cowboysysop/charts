@@ -48,7 +48,7 @@ image:
   repository: flowiseai/flowise
 
   ## @param image.tag Image tag
-  tag: 2.2.3
+  tag: 2.2.4
 
   ## @param image.digest Image digest
   digest: ""

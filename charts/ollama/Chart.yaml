@@ -10,7 +10,7 @@ name: ollama
 sources:
   - https://github.com/ollama/ollama
   - https://github.com/cowboysysop/charts/tree/master/charts/ollama
-version: 1.5.4
+version: 1.5.5
 dependencies:
   - name: common
     version: 2.21.0

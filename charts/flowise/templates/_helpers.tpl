@@ -231,8 +231,8 @@ PostgreSQL user
 PostgreSQL secret name
 */}}
 {{- define "flowise.postgresql.secretName" -}}
-{{- if .Values.postgresql.existingSecret -}}
-    {{ .Values.postgresql.existingSecret }}
+{{- if .Values.postgresql.auth.existingSecret -}}
+    {{ .Values.postgresql.auth.existingSecret }}
 {{- else if .Values.externalPostgresql.existingSecret -}}
     {{ .Values.externalPostgresql.existingSecret }}
 {{- else -}}

@@ -44,7 +44,7 @@ image:
   repository: traefik/whoami
 
   ## @param image.tag Image tag
-  tag: v1.10.3
+  tag: v1.10.4
 
   ## @param image.digest Image digest
   digest: ""

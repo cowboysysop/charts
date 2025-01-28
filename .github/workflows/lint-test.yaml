@@ -8,10 +8,10 @@ jobs:
     strategy:
       matrix:
         helm:
-          - v3.9.4 # renovate: helm
-          - v3.10.3 # renovate: helm
-          - v3.11.3 # renovate: helm
-          - v3.12.3 # renovate: helm
+          - v3.14.4 # renovate: helm
+          - v3.15.4 # renovate: helm
+          - v3.16.4 # renovate: helm
+          - v3.17.0 # renovate: helm
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
@@ -49,10 +49,10 @@ jobs:
     strategy:
       matrix:
         kubernetes:
-          - v1.24.17 # renovate: kindest/node
-          - v1.25.16 # renovate: kindest/node
-          - v1.26.15 # renovate: kindest/node
-          - v1.27.16 # renovate: kindest/node
+          - v1.29.12 # renovate: kindest/node
+          - v1.30.8 # renovate: kindest/node
+          - v1.31.4 # renovate: kindest/node
+          - v1.32.1 # renovate: kindest/node
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2

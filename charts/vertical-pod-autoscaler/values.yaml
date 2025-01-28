@@ -48,7 +48,7 @@ admissionController:
     repository: autoscaling/vpa-admission-controller
 
     ## @param admissionController.image.tag Image tag
-    tag: 1.2.2
+    tag: 1.3.0
 
     ## @param admissionController.image.digest Image digest
     digest: ""
@@ -76,6 +76,9 @@ admissionController:
 
     ## @param admissionController.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
+
+  ## @param admissionController.enableServiceLinks Whether information about services should be injected into pod's environment variable
+  enableServiceLinks: false
 
   ## @param admissionController.hostAliases Pod host aliases
   hostAliases: []
@@ -196,6 +199,12 @@ admissionController:
     clusterIP:
     # clusterIP: 10.43.0.100
 
+    ## @param admissionController.service.ipFamilyPolicy Service IP family policy
+    ipFamilyPolicy: ""
+
+    ## @param admissionController.service.ipFamilies Service IP families
+    ipFamilies: []
+
     ## @param admissionController.service.sessionAffinity Control where client requests go, to the same pod or round-robin
     sessionAffinity: None
 
@@ -262,6 +271,12 @@ admissionController:
       clusterIP:
       # clusterIP: 10.43.0.100
 
+      ## @param admissionController.metrics.service.ipFamilyPolicy Metrics service IP family policy
+      ipFamilyPolicy: ""
+
+      ## @param admissionController.metrics.service.ipFamilies Metrics service IP families
+      ipFamilies: []
+
       ports:
         ## @param admissionController.metrics.service.ports.metrics Metrics service port for Metrics
         metrics: 8944
@@ -324,7 +339,7 @@ recommender:
     repository: autoscaling/vpa-recommender
 
     ## @param recommender.image.tag Image tag
-    tag: 1.2.2
+    tag: 1.3.0
 
     ## @param recommender.image.digest Image digest
     digest: ""
@@ -352,6 +367,9 @@ recommender:
 
     ## @param recommender.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
+
+  ## @param recommender.enableServiceLinks Whether information about services should be injected into pod's environment variable
+  enableServiceLinks: false
 
   ## @param recommender.hostAliases Pod host aliases
   hostAliases: []
@@ -558,6 +576,12 @@ recommender:
       clusterIP:
       # clusterIP: 10.43.0.100
 
+      ## @param recommender.metrics.service.ipFamilyPolicy Metrics service IP family policy
+      ipFamilyPolicy: ""
+
+      ## @param recommender.metrics.service.ipFamilies Metrics service IP families
+      ipFamilies: []
+
       ports:
         ## @param recommender.metrics.service.ports.metrics Metrics service port for Metrics
         metrics: 8942
@@ -610,7 +634,7 @@ updater:
     repository: autoscaling/vpa-updater
 
     ## @param updater.image.tag Image tag
-    tag: 1.2.2
+    tag: 1.3.0
 
     ## @param updater.image.digest Image digest
     digest: ""
@@ -638,6 +662,9 @@ updater:
 
     ## @param updater.serviceAccount.name The name of the service account to use (Generated using the `vertical-pod-autoscaler.fullname` template if not set)
     name:
+
+  ## @param updater.enableServiceLinks Whether information about services should be injected into pod's environment variable
+  enableServiceLinks: false
 
   ## @param updater.hostAliases Pod host aliases
   hostAliases: []
@@ -813,6 +840,12 @@ updater:
       clusterIP:
       # clusterIP: 10.43.0.100
 
+      ## @param updater.metrics.service.ipFamilyPolicy Metrics service IP family policy
+      ipFamilyPolicy: ""
+
+      ## @param updater.metrics.service.ipFamilies Metrics service IP families
+      ipFamilies: []
+
       ports:
         ## @param updater.metrics.service.ports.metrics Metrics service port for Metrics
         metrics: 8943
@@ -851,6 +884,9 @@ updater:
 ## @section CRDs parameters
 
 crds:
+  ## @param crds.enabled Enable CRDs
+  enabled: true
+
   image:
     ## @param crds.image.registry Image registry
     registry: docker.io

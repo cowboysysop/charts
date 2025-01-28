@@ -38,6 +38,7 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
     spec:
+      enableServiceLinks: {{ .Values.admissionController.enableServiceLinks }}
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.admissionController.image ) "global" .Values.global ) | nindent 6 }}
       {{- if .Values.admissionController.hostAliases }}
       hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.admissionController.hostAliases "context" $) | nindent 8 }}

@@ -36,6 +36,7 @@ spec:
         {{- end }}
       {{- end }}
     spec:
+      enableServiceLinks: {{ .Values.recommender.enableServiceLinks }}
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.recommender.image ) "global" .Values.global ) | nindent 6 }}
       {{- if .Values.recommender.hostAliases }}
       hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.recommender.hostAliases "context" $) | nindent 8 }}

@@ -3264,6 +3264,32 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: 0.25.0
+    created: "2025-02-24T08:38:41.54139118Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 2.20.3
+    description: Creates diagrams from textual descriptions
+    digest: a9bb7a73fa54a3d5c8c5a2f159ad95884678cf38bda1e0868bb23b2523578632
+    home: https://kroki.io/
+    icon: https://raw.githubusercontent.com/yuzutech/kroki.io/master/assets/favicon-196x196.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kroki
+    sources:
+    - https://github.com/yuzutech/kroki
+    - https://github.com/cowboysysop/charts/tree/master/charts/kroki
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kroki-5.6.0/kroki-5.6.0.tgz
+    version: 5.6.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 0.25.0
     created: "2024-11-11T09:44:21.588136853Z"
     dependencies:
     - name: common
@@ -13976,4 +14002,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-02-23T02:51:32.230011114Z"
+generated: "2025-02-24T08:38:41.542397678Z"

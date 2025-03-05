@@ -77,6 +77,9 @@ serviceAccount:
   ## @param serviceAccount.name The name of the service account to use (Generated using the `dolibarr.fullname` template if not set)
   name:
 
+## @param enableServiceLinks Whether information about services should be injected into pod's environment variable
+enableServiceLinks: false
+
 ## @param hostAliases Pod host aliases
 hostAliases: []
 
@@ -183,6 +186,12 @@ service:
   ## @param service.clusterIP Static cluster IP address or None for headless service when service type is ClusterIP
   clusterIP:
   # clusterIP: 10.43.0.100
+
+  ## @param service.ipFamilyPolicy Service IP family policy
+  ipFamilyPolicy: ""
+
+  ## @param service.ipFamilies Service IP families
+  ipFamilies: []
 
   ## @param service.sessionAffinity Control where client requests go, to the same pod or round-robin
   sessionAffinity: None

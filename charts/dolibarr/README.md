@@ -43,6 +43,14 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 6.0.0
+
+The application has been updated to a major release, see the release notes for breaking changes:
+
+- https://github.com/Dolibarr/dolibarr/releases/tag/20.0.0
+
+Information about services are no more injected into pod's environment variable.
+
 ### Upgrading to version 5.0.0
 
 The MariaDB subchart has been updated to a major release, see these upgrade instructions:
@@ -112,7 +120,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `dolibarr/dolibarr`      |
-| `image.tag`                          | Image tag                                                                                             | `19.0.3`                 |
+| `image.tag`                          | Image tag                                                                                             | `20.0.3`                 |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -121,6 +129,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
 | `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
 | `serviceAccount.name`                | The name of the service account to use (Generated using the `dolibarr.fullname` template if not set)  | `nil`                    |
+| `enableServiceLinks`                 | Whether information about services should be injected into pod's environment variable                 | `false`                  |
 | `hostAliases`                        | Pod host aliases                                                                                      | `[]`                     |
 | `deploymentAnnotations`              | Additional deployment annotations                                                                     | `{}`                     |
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
@@ -152,6 +161,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `service.annotations`                | Service annotations                                                                                   | `{}`                     |
 | `service.type`                       | Service type                                                                                          | `ClusterIP`              |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
+| `service.ipFamilyPolicy`             | Service IP family policy                                                                              | `""`                     |
+| `service.ipFamilies`                 | Service IP families                                                                                   | `[]`                     |
 | `service.sessionAffinity`            | Control where client requests go, to the same pod or round-robin                                      | `None`                   |
 | `service.sessionAffinityConfig`      | Additional settings for the sessionAffinity                                                           | `{}`                     |
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |

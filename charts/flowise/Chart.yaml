@@ -10,7 +10,7 @@ name: flowise
 sources:
   - https://github.com/FlowiseAI/Flowise
   - https://github.com/cowboysysop/charts/tree/master/charts/flowise
-version: 3.11.2
+version: 3.11.3
 dependencies:
   - name: common
     version: 2.21.0

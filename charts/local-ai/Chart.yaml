@@ -10,10 +10,10 @@ name: local-ai
 sources:
   - https://github.com/go-skynet/LocalAI
   - https://github.com/cowboysysop/charts/tree/master/charts/local-ai
-version: 3.0.0
+version: 3.1.0
 dependencies:
   - name: common
-    version: 2.9.0
+    version: 2.27.0
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

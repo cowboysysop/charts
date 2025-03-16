@@ -1,0 +1,51 @@
+# Default values for cert-manager-common.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+## @section Common parameters
+
+## @param kubeVersion Override Kubernetes version
+kubeVersion: ""
+
+## @param nameOverride Partially override `cert-manager-common.fullname` template with a string (will prepend the release name)
+nameOverride: ""
+
+## @param fullnameOverride Fully override `cert-manager-common.fullname` template with a string
+fullnameOverride: ""
+
+## @param commonAnnotations Annotations to add to all deployed objects
+commonAnnotations: {}
+
+## @param commonLabels Labels to add to all deployed objects
+commonLabels: {}
+
+## @param extraDeploy Array of extra objects to deploy with the release
+extraDeploy: []
+
+## @section Grafana dashboards parameters
+
+grafanaDashboards:
+  ## @param grafanaDashboards.enabled Specifies whether Grafana dashboards should be created
+  enabled: false
+
+  ## @param grafanaDashboards.namespace Namespace in which to create the Grafana dashboards
+  namespace: ""
+
+  ## @extra grafanaDashboards.labels [object] Additional Grafana dashboards labels
+  ## @param grafanaDashboards.labels.grafana_dashboard Label used by Grafana dashboards selector
+  labels:
+    grafana_dashboard: "1"
+
+## @section Prometheus rules parameters
+
+prometheusRules:
+  ## @param prometheusRules.enabled Specifies whether Prometheus rules should be created
+  enabled: false
+
+  ## @param prometheusRules.namespace Namespace in which to create the Prometheus rules
+  namespace: ""
+
+  ## @extra prometheusRules.labels [object] Additional Prometheus rules labels
+  ## @param prometheusRules.labels.release Label used by Prometheus rules selector
+  labels:
+    release: kube-prometheus-stack

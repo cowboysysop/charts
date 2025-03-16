@@ -1,0 +1,21 @@
+apiVersion: v2
+appVersion: 1.0.0
+description: Collection of Kubernetes objects common to all Cert-Manager instances
+home: https://github.com/cowboysysop/charts/tree/master/charts/cert-manager-common
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: cert-manager-common
+sources:
+  - https://github.com/imusmanmalik/cert-manager-mixin
+  - https://github.com/cowboysysop/charts/tree/master/charts/cert-manager-common
+version: 1.0.0
+dependencies:
+  - name: common
+    version: 2.21.0
+    repository: https://charts.bitnami.com/bitnami/
+annotations:
+  artifacthub.io/signKey: |
+    fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+    url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+  kubeVersion: ">=1.24"

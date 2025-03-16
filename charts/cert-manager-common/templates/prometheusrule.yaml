@@ -1,0 +1,23 @@
+{{- if .Values.prometheusRules.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: {{ include "cert-manager-common.fullname" . }}
+  namespace: {{ default .Release.Namespace .Values.prometheusRules.namespace | quote }}
+  labels:
+    {{- include "cert-manager-common.labels" . | nindent 4 }}
+    {{- if .Values.prometheusRules.labels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.prometheusRules.labels "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations:
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  {{- range $path, $_ := .Files.Glob  "files/prometheus-rules/*.yaml" }}
+  {{- $.Files.Get $path | nindent 2 }}
+  {{- end }}
+{{- end }}

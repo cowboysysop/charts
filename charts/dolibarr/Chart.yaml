@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 20.0.3
+appVersion: 21.0.0
 description: A modern software package to manage your company or foundation's activity
 home: https://www.dolibarr.org/
 icon: https://raw.githubusercontent.com/Dolibarr/dolibarr/develop/doc/images/dolibarr_256x256_color.svg
@@ -16,7 +16,7 @@ dependencies:
     version: 2.21.0
     repository: https://charts.bitnami.com/bitnami/
   - name: mariadb
-    version: 18.2.6
+    version: 20.4.2
     repository: https://charts.bitnami.com/bitnami/
     condition: mariadb.enabled
 annotations:

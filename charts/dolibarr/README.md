@@ -43,6 +43,18 @@ The command upgrades the existing `my-release` deployment with the most latest r
 
 **TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
 
+### Upgrading to version 7.0.0
+
+The application has been updated to a major release, see the release notes for breaking changes:
+
+- https://github.com/Dolibarr/dolibarr/releases/tag/21.0.0
+
+The MariaDB subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-2020
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-2000
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1900
+
 ### Upgrading to version 6.0.0
 
 The application has been updated to a major release, see the release notes for breaking changes:
@@ -120,7 +132,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `dolibarr/dolibarr`      |
-| `image.tag`                          | Image tag                                                                                             | `20.0.3`                 |
+| `image.tag`                          | Image tag                                                                                             | `21.0.0`                 |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -236,8 +248,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | Name                     | Description                                              | Default         |
 | ------------------------ | -------------------------------------------------------- | --------------- |
 | `wait.image.registry`    | Image registry                                           | `docker.io`     |
-| `wait.image.repository`  | Image repository                                         | `atkrad/wait4x` |
-| `wait.image.tag`         | Image tag                                                | `2.14.1`        |
+| `wait.image.repository`  | Image repository                                         | `wait4x/wait4x` |
+| `wait.image.tag`         | Image tag                                                | `3.2.0`         |
 | `wait.image.digest`      | Image digest                                             | `""`            |
 | `wait.image.pullPolicy`  | Image pull policy                                        | `IfNotPresent`  |
 | `wait.securityContext`   | Container security context                               | `{}`            |

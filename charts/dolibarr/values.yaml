@@ -48,7 +48,7 @@ image:
   repository: dolibarr/dolibarr
 
   ## @param image.tag Image tag
-  tag: 20.0.4
+  tag: 21.0.0
 
   ## @param image.digest Image digest
   digest: ""
@@ -422,10 +422,10 @@ wait:
     registry: docker.io
 
     ## @param wait.image.repository Image repository
-    repository: atkrad/wait4x
+    repository: wait4x/wait4x
 
     ## @param wait.image.tag Image tag
-    tag: 2.14.1
+    tag: 3.2.0
 
     ## @param wait.image.digest Image digest
     digest: ""

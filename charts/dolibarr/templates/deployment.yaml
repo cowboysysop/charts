@@ -126,6 +126,13 @@ spec:
                 secretKeyRef:
                   name: {{ include "dolibarr.secretName" . }}
                   key: {{ include "dolibarr.secretKeyAdminPassword" . }}
+            {{- if .Values.dolibarr.cron.enabled }}
+            - name: DOLI_CRON_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "dolibarr.secretName" . }}
+                  key: {{ include "dolibarr.secretKeyCronSecurityKey" . }}
+            {{- end }}
             - name: DOLI_DB_HOST
               value: {{ include "dolibarr.mariadb.host" . | quote }}
             - name: DOLI_DB_HOST_PORT

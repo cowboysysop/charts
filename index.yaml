@@ -11805,6 +11805,31 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/quickchart-1.0.0/quickchart-1.0.0.tgz
     version: 1.0.0
+  redis-extra:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 1.0.0
+    created: "2025-03-24T20:32:23.318269874Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami/
+      version: 2.21.0
+    description: Collection of extra Kubernetes objects for a Redis instance
+    digest: bba106a9b597c39ebf2dd04f38479aa796ef9a27880e6ea19a009e97055840f3
+    home: https://github.com/cowboysysop/charts/tree/master/charts/redis-extra
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: redis-extra
+    sources:
+    - https://github.com/cowboysysop/charts/tree/master/charts/redis-extra
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/redis-extra-1.0.0/redis-extra-1.0.0.tgz
+    version: 1.0.0
   training-operator:
   - annotations:
       artifacthub.io/signKey: |
@@ -14319,4 +14344,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-03-23T17:06:05.385321305Z"
+generated: "2025-03-24T20:32:23.319077104Z"

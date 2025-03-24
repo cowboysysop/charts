@@ -24,6 +24,7 @@
 | [ollama](charts/ollama)                                   | Get up and running with large language models, locally                                                                       |
 | [qdrant](charts/qdrant)                                   | Vector similarity search engine and vector database                                                                          |
 | [quickchart](charts/quickchart)                           | Chart image and QR code web API                                                                                              |
+| [redis-extra](charts/redis-extra)                         | Collection of extra Kubernetes objects for a Redis instance                                                                  |
 | [vertical-pod-autoscaler](charts/vertical-pod-autoscaler) | Set of components that automatically adjust the amount of CPU and memory requested by pods running in the Kubernetes Cluster |
 | [whoami](charts/whoami)                                   | Tiny Go webserver that prints os information and HTTP request to output                                                      |
 

@@ -1,0 +1,115 @@
+# Default values for redis-extra.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+## @section Common parameters
+
+## @param kubeVersion Override Kubernetes version
+kubeVersion: ""
+
+## @param nameOverride Partially override `redis-extra.fullname` template with a string (will prepend the release name)
+nameOverride: ""
+
+## @param fullnameOverride Fully override `redis-extra.fullname` template with a string
+fullnameOverride: ""
+
+## @param commonAnnotations Annotations to add to all deployed objects
+commonAnnotations: {}
+
+## @param commonLabels Labels to add to all deployed objects
+commonLabels: {}
+
+## @param extraDeploy Array of extra objects to deploy with the release
+extraDeploy: []
+
+## @section Velero backups parameters
+
+veleroBackups:
+  ## @param veleroBackups.enabled Specifies whether Velero backups should be created
+  enabled: false
+
+  ## @param veleroBackups.namespace Namespace in which to create the Velero backups
+  namespace: "velero"
+
+  ## @param veleroBackups.annotations Velero backup annotations
+  annotations: {}
+
+  ## @param veleroBackups.backupLocation Backup storage location
+  backupLocation: ""
+
+  ## @param veleroBackups.snapshotLocation Volume snapshot location
+  snapshotLocation: ""
+
+  hourly:
+    ## @param veleroBackups.hourly.enabled Enable hourly backups
+    enabled: false
+
+    ## @param veleroBackups.hourly.minute Minute for hourly backups
+    minute: 0
+
+    ## @param veleroBackups.hourly.retention Number of hours after which hourly backups expire
+    retention: 24
+
+  daily:
+    ## @param veleroBackups.daily.enabled Enable daily backups
+    enabled: true
+
+    ## @param veleroBackups.daily.hour Hour for daily backups
+    hour: 0
+
+    ## @param veleroBackups.daily.minute Minute for daily backups
+    minute: 0
+
+    ## @param veleroBackups.daily.retention Number of days after which daily backups expire
+    retention: 7
+
+  weekly:
+    ## @param veleroBackups.weekly.enabled Enable weekly backups
+    enabled: true
+
+    ## @param veleroBackups.weekly.day Day of week for weekly backups
+    day: 0
+
+    ## @param veleroBackups.weekly.hour Hour for weekly backups
+    hour: 0
+
+    ## @param veleroBackups.weekly.minute Minute for weekly backups
+    minute: 0
+
+    ## @param veleroBackups.weekly.retention Number of weeks after which weekly backups expire
+    retention: 5
+
+  monthly:
+    ## @param veleroBackups.monthly.enabled Enable monthly backups
+    enabled: true
+
+    ## @param veleroBackups.monthly.day Day of month for monthly backups
+    day: 1
+
+    ## @param veleroBackups.monthly.hour Hour for monthly backups
+    hour: 0
+
+    ## @param veleroBackups.monthly.minute Minute for monthly backups
+    minute: 0
+
+    ## @param veleroBackups.monthly.retention Number of months after which monthly backups expire
+    retention: 12
+
+  yearly:
+    ## @param veleroBackups.yearly.enabled Enable yearly backups
+    enabled: false
+
+    ## @param veleroBackups.yearly.month Month for yearly backups
+    month: 1
+
+    ## @param veleroBackups.yearly.day Day of month for yearly backups
+    day: 1
+
+    ## @param veleroBackups.yearly.hour Hour for yearly backups
+    hour: 0
+
+    ## @param veleroBackups.yearly.minute Minute for yearly backups
+    minute: 0
+
+    ## @param veleroBackups.yearly.retention Number of years after which yearly backups expire
+    retention: 10

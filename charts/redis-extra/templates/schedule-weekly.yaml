@@ -1,0 +1,35 @@
+{{- if and .Values.veleroBackups.enabled .Values.veleroBackups.weekly.enabled }}
+apiVersion: velero.io/v1
+kind: Schedule
+metadata:
+  name: {{ include "redis-extra.fullname" . }}-weekly
+  namespace: {{ default .Release.Namespace .Values.veleroBackups.namespace | quote }}
+  labels:
+    {{- include "redis-extra.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.veleroBackups.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- if .Values.veleroBackups.annotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.veleroBackups.annotations "context" $ ) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  schedule: {{ .Values.veleroBackups.weekly.minute }} {{ .Values.veleroBackups.weekly.hour }} * * {{ .Values.veleroBackups.weekly.day }}
+  template:
+    includedNamespaces:
+      - {{ .Release.Namespace | quote }}
+    {{- if .Values.veleroBackups.backupLocation }}
+    storageLocation: {{ .Values.veleroBackups.backupLocation }}
+    {{- end }}
+    {{- if .Values.veleroBackups.snapshotLocation }}
+    volumeSnapshotLocations:
+      - {{ .Values.veleroBackups.snapshotLocation }}
+    {{- end }}
+    ttl: {{ mul .Values.veleroBackups.weekly.retention 7 24 }}h
+    snapshotMoveData: true
+{{- end }}

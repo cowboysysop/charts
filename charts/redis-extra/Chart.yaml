@@ -1,0 +1,20 @@
+apiVersion: v2
+appVersion: 1.0.0
+description: Collection of extra Kubernetes objects for a Redis instance
+home: https://github.com/cowboysysop/charts/tree/master/charts/redis-extra
+maintainers:
+  - name: sebastien-prudhomme
+    email: sebastien.prudhomme@gmail.com
+name: redis-extra
+sources:
+  - https://github.com/cowboysysop/charts/tree/master/charts/redis-extra
+version: 1.0.0
+dependencies:
+  - name: common
+    version: 2.21.0
+    repository: https://charts.bitnami.com/bitnami/
+annotations:
+  artifacthub.io/signKey: |
+    fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+    url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+  kubeVersion: ">=1.24"

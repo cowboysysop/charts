@@ -99,7 +99,7 @@ spec:
             - /bin/sh
             - -ec
             - |
-              wait4x postgresql "postgres://${POSTGRESQL_USERNAME}:${POSTGRESQL_PASSWORD}@${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${POSTGRESQL_DATABASE}?sslmode=disable" --timeout 0
+              wait4x postgresql "postgres://${POSTGRESQL_USERNAME}:${POSTGRESQL_PASSWORD}@${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${POSTGRESQL_DATABASE}?sslmode=${POSTGRESQL_SSL}" --timeout 0
           env:
             - name: POSTGRESQL_HOST
               value: {{ include "flowise.postgresql.host" . | quote }}
@@ -114,6 +114,8 @@ spec:
                   key: {{ include "flowise.postgresql.secretKeyPassword" . }}
             - name: POSTGRESQL_DATABASE
               value: {{ include "flowise.postgresql.database" . | quote }}
+            - name: POSTGRESQL_SSL
+              value: {{ include "flowise.postgresql.ssl" . | lower }}
           resources:
             {{- toYaml .Values.wait.resources | nindent 12 }}
           volumeMounts:
@@ -186,6 +188,8 @@ spec:
                   key: {{ include "flowise.postgresql.secretKeyPassword" . }}
             - name: DATABASE_NAME
               value: {{ include "flowise.postgresql.database" . | quote }}
+            - name: POSTGRESQL_SSL
+              value: {{ include "flowise.postgresql.ssl" . | lower }}
             {{- end }}
             - name: DISABLE_FLOWISE_TELEMETRY
               value: "true"

@@ -4,7 +4,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: {{ include "vertical-pod-autoscaler.updater.fullname" . }}
-  namespace: {{ default .Release.Namespace .Values.updater.metrics.serviceMonitor.namespace | quote }}
+  namespace: {{ default (include "vertical-pod-autoscaler.namespace" .) .Values.updater.metrics.serviceMonitor.namespace | quote }}
   labels:
     {{- include "vertical-pod-autoscaler.updater.labels" . | nindent 4 }}
     {{- if .Values.updater.metrics.serviceMonitor.labels }}

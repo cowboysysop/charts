@@ -3,6 +3,7 @@ apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
   name: {{ include "vertical-pod-autoscaler.updater.fullname" . }}
+  namespace: {{ include "vertical-pod-autoscaler.namespace" . }}
   labels:
     {{- include "vertical-pod-autoscaler.updater.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}

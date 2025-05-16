@@ -153,6 +153,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
 | `admissionController.enabled`                                  | Enable the component                                                                                                | `true`                                 |
 | `admissionController.replicaCount`                             | Number of replicas                                                                                                  | `1`                                    |
+| `admissionController.revisionHistoryLimit`                     | The number of old ReplicaSets to retain to allow rollback                                                           | `10`                                   |
 | `admissionController.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`                      |
 | `admissionController.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-admission-controller` |
 | `admissionController.image.tag`                                | Image tag                                                                                                           | `1.3.0`                                |
@@ -243,6 +244,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | Name                                                   | Description                                                                                                         | Default                       |
 | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
 | `recommender.replicaCount`                             | Number of replicas                                                                                                  | `1`                           |
+| `recommender.revisionHistoryLimit`                     | The number of old ReplicaSets to retain to allow rollback                                                           | `10`                          |
 | `recommender.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`             |
 | `recommender.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-recommender` |
 | `recommender.image.tag`                                | Image tag                                                                                                           | `1.3.0`                       |
@@ -320,6 +322,7 @@ $ kubectl delete crd verticalpodautoscalercheckpoints.autoscaling.k8s.io
 | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------- |
 | `updater.enabled`                                  | Enable the component                                                                                                | `true`                    |
 | `updater.replicaCount`                             | Number of replicas                                                                                                  | `1`                       |
+| `updater.revisionHistoryLimit`                     | The number of old ReplicaSets to retain to allow rollback                                                           | `10`                      |
 | `updater.image.registry`                           | Image registry                                                                                                      | `registry.k8s.io`         |
 | `updater.image.repository`                         | Image repository                                                                                                    | `autoscaling/vpa-updater` |
 | `updater.image.tag`                                | Image tag                                                                                                           | `1.3.0`                   |

@@ -50,7 +50,7 @@ jobs:
       matrix:
         kubernetes:
           - v1.29.14 # renovate: kindest/node
-          - v1.30.10 # renovate: kindest/node
+          - v1.30.13 # renovate: kindest/node
           - v1.31.6 # renovate: kindest/node
           - v1.32.3 # renovate: kindest/node
     steps:

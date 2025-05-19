@@ -40,6 +40,9 @@ admissionController:
   ## @param admissionController.replicaCount Number of replicas
   replicaCount: 1
 
+  ## @param admissionController.revisionHistoryLimit Number of old history to retain to allow rollback
+  revisionHistoryLimit: 10
+
   image:
     ## @param admissionController.image.registry Image registry
     registry: registry.k8s.io
@@ -330,6 +333,9 @@ admissionController:
 recommender:
 ## @param recommender.replicaCount Number of replicas
   replicaCount: 1
+
+  ## @param recommender.revisionHistoryLimit Number of old history to retain to allow rollback
+  revisionHistoryLimit: 10
 
   image:
     ## @param recommender.image.registry Image registry
@@ -625,6 +631,9 @@ updater:
 
   ## @param updater.replicaCount Number of replicas
   replicaCount: 1
+
+  ## @param updater.revisionHistoryLimit Number of old history to retain to allow rollback
+  revisionHistoryLimit: 10
 
   image:
     ## @param updater.image.registry Image registry

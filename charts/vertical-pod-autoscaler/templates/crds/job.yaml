@@ -1,5 +1,5 @@
 {{- if .Values.crds.enabled }}
-apiVersion: batch/v1
+apiVersion: {{ include "common.capabilities.job.apiVersion" . }}
 kind: Job
 metadata:
   name: {{ include "vertical-pod-autoscaler.crds.fullname" . }}
@@ -42,7 +42,7 @@ spec:
           imagePullPolicy: {{ .Values.crds.image.pullPolicy }}
           args:
             - apply
-            {{- range $path, $_ := .Files.Glob  "files/crds/*" }}
+            {{- range $path, $_ := .Files.Glob  "files/crds/*.yaml" }}
             - --filename=/config/{{ base $path }}
             {{- end }}
           resources:

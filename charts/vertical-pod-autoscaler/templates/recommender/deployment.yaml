@@ -13,6 +13,7 @@ metadata:
   {{- end }}
 spec:
   replicas: {{ .Values.recommender.replicaCount }}
+  revisionHistoryLimit: {{ .Values.recommender.revisionHistoryLimit }}
   selector:
     matchLabels:
       {{- include "vertical-pod-autoscaler.recommender.selectorLabels" . | nindent 6 }}

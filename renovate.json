@@ -20,24 +20,24 @@
         ],
         "fileFilters": [
           "charts/*/Chart.yaml"
-	],
+        ],
         "executionMode": "branch"
       }
     },
     {
-      "matchPackagePrefixes": [
-        "docker.io/yuzutech/kroki"
+      "matchPackageNames": [
+        "/^docker.io\\/yuzutech\\/kroki.*$/"
       ],
       "groupName": "docker.io/yuzutech/kroki"
     },
     {
-      "matchPackagePrefixes": [
-        "registry.k8s.io/autoscaling/vpa"
+      "matchPackageNames": [
+        "/^registry.k8s.io\\/autoscaling\\/vpa.*$/"
       ],
       "groupName": "registry.k8s.io/autoscaling/vpa"
     },
     {
-      "matchPaths": [
+      "matchFileNames": [
         ".github/workflows/**"
       ],
       "semanticCommitType": "ci"
@@ -61,7 +61,7 @@
       "enabled": false
     },
     {
-      "matchPaths": [
+      "matchFileNames": [
         "charts/*/Chart.yaml",
         "charts/*/values.yaml"
       ],
@@ -72,7 +72,7 @@
       "semanticCommitType": "feat!"
     },
     {
-      "matchPaths": [
+      "matchFileNames": [
         "charts/*/Chart.yaml",
         "charts/*/values.yaml"
       ],
@@ -86,13 +86,14 @@
       "matchUpdateTypes": [
         "patch"
       ],
-      "automerge": true
+      "automerge": false
     }
   ],
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": [
-        "^\\.github\\/workflows\\/.*$"
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.github\\/workflows\\/.*$/"
       ],
       "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: helm\\n"
@@ -102,8 +103,9 @@
       "packageNameTemplate": "helm/helm"
     },
     {
-      "fileMatch": [
-        "^\\.github\\/workflows\\/.*$"
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.github\\/workflows\\/.*$/"
       ],
       "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: kindest\\/node\\n"
@@ -112,8 +114,9 @@
       "depNameTemplate": "kindest/node"
     },
     {
-      "fileMatch": [
-        "^\\.github\\/workflows\\/.*$"
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.github\\/workflows\\/.*$/"
       ],
       "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: python\\n"
@@ -124,8 +127,9 @@
       "packageNameTemplate": "actions/python-versions"
     },
     {
-      "fileMatch": [
-        "^\\.github\\/workflows\\/.*$"
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^\\.github\\/workflows\\/.*$/"
       ],
       "matchStrings": [
         "(:|-) (?<currentValue>.+?) # renovate: ghcr.io\\/renovatebot\\/renovate\\n"

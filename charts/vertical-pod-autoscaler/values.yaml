@@ -22,6 +22,9 @@ nameOverride: ""
 ## @param fullnameOverride Fully override `vertical-pod-autoscaler.fullname` template with a string
 fullnameOverride: ""
 
+## @param namespaceOverride Fully override `common.names.namespace` template with a string
+namespaceOverride: ""
+
 ## @param commonAnnotations Annotations to add to all deployed objects
 commonAnnotations: {}
 

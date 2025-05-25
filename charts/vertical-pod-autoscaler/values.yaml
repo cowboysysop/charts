@@ -22,6 +22,9 @@ nameOverride: ""
 ## @param fullnameOverride Fully override `vertical-pod-autoscaler.fullname` template with a string
 fullnameOverride: ""
 
+## @param namespaceOverride Fully override `common.names.namespace` template with a string
+namespaceOverride: ""
+
 ## @param commonAnnotations Annotations to add to all deployed objects
 commonAnnotations: {}
 
@@ -51,7 +54,7 @@ admissionController:
     repository: autoscaling/vpa-admission-controller
 
     ## @param admissionController.image.tag Image tag
-    tag: 1.3.1
+    tag: 1.4.0
 
     ## @param admissionController.image.digest Image digest
     digest: ""
@@ -345,7 +348,7 @@ recommender:
     repository: autoscaling/vpa-recommender
 
     ## @param recommender.image.tag Image tag
-    tag: 1.3.1
+    tag: 1.4.0
 
     ## @param recommender.image.digest Image digest
     digest: ""
@@ -643,7 +646,7 @@ updater:
     repository: autoscaling/vpa-updater
 
     ## @param updater.image.tag Image tag
-    tag: 1.3.1
+    tag: 1.4.0
 
     ## @param updater.image.digest Image digest
     digest: ""

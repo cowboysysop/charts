@@ -42,3 +42,16 @@ jobs:
           config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Login to registry
+        uses: docker/login-action@v3.4.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push to registry
+        run: |
+          for package in $(ls .cr-release-packages/*.tgz 2>/dev/null); do
+            helm push ${package} oci://ghcr.io/${{ github.repository_owner }}/charts
+          done

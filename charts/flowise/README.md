@@ -11,6 +11,12 @@ $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
 $ helm install my-release cowboysysop/flowise
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release oci://ghcr.io/cowboysysop/charts/flowise
+```
+
 ## Introduction
 
 This chart bootstraps a Flowise deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
@@ -29,6 +35,12 @@ $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
 $ helm install my-release cowboysysop/flowise
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release oci://ghcr.io/cowboysysop/charts/flowise
+```
+
 These commands deploy Flowise on the Kubernetes cluster in the default configuration and with the release name `my-release`. The deployment configuration can be customized by specifying the customization parameters with the `helm install` command using the `--values` or `--set` arguments. Find more information in the [configuration section](#configuration) of this document.
 
 ## Upgrading
@@ -39,9 +51,32 @@ Upgrade the chart deployment using:
 $ helm upgrade my-release cowboysysop/flowise
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm upgrade my-release oci://ghcr.io/cowboysysop/charts/flowise
+```
+
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
-**TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
+### Upgrading to version 4.0.0
+
+A new parameter `config.encryptionKey` has been added.
+
+If you're using the default `local` storage type and not the `aws` one, configure it with the
+current value of the encryption key using:
+
+```bash
+$ kubectl exec deployment/my-flowise-deployment -c flowise -- cat /data/encryption.key
+```
+
+The MariaDB subchart has been updated to a major release, see these upgrade instructions:
+
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-2020
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-2000
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1900
+
+Information about services are no more injected into pod's environment variable.
 
 ### Upgrading to version 3.0.0
 
@@ -92,6 +127,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `kubeVersion`       | Override Kubernetes version                                                                  | `""`    |
 | `nameOverride`      | Partially override `flowise.fullname` template with a string (will prepend the release name) | `""`    |
 | `fullnameOverride`  | Fully override `flowise.fullname` template with a string                                     | `""`    |
+| `namespaceOverride` | Fully override `common.names.namespace` template with a string                               | `""`    |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                   | `{}`    |
 | `commonLabels`      | Labels to add to all deployed objects                                                        | `{}`    |
 | `extraDeploy`       | Array of extra objects to deploy with the release                                            | `[]`    |
@@ -101,10 +137,11 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | Name                                 | Description                                                                                           | Default                  |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------ |
 | `replicaCount`                       | Number of replicas (do not change it)                                                                 | `1`                      |
+| `revisionHistoryLimit`               | Number of old history to retain to allow rollback                                                     | `10`                     |
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `flowiseai/flowise`      |
-| `image.tag`                          | Image tag                                                                                             | `2.2.4`                  |
+| `image.tag`                          | Image tag                                                                                             | `3.0.0`                  |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -113,6 +150,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
 | `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
 | `serviceAccount.name`                | The name of the service account to use (Generated using the `flowise.fullname` template if not set)   | `nil`                    |
+| `enableServiceLinks`                 | Whether information about services should be injected into pod's environment variable                 | `false`                  |
 | `hostAliases`                        | Pod host aliases                                                                                      | `[]`                     |
 | `deploymentAnnotations`              | Additional deployment annotations                                                                     | `{}`                     |
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
@@ -179,12 +217,14 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ### Config parameters
 
-| Name                        | Description                                   | Default    |
-| --------------------------- | --------------------------------------------- | ---------- |
-| `config.username`           | Username to login                             | `""`       |
-| `config.password`           | Password to login                             | `""`       |
-| `existingSecret`            | Name of existing Secret to use                | `""`       |
-| `existingSecretKeyPassword` | Key in existing Secret that contains password | `password` |
+| Name                             | Description                                         | Default          |
+| -------------------------------- | --------------------------------------------------- | ---------------- |
+| `config.username`                | Username to login                                   | `""`             |
+| `config.password`                | Password to login                                   | `""`             |
+| `config.encryptionKey`           | Encryption key                                      | `""`             |
+| `existingSecret`                 | Name of existing Secret to use                      | `""`             |
+| `existingSecretKeyPassword`      | Key in existing Secret that contains password       | `password`       |
+| `existingSecretKeyEncryptionKey` | Key in existing Secret that contains encryption key | `encryption-key` |
 
 ### MariaDB parameters
 
@@ -231,8 +271,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | Name                     | Description                                              | Default         |
 | ------------------------ | -------------------------------------------------------- | --------------- |
 | `wait.image.registry`    | Image registry                                           | `docker.io`     |
-| `wait.image.repository`  | Image repository                                         | `atkrad/wait4x` |
-| `wait.image.tag`         | Image tag                                                | `2.14.1`        |
+| `wait.image.repository`  | Image repository                                         | `wait4x/wait4x` |
+| `wait.image.tag`         | Image tag                                                | `3.2.0`         |
 | `wait.image.digest`      | Image digest                                             | `""`            |
 | `wait.image.pullPolicy`  | Image pull policy                                        | `IfNotPresent`  |
 | `wait.securityContext`   | Container security context                               | `{}`            |
@@ -258,6 +298,13 @@ $ helm install my-release \
     --set nameOverride=my-name cowboysysop/flowise
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release \
+    --set nameOverride=my-name oci://ghcr.io/cowboysysop/charts/flowise
+```
+
 The above command sets the `nameOverride` to `my-name`.
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
@@ -265,6 +312,13 @@ Alternatively, a YAML file that specifies the values for the above parameters ca
 ```bash
 $ helm install my-release \
     --values values.yaml cowboysysop/flowise
+```
+
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release \
+    --values values.yaml oci://ghcr.io/cowboysysop/charts/flowise
 ```
 
 **TIP**: You can use the default [values.yaml](values.yaml).

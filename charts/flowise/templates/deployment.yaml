@@ -2,6 +2,7 @@ apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
   name: {{ include "flowise.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels:
     {{- include "flowise.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
@@ -13,6 +14,7 @@ metadata:
   {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
       {{- include "flowise.selectorLabels" . | nindent 6 }}
@@ -40,6 +42,7 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
     spec:
+      enableServiceLinks: {{ .Values.enableServiceLinks }}
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.image ) "global" .Values.global ) | nindent 6 }}
       {{- if .Values.hostAliases }}
       hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.hostAliases "context" $) | nindent 8 }}
@@ -145,6 +148,11 @@ spec:
                   name: {{ include "flowise.secretName" . }}
                   key: {{ include "flowise.secretKeyPassword" . }}
             {{- end }}
+            - name: FLOWISE_SECRETKEY_OVERWRITE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.secretName" . }}
+                  key: {{ include "flowise.secretKeyEncryptionKey" . }}
             - name: APIKEY_PATH
               value: /data
             - name: BLOB_STORAGE_PATH
@@ -187,8 +195,6 @@ spec:
             - name: DATABASE_NAME
               value: {{ include "flowise.postgresql.database" . | quote }}
             {{- end }}
-            - name: DISABLE_FLOWISE_TELEMETRY
-              value: "true"
             {{- if .Values.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}

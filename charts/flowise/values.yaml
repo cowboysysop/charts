@@ -22,6 +22,9 @@ nameOverride: ""
 ## @param fullnameOverride Fully override `flowise.fullname` template with a string
 fullnameOverride: ""
 
+## @param namespaceOverride Fully override `common.names.namespace` template with a string
+namespaceOverride: ""
+
 ## @param commonAnnotations Annotations to add to all deployed objects
 commonAnnotations: {}
 
@@ -36,6 +39,9 @@ extraDeploy: []
 ## @param replicaCount Number of replicas (do not change it)
 replicaCount: 1
 
+## @param revisionHistoryLimit Number of old history to retain to allow rollback
+revisionHistoryLimit: 10
+
 updateStrategy:
   ## @param updateStrategy.type Update strategy type (do not change it)
   type: Recreate
@@ -48,7 +54,7 @@ image:
   repository: flowiseai/flowise
 
   ## @param image.tag Image tag
-  tag: 2.2.8
+  tag: 3.0.0
 
   ## @param image.digest Image digest
   digest: ""
@@ -76,6 +82,9 @@ serviceAccount:
 
   ## @param serviceAccount.name The name of the service account to use (Generated using the `flowise.fullname` template if not set)
   name:
+
+## @param enableServiceLinks Whether information about services should be injected into pod's environment variable
+enableServiceLinks: false
 
 ## @param hostAliases Pod host aliases
 hostAliases: []
@@ -313,11 +322,17 @@ config:
   ## @param config.password Password to login
   password: ""
 
+  ## @param config.encryptionKey Encryption key
+  encryptionKey: ""
+
 ## @param existingSecret Name of existing Secret to use
 existingSecret: ""
 
 ## @param existingSecretKeyPassword Key in existing Secret that contains password
 existingSecretKeyPassword: password
+
+## @param existingSecretKeyEncryptionKey Key in existing Secret that contains encryption key
+existingSecretKeyEncryptionKey: encryption-key
 
 ## @section MariaDB parameters
 
@@ -433,10 +448,10 @@ wait:
     registry: docker.io
 
     ## @param wait.image.repository Image repository
-    repository: atkrad/wait4x
+    repository: wait4x/wait4x
 
     ## @param wait.image.tag Image tag
-    tag: 2.14.1
+    tag: 3.2.0
 
     ## @param wait.image.digest Image digest
     digest: ""

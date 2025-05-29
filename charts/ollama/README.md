@@ -11,6 +11,12 @@ $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
 $ helm install my-release cowboysysop/ollama
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release oci://ghcr.io/cowboysysop/charts/ollama
+```
+
 ## Introduction
 
 This chart bootstraps a Ollama deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
@@ -29,6 +35,12 @@ $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
 $ helm install my-release cowboysysop/ollama
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release oci://ghcr.io/cowboysysop/charts/ollama
+```
+
 These commands deploy Ollama on the Kubernetes cluster in the default configuration and with the release name `my-release`. The deployment configuration can be customized by specifying the customization parameters with the `helm install` command using the `--values` or `--set` arguments. Find more information in the [configuration section](#configuration) of this document.
 
 ## Upgrading
@@ -39,9 +51,17 @@ Upgrade the chart deployment using:
 $ helm upgrade my-release cowboysysop/ollama
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm upgrade my-release oci://ghcr.io/cowboysysop/charts/ollama
+```
+
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
-**TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
+### Upgrading to version 2.0.0
+
+Information about services are no more injected into pod's environment variable.
 
 ## Uninstalling
 
@@ -71,6 +91,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `kubeVersion`       | Override Kubernetes version                                                                 | `""`    |
 | `nameOverride`      | Partially override `ollama.fullname` template with a string (will prepend the release name) | `""`    |
 | `fullnameOverride`  | Fully override `ollama.fullname` template with a string                                     | `""`    |
+| `namespaceOverride` | Fully override `common.names.namespace` template with a string                              | `""`    |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                  | `{}`    |
 | `commonLabels`      | Labels to add to all deployed objects                                                       | `{}`    |
 | `extraDeploy`       | Array of extra objects to deploy with the release                                           | `[]`    |
@@ -80,10 +101,11 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | Name                                 | Description                                                                                           | Default                  |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------ |
 | `replicaCount`                       | Number of replicas (do not change it)                                                                 | `1`                      |
+| `revisionHistoryLimit`               | Number of old history to retain to allow rollback                                                     | `10`                     |
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `ollama/ollama`          |
-| `image.tag`                          | Image tag                                                                                             | `0.3.4`                  |
+| `image.tag`                          | Image tag                                                                                             | `0.8.0`                  |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -92,6 +114,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
 | `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
 | `serviceAccount.name`                | The name of the service account to use (Generated using the `ollama.fullname` template if not set)    | `nil`                    |
+| `enableServiceLinks`                 | Whether information about services should be injected into pod's environment variable                 | `false`                  |
+| `hostAliases`                        | Pod host aliases                                                                                      | `[]`                     |
 | `deploymentAnnotations`              | Additional deployment annotations                                                                     | `{}`                     |
 | `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
 | `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
@@ -122,6 +146,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `service.annotations`                | Service annotations                                                                                   | `{}`                     |
 | `service.type`                       | Service type                                                                                          | `ClusterIP`              |
 | `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
+| `service.ipFamilyPolicy`             | Service IP family policy                                                                              | `""`                     |
+| `service.ipFamilies`                 | Service IP families                                                                                   | `[]`                     |
 | `service.sessionAffinity`            | Control where client requests go, to the same pod or round-robin                                      | `None`                   |
 | `service.sessionAffinityConfig`      | Additional settings for the sessionAffinity                                                           | `{}`                     |
 | `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |
@@ -172,6 +198,13 @@ $ helm install my-release \
     --set nameOverride=my-name cowboysysop/ollama
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release \
+    --set nameOverride=my-name oci://ghcr.io/cowboysysop/charts/ollama
+```
+
 The above command sets the `nameOverride` to `my-name`.
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
@@ -179,6 +212,13 @@ Alternatively, a YAML file that specifies the values for the above parameters ca
 ```bash
 $ helm install my-release \
     --values values.yaml cowboysysop/ollama
+```
+
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release \
+    --values values.yaml oci://ghcr.io/cowboysysop/charts/ollama
 ```
 
 **TIP**: You can use the default [values.yaml](values.yaml).

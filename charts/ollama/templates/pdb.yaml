@@ -3,6 +3,7 @@ apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:
   name: {{ include "ollama.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels:
     {{- include "ollama.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}

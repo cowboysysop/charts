@@ -139,15 +139,6 @@ spec:
           env:
             - name: PORT
               value: {{ .Values.containerPorts.http | quote }}
-            {{- if and .Values.config.username .Values.config.password }}
-            - name: FLOWISE_USERNAME
-              value: {{ .Values.config.username | quote }}
-            - name: FLOWISE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "flowise.secretName" . }}
-                  key: {{ include "flowise.secretKeyPassword" . }}
-            {{- end }}
             - name: FLOWISE_SECRETKEY_OVERWRITE
               valueFrom:
                 secretKeyRef:

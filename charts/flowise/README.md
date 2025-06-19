@@ -59,6 +59,14 @@ $ helm upgrade my-release oci://ghcr.io/cowboysysop/charts/flowise
 
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
+### Upgrading to version 5.0.0
+
+The application has changed its authentication system, see the release notes:
+
+- https://github.com/FlowiseAI/Flowise/releases/tag/flowise%403.0.1
+
+Parameters `config.username` and `config.password` have been removed.
+
 ### Upgrading to version 4.0.0
 
 A new parameter `config.encryptionKey` has been added.
@@ -141,7 +149,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                     | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                   | Image repository                                                                                      | `flowiseai/flowise`      |
-| `image.tag`                          | Image tag                                                                                             | `3.0.0`                  |
+| `image.tag`                          | Image tag                                                                                             | `3.0.2`                  |
 | `image.digest`                       | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -219,11 +227,8 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 | Name                             | Description                                         | Default          |
 | -------------------------------- | --------------------------------------------------- | ---------------- |
-| `config.username`                | Username to login                                   | `""`             |
-| `config.password`                | Password to login                                   | `""`             |
 | `config.encryptionKey`           | Encryption key                                      | `""`             |
 | `existingSecret`                 | Name of existing Secret to use                      | `""`             |
-| `existingSecretKeyPassword`      | Key in existing Secret that contains password       | `password`       |
 | `existingSecretKeyEncryptionKey` | Key in existing Secret that contains encryption key | `encryption-key` |
 
 ### MariaDB parameters

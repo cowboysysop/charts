@@ -74,17 +74,6 @@ Create the name of the secret to use
 {{- end -}}
 
 {{/*
-Key in Secret that contains password
-*/}}
-{{- define "flowise.secretKeyPassword" -}}
-{{- if .Values.existingSecret -}}
-    {{ .Values.existingSecretKeyPassword }}
-{{- else -}}
-    password
-{{- end -}}
-{{- end -}}
-
-{{/*
 Key in Secret that contains encryption key
 */}}
 {{- define "flowise.secretKeyEncryptionKey" -}}

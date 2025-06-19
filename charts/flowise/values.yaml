@@ -54,7 +54,7 @@ image:
   repository: flowiseai/flowise
 
   ## @param image.tag Image tag
-  tag: 3.0.0
+  tag: 3.0.2
 
   ## @param image.digest Image digest
   digest: ""
@@ -316,20 +316,11 @@ persistence:
 ## @section Config parameters
 
 config:
-  ## @param config.username Username to login
-  username: ""
-
-  ## @param config.password Password to login
-  password: ""
-
   ## @param config.encryptionKey Encryption key
   encryptionKey: ""
 
 ## @param existingSecret Name of existing Secret to use
 existingSecret: ""
-
-## @param existingSecretKeyPassword Key in existing Secret that contains password
-existingSecretKeyPassword: password
 
 ## @param existingSecretKeyEncryptionKey Key in existing Secret that contains encryption key
 existingSecretKeyEncryptionKey: encryption-key

@@ -10399,6 +10399,32 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: 0.8.0
+    created: "2025-06-22T14:08:11.680472435Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.31.1
+    description: Get up and running with large language models, locally
+    digest: 07a4cff44e1bf33126a82b8ec804d0404ee9a7665c2951c139f57fb55ad854aa
+    home: https://ollama.com/
+    icon: https://raw.githubusercontent.com/cowboysysop/charts/master/charts/ollama/icon.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: ollama
+    sources:
+    - https://github.com/ollama/ollama
+    - https://github.com/cowboysysop/charts/tree/master/charts/ollama
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/ollama-2.1.1/ollama-2.1.1.tgz
+    version: 2.1.1
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 0.8.0
     created: "2025-06-01T13:18:56.73036989Z"
     dependencies:
     - name: common
@@ -14871,4 +14897,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-06-19T21:47:34.95087623Z"
+generated: "2025-06-22T14:08:11.68208507Z"

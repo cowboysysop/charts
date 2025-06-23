@@ -227,9 +227,68 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 | Name                             | Description                                         | Default          |
 | -------------------------------- | --------------------------------------------------- | ---------------- |
+| `config.mode`                    | Mode to run Flowise                                 | `main`           |
 | `config.encryptionKey`           | Encryption key                                      | `""`             |
 | `existingSecret`                 | Name of existing Secret to use                      | `""`             |
 | `existingSecretKeyEncryptionKey` | Key in existing Secret that contains encryption key | `encryption-key` |
+
+### Worker parameters
+
+| Name                                        | Description                                                                                           | Default                    |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------- |
+| `worker.enabled`                            | Enable the component                                                                                  | `false`                    |
+| `worker.replicaCount`                       | Number of replicas                                                                                    | `1`                        |
+| `worker.revisionHistoryLimit`               | Number of old history to retain to allow rollback                                                     | `10`                       |
+| `worker.image.registry`                     | Image registry                                                                                        | `docker.io`                |
+| `worker.image.repository`                   | Image repository                                                                                      | `flowiseai/flowise-worker` |
+| `worker.image.tag`                          | Image tag                                                                                             | `3.0.2`                    |
+| `worker.image.digest`                       | Image digest                                                                                          | `""`                       |
+| `worker.image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`             |
+| `worker.pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                    |
+| `worker.pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                        |
+| `worker.pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                      |
+| `worker.serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                     |
+| `worker.serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                       |
+| `worker.serviceAccount.name`                | The name of the service account to use (Generated using the `flowise.fullname` template if not set)   | `nil`                      |
+| `worker.enableServiceLinks`                 | Whether information about services should be injected into pod's environment variable                 | `false`                    |
+| `worker.hostAliases`                        | Pod host aliases                                                                                      | `[]`                       |
+| `worker.deploymentAnnotations`              | Additional deployment annotations                                                                     | `{}`                       |
+| `worker.podAnnotations`                     | Additional pod annotations                                                                            | `{}`                       |
+| `worker.podLabels`                          | Additional pod labels                                                                                 | `{}`                       |
+| `worker.podSecurityContext`                 | Pod security context                                                                                  | `{}`                       |
+| `worker.priorityClassName`                  | Priority class name                                                                                   | `nil`                      |
+| `worker.runtimeClassName`                   | Runtime class name                                                                                    | `""`                       |
+| `worker.topologySpreadConstraints`          | Topology Spread Constraints for pod assignment                                                        | `[]`                       |
+| `worker.securityContext`                    | Container security context                                                                            | `{}`                       |
+| `worker.containerPorts.probes`              | Container port for Probes                                                                             | `5566`                     |
+| `worker.livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                     |
+| `worker.livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `0`                        |
+| `worker.livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                               | `10`                       |
+| `worker.livenessProbe.timeoutSeconds`       | When the liveness probe times out                                                                     | `1`                        |
+| `worker.livenessProbe.failureThreshold`     | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                        |
+| `worker.livenessProbe.successThreshold`     | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                        |
+| `worker.readinessProbe.enabled`             | Enable readiness probe                                                                                | `true`                     |
+| `worker.readinessProbe.initialDelaySeconds` | Delay before the readiness probe is initiated                                                         | `0`                        |
+| `worker.readinessProbe.periodSeconds`       | How often to perform the readiness probe                                                              | `10`                       |
+| `worker.readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                        |
+| `worker.readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                        |
+| `worker.readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                        |
+| `worker.startupProbe.enabled`               | Enable startup probe                                                                                  | `false`                    |
+| `worker.startupProbe.initialDelaySeconds`   | Delay before the startup probe is initiated                                                           | `0`                        |
+| `worker.startupProbe.periodSeconds`         | How often to perform the startup probe                                                                | `10`                       |
+| `worker.startupProbe.timeoutSeconds`        | When the startup probe times out                                                                      | `1`                        |
+| `worker.startupProbe.failureThreshold`      | Minimum consecutive failures for the startup probe to be considered failed after having succeeded     | `3`                        |
+| `worker.startupProbe.successThreshold`      | Minimum consecutive successes for the startup probe to be considered successful after having failed   | `1`                        |
+| `worker.resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                       |
+| `worker.nodeSelector`                       | Node labels for pod assignment                                                                        | `{}`                       |
+| `worker.tolerations`                        | Tolerations for pod assignment                                                                        | `[]`                       |
+| `worker.affinity`                           | Map of node/pod affinities                                                                            | `{}`                       |
+| `worker.extraArgs`                          | Additional container arguments                                                                        | `{}`                       |
+| `worker.extraEnvVars`                       | Additional container environment variables                                                            | `[]`                       |
+| `worker.extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                      |
+| `worker.extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                      |
+| `worker.extraVolumes`                       | Optionally specify extra list of additional volumes                                                   | `[]`                       |
+| `worker.extraVolumeMounts`                  | Optionally specify extra list of additional volumeMounts                                              | `[]`                       |
 
 ### MariaDB parameters
 
@@ -270,6 +329,22 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `externalPostgresql.existingSecret`            | Name of existing Secret to use                           | `""`         |
 | `externalPostgresql.existingSecretKeyPassword` | Key in existing Secret that contains PostgreSQL password | `password`   |
 | `externalPostgresql.database`                  | External PostgreSQL database                             | `flowise`    |
+
+### Redis parameters
+
+| Name                                      | Description                                         | Default          |
+| ----------------------------------------- | --------------------------------------------------- | ---------------- |
+| `redis.enabled`                           | Whether to use the Redis chart                      | `false`          |
+| `redis.architecture`                      | Redis architecture                                  | `standalone`     |
+| `redis.auth.password`                     | Redis password                                      | `flowise`        |
+| `redis.auth.existingSecret`               | Name of existing Secret to use                      | `""`             |
+| `redis.master.service.ports.redis`        | Redis port                                          | `6379`           |
+| `externalRedis.enabled`                   | Whether to use an external Redis                    | `false`          |
+| `externalRedis.host`                      | External Redis host                                 | `redis`          |
+| `externalRedis.port`                      | External Redis port                                 | `6379`           |
+| `externalRedis.password`                  | External Redis password                             | `flowise`        |
+| `externalRedis.existingSecret`            | Name of existing Secret to use                      | `""`             |
+| `externalRedis.existingSecretKeyPassword` | Key in existing Secret that contains Redis password | `redis-password` |
 
 ### Wait parameters
 
@@ -327,6 +402,14 @@ $ helm install my-release \
 ```
 
 **TIP**: You can use the default [values.yaml](values.yaml).
+
+## Queue mode
+
+To run Flowise in queue mode:
+
+- Set `config.mode` parameter to `queue`
+- Set `worker.enabled` parameter to `true`
+- Set `redis.enabled` parameter or `externalRedis.enabled` parameter to `true`
 
 ## License
 

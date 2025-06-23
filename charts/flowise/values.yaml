@@ -316,6 +316,9 @@ persistence:
 ## @section Config parameters
 
 config:
+  ## @param config.mode Mode to run Flowise
+  mode: main
+
   ## @param config.encryptionKey Encryption key
   encryptionKey: ""
 
@@ -324,6 +327,193 @@ existingSecret: ""
 
 ## @param existingSecretKeyEncryptionKey Key in existing Secret that contains encryption key
 existingSecretKeyEncryptionKey: encryption-key
+
+## @section Worker parameters
+
+worker:
+  ## @param worker.enabled Enable the component
+  enabled: false
+
+  ## @param worker.replicaCount Number of replicas
+  replicaCount: 1
+
+  ## @param worker.revisionHistoryLimit Number of old history to retain to allow rollback
+  revisionHistoryLimit: 10
+
+  image:
+    ## @param worker.image.registry Image registry
+    registry: docker.io
+
+    ## @param worker.image.repository Image repository
+    repository: flowiseai/flowise-worker
+
+    ## @param worker.image.tag Image tag
+    tag: 3.0.2
+
+    ## @param worker.image.digest Image digest
+    digest: ""
+
+    ## @param worker.image.pullPolicy Image pull policy
+    pullPolicy: IfNotPresent
+
+  pdb:
+    ## @param worker.pdb.create Specifies whether a pod disruption budget should be created
+    create: false
+
+    ## @param worker.pdb.minAvailable Minimum number/percentage of pods that should remain scheduled
+    minAvailable: 1
+
+    ## @param worker.pdb.maxUnavailable Maximum number/percentage of pods that may be made unavailable
+    maxUnavailable:
+    # maxUnavailable: 1
+
+  serviceAccount:
+    ## @param worker.serviceAccount.create Specifies whether a service account should be created
+    create: true
+
+    ## @param worker.serviceAccount.annotations Service account annotations
+    annotations: {}
+
+    ## @param worker.serviceAccount.name The name of the service account to use (Generated using the `flowise.fullname` template if not set)
+    name:
+
+  ## @param worker.enableServiceLinks Whether information about services should be injected into pod's environment variable
+  enableServiceLinks: false
+
+  ## @param worker.hostAliases Pod host aliases
+  hostAliases: []
+
+  ## @param worker.deploymentAnnotations Additional deployment annotations
+  deploymentAnnotations: {}
+
+  ## @param worker.podAnnotations Additional pod annotations
+  podAnnotations: {}
+
+  ## @param worker.podLabels Additional pod labels
+  podLabels: {}
+
+  ## @param worker.podSecurityContext Pod security context
+  podSecurityContext: {}
+    # fsGroup: 2000
+
+  ## @param worker.priorityClassName Priority class name
+  priorityClassName:
+  # priorityClassName : high-priority
+
+  ## @param worker.runtimeClassName Runtime class name
+  runtimeClassName: ""
+
+  ## @param worker.topologySpreadConstraints Topology Spread Constraints for pod assignment
+  topologySpreadConstraints: []
+
+  ## @param worker.securityContext Container security context
+  securityContext: {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  containerPorts:
+    ## @param worker.containerPorts.probes Container port for Probes
+    probes: 5566
+
+  livenessProbe:
+    ## @param worker.livenessProbe.enabled Enable liveness probe
+    enabled: true
+
+    ## @param worker.livenessProbe.initialDelaySeconds Delay before the liveness probe is initiated
+    initialDelaySeconds: 0
+
+    ## @param worker.livenessProbe.periodSeconds How often to perform the liveness probe
+    periodSeconds: 10
+
+    ## @param worker.livenessProbe.timeoutSeconds When the liveness probe times out
+    timeoutSeconds: 1
+
+    ## @param worker.livenessProbe.failureThreshold Minimum consecutive failures for the liveness probe to be considered failed after having succeeded
+    failureThreshold: 3
+
+    ## @param worker.livenessProbe.successThreshold Minimum consecutive successes for the liveness probe to be considered successful after having failed
+    successThreshold: 1
+
+  readinessProbe:
+    ## @param worker.readinessProbe.enabled Enable readiness probe
+    enabled: true
+
+    ## @param worker.readinessProbe.initialDelaySeconds Delay before the readiness probe is initiated
+    initialDelaySeconds: 0
+
+    ## @param worker.readinessProbe.periodSeconds How often to perform the readiness probe
+    periodSeconds: 10
+
+    ## @param worker.readinessProbe.timeoutSeconds When the readiness probe times out
+    timeoutSeconds: 1
+
+    ## @param worker.readinessProbe.failureThreshold Minimum consecutive failures for the readiness probe to be considered failed after having succeeded
+    failureThreshold: 3
+
+    ## @param worker.readinessProbe.successThreshold Minimum consecutive successes for the readiness probe to be considered successful after having failed
+    successThreshold: 1
+
+  startupProbe:
+    ## @param worker.startupProbe.enabled Enable startup probe
+    enabled: false
+
+    ## @param worker.startupProbe.initialDelaySeconds Delay before the startup probe is initiated
+    initialDelaySeconds: 0
+
+    ## @param worker.startupProbe.periodSeconds How often to perform the startup probe
+    periodSeconds: 10
+
+    ## @param worker.startupProbe.timeoutSeconds When the startup probe times out
+    timeoutSeconds: 1
+
+    ## @param worker.startupProbe.failureThreshold Minimum consecutive failures for the startup probe to be considered failed after having succeeded
+    failureThreshold: 3
+
+    ## @param worker.startupProbe.successThreshold Minimum consecutive successes for the startup probe to be considered successful after having failed
+    successThreshold: 1
+
+  ## @param worker.resources CPU/Memory resource requests/limits
+  resources: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  ## @param worker.nodeSelector Node labels for pod assignment
+  nodeSelector: {}
+
+  ## @param worker.tolerations Tolerations for pod assignment
+  tolerations: []
+
+  ## @param worker.affinity Map of node/pod affinities
+  affinity: {}
+
+  ## @param worker.extraArgs Additional container arguments
+  extraArgs: {}
+    # name: ""
+
+  ## @param worker.extraEnvVars Additional container environment variables
+  extraEnvVars: []
+    # - name: MY-NAME
+    #   value: "MY-VALUE"
+
+  ## @param worker.extraEnvVarsCM Name of existing ConfigMap containing additional container environment variables
+  extraEnvVarsCM:
+
+  ## @param worker.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
+  extraEnvVarsSecret:
+
+  ## @param worker.extraVolumes Optionally specify extra list of additional volumes
+  extraVolumes: []
+
+  ## @param worker.extraVolumeMounts Optionally specify extra list of additional volumeMounts
+  extraVolumeMounts: []
 
 ## @section MariaDB parameters
 
@@ -430,6 +620,47 @@ externalPostgresql:
 
   ## @param externalPostgresql.database External PostgreSQL database
   database: flowise
+
+## @section Redis parameters
+
+redis:
+  ## @param redis.enabled Whether to use the Redis chart
+  enabled: false
+
+  ## @param redis.architecture Redis architecture
+  architecture: standalone
+
+  auth:
+    ## @param redis.auth.password Redis password
+    password: flowise
+
+    ## @param redis.auth.existingSecret Name of existing Secret to use
+    existingSecret: ""
+
+  master:
+    service:
+      ports:
+        ## @param redis.master.service.ports.redis Redis port
+        redis: 6379
+
+externalRedis:
+  ## @param externalRedis.enabled Whether to use an external Redis
+  enabled: false
+
+  ## @param externalRedis.host External Redis host
+  host: redis
+
+  ## @param externalRedis.port External Redis port
+  port: 6379
+
+  ## @param externalRedis.password External Redis password
+  password: flowise
+
+  ## @param externalRedis.existingSecret Name of existing Secret to use
+  existingSecret: ""
+
+  ## @param externalRedis.existingSecretKeyPassword Key in existing Secret that contains Redis password
+  existingSecretKeyPassword: redis-password
 
 ## @section Wait parameters
 

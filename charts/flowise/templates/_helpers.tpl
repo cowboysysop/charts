@@ -261,3 +261,66 @@ PostgreSQL database
     {{ .Values.externalPostgresql.database }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Redis fully qualified app name
+*/}}
+{{- define "flowise.redis.fullname" -}}
+{{- if .Values.redis.fullnameOverride -}}
+{{- .Values.redis.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default "redis" .Values.redis.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Redis host
+*/}}
+{{- define "flowise.redis.host" -}}
+{{- if .Values.redis.enabled -}}
+{{- if .Values.redis.fullnameOverride -}}
+{{- printf "%s-%s" .Values.redis.fullnameOverride "master" | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default "redis" .Values.redis.nameOverride -}}
+{{- printf "%s-%s-%s" .Release.Name $name "master" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- else -}}
+    {{ .Values.externalRedis.host }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Redis port
+*/}}
+{{- define "flowise.redis.port" -}}
+{{- if .Values.redis.enabled -}}
+    {{ .Values.redis.master.service.ports.redis }}
+{{- else -}}
+    {{ .Values.externalRedis.port }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Redis secret name
+*/}}
+{{- define "flowise.redis.secretName" -}}
+{{- if .Values.redis.auth.existingSecret -}}
+    {{ .Values.redis.auth.existingSecret }}
+{{- else if .Values.externalRedis.existingSecret -}}
+    {{ .Values.externalRedis.existingSecret }}
+{{- else -}}
+    {{ include "flowise.redis.fullname" . }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Key in Secret that contains Redis password
+*/}}
+{{- define "flowise.redis.secretKeyPassword" -}}
+{{- if .Values.externalRedis.existingSecret -}}
+    {{ .Values.externalRedis.existingSecretKeyPassword }}
+{{- else -}}
+    redis-password
+{{- end -}}
+{{- end -}}

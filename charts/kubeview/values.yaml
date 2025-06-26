@@ -44,7 +44,7 @@ image:
   repository: benc-uk/kubeview
 
   ## @param image.tag Image tag
-  tag: 0.1.31
+  tag: 2.0.3
 
   ## @param image.digest Image digest
   digest: ""

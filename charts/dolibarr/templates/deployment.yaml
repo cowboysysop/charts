@@ -66,13 +66,13 @@ spec:
           command:
             - /bin/sh
             - -ec
-            {{ if eq (include "dolibarr.database.type" .) "pgsql" }}
+            {{- if eq (include "dolibarr.database.type" .) "pgsql" }}
             - |
               wait4x postgresql "postgres://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}" --timeout 0
-            {{ else }}
+            {{- else }}
             - |
               wait4x mysql "${DB_USERNAME}:${DB_PASSWORD}@tcp(${DB_HOST}:${DB_PORT})/${DB_NAME}" --timeout 0
-            {{ end }}
+            {{- end }}
           env:
             - name: DB_HOST
               value: {{ include "dolibarr.database.host" . | quote }}

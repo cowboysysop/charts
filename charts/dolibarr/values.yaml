@@ -420,13 +420,9 @@ externalDatabase:
   host: "localhost"
   port: 5432
   username: "dolibarr"
-  password: "dolibarr"
-  usernameSecret:
-    name: "external-db-secret"
-    key: "username"
-  passwordSecret:
-    name: "external-db-secret"
-    key: "password"
+  existingSecret: ""
+  existingSecretKeyPassword: ""
+  name: "dolibarr"
 
 ## @section Wait parameters
 

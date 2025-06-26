@@ -96,9 +96,9 @@ Key in Secret that contains cron security key
 {{- end -}}
 
 {{/*
-MariaDB fully qualified app name
+Database fully qualified app name
 */}}
-{{- define "dolibarr.mariadb.fullname" -}}
+{{- define "dolibarr.database.fullname" -}}
 {{- if .Values.mariadb.fullnameOverride -}}
 {{- .Values.mariadb.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -107,10 +107,11 @@ MariaDB fully qualified app name
 {{- end -}}
 {{- end -}}
 
+
 {{/*
-MariaDB host
+Database host
 */}}
-{{- define "dolibarr.mariadb.host" -}}
+{{- define "dolibarr.database.host" -}}
 {{- if .Values.mariadb.enabled -}}
 {{- if eq .Values.mariadb.architecture "replication" -}}
     {{- if .Values.mariadb.fullnameOverride -}}
@@ -123,51 +124,54 @@ MariaDB host
     {{ include "dolibarr.mariadb.fullname" . }}
 {{- end -}}
 {{- else -}}
-    {{ .Values.externalMariadb.host }}
+    {{ .Values.externalDatabase.host }}
 {{- end -}}
 {{- end -}}
 
+
 {{/*
-MariaDB port
+Database port
 */}}
-{{- define "dolibarr.mariadb.port" -}}
+{{- define "dolibarr.database.port" -}}
 {{- if .Values.mariadb.enabled -}}
     {{ .Values.mariadb.primary.service.ports.mysql }}
 {{- else -}}
-    {{ .Values.externalMariadb.port }}
+    {{ .Values.externalDatabase.port }}
 {{- end -}}
 {{- end -}}
 
 {{/*
-MariaDB user
+Database user
 */}}
-{{- define "dolibarr.mariadb.username" -}}
+{{- define "dolibarr.database.username" -}}
 {{- if .Values.mariadb.enabled -}}
     {{ .Values.mariadb.auth.username }}
 {{- else -}}
-    {{ .Values.externalMariadb.username }}
+    {{ .Values.externalDatabase.username }}
 {{- end -}}
 {{- end -}}
 
 {{/*
-MariaDB secret name
+Database secret name
 */}}
-{{- define "dolibarr.mariadb.secretName" -}}
+{{- define "dolibarr.database.secretName" -}}
+{{- if .Values.mariadb.enabled -}}
 {{- if .Values.mariadb.auth.existingSecret -}}
     {{ .Values.mariadb.auth.existingSecret }}
-{{- else if .Values.externalMariadb.existingSecret -}}
-    {{ .Values.externalMariadb.existingSecret }}
 {{- else -}}
-    {{ include "dolibarr.mariadb.fullname" . }}
+    {{ include "dolibarr.database.fullname" . }}
+{{- end -}}
+{{- else -}}
+    {{ .Values.externalDatabase.existingSecret }}
 {{- end -}}
 {{- end -}}
 
 {{/*
 Key in Secret that contains MariaDB password
 */}}
-{{- define "dolibarr.mariadb.secretKeyPassword" -}}
-{{- if .Values.externalMariadb.existingSecret -}}
-    {{ .Values.externalMariadb.existingSecretKeyPassword }}
+{{- define "dolibarr.database.secretKeyPassword" -}}
+{{- if .Values.externalDatabase.existingSecret -}}
+    {{ .Values.externalDatabase.existingSecretKeyPassword }}
 {{- else -}}
     mariadb-password
 {{- end -}}
@@ -176,10 +180,22 @@ Key in Secret that contains MariaDB password
 {{/*
 MariaDB database
 */}}
-{{- define "dolibarr.mariadb.database" -}}
+{{- define "dolibarr.database.name" -}}
 {{- if .Values.mariadb.enabled -}}
     {{ .Values.mariadb.auth.database }}
 {{- else -}}
-    {{ .Values.externalMariadb.database }}
+    {{ .Values.externalDatabase.name }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+External DB type
+*/}}
+{{- define "dolibarr.database.type" -}}
+{{- if .Values.mariadb.enabled -}}
+  mysqli
+{{- else -}}
+  {{ .Values.externalDatabase.type }}
+{{- end -}}
+{{- end -}}
+

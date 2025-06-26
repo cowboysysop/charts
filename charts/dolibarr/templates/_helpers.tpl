@@ -121,7 +121,7 @@ Database host
     {{- printf "%s-%s-%s" .Release.Name $name "primary" | trunc 63 | trimSuffix "-" -}}
     {{- end -}}
 {{- else -}}
-    {{ include "dolibarr.mariadb.fullname" . }}
+    {{ include "dolibarr.database.fullname" . }}
 {{- end -}}
 {{- else -}}
     {{ .Values.externalDatabase.host }}

@@ -15,6 +15,7 @@
 | [cert-manager-common](charts/cert-manager-common)         | Collection of Kubernetes objects common to all Cert-Manager instances                                                        |
 | [dolibarr](charts/dolibarr)                               | A modern software package to manage your company or foundation's activity                                                    |
 | [flowise](charts/flowise)                                 | Drag & drop UI to build your customized LLM flow                                                                             |
+| [grafana-mcp](charts/grafana-mcp)                         | Model Context Protocol server for Grafana                                                                                    |
 | [kroki](charts/kroki)                                     | Creates diagrams from textual descriptions                                                                                   |
 | [kubebox](charts/kubebox)                                 | Terminal and Web console for Kubernetes                                                                                      |
 | [kubeview](charts/kubeview)                               | Kubernetes cluster visualiser and graphical explorer                                                                         |

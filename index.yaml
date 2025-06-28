@@ -2695,6 +2695,32 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/flowise-1.0.0/flowise-1.0.0.tgz
     version: 1.0.0
+  grafana-mcp:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: latest
+    created: "2025-06-28T16:35:56.818910349Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.31.1
+    description: Model Context Protocol server for Grafana
+    digest: 72bc2a11438f7ed7fc3b84d8c1b119c2bafaef65b7eb95bf4dec5083032554bf
+    home: https://github.com/grafana/mcp-grafana
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: grafana-mcp
+    sources:
+    - https://github.com/grafana/mcp-grafana
+    - https://github.com/cowboysysop/charts/tree/master/charts/grafana-mcp
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/grafana-mcp-1.0.0/grafana-mcp-1.0.0.tgz
+    version: 1.0.0
   katib:
   - annotations:
       artifacthub.io/signKey: |
@@ -14961,4 +14987,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-06-26T19:58:00.353859634Z"
+generated: "2025-06-28T16:35:56.819718325Z"

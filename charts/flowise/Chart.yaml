@@ -10,7 +10,7 @@ name: flowise
 sources:
   - https://github.com/FlowiseAI/Flowise
   - https://github.com/cowboysysop/charts/tree/master/charts/flowise
-version: 5.1.1
+version: 5.1.2
 dependencies:
   - name: common
     version: 2.31.1
@@ -20,7 +20,7 @@ dependencies:
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: mariadb.enabled
   - name: postgresql
-    version: 15.5.7
+    version: 15.5.38
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
   - name: redis

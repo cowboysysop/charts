@@ -26,6 +26,12 @@
     },
     {
       "matchPackageNames": [
+        "/^docker.io\\/flowiseai\\/flowise.*$/"
+      ],
+      "groupName": "docker.io/flowiseai/flowise"
+    },
+    {
+      "matchPackageNames": [
         "/^docker.io\\/yuzutech\\/kroki.*$/"
       ],
       "groupName": "docker.io/yuzutech/kroki"

@@ -5017,6 +5017,32 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/kubebox-1.0.0/kubebox-1.0.0.tgz
     version: 1.0.0
+  kubernetes-mcp:
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 0.0.44
+    created: "2025-07-03T19:41:54.670880009Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.31.1
+    description: Model Context Protocol server for Kubernetes
+    digest: dae96d7d1402b397e3d66d0aade392a365f9048e36fb940b3b77a69fd55818d3
+    home: https://github.com/manusa/kubernetes-mcp-server
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubernetes-mcp
+    sources:
+    - https://github.com/manusa/kubernetes-mcp-server
+    - https://github.com/cowboysysop/charts/tree/master/charts/kubernetes-mcp
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubernetes-mcp-1.0.0/kubernetes-mcp-1.0.0.tgz
+    version: 1.0.0
   kubeview:
   - annotations:
       artifacthub.io/signKey: |
@@ -15025,4 +15051,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-06-29T12:06:44.414069234Z"
+generated: "2025-07-03T19:41:54.672336317Z"

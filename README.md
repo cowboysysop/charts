@@ -18,6 +18,7 @@
 | [grafana-mcp](charts/grafana-mcp)                         | Model Context Protocol server for Grafana                                                                                    |
 | [kroki](charts/kroki)                                     | Creates diagrams from textual descriptions                                                                                   |
 | [kubebox](charts/kubebox)                                 | Terminal and Web console for Kubernetes                                                                                      |
+| [kubernetes-mcp](charts/kubernetes-mcp)                   | Model Context Protocol server for Kubernetes                                                                                 |
 | [kubeview](charts/kubeview)                               | Kubernetes cluster visualiser and graphical explorer                                                                         |
 | [lighthouse-ci](charts/lighthouse-ci)                     | Enables running a server to display Lighthouse CI results                                                                    |
 | [local-ai](charts/local-ai)                               | A drop-in replacement REST API compatible with OpenAI API specifications for local inferencing                               |

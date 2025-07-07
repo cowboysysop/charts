@@ -142,6 +142,17 @@
       ],
       "datasourceTemplate": "docker",
       "depNameTemplate": "ghcr.io/renovatebot/renovate"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^charts\\/ollama\\/Chart\\.yaml$/"
+      ],
+      "matchStrings": [
+        "appVersion: (?<currentValue>.+?)\\n"
+      ],
+      "datasourceTemplate": "docker",
+      "depNameTemplate": "docker.io/ollama/ollama"
     }
   ]
 }

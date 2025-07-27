@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "dolibarr.tests.labels" -}}
-{{ include "dolibarr.labels" . }}
+{{ include "dolibarr.commonLabels" . }}
 {{ include "dolibarr.tests.componentLabels" . }}
 {{- end -}}

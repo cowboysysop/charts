@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "dolibarr.labels" -}}
+{{- define "dolibarr.commonLabels" -}}
 helm.sh/chart: {{ include "dolibarr.chart" . }}
-{{ include "dolibarr.selectorLabels" . }}
+{{ include "dolibarr.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "dolibarr.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "dolibarr.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "dolibarr.componentLabels" -}}
+app.kubernetes.io/component: dolibarr
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "dolibarr.labels" -}}
+{{ include "dolibarr.commonLabels" . }}
+{{ include "dolibarr.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "dolibarr.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "dolibarr.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "dolibarr.commonSelectorLabels" . }}
+{{ include "dolibarr.componentLabels" . }}
 {{- end -}}
 
 {{/*

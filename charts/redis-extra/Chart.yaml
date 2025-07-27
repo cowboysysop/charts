@@ -8,10 +8,10 @@ maintainers:
 name: redis-extra
 sources:
   - https://github.com/cowboysysop/charts/tree/master/charts/redis-extra
-version: 1.0.0
+version: 1.1.0
 dependencies:
   - name: common
-    version: 2.21.0
+    version: 2.31.3
     repository: https://charts.bitnami.com/bitnami/
 annotations:
   artifacthub.io/signKey: |

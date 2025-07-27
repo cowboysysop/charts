@@ -26,6 +26,33 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/cert-manager-common-1.0.0/cert-manager-common-1.0.0.tgz
     version: 1.0.0
+  common:
+  - annotations:
+      category: Infrastructure
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.31.3
+    created: "2025-07-27T09:24:00.378932584Z"
+    description: A Library Helm Chart for grouping common logic between bitnami charts.
+      This chart is not deployable by itself.
+    digest: 0de7dde406256e01ccc87c2092061aa24c1e05ef6c1fd9162c9391b0c5e4846a
+    home: https://github.com/cowboysysop/charts/tree/master/charts/common
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    - bitnami
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: common
+    sources:
+    - https://github.com/cowboysysop/charts/tree/master/charts/common
+    type: library
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/common-2.31.3/common-2.31.3.tgz
+    version: 2.31.3
   dolibarr:
   - annotations:
       artifacthub.io/signKey: |
@@ -15051,4 +15078,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-03T19:41:54.672336317Z"
+generated: "2025-07-27T09:24:00.380235284Z"

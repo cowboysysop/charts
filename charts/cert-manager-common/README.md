@@ -11,6 +11,12 @@ $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
 $ helm install my-release cowboysysop/cert-manager-common
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release oci://ghcr.io/cowboysysop/charts/cert-manager-common
+```
+
 ## Introduction
 
 This chart bootstraps a Cert-Manager Common deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
@@ -29,6 +35,12 @@ $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
 $ helm install my-release cowboysysop/cert-manager-common
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release oci://ghcr.io/cowboysysop/charts/cert-manager-common
+```
+
 These commands deploy Cert-Manager Common on the Kubernetes cluster in the default configuration and with the release name `my-release`. The deployment configuration can be customized by specifying the customization parameters with the `helm install` command using the `--values` or `--set` arguments. Find more information in the [configuration section](#configuration) of this document.
 
 ## Upgrading
@@ -39,9 +51,18 @@ Upgrade the chart deployment using:
 $ helm upgrade my-release cowboysysop/cert-manager-common
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm upgrade my-release oci://ghcr.io/cowboysysop/charts/cert-manager-common
+```
+
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
-**TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
+### Upgrading to version 2.0.0
+The chart now uses forked versions of the Bitnami charts to reference the Bitnami Legacy repository:
+
+- https://github.com/bitnami/containers/issues/83267
 
 ## Uninstalling
 
@@ -64,6 +85,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `kubeVersion`       | Override Kubernetes version                                                                              | `""`    |
 | `nameOverride`      | Partially override `cert-manager-common.fullname` template with a string (will prepend the release name) | `""`    |
 | `fullnameOverride`  | Fully override `cert-manager-common.fullname` template with a string                                     | `""`    |
+| `namespaceOverride` | Fully override `common.names.namespace` template with a string                                           | `""`    |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                               | `{}`    |
 | `commonLabels`      | Labels to add to all deployed objects                                                                    | `{}`    |
 | `extraDeploy`       | Array of extra objects to deploy with the release                                                        | `[]`    |
@@ -95,6 +117,13 @@ $ helm install my-release \
     --set nameOverride=my-name cowboysysop/cert-manager-common
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release \
+    --set nameOverride=my-name oci://ghcr.io/cowboysysop/charts/cert-manager-common
+```
+
 The above command sets the `nameOverride` to `my-name`.
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
@@ -102,6 +131,13 @@ Alternatively, a YAML file that specifies the values for the above parameters ca
 ```bash
 $ helm install my-release \
     --values values.yaml cowboysysop/cert-manager-common
+```
+
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release \
+    --values values.yaml oci://ghcr.io/cowboysysop/charts/cert-manager-common
 ```
 
 **TIP**: You can use the default [values.yaml](values.yaml).

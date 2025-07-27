@@ -3,9 +3,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "cert-manager-common.fullname" . }}-grafana-dashboards
-  namespace: {{ default .Release.Namespace .Values.grafanaDashboards.namespace | quote }}
+  namespace: {{ default (include "common.names.namespace" .) .Values.grafanaDashboards.namespace | quote }}
   labels:
-    {{- include "cert-manager-common.labels" . | nindent 4 }}
+    {{- include "cert-manager-common.commonLabels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}

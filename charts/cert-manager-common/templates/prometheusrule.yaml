@@ -3,9 +3,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   name: {{ include "cert-manager-common.fullname" . }}
-  namespace: {{ default .Release.Namespace .Values.prometheusRules.namespace | quote }}
+  namespace: {{ default (include "common.names.namespace" .) .Values.prometheusRules.namespace | quote }}
   labels:
-    {{- include "cert-manager-common.labels" . | nindent 4 }}
+    {{- include "cert-manager-common.commonLabels" . | nindent 4 }}
     {{- if .Values.prometheusRules.labels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.prometheusRules.labels "context" $ ) | nindent 4 }}
     {{- end }}

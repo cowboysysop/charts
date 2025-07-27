@@ -9,11 +9,11 @@ name: cert-manager-common
 sources:
   - https://github.com/imusmanmalik/cert-manager-mixin
   - https://github.com/cowboysysop/charts/tree/master/charts/cert-manager-common
-version: 1.0.0
+version: 2.0.0
 dependencies:
   - name: common
-    version: 2.21.0
-    repository: https://charts.bitnami.com/bitnami/
+    version: 2.31.3
+    repository: oci://ghcr.io/cowboysysop/charts
 annotations:
   artifacthub.io/signKey: |
     fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8

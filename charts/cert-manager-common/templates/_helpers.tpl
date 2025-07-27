@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "cert-manager-common.labels" -}}
+{{- define "cert-manager-common.commonLabels" -}}
 helm.sh/chart: {{ include "cert-manager-common.chart" . }}
-{{ include "cert-manager-common.selectorLabels" . }}
+{{ include "cert-manager-common.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,9 +44,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
-Selector labels
+Common selector labels
 */}}
-{{- define "cert-manager-common.selectorLabels" -}}
+{{- define "cert-manager-common.commonSelectorLabels" -}}
 app.kubernetes.io/name: {{ include "cert-manager-common.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}

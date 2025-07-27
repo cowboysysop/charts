@@ -8,6 +8,31 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-07-27T16:30:52.027265373Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 2.31.3
+    description: Collection of Kubernetes objects common to all Cert-Manager instances
+    digest: 0e4770bec76c892902714a96b645000297bd6e8c3d026d9ca64b9e7aaa223fbd
+    home: https://github.com/cowboysysop/charts/tree/master/charts/cert-manager-common
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: cert-manager-common
+    sources:
+    - https://github.com/imusmanmalik/cert-manager-mixin
+    - https://github.com/cowboysysop/charts/tree/master/charts/cert-manager-common
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/cert-manager-common-2.0.0/cert-manager-common-2.0.0.tgz
+    version: 2.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-03-16T16:54:01.544841188Z"
     dependencies:
     - name: common
@@ -15120,4 +15145,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-27T12:08:47.484298582Z"
+generated: "2025-07-27T16:30:52.02833025Z"

@@ -254,7 +254,7 @@ tests:
     repository: cowboysysop/pytest
 
     ## @param tests.image.tag Image tag
-    tag: 1.2.0
+    tag: 1.2.6
 
     ## @param tests.image.digest Image digest
     digest: ""

@@ -18,6 +18,13 @@ charts = os.listdir("charts")
 for chart in charts:
     with open(f"charts/{chart}/Chart.yaml", "r") as stream:
         chart_yaml = yaml.safe_load(stream)
+
+        chart_type = chart_yaml.get("type")
+
+        if chart_type is not None and chart_type == "library":
+            excluded_charts.append(chart)
+            continue
+
         chart_annotations = chart_yaml.get("annotations")
 
         if chart_annotations is not None:

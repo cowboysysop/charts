@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "flowise.tests.labels" -}}
-{{ include "flowise.labels" . }}
+{{ include "flowise.commonLabels" . }}
 {{ include "flowise.tests.componentLabels" . }}
 {{- end -}}

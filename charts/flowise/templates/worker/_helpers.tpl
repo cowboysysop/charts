@@ -1,109 +1,42 @@
 {{/* vim: set filetype=mustache: */}}
 {{/*
-Expand the name of the chart.
-*/}}
-{{- define "flowise.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
 Create a default fully qualified app name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-If release name contains chart name it will be used as a full name.
 */}}
-{{- define "flowise.fullname" -}}
-{{- if .Values.fullnameOverride -}}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- if contains $name .Release.Name -}}
-{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Create chart name and version as used by the chart label.
-*/}}
-{{- define "flowise.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
-Common labels
-*/}}
-{{- define "flowise.commonLabels" -}}
-helm.sh/chart: {{ include "flowise.chart" . }}
-{{ include "flowise.commonSelectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-{{- end -}}
-
-{{/*
-Common selector labels
-*/}}
-{{- define "flowise.commonSelectorLabels" -}}
-app.kubernetes.io/name: {{ include "flowise.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{- define "flowise.worker.fullname" -}}
+{{- printf "%s-%s" (include "flowise.fullname" .) "worker" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Component labels
 */}}
-{{- define "flowise.componentLabels" -}}
-app.kubernetes.io/component: flowise
+{{- define "flowise.worker.componentLabels" -}}
+app.kubernetes.io/component: worker
 {{- end -}}
 
 {{/*
 Labels
 */}}
-{{- define "flowise.labels" -}}
+{{- define "flowise.worker.labels" -}}
 {{ include "flowise.commonLabels" . }}
-{{ include "flowise.componentLabels" . }}
+{{ include "flowise.worker.componentLabels" . }}
 {{- end -}}
 
 {{/*
 Selector labels
 */}}
-{{- define "flowise.selectorLabels" -}}
+{{- define "flowise.worker.selectorLabels" -}}
 {{ include "flowise.commonSelectorLabels" . }}
-{{ include "flowise.componentLabels" . }}
+{{ include "flowise.worker.componentLabels" . }}
 {{- end -}}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "flowise.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create -}}
-    {{ default (include "flowise.fullname" .) .Values.serviceAccount.name }}
+{{- define "flowise.worker.serviceAccountName" -}}
+{{- if .Values.worker.serviceAccount.create -}}
+    {{ default (include "flowise.worker.fullname" .) .Values.worker.serviceAccount.name }}
 {{- else -}}
-    {{ default "default" .Values.serviceAccount.name }}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Create the name of the secret to use
-*/}}
-{{- define "flowise.secretName" -}}
-{{- if .Values.existingSecret -}}
-    {{ .Values.existingSecret }}
-{{- else -}}
-    {{ include "flowise.fullname" . }}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Key in Secret that contains encryption key
-*/}}
-{{- define "flowise.secretKeyEncryptionKey" -}}
-{{- if .Values.existingSecret -}}
-    {{ .Values.existingSecretKeyEncryptionKey }}
-{{- else -}}
-    encryption-key
+    {{ default "default" .Values.worker.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
 

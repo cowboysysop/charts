@@ -1,0 +1,4 @@
+fullnameOverride: flowise
+redis:
+  enabled: true
+  fullnameOverride: redis

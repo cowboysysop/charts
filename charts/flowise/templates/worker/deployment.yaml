@@ -1,0 +1,288 @@
+{{- if .Values.worker.enabled }}
+apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ include "flowise.worker.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
+  labels:
+    {{- include "flowise.worker.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.worker.deploymentAnnotations .Values.commonAnnotations }}
+  {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.worker.deploymentAnnotations .Values.commonAnnotations ) "context" . ) }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.worker.replicaCount }}
+  revisionHistoryLimit: {{ .Values.worker.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      {{- include "flowise.worker.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "flowise.worker.selectorLabels" . | nindent 8 }}
+        {{- if .Values.worker.podLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.worker.podLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonLabels }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- if or .Values.worker.podAnnotations .Values.commonAnnotations }}
+      annotations:
+        {{- if .Values.worker.podAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.worker.podAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+        {{- if .Values.commonAnnotations }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
+        {{- end }}
+      {{- end }}
+    spec:
+      enableServiceLinks: {{ .Values.worker.enableServiceLinks }}
+      {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.worker.image ) "global" .Values.global ) | nindent 6 }}
+      {{- if .Values.worker.hostAliases }}
+      hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.worker.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.worker.priorityClassName }}
+      priorityClassName: {{ .Values.worker.priorityClassName | quote }}
+      {{- end }}
+      {{- if .Values.worker.runtimeClassName }}
+      runtimeClassName: {{ .Values.worker.runtimeClassName | quote }}
+      {{- end }}
+      serviceAccountName: {{ include "flowise.worker.serviceAccountName" . }}
+      {{- if .Values.worker.topologySpreadConstraints }}
+      topologySpreadConstraints: {{- include "common.tplvalues.render" (dict "value" .Values.worker.topologySpreadConstraints "context" .) | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.worker.podSecurityContext | nindent 8 }}
+      initContainers:
+        {{- if or .Values.mariadb.enabled .Values.externalMariadb.enabled }}
+        - name: wait-mariadb
+          securityContext:
+            {{- toYaml .Values.wait.securityContext | nindent 12 }}
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.wait.image "global" .Values.global ) }}
+          imagePullPolicy: {{ .Values.wait.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              wait4x mysql "${MARIADB_USERNAME}:${MARIADB_PASSWORD}@tcp(${MARIADB_HOST}:${MARIADB_PORT})/${MARIADB_DATABASE}" --timeout 0
+          env:
+            - name: MARIADB_HOST
+              value: {{ include "flowise.mariadb.host" . | quote }}
+            - name: MARIADB_PORT
+              value: {{ include "flowise.mariadb.port" . | quote }}
+            - name: MARIADB_USERNAME
+              value: {{ include "flowise.mariadb.username" . | quote }}
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.mariadb.secretName" . }}
+                  key: {{ include "flowise.mariadb.secretKeyPassword" . }}
+            - name: MARIADB_DATABASE
+              value: {{ include "flowise.mariadb.database" . | quote }}
+          resources:
+            {{- toYaml .Values.wait.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.wait.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.wait.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+        {{- end }}
+        {{- if or .Values.postgresql.enabled .Values.externalPostgresql.enabled }}
+        - name: wait-postgresql
+          securityContext:
+            {{- toYaml .Values.wait.securityContext | nindent 12 }}
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.wait.image "global" .Values.global ) }}
+          imagePullPolicy: {{ .Values.wait.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              wait4x postgresql "postgres://${POSTGRESQL_USERNAME}:${POSTGRESQL_PASSWORD}@${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${POSTGRESQL_DATABASE}?sslmode=disable" --timeout 0
+          env:
+            - name: POSTGRESQL_HOST
+              value: {{ include "flowise.postgresql.host" . | quote }}
+            - name: POSTGRESQL_PORT
+              value: {{ include "flowise.postgresql.port" . | quote }}
+            - name: POSTGRESQL_USERNAME
+              value: {{ include "flowise.postgresql.username" . | quote }}
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.postgresql.secretName" . }}
+                  key: {{ include "flowise.postgresql.secretKeyPassword" . }}
+            - name: POSTGRESQL_DATABASE
+              value: {{ include "flowise.postgresql.database" . | quote }}
+          resources:
+            {{- toYaml .Values.wait.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.wait.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.wait.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+        {{- end }}
+        {{- if or .Values.redis.enabled .Values.externalRedis.enabled }}
+        - name: wait-redis
+          securityContext:
+            {{- toYaml .Values.wait.securityContext | nindent 12 }}
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.wait.image "global" .Values.global ) }}
+          imagePullPolicy: {{ .Values.wait.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              wait4x redis "redis://default:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}" --timeout 0
+          env:
+            - name: REDIS_HOST
+              value: {{ include "flowise.redis.host" . | quote }}
+            - name: REDIS_PORT
+              value: {{ include "flowise.redis.port" . | quote }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.redis.secretName" . }}
+                  key: {{ include "flowise.redis.secretKeyPassword" . }}
+          resources:
+            {{- toYaml .Values.wait.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.wait.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.wait.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+        {{- end }}
+      containers:
+        - name: worker
+          securityContext:
+            {{- toYaml .Values.worker.securityContext | nindent 12 }}
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.worker.image "global" .Values.global ) }}
+          imagePullPolicy: {{ .Values.worker.image.pullPolicy }}
+          {{- if .Values.worker.extraArgs }}
+          args:
+            {{- range $key, $value := .Values.worker.extraArgs }}
+            - --{{ $key }}={{ $value }}
+            {{- end }}
+          {{- end }}
+          env:
+            - name: WORKER_PORT
+              value: {{ .Values.worker.containerPorts.probes | quote }}
+            - name: FLOWISE_SECRETKEY_OVERWRITE
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.secretName" . }}
+                  key: {{ include "flowise.secretKeyEncryptionKey" . }}
+            {{- if or .Values.mariadb.enabled .Values.externalMariadb.enabled }}
+            - name: DATABASE_TYPE
+              value: mysql
+            - name: DATABASE_HOST
+              value: {{ include "flowise.mariadb.host" . | quote }}
+            - name: DATABASE_PORT
+              value: {{ include "flowise.mariadb.port" . | quote }}
+            - name: DATABASE_USER
+              value: {{ include "flowise.mariadb.username" . | quote }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.mariadb.secretName" . }}
+                  key: {{ include "flowise.mariadb.secretKeyPassword" . }}
+            - name: DATABASE_NAME
+              value: {{ include "flowise.mariadb.database" . | quote }}
+            {{- end }}
+            {{- if or .Values.postgresql.enabled .Values.externalPostgresql.enabled }}
+            - name: DATABASE_TYPE
+              value: postgres
+            - name: DATABASE_HOST
+              value: {{ include "flowise.postgresql.host" . | quote }}
+            - name: DATABASE_PORT
+              value: {{ include "flowise.postgresql.port" . | quote }}
+            - name: DATABASE_USER
+              value: {{ include "flowise.postgresql.username" . | quote }}
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.postgresql.secretName" . }}
+                  key: {{ include "flowise.postgresql.secretKeyPassword" . }}
+            - name: DATABASE_NAME
+              value: {{ include "flowise.postgresql.database" . | quote }}
+            {{- end }}
+            - name: REDIS_HOST
+              value: {{ include "flowise.redis.host" . | quote }}
+            - name: REDIS_PORT
+              value: {{ include "flowise.redis.port" . | quote }}
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "flowise.redis.secretName" . }}
+                  key: {{ include "flowise.redis.secretKeyPassword" . }}
+            {{- if .Values.worker.extraEnvVars }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.worker.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
+          {{- if or .Values.worker.extraEnvVarsCM .Values.worker.extraEnvVarsSecret }}
+          envFrom:
+            {{- if .Values.worker.extraEnvVarsCM }}
+            - configMapRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.worker.extraEnvVarsCM "context" $) }}
+            {{- end }}
+            {{- if .Values.worker.extraEnvVarsSecret }}
+            - secretRef:
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.worker.extraEnvVarsSecret "context" $) }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http-probes
+              containerPort: {{ .Values.worker.containerPorts.probes }}
+              protocol: TCP
+          {{- if .Values.worker.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http-probes
+            initialDelaySeconds: {{ .Values.worker.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.worker.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.worker.livenessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.worker.livenessProbe.failureThreshold }}
+            successThreshold: {{ .Values.worker.livenessProbe.successThreshold }}
+          {{- end }}
+          {{- if .Values.worker.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http-probes
+            initialDelaySeconds: {{ .Values.worker.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.worker.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.worker.readinessProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.worker.readinessProbe.failureThreshold }}
+            successThreshold: {{ .Values.worker.readinessProbe.successThreshold }}
+          {{- end }}
+          {{- if .Values.worker.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: http-probes
+            initialDelaySeconds: {{ .Values.worker.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.worker.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.worker.startupProbe.timeoutSeconds }}
+            failureThreshold: {{ .Values.worker.startupProbe.failureThreshold }}
+            successThreshold: {{ .Values.worker.startupProbe.successThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.worker.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.worker.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.worker.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+      {{- with .Values.worker.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.worker.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.worker.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      volumes:
+        {{- if .Values.worker.extraVolumes }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.worker.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}
+{{- end }}

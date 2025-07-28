@@ -1,0 +1,42 @@
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+annotations:
+  category: Database
+  images: |
+    - name: kubectl
+      image: docker.io/bitnamilegacy/kubectl:1.33.2-debian-12-r0
+    - name: os-shell
+      image: docker.io/bitnamilegacy/os-shell:12-debian-12-r47
+    - name: redis
+      image: docker.io/bitnamilegacy/redis:8.0.2-debian-12-r4
+    - name: redis-exporter
+      image: docker.io/bitnamilegacy/redis-exporter:1.74.0-debian-12-r1
+    - name: redis-sentinel
+      image: docker.io/bitnamilegacy/redis-sentinel:8.0.2-debian-12-r2
+  licenses: Apache-2.0
+  tanzuCategory: service
+apiVersion: v2
+appVersion: 8.0.2
+dependencies:
+- name: common
+  repository: oci://ghcr.io/cowboysysop/charts
+  tags:
+  - bitnami-common
+  version: 2.31.3
+description: Redis(R) is an open source, advanced key-value store. It is often referred
+  to as a data structure server since keys can contain strings, hashes, lists, sets
+  and sorted sets.
+home: https://github.com/cowboysysop/charts/tree/master/charts/redis
+icon: https://raw.githubusercontent.com/cowboysysop/charts/master/charts/redis/icon.png
+keywords:
+- redis
+- keyvalue
+- database
+maintainers:
+- name: sebastien-prudhomme
+  email: sebastien.prudhomme@gmail.com
+name: redis
+sources:
+- https://github.com/cowboysysop/charts/tree/master/charts/redis
+version: 21.2.6

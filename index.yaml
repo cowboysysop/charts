@@ -12571,6 +12571,50 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/quickchart-1.0.0/quickchart-1.0.0.tgz
     version: 1.0.0
+  redis:
+  - annotations:
+      category: Database
+      images: |
+        - name: kubectl
+          image: docker.io/bitnamilegacy/kubectl:1.33.2-debian-12-r0
+        - name: os-shell
+          image: docker.io/bitnamilegacy/os-shell:12-debian-12-r47
+        - name: redis
+          image: docker.io/bitnamilegacy/redis:8.0.2-debian-12-r4
+        - name: redis-exporter
+          image: docker.io/bitnamilegacy/redis-exporter:1.74.0-debian-12-r1
+        - name: redis-sentinel
+          image: docker.io/bitnamilegacy/redis-sentinel:8.0.2-debian-12-r2
+      licenses: Apache-2.0
+      tanzuCategory: service
+    apiVersion: v2
+    appVersion: 8.0.2
+    created: "2025-07-28T19:50:54.163913537Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      tags:
+      - bitnami-common
+      version: 2.31.3
+    description: Redis(R) is an open source, advanced key-value store. It is often
+      referred to as a data structure server since keys can contain strings, hashes,
+      lists, sets and sorted sets.
+    digest: 15bd984307088ec06d51009bd090e8667296148724c4f867794d9f60ed0de5f3
+    home: https://github.com/cowboysysop/charts/tree/master/charts/redis
+    icon: https://raw.githubusercontent.com/cowboysysop/charts/master/charts/redis/icon.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: redis
+    sources:
+    - https://github.com/cowboysysop/charts/tree/master/charts/redis
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/redis-21.2.6/redis-21.2.6.tgz
+    version: 21.2.6
   redis-extra:
   - annotations:
       artifacthub.io/signKey: |
@@ -15218,4 +15262,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-28T19:22:00.633053344Z"
+generated: "2025-07-28T19:50:54.164789623Z"

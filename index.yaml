@@ -2862,6 +2862,31 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: latest
+    created: "2025-07-29T19:34:15.914791657Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 2.31.3
+    description: Model Context Protocol server for Grafana
+    digest: b35ad942928f9be93ada31ef23fbc8f9bed00abc3de6619f6dcac2632bb6eebc
+    home: https://github.com/grafana/mcp-grafana
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: grafana-mcp
+    sources:
+    - https://github.com/grafana/mcp-grafana
+    - https://github.com/cowboysysop/charts/tree/master/charts/grafana-mcp
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/grafana-mcp-2.0.0/grafana-mcp-2.0.0.tgz
+    version: 2.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: latest
     created: "2025-06-28T16:35:56.818910349Z"
     dependencies:
     - name: common
@@ -15300,4 +15325,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-07-28T20:31:13.02773201Z"
+generated: "2025-07-29T19:34:15.915576719Z"

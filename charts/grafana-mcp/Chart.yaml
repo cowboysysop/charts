@@ -9,11 +9,11 @@ name: grafana-mcp
 sources:
   - https://github.com/grafana/mcp-grafana
   - https://github.com/cowboysysop/charts/tree/master/charts/grafana-mcp
-version: 1.0.0
+version: 2.0.0
 dependencies:
   - name: common
-    version: 2.31.1
-    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 2.31.3
+    repository: oci://ghcr.io/cowboysysop/charts
 annotations:
   artifacthub.io/signKey: |
     fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8

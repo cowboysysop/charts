@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "grafana-mcp.labels" -}}
+{{- define "grafana-mcp.commonLabels" -}}
 helm.sh/chart: {{ include "grafana-mcp.chart" . }}
-{{ include "grafana-mcp.selectorLabels" . }}
+{{ include "grafana-mcp.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "grafana-mcp.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "grafana-mcp.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "grafana-mcp.componentLabels" -}}
+app.kubernetes.io/component: grafana-mcp
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "grafana-mcp.labels" -}}
+{{ include "grafana-mcp.commonLabels" . }}
+{{ include "grafana-mcp.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "grafana-mcp.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "grafana-mcp.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "grafana-mcp.commonSelectorLabels" . }}
+{{ include "grafana-mcp.componentLabels" . }}
 {{- end -}}
 
 {{/*

@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "grafana-mcp.tests.labels" -}}
-{{ include "grafana-mcp.labels" . }}
+{{ include "grafana-mcp.commonLabels" . }}
 {{ include "grafana-mcp.tests.componentLabels" . }}
 {{- end -}}

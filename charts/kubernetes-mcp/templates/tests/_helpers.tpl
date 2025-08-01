@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "kubernetes-mcp.tests.labels" -}}
-{{ include "kubernetes-mcp.labels" . }}
+{{ include "kubernetes-mcp.commonLabels" . }}
 {{ include "kubernetes-mcp.tests.componentLabels" . }}
 {{- end -}}

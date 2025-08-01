@@ -59,6 +59,20 @@ $ helm upgrade my-release oci://ghcr.io/cowboysysop/charts/kubernetes-mcp
 
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
+### Upgrading to version 2.0.0
+
+The chart now uses forked versions of the Bitnami charts to reference the Bitnami Legacy repository:
+
+- https://github.com/bitnami/containers/issues/83267
+
+A label `app.kubernetes.io/component` will be added to the Deployment. Run this command before upgrading to prevent an immutable field error:
+
+```bash
+$ kubectl delete deployment/my-kubernetes-mcp-deployment
+```
+
+Pod and container security contexts are now configured with default values.
+
 ## Uninstalling
 
 Uninstall the `my-release` deployment using:
@@ -94,62 +108,69 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 
 ### Parameters
 
-| Name                               | Description                                                                                                | Default                        |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `replicaCount`                     | Number of replicas                                                                                         | `1`                            |
-| `revisionHistoryLimit`             | Number of old history to retain to allow rollback                                                          | `10`                           |
-| `image.registry`                   | Image registry                                                                                             | `quay.io`                      |
-| `image.repository`                 | Image repository                                                                                           | `manusa/kubernetes_mcp_server` |
-| `image.tag`                        | Image tag                                                                                                  | `v0.0.44`                      |
-| `image.digest`                     | Image digest                                                                                               | `""`                           |
-| `image.pullPolicy`                 | Image pull policy                                                                                          | `IfNotPresent`                 |
-| `pdb.create`                       | Specifies whether a pod disruption budget should be created                                                | `false`                        |
-| `pdb.minAvailable`                 | Minimum number/percentage of pods that should remain scheduled                                             | `1`                            |
-| `pdb.maxUnavailable`               | Maximum number/percentage of pods that may be made unavailable                                             | `nil`                          |
-| `rbac.rules`                       | Custom RBAC rules to set                                                                                   | `[]`                           |
-| `serviceAccount.create`            | Specifies whether a service account should be created                                                      | `true`                         |
-| `serviceAccount.annotations`       | Service account annotations                                                                                | `{}`                           |
-| `serviceAccount.name`              | The name of the service account to use (Generated using the `kubernetes-mcp.fullname` template if not set) | `nil`                          |
-| `enableServiceLinks`               | Whether information about services should be injected into pod's environment variable                      | `false`                        |
-| `hostAliases`                      | Pod host aliases                                                                                           | `[]`                           |
-| `deploymentAnnotations`            | Additional deployment annotations                                                                          | `{}`                           |
-| `podAnnotations`                   | Additional pod annotations                                                                                 | `{}`                           |
-| `podLabels`                        | Additional pod labels                                                                                      | `{}`                           |
-| `podSecurityContext`               | Pod security context                                                                                       | `{}`                           |
-| `priorityClassName`                | Priority class name                                                                                        | `nil`                          |
-| `runtimeClassName`                 | Runtime class name                                                                                         | `""`                           |
-| `topologySpreadConstraints`        | Topology Spread Constraints for pod assignment                                                             | `[]`                           |
-| `securityContext`                  | Container security context                                                                                 | `{}`                           |
-| `containerPorts.http`              | Container port for HTTP                                                                                    | `8080`                         |
-| `service.annotations`              | Service annotations                                                                                        | `{}`                           |
-| `service.type`                     | Service type                                                                                               | `ClusterIP`                    |
-| `service.clusterIP`                | Static cluster IP address or None for headless service when service type is ClusterIP                      | `nil`                          |
-| `service.ipFamilyPolicy`           | Service IP family policy                                                                                   | `""`                           |
-| `service.ipFamilies`               | Service IP families                                                                                        | `[]`                           |
-| `service.sessionAffinity`          | Control where client requests go, to the same pod or round-robin                                           | `None`                         |
-| `service.sessionAffinityConfig`    | Additional settings for the sessionAffinity                                                                | `{}`                           |
-| `service.loadBalancerIP`           | Static load balancer IP address when service type is LoadBalancer                                          | `nil`                          |
-| `service.loadBalancerSourceRanges` | Source IP address ranges when service type is LoadBalancer                                                 | `nil`                          |
-| `service.externalTrafficPolicy`    | External traffic routing policy when service type is LoadBalancer or NodePort                              | `Cluster`                      |
-| `service.ports.http`               | Service port for HTTP                                                                                      | `8080`                         |
-| `service.nodePorts.http`           | Service node port for HTTP when service type is LoadBalancer or NodePort                                   | `nil`                          |
-| `ingress.enabled`                  | Enable ingress controller resource                                                                         | `false`                        |
-| `ingress.ingressClassName`         | IngressClass that will be be used to implement the Ingress                                                 | `""`                           |
-| `ingress.pathType`                 | Ingress path type                                                                                          | `ImplementationSpecific`       |
-| `ingress.annotations`              | Ingress annotations                                                                                        | `{}`                           |
-| `ingress.hosts[0].host`            | Hostname to your Kubernetes MCP Server installation                                                        | `kubernetes-mcp.local`         |
-| `ingress.hosts[0].paths`           | Paths within the url structure                                                                             | `["/"]`                        |
-| `ingress.tls`                      | TLS configuration                                                                                          | `[]`                           |
-| `resources`                        | CPU/Memory resource requests/limits                                                                        | `{}`                           |
-| `nodeSelector`                     | Node labels for pod assignment                                                                             | `{}`                           |
-| `tolerations`                      | Tolerations for pod assignment                                                                             | `[]`                           |
-| `affinity`                         | Map of node/pod affinities                                                                                 | `{}`                           |
-| `extraArgs`                        | Additional container arguments                                                                             | `{}`                           |
-| `extraEnvVars`                     | Additional container environment variables                                                                 | `[]`                           |
-| `extraEnvVarsCM`                   | Name of existing ConfigMap containing additional container environment variables                           | `nil`                          |
-| `extraEnvVarsSecret`               | Name of existing Secret containing additional container environment variables                              | `nil`                          |
-| `extraVolumes`                     | Optionally specify extra list of additional volumes                                                        | `[]`                           |
-| `extraVolumeMounts`                | Optionally specify extra list of additional volumeMounts                                                   | `[]`                           |
+| Name                                       | Description                                                                                                | Default                        |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `replicaCount`                             | Number of replicas                                                                                         | `1`                            |
+| `revisionHistoryLimit`                     | Number of old history to retain to allow rollback                                                          | `10`                           |
+| `image.registry`                           | Image registry                                                                                             | `quay.io`                      |
+| `image.repository`                         | Image repository                                                                                           | `manusa/kubernetes_mcp_server` |
+| `image.tag`                                | Image tag                                                                                                  | `v0.0.47`                      |
+| `image.digest`                             | Image digest                                                                                               | `""`                           |
+| `image.pullPolicy`                         | Image pull policy                                                                                          | `IfNotPresent`                 |
+| `pdb.create`                               | Specifies whether a pod disruption budget should be created                                                | `false`                        |
+| `pdb.minAvailable`                         | Minimum number/percentage of pods that should remain scheduled                                             | `1`                            |
+| `pdb.maxUnavailable`                       | Maximum number/percentage of pods that may be made unavailable                                             | `nil`                          |
+| `rbac.rules`                               | Custom RBAC rules to set                                                                                   | `[]`                           |
+| `serviceAccount.create`                    | Specifies whether a service account should be created                                                      | `true`                         |
+| `serviceAccount.annotations`               | Service account annotations                                                                                | `{}`                           |
+| `serviceAccount.name`                      | The name of the service account to use (Generated using the `kubernetes-mcp.fullname` template if not set) | `nil`                          |
+| `enableServiceLinks`                       | Whether information about services should be injected into pod's environment variable                      | `false`                        |
+| `hostAliases`                              | Pod host aliases                                                                                           | `[]`                           |
+| `deploymentAnnotations`                    | Additional deployment annotations                                                                          | `{}`                           |
+| `podAnnotations`                           | Additional pod annotations                                                                                 | `{}`                           |
+| `podLabels`                                | Additional pod labels                                                                                      | `{}`                           |
+| `podSecurityContext`                       | Pod security context                                                                                       |                                |
+| `podSecurityContext.seccompProfile.type`   | Set pod's Security Context seccomp profile                                                                 | `RuntimeDefault`               |
+| `priorityClassName`                        | Priority class name                                                                                        | `nil`                          |
+| `runtimeClassName`                         | Runtime class name                                                                                         | `""`                           |
+| `topologySpreadConstraints`                | Topology Spread Constraints for pod assignment                                                             | `[]`                           |
+| `securityContext`                          | Container security context                                                                                 |                                |
+| `securityContext.allowPrivilegeEscalation` | Set container's Security Context allowPrivilegeEscalation                                                  | `false`                        |
+| `securityContext.capabilities.drop`        | List of capabilities to be dropped                                                                         | `["ALL"]`                      |
+| `securityContext.readOnlyRootFilesystem`   | Set container's Security Context readOnlyRootFilesystem                                                    | `true`                         |
+| `securityContext.runAsNonRoot`             | Whether the container must run as a non-root user                                                          | `true`                         |
+| `securityContext.runAsUser`                | The UID to run the entrypoint of the container process                                                     | `65534`                        |
+| `securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                                                     | `65534`                        |
+| `containerPorts.http`                      | Container port for HTTP                                                                                    | `8080`                         |
+| `service.annotations`                      | Service annotations                                                                                        | `{}`                           |
+| `service.type`                             | Service type                                                                                               | `ClusterIP`                    |
+| `service.clusterIP`                        | Static cluster IP address or None for headless service when service type is ClusterIP                      | `nil`                          |
+| `service.ipFamilyPolicy`                   | Service IP family policy                                                                                   | `""`                           |
+| `service.ipFamilies`                       | Service IP families                                                                                        | `[]`                           |
+| `service.sessionAffinity`                  | Control where client requests go, to the same pod or round-robin                                           | `None`                         |
+| `service.sessionAffinityConfig`            | Additional settings for the sessionAffinity                                                                | `{}`                           |
+| `service.loadBalancerIP`                   | Static load balancer IP address when service type is LoadBalancer                                          | `nil`                          |
+| `service.loadBalancerSourceRanges`         | Source IP address ranges when service type is LoadBalancer                                                 | `nil`                          |
+| `service.externalTrafficPolicy`            | External traffic routing policy when service type is LoadBalancer or NodePort                              | `Cluster`                      |
+| `service.ports.http`                       | Service port for HTTP                                                                                      | `8080`                         |
+| `service.nodePorts.http`                   | Service node port for HTTP when service type is LoadBalancer or NodePort                                   | `nil`                          |
+| `ingress.enabled`                          | Enable ingress controller resource                                                                         | `false`                        |
+| `ingress.ingressClassName`                 | IngressClass that will be be used to implement the Ingress                                                 | `""`                           |
+| `ingress.pathType`                         | Ingress path type                                                                                          | `ImplementationSpecific`       |
+| `ingress.annotations`                      | Ingress annotations                                                                                        | `{}`                           |
+| `ingress.hosts[0].host`                    | Hostname to your Kubernetes MCP Server installation                                                        | `kubernetes-mcp.local`         |
+| `ingress.hosts[0].paths`                   | Paths within the url structure                                                                             | `["/"]`                        |
+| `ingress.tls`                              | TLS configuration                                                                                          | `[]`                           |
+| `resources`                                | CPU/Memory resource requests/limits                                                                        | `{}`                           |
+| `nodeSelector`                             | Node labels for pod assignment                                                                             | `{}`                           |
+| `tolerations`                              | Tolerations for pod assignment                                                                             | `[]`                           |
+| `affinity`                                 | Map of node/pod affinities                                                                                 | `{}`                           |
+| `extraArgs`                                | Additional container arguments                                                                             | `{}`                           |
+| `extraEnvVars`                             | Additional container environment variables                                                                 | `[]`                           |
+| `extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables                           | `nil`                          |
+| `extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables                              | `nil`                          |
+| `extraVolumes`                             | Optionally specify extra list of additional volumes                                                        | `[]`                           |
+| `extraVolumeMounts`                        | Optionally specify extra list of additional volumeMounts                                                   | `[]`                           |
 
 ### Tests parameters
 

@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "kroki.tests.labels" -}}
-{{ include "kroki.labels" . }}
+{{ include "kroki.commonLabels" . }}
 {{ include "kroki.tests.componentLabels" . }}
 {{- end -}}

@@ -2,6 +2,7 @@ apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
   name: {{ include "kroki.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels:
     {{- include "kroki.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
@@ -14,6 +15,7 @@ metadata:
 spec:
   {{- if not .Values.autoscaling.hpa.enabled }}
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   {{- end }}
   selector:
     matchLabels:
@@ -38,7 +40,11 @@ spec:
         {{- end }}
       {{- end }}
     spec:
+      enableServiceLinks: {{ .Values.enableServiceLinks }}
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.image ) "global" .Values.global ) | nindent 6 }}
+      {{- if .Values.hostAliases }}
+      hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
@@ -117,6 +123,16 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: kroki-tmp
+            - name: empty-dir
+              mountPath: /home/kroki
+              subPath: kroki-home-kroki
+            {{- if .Values.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
         {{- if .Values.bpmn.enabled }}
         - name: bpmn
           securityContext:
@@ -150,6 +166,16 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.bpmn.resources | nindent 12 }}
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: bpmn-tmp
+            - name: empty-dir
+              mountPath: /home/kroki
+              subPath: bpmn-home-kroki
+            {{- if .Values.bpmn.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.bpmn.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
         {{- end }}
         {{- if .Values.diagramsnet.enabled }}
         - name: diagramsnet
@@ -184,6 +210,16 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.diagramsnet.resources | nindent 12 }}
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: diagramsnet-tmp
+            - name: empty-dir
+              mountPath: /home/kroki
+              subPath: diagramsnet-home-kroki
+            {{- if .Values.diagramsnet.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.diagramsnet.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
         {{- end }}
         {{- if .Values.excalidraw.enabled }}
         - name: excalidraw
@@ -218,6 +254,16 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.excalidraw.resources | nindent 12 }}
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: excalidraw-tmp
+            - name: empty-dir
+              mountPath: /home/kroki
+              subPath: excalidraw-home-kroki
+            {{- if .Values.excalidraw.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.excalidraw.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
         {{- end }}
         {{- if .Values.mermaid.enabled }}
         - name: mermaid
@@ -252,6 +298,16 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.mermaid.resources | nindent 12 }}
+          volumeMounts:
+            - name: empty-dir
+              mountPath: /tmp
+              subPath: mermaid-tmp
+            - name: empty-dir
+              mountPath: /home/kroki
+              subPath: mermaid-home-kroki
+            {{- if .Values.mermaid.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.mermaid.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -265,3 +321,9 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+        - name: empty-dir
+          emptyDir: {}
+        {{- if .Values.extraVolumes }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}

@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "kroki.labels" -}}
+{{- define "kroki.commonLabels" -}}
 helm.sh/chart: {{ include "kroki.chart" . }}
-{{ include "kroki.selectorLabels" . }}
+{{ include "kroki.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "kroki.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "kroki.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "kroki.componentLabels" -}}
+app.kubernetes.io/component: kroki
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "kroki.labels" -}}
+{{ include "kroki.commonLabels" . }}
+{{ include "kroki.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "kroki.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "kroki.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "kroki.commonSelectorLabels" . }}
+{{ include "kroki.componentLabels" . }}
 {{- end -}}
 
 {{/*

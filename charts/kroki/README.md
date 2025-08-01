@@ -11,6 +11,12 @@ $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
 $ helm install my-release cowboysysop/kroki
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release oci://ghcr.io/cowboysysop/charts/kroki
+```
+
 ## Introduction
 
 This chart bootstraps a Kroki deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
@@ -29,6 +35,12 @@ $ helm repo add cowboysysop https://cowboysysop.github.io/charts/
 $ helm install my-release cowboysysop/kroki
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release oci://ghcr.io/cowboysysop/charts/kroki
+```
+
 These commands deploy Kroki on the Kubernetes cluster in the default configuration and with the release name `my-release`. The deployment configuration can be customized by specifying the customization parameters with the `helm install` command using the `--values` or `--set` arguments. Find more information in the [configuration section](#configuration) of this document.
 
 ## Upgrading
@@ -39,9 +51,29 @@ Upgrade the chart deployment using:
 $ helm upgrade my-release cowboysysop/kroki
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm upgrade my-release oci://ghcr.io/cowboysysop/charts/kroki
+```
+
 The command upgrades the existing `my-release` deployment with the most latest release of the chart.
 
-**TIP**: Use `helm repo update` to update information on available charts in the chart repositories.
+### Upgrading to version 6.0.0
+
+The chart now uses forked versions of the Bitnami charts to reference the Bitnami Legacy repository:
+
+- https://github.com/bitnami/containers/issues/83267
+
+A label `app.kubernetes.io/component` will be added to the Deployment. Run this command before upgrading to prevent an immutable field error:
+
+```bash
+$ kubectl delete deployment/my-kroki-deployment
+```
+
+Pod and container security contexts are now configured with default values.
+
+Information about services are no more injected into pod's environment variable.
 
 ### Upgrading to version 5.0.0
 
@@ -97,155 +129,198 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `kubeVersion`       | Override Kubernetes version                                                                | `""`    |
 | `nameOverride`      | Partially override `kroki.fullname` template with a string (will prepend the release name) | `""`    |
 | `fullnameOverride`  | Fully override `kroki.fullname` template with a string                                     | `""`    |
+| `namespaceOverride` | Fully override `common.names.namespace` template with a string                             | `""`    |
 | `commonAnnotations` | Annotations to add to all deployed objects                                                 | `{}`    |
 | `commonLabels`      | Labels to add to all deployed objects                                                      | `{}`    |
 | `extraDeploy`       | Array of extra objects to deploy with the release                                          | `[]`    |
 
 ### Parameters
 
-| Name                                 | Description                                                                                           | Default                  |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------ |
-| `replicaCount`                       | Number of replicas                                                                                    | `1`                      |
-| `image.registry`                     | Image registry                                                                                        | `docker.io`              |
-| `image.repository`                   | Image repository                                                                                      | `yuzutech/kroki`         |
-| `image.tag`                          | Image tag                                                                                             | `0.25.0`                 |
-| `image.digest`                       | Image digest                                                                                          | `""`                     |
-| `image.pullPolicy`                   | Image pull policy                                                                                     | `IfNotPresent`           |
-| `pdb.create`                         | Specifies whether a pod disruption budget should be created                                           | `false`                  |
-| `pdb.minAvailable`                   | Minimum number/percentage of pods that should remain scheduled                                        | `1`                      |
-| `pdb.maxUnavailable`                 | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                    |
-| `serviceAccount.create`              | Specifies whether a service account should be created                                                 | `true`                   |
-| `serviceAccount.annotations`         | Service account annotations                                                                           | `{}`                     |
-| `serviceAccount.name`                | The name of the service account to use (Generated using the `kroki.fullname` template if not set)     | `nil`                    |
-| `deploymentAnnotations`              | Additional deployment annotations                                                                     | `{}`                     |
-| `podAnnotations`                     | Additional pod annotations                                                                            | `{}`                     |
-| `podLabels`                          | Additional pod labels                                                                                 | `{}`                     |
-| `podSecurityContext`                 | Pod security context                                                                                  | `{}`                     |
-| `priorityClassName`                  | Priority class name                                                                                   | `nil`                    |
-| `runtimeClassName`                   | Runtime class name                                                                                    | `""`                     |
-| `topologySpreadConstraints`          | Topology Spread Constraints for pod assignment                                                        | `[]`                     |
-| `securityContext`                    | Container security context                                                                            | `{}`                     |
-| `containerPorts.http`                | Container port for HTTP                                                                               | `8000`                   |
-| `livenessProbe.enabled`              | Enable liveness probe                                                                                 | `true`                   |
-| `livenessProbe.initialDelaySeconds`  | Delay before the liveness probe is initiated                                                          | `0`                      |
-| `livenessProbe.periodSeconds`        | How often to perform the liveness probe                                                               | `10`                     |
-| `livenessProbe.timeoutSeconds`       | When the liveness probe times out                                                                     | `1`                      |
-| `livenessProbe.failureThreshold`     | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                      |
-| `livenessProbe.successThreshold`     | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                      |
-| `readinessProbe.enabled`             | Enable readiness probe                                                                                | `true`                   |
-| `readinessProbe.initialDelaySeconds` | Delay before the readiness probe is initiated                                                         | `0`                      |
-| `readinessProbe.periodSeconds`       | How often to perform the readiness probe                                                              | `10`                     |
-| `readinessProbe.timeoutSeconds`      | When the readiness probe times out                                                                    | `1`                      |
-| `readinessProbe.failureThreshold`    | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                      |
-| `readinessProbe.successThreshold`    | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                      |
-| `startupProbe.enabled`               | Enable startup probe                                                                                  | `false`                  |
-| `startupProbe.initialDelaySeconds`   | Delay before the startup probe is initiated                                                           | `0`                      |
-| `startupProbe.periodSeconds`         | How often to perform the startup probe                                                                | `10`                     |
-| `startupProbe.timeoutSeconds`        | When the startup probe times out                                                                      | `1`                      |
-| `startupProbe.failureThreshold`      | Minimum consecutive failures for the startup probe to be considered failed after having succeeded     | `3`                      |
-| `startupProbe.successThreshold`      | Minimum consecutive successes for the startup probe to be considered successful after having failed   | `1`                      |
-| `service.annotations`                | Service annotations                                                                                   | `{}`                     |
-| `service.type`                       | Service type                                                                                          | `ClusterIP`              |
-| `service.clusterIP`                  | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
-| `service.sessionAffinity`            | Control where client requests go, to the same pod or round-robin                                      | `None`                   |
-| `service.sessionAffinityConfig`      | Additional settings for the sessionAffinity                                                           | `{}`                     |
-| `service.loadBalancerIP`             | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |
-| `service.loadBalancerSourceRanges`   | Source IP address ranges when service type is LoadBalancer                                            | `nil`                    |
-| `service.externalTrafficPolicy`      | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                |
-| `service.ports.http`                 | Service port for HTTP                                                                                 | `8000`                   |
-| `service.nodePorts.http`             | Service node port for HTTP when service type is LoadBalancer or NodePort                              | `nil`                    |
-| `ingress.enabled`                    | Enable ingress controller resource                                                                    | `false`                  |
-| `ingress.ingressClassName`           | IngressClass that will be be used to implement the Ingress                                            | `""`                     |
-| `ingress.pathType`                   | Ingress path type                                                                                     | `ImplementationSpecific` |
-| `ingress.annotations`                | Ingress annotations                                                                                   | `{}`                     |
-| `ingress.hosts[0].host`              | Hostname to your Kroki installation                                                                   | `kroki.local`            |
-| `ingress.hosts[0].paths`             | Paths within the url structure                                                                        | `["/"]`                  |
-| `ingress.tls`                        | TLS configuration                                                                                     | `[]`                     |
-| `resources`                          | CPU/Memory resource requests/limits                                                                   | `{}`                     |
-| `nodeSelector`                       | Node labels for pod assignment                                                                        | `{}`                     |
-| `tolerations`                        | Tolerations for pod assignment                                                                        | `[]`                     |
-| `affinity`                           | Map of node/pod affinities                                                                            | `{}`                     |
-| `extraArgs`                          | Additional container arguments                                                                        | `{}`                     |
-| `extraEnvVars`                       | Additional container environment variables                                                            | `[]`                     |
-| `extraEnvVarsCM`                     | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
-| `extraEnvVarsSecret`                 | Name of existing Secret containing additional container environment variables                         | `nil`                    |
-| `autoscaling.hpa.enabled`            | Enable HPA                                                                                            | `false`                  |
-| `autoscaling.hpa.minReplicas`        | Minimum number of replicas                                                                            | `""`                     |
-| `autoscaling.hpa.maxReplicas`        | Maximum number of replicas                                                                            | `""`                     |
-| `autoscaling.hpa.targetCPU`          | Target CPU utilization percentage                                                                     | `""`                     |
-| `autoscaling.hpa.targetMemory`       | Target Memory utilization percentage                                                                  | `""`                     |
+| Name                                       | Description                                                                                           | Default                  |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------ |
+| `replicaCount`                             | Number of replicas                                                                                    | `1`                      |
+| `revisionHistoryLimit`                     | Number of old history to retain to allow rollback                                                     | `10`                     |
+| `image.registry`                           | Image registry                                                                                        | `docker.io`              |
+| `image.repository`                         | Image repository                                                                                      | `yuzutech/kroki`         |
+| `image.tag`                                | Image tag                                                                                             | `0.28.0`                 |
+| `image.digest`                             | Image digest                                                                                          | `""`                     |
+| `image.pullPolicy`                         | Image pull policy                                                                                     | `IfNotPresent`           |
+| `pdb.create`                               | Specifies whether a pod disruption budget should be created                                           | `false`                  |
+| `pdb.minAvailable`                         | Minimum number/percentage of pods that should remain scheduled                                        | `1`                      |
+| `pdb.maxUnavailable`                       | Maximum number/percentage of pods that may be made unavailable                                        | `nil`                    |
+| `serviceAccount.create`                    | Specifies whether a service account should be created                                                 | `true`                   |
+| `serviceAccount.annotations`               | Service account annotations                                                                           | `{}`                     |
+| `serviceAccount.name`                      | The name of the service account to use (Generated using the `kroki.fullname` template if not set)     | `nil`                    |
+| `enableServiceLinks`                       | Whether information about services should be injected into pod's environment variable                 | `false`                  |
+| `hostAliases`                              | Pod host aliases                                                                                      | `[]`                     |
+| `deploymentAnnotations`                    | Additional deployment annotations                                                                     | `{}`                     |
+| `podAnnotations`                           | Additional pod annotations                                                                            | `{}`                     |
+| `podLabels`                                | Additional pod labels                                                                                 | `{}`                     |
+| `podSecurityContext`                       | Pod security context                                                                                  |                          |
+| `podSecurityContext.seccompProfile.type`   | Set pod's Security Context seccomp profile                                                            | `RuntimeDefault`         |
+| `priorityClassName`                        | Priority class name                                                                                   | `nil`                    |
+| `runtimeClassName`                         | Runtime class name                                                                                    | `""`                     |
+| `topologySpreadConstraints`                | Topology Spread Constraints for pod assignment                                                        | `[]`                     |
+| `securityContext`                          | Container security context                                                                            |                          |
+| `securityContext.allowPrivilegeEscalation` | Set container's Security Context allowPrivilegeEscalation                                             | `false`                  |
+| `securityContext.capabilities.drop`        | List of capabilities to be dropped                                                                    | `["ALL"]`                |
+| `securityContext.readOnlyRootFilesystem`   | Set container's Security Context readOnlyRootFilesystem                                               | `true`                   |
+| `securityContext.runAsNonRoot`             | Whether the container must run as a non-root user                                                     | `true`                   |
+| `securityContext.runAsUser`                | The UID to run the entrypoint of the container process                                                | `1001`                   |
+| `securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                                                | `1001`                   |
+| `containerPorts.http`                      | Container port for HTTP                                                                               | `8000`                   |
+| `livenessProbe.enabled`                    | Enable liveness probe                                                                                 | `true`                   |
+| `livenessProbe.initialDelaySeconds`        | Delay before the liveness probe is initiated                                                          | `0`                      |
+| `livenessProbe.periodSeconds`              | How often to perform the liveness probe                                                               | `10`                     |
+| `livenessProbe.timeoutSeconds`             | When the liveness probe times out                                                                     | `1`                      |
+| `livenessProbe.failureThreshold`           | Minimum consecutive failures for the liveness probe to be considered failed after having succeeded    | `3`                      |
+| `livenessProbe.successThreshold`           | Minimum consecutive successes for the liveness probe to be considered successful after having failed  | `1`                      |
+| `readinessProbe.enabled`                   | Enable readiness probe                                                                                | `true`                   |
+| `readinessProbe.initialDelaySeconds`       | Delay before the readiness probe is initiated                                                         | `0`                      |
+| `readinessProbe.periodSeconds`             | How often to perform the readiness probe                                                              | `10`                     |
+| `readinessProbe.timeoutSeconds`            | When the readiness probe times out                                                                    | `1`                      |
+| `readinessProbe.failureThreshold`          | Minimum consecutive failures for the readiness probe to be considered failed after having succeeded   | `3`                      |
+| `readinessProbe.successThreshold`          | Minimum consecutive successes for the readiness probe to be considered successful after having failed | `1`                      |
+| `startupProbe.enabled`                     | Enable startup probe                                                                                  | `false`                  |
+| `startupProbe.initialDelaySeconds`         | Delay before the startup probe is initiated                                                           | `0`                      |
+| `startupProbe.periodSeconds`               | How often to perform the startup probe                                                                | `10`                     |
+| `startupProbe.timeoutSeconds`              | When the startup probe times out                                                                      | `1`                      |
+| `startupProbe.failureThreshold`            | Minimum consecutive failures for the startup probe to be considered failed after having succeeded     | `3`                      |
+| `startupProbe.successThreshold`            | Minimum consecutive successes for the startup probe to be considered successful after having failed   | `1`                      |
+| `service.annotations`                      | Service annotations                                                                                   | `{}`                     |
+| `service.type`                             | Service type                                                                                          | `ClusterIP`              |
+| `service.clusterIP`                        | Static cluster IP address or None for headless service when service type is ClusterIP                 | `nil`                    |
+| `service.ipFamilyPolicy`                   | Service IP family policy                                                                              | `""`                     |
+| `service.ipFamilies`                       | Service IP families                                                                                   | `[]`                     |
+| `service.sessionAffinity`                  | Control where client requests go, to the same pod or round-robin                                      | `None`                   |
+| `service.sessionAffinityConfig`            | Additional settings for the sessionAffinity                                                           | `{}`                     |
+| `service.loadBalancerIP`                   | Static load balancer IP address when service type is LoadBalancer                                     | `nil`                    |
+| `service.loadBalancerSourceRanges`         | Source IP address ranges when service type is LoadBalancer                                            | `nil`                    |
+| `service.externalTrafficPolicy`            | External traffic routing policy when service type is LoadBalancer or NodePort                         | `Cluster`                |
+| `service.ports.http`                       | Service port for HTTP                                                                                 | `8000`                   |
+| `service.nodePorts.http`                   | Service node port for HTTP when service type is LoadBalancer or NodePort                              | `nil`                    |
+| `ingress.enabled`                          | Enable ingress controller resource                                                                    | `false`                  |
+| `ingress.ingressClassName`                 | IngressClass that will be be used to implement the Ingress                                            | `""`                     |
+| `ingress.pathType`                         | Ingress path type                                                                                     | `ImplementationSpecific` |
+| `ingress.annotations`                      | Ingress annotations                                                                                   | `{}`                     |
+| `ingress.hosts[0].host`                    | Hostname to your Kroki installation                                                                   | `kroki.local`            |
+| `ingress.hosts[0].paths`                   | Paths within the url structure                                                                        | `["/"]`                  |
+| `ingress.tls`                              | TLS configuration                                                                                     | `[]`                     |
+| `resources`                                | CPU/Memory resource requests/limits                                                                   | `{}`                     |
+| `nodeSelector`                             | Node labels for pod assignment                                                                        | `{}`                     |
+| `tolerations`                              | Tolerations for pod assignment                                                                        | `[]`                     |
+| `affinity`                                 | Map of node/pod affinities                                                                            | `{}`                     |
+| `extraArgs`                                | Additional container arguments                                                                        | `{}`                     |
+| `extraEnvVars`                             | Additional container environment variables                                                            | `[]`                     |
+| `extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables                      | `nil`                    |
+| `extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables                         | `nil`                    |
+| `extraVolumes`                             | Optionally specify extra list of additional volumes                                                   | `[]`                     |
+| `extraVolumeMounts`                        | Optionally specify extra list of additional volumeMounts                                              | `[]`                     |
+| `autoscaling.hpa.enabled`                  | Enable HPA                                                                                            | `false`                  |
+| `autoscaling.hpa.minReplicas`              | Minimum number of replicas                                                                            | `""`                     |
+| `autoscaling.hpa.maxReplicas`              | Maximum number of replicas                                                                            | `""`                     |
+| `autoscaling.hpa.targetCPU`                | Target CPU utilization percentage                                                                     | `""`                     |
+| `autoscaling.hpa.targetMemory`             | Target Memory utilization percentage                                                                  | `""`                     |
 
 ### BPMN parameters
 
-| Name                       | Description                                                                      | Default               |
-| -------------------------- | -------------------------------------------------------------------------------- | --------------------- |
-| `bpmn.enabled`             | Enable BPMN                                                                      | `true`                |
-| `bpmn.image.registry`      | Image registry                                                                   | `docker.io`           |
-| `bpmn.image.repository`    | Image repository                                                                 | `yuzutech/kroki-bpmn` |
-| `bpmn.image.tag`           | Image tag                                                                        | `0.25.0`              |
-| `bpmn.image.digest`        | Image digest                                                                     | `""`                  |
-| `bpmn.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`        |
-| `bpmn.securityContext`     | Container security context                                                       | `{}`                  |
-| `bpmn.containerPorts.http` | Container port for HTTP                                                          | `8003`                |
-| `bpmn.resources`           | CPU/Memory resource requests/limits                                              | `{}`                  |
-| `bpmn.extraArgs`           | Additional container arguments                                                   | `{}`                  |
-| `bpmn.extraEnvVars`        | Additional container environment variables                                       | `[]`                  |
-| `bpmn.extraEnvVarsCM`      | Name of existing ConfigMap containing additional container environment variables | `nil`                 |
-| `bpmn.extraEnvVarsSecret`  | Name of existing Secret containing additional container environment variables    | `nil`                 |
+| Name                                            | Description                                                                      | Default               |
+| ----------------------------------------------- | -------------------------------------------------------------------------------- | --------------------- |
+| `bpmn.enabled`                                  | Enable BPMN                                                                      | `true`                |
+| `bpmn.image.registry`                           | Image registry                                                                   | `docker.io`           |
+| `bpmn.image.repository`                         | Image repository                                                                 | `yuzutech/kroki-bpmn` |
+| `bpmn.image.tag`                                | Image tag                                                                        | `0.28.0`              |
+| `bpmn.image.digest`                             | Image digest                                                                     | `""`                  |
+| `bpmn.image.pullPolicy`                         | Image pull policy                                                                | `IfNotPresent`        |
+| `bpmn.securityContext`                          | Container security context                                                       |                       |
+| `bpmn.securityContext.allowPrivilegeEscalation` | Set container's Security Context allowPrivilegeEscalation                        | `false`               |
+| `bpmn.securityContext.capabilities.drop`        | List of capabilities to be dropped                                               | `["ALL"]`             |
+| `bpmn.securityContext.readOnlyRootFilesystem`   | Set container's Security Context readOnlyRootFilesystem                          | `true`                |
+| `bpmn.securityContext.runAsNonRoot`             | Whether the container must run as a non-root user                                | `true`                |
+| `bpmn.securityContext.runAsUser`                | The UID to run the entrypoint of the container process                           | `1001`                |
+| `bpmn.securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                           | `1001`                |
+| `bpmn.containerPorts.http`                      | Container port for HTTP                                                          | `8003`                |
+| `bpmn.resources`                                | CPU/Memory resource requests/limits                                              | `{}`                  |
+| `bpmn.extraArgs`                                | Additional container arguments                                                   | `{}`                  |
+| `bpmn.extraEnvVars`                             | Additional container environment variables                                       | `[]`                  |
+| `bpmn.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables | `nil`                 |
+| `bpmn.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables    | `nil`                 |
+| `bpmn.extraVolumeMounts`                        | Optionally specify extra list of additional volumeMounts                         | `[]`                  |
 
 ### Diagrams.net parameters
 
-| Name                              | Description                                                                      | Default                      |
-| --------------------------------- | -------------------------------------------------------------------------------- | ---------------------------- |
-| `diagramsnet.enabled`             | Enable Diagrams.net                                                              | `true`                       |
-| `diagramsnet.image.registry`      | Image registry                                                                   | `docker.io`                  |
-| `diagramsnet.image.repository`    | Image repository                                                                 | `yuzutech/kroki-diagramsnet` |
-| `diagramsnet.image.tag`           | Image tag                                                                        | `0.25.0`                     |
-| `diagramsnet.image.digest`        | Image digest                                                                     | `""`                         |
-| `diagramsnet.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`               |
-| `diagramsnet.securityContext`     | Container security context                                                       | `{}`                         |
-| `diagramsnet.containerPorts.http` | Container port for HTTP                                                          | `8005`                       |
-| `diagramsnet.resources`           | CPU/Memory resource requests/limits                                              | `{}`                         |
-| `diagramsnet.extraArgs`           | Additional container arguments                                                   | `{}`                         |
-| `diagramsnet.extraEnvVars`        | Additional container environment variables                                       | `[]`                         |
-| `diagramsnet.extraEnvVarsCM`      | Name of existing ConfigMap containing additional container environment variables | `nil`                        |
-| `diagramsnet.extraEnvVarsSecret`  | Name of existing Secret containing additional container environment variables    | `nil`                        |
+| Name                                                   | Description                                                                      | Default                      |
+| ------------------------------------------------------ | -------------------------------------------------------------------------------- | ---------------------------- |
+| `diagramsnet.enabled`                                  | Enable Diagrams.net                                                              | `true`                       |
+| `diagramsnet.image.registry`                           | Image registry                                                                   | `docker.io`                  |
+| `diagramsnet.image.repository`                         | Image repository                                                                 | `yuzutech/kroki-diagramsnet` |
+| `diagramsnet.image.tag`                                | Image tag                                                                        | `0.28.0`                     |
+| `diagramsnet.image.digest`                             | Image digest                                                                     | `""`                         |
+| `diagramsnet.image.pullPolicy`                         | Image pull policy                                                                | `IfNotPresent`               |
+| `diagramsnet.securityContext`                          | Container security context                                                       |                              |
+| `diagramsnet.securityContext.allowPrivilegeEscalation` | Set container's Security Context allowPrivilegeEscalation                        | `false`                      |
+| `diagramsnet.securityContext.capabilities.drop`        | List of capabilities to be dropped                                               | `["ALL"]`                    |
+| `diagramsnet.securityContext.readOnlyRootFilesystem`   | Set container's Security Context readOnlyRootFilesystem                          | `true`                       |
+| `diagramsnet.securityContext.runAsNonRoot`             | Whether the container must run as a non-root user                                | `true`                       |
+| `diagramsnet.securityContext.runAsUser`                | The UID to run the entrypoint of the container process                           | `1001`                       |
+| `diagramsnet.securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                           | `1001`                       |
+| `diagramsnet.containerPorts.http`                      | Container port for HTTP                                                          | `8005`                       |
+| `diagramsnet.resources`                                | CPU/Memory resource requests/limits                                              | `{}`                         |
+| `diagramsnet.extraArgs`                                | Additional container arguments                                                   | `{}`                         |
+| `diagramsnet.extraEnvVars`                             | Additional container environment variables                                       | `[]`                         |
+| `diagramsnet.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables | `nil`                        |
+| `diagramsnet.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables    | `nil`                        |
+| `diagramsnet.extraVolumeMounts`                        | Optionally specify extra list of additional volumeMounts                         | `[]`                         |
 
 ### Excalidraw parameters
 
-| Name                             | Description                                                                      | Default                     |
-| -------------------------------- | -------------------------------------------------------------------------------- | --------------------------- |
-| `excalidraw.enabled`             | Enable Excalidraw                                                                | `true`                      |
-| `excalidraw.image.registry`      | Image registry                                                                   | `docker.io`                 |
-| `excalidraw.image.repository`    | Image repository                                                                 | `yuzutech/kroki-excalidraw` |
-| `excalidraw.image.tag`           | Image tag                                                                        | `0.25.0`                    |
-| `excalidraw.image.digest`        | Image digest                                                                     | `""`                        |
-| `excalidraw.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`              |
-| `excalidraw.securityContext`     | Container security context                                                       | `{}`                        |
-| `excalidraw.containerPorts.http` | Container port for HTTP                                                          | `8004`                      |
-| `excalidraw.resources`           | CPU/Memory resource requests/limits                                              | `{}`                        |
-| `excalidraw.extraArgs`           | Additional container arguments                                                   | `{}`                        |
-| `excalidraw.extraEnvVars`        | Additional container environment variables                                       | `[]`                        |
-| `excalidraw.extraEnvVarsCM`      | Name of existing ConfigMap containing additional container environment variables | `nil`                       |
-| `excalidraw.extraEnvVarsSecret`  | Name of existing Secret containing additional container environment variables    | `nil`                       |
+| Name                                                  | Description                                                                      | Default                     |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------- |
+| `excalidraw.enabled`                                  | Enable Excalidraw                                                                | `true`                      |
+| `excalidraw.image.registry`                           | Image registry                                                                   | `docker.io`                 |
+| `excalidraw.image.repository`                         | Image repository                                                                 | `yuzutech/kroki-excalidraw` |
+| `excalidraw.image.tag`                                | Image tag                                                                        | `0.28.0`                    |
+| `excalidraw.image.digest`                             | Image digest                                                                     | `""`                        |
+| `excalidraw.image.pullPolicy`                         | Image pull policy                                                                | `IfNotPresent`              |
+| `excalidraw.securityContext`                          | Container security context                                                       |                             |
+| `excalidraw.securityContext.allowPrivilegeEscalation` | Set container's Security Context allowPrivilegeEscalation                        | `false`                     |
+| `excalidraw.securityContext.capabilities.drop`        | List of capabilities to be dropped                                               | `["ALL"]`                   |
+| `excalidraw.securityContext.readOnlyRootFilesystem`   | Set container's Security Context readOnlyRootFilesystem                          | `true`                      |
+| `excalidraw.securityContext.runAsNonRoot`             | Whether the container must run as a non-root user                                | `true`                      |
+| `excalidraw.securityContext.runAsUser`                | The UID to run the entrypoint of the container process                           | `1001`                      |
+| `excalidraw.securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                           | `1001`                      |
+| `excalidraw.containerPorts.http`                      | Container port for HTTP                                                          | `8004`                      |
+| `excalidraw.resources`                                | CPU/Memory resource requests/limits                                              | `{}`                        |
+| `excalidraw.extraArgs`                                | Additional container arguments                                                   | `{}`                        |
+| `excalidraw.extraEnvVars`                             | Additional container environment variables                                       | `[]`                        |
+| `excalidraw.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables | `nil`                       |
+| `excalidraw.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables    | `nil`                       |
+| `excalidraw.extraVolumeMounts`                        | Optionally specify extra list of additional volumeMounts                         | `[]`                        |
 
 ### Mermaid parameters
 
-| Name                          | Description                                                                      | Default                  |
-| ----------------------------- | -------------------------------------------------------------------------------- | ------------------------ |
-| `mermaid.enabled`             | Enable Mermaid                                                                   | `true`                   |
-| `mermaid.image.registry`      | Image registry                                                                   | `docker.io`              |
-| `mermaid.image.repository`    | Image repository                                                                 | `yuzutech/kroki-mermaid` |
-| `mermaid.image.tag`           | Image tag                                                                        | `0.25.0`                 |
-| `mermaid.image.digest`        | Image digest                                                                     | `""`                     |
-| `mermaid.image.pullPolicy`    | Image pull policy                                                                | `IfNotPresent`           |
-| `mermaid.securityContext`     | Container security context                                                       | `{}`                     |
-| `mermaid.containerPorts.http` | Container port for HTTP                                                          | `8002`                   |
-| `mermaid.resources`           | CPU/Memory resource requests/limits                                              | `{}`                     |
-| `mermaid.extraArgs`           | Additional container arguments                                                   | `{}`                     |
-| `mermaid.extraEnvVars`        | Additional container environment variables                                       | `[]`                     |
-| `mermaid.extraEnvVarsCM`      | Name of existing ConfigMap containing additional container environment variables | `nil`                    |
-| `mermaid.extraEnvVarsSecret`  | Name of existing Secret containing additional container environment variables    | `nil`                    |
+| Name                                               | Description                                                                      | Default                  |
+| -------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------ |
+| `mermaid.enabled`                                  | Enable Mermaid                                                                   | `true`                   |
+| `mermaid.image.registry`                           | Image registry                                                                   | `docker.io`              |
+| `mermaid.image.repository`                         | Image repository                                                                 | `yuzutech/kroki-mermaid` |
+| `mermaid.image.tag`                                | Image tag                                                                        | `0.28.0`                 |
+| `mermaid.image.digest`                             | Image digest                                                                     | `""`                     |
+| `mermaid.image.pullPolicy`                         | Image pull policy                                                                | `IfNotPresent`           |
+| `mermaid.securityContext`                          | Container security context                                                       |                          |
+| `mermaid.securityContext.allowPrivilegeEscalation` | Set container's Security Context allowPrivilegeEscalation                        | `false`                  |
+| `mermaid.securityContext.capabilities.drop`        | List of capabilities to be dropped                                               | `["ALL"]`                |
+| `mermaid.securityContext.readOnlyRootFilesystem`   | Set container's Security Context readOnlyRootFilesystem                          | `true`                   |
+| `mermaid.securityContext.runAsNonRoot`             | Whether the container must run as a non-root user                                | `true`                   |
+| `mermaid.securityContext.runAsUser`                | The UID to run the entrypoint of the container process                           | `1001`                   |
+| `mermaid.securityContext.runAsGroup`               | The GID to run the entrypoint of the container process                           | `1001`                   |
+| `mermaid.containerPorts.http`                      | Container port for HTTP                                                          | `8002`                   |
+| `mermaid.resources`                                | CPU/Memory resource requests/limits                                              | `{}`                     |
+| `mermaid.extraArgs`                                | Additional container arguments                                                   | `{}`                     |
+| `mermaid.extraEnvVars`                             | Additional container environment variables                                       | `[]`                     |
+| `mermaid.extraEnvVarsCM`                           | Name of existing ConfigMap containing additional container environment variables | `nil`                    |
+| `mermaid.extraEnvVarsSecret`                       | Name of existing Secret containing additional container environment variables    | `nil`                    |
+| `mermaid.extraVolumeMounts`                        | Optionally specify extra list of additional volumeMounts                         | `[]`                     |
 
 ### Tests parameters
 
@@ -253,7 +328,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | ------------------------ | ----------------- | -------------------- |
 | `tests.image.registry`   | Image registry    | `ghcr.io`            |
 | `tests.image.repository` | Image repository  | `cowboysysop/pytest` |
-| `tests.image.tag`        | Image tag         | `1.0.41`             |
+| `tests.image.tag`        | Image tag         | `1.2.0`              |
 | `tests.image.digest`     | Image digest      | `""`                 |
 | `tests.image.pullPolicy` | Image pull policy | `IfNotPresent`       |
 
@@ -266,6 +341,13 @@ $ helm install my-release \
     --set nameOverride=my-name cowboysysop/kroki
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release \
+    --set nameOverride=my-name oci://ghcr.io/cowboysysop/charts/kroki
+```
+
 The above command sets the `nameOverride` to `my-name`.
 
 Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
@@ -275,4 +357,17 @@ $ helm install my-release \
     --values values.yaml cowboysysop/kroki
 ```
 
+or for an OCI-based registry:
+
+```bash
+$ helm install my-release \
+    --values values.yaml oci://ghcr.io/cowboysysop/charts/kroki
+```
+
 **TIP**: You can use the default [values.yaml](values.yaml).
+
+## License
+
+The source code of this chart is under [MIT License](LICENSE).
+
+It also uses source code under Apache 2.0 License from the [Bitnami repository](https://github.com/bitnami/charts).

@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "kubernetes-mcp.labels" -}}
+{{- define "kubernetes-mcp.commonLabels" -}}
 helm.sh/chart: {{ include "kubernetes-mcp.chart" . }}
-{{ include "kubernetes-mcp.selectorLabels" . }}
+{{ include "kubernetes-mcp.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "kubernetes-mcp.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "kubernetes-mcp.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "kubernetes-mcp.componentLabels" -}}
+app.kubernetes.io/component: kubernetes-mcp
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "kubernetes-mcp.labels" -}}
+{{ include "kubernetes-mcp.commonLabels" . }}
+{{ include "kubernetes-mcp.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "kubernetes-mcp.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "kubernetes-mcp.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "kubernetes-mcp.commonSelectorLabels" . }}
+{{ include "kubernetes-mcp.componentLabels" . }}
 {{- end -}}
 
 {{/*

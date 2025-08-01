@@ -5221,6 +5221,31 @@ entries:
         url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
       kubeVersion: '>=1.24'
     apiVersion: v2
+    appVersion: 0.0.47
+    created: "2025-08-01T09:07:17.600623764Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 2.31.3
+    description: Model Context Protocol server for Kubernetes
+    digest: af3883ad666ec2a43f120539fefc36647902785ffbfba25ba200845da481466e
+    home: https://github.com/manusa/kubernetes-mcp-server
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubernetes-mcp
+    sources:
+    - https://github.com/manusa/kubernetes-mcp-server
+    - https://github.com/cowboysysop/charts/tree/master/charts/kubernetes-mcp
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubernetes-mcp-2.0.0/kubernetes-mcp-2.0.0.tgz
+    version: 2.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
     appVersion: 0.0.44
     created: "2025-07-03T19:41:54.670880009Z"
     dependencies:
@@ -15376,4 +15401,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-08-01T08:00:18.284241416Z"
+generated: "2025-08-01T09:07:17.602020531Z"

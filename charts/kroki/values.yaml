@@ -22,6 +22,9 @@ nameOverride: ""
 ## @param fullnameOverride Fully override `kroki.fullname` template with a string
 fullnameOverride: ""
 
+## @param namespaceOverride Fully override `common.names.namespace` template with a string
+namespaceOverride: ""
+
 ## @param commonAnnotations Annotations to add to all deployed objects
 commonAnnotations: {}
 
@@ -35,6 +38,9 @@ extraDeploy: []
 
 ## @param replicaCount Number of replicas
 replicaCount: 1
+
+## @param revisionHistoryLimit Number of old history to retain to allow rollback
+revisionHistoryLimit: 10
 
 image:
   ## @param image.registry Image registry
@@ -73,6 +79,12 @@ serviceAccount:
   ## @param serviceAccount.name The name of the service account to use (Generated using the `kroki.fullname` template if not set)
   name:
 
+## @param enableServiceLinks Whether information about services should be injected into pod's environment variable
+enableServiceLinks: false
+
+## @param hostAliases Pod host aliases
+hostAliases: []
+
 ## @param deploymentAnnotations Additional deployment annotations
 deploymentAnnotations: {}
 
@@ -82,9 +94,11 @@ podAnnotations: {}
 ## @param podLabels Additional pod labels
 podLabels: {}
 
-## @param podSecurityContext Pod security context
-podSecurityContext: {}
-  # fsGroup: 2000
+## @extra podSecurityContext Pod security context
+## @param podSecurityContext.seccompProfile.type Set pod's Security Context seccomp profile
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
 
 ## @param priorityClassName Priority class name
 priorityClassName:
@@ -96,14 +110,22 @@ runtimeClassName: ""
 ## @param topologySpreadConstraints Topology Spread Constraints for pod assignment
 topologySpreadConstraints: []
 
-## @param securityContext Container security context
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+## @extra securityContext Container security context
+## @param securityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
+## @param securityContext.capabilities.drop List of capabilities to be dropped
+## @param securityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
+## @param securityContext.runAsNonRoot Whether the container must run as a non-root user
+## @param securityContext.runAsUser The UID to run the entrypoint of the container process
+## @param securityContext.runAsGroup The GID to run the entrypoint of the container process
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1001
+  runAsGroup: 1001
 
 containerPorts:
   ## @param containerPorts.http Container port for HTTP
@@ -177,6 +199,12 @@ service:
   clusterIP:
   # clusterIP: 10.43.0.100
 
+  ## @param service.ipFamilyPolicy Service IP family policy
+  ipFamilyPolicy: ""
+
+  ## @param service.ipFamilies Service IP families
+  ipFamilies: []
+
   ## @param service.sessionAffinity Control where client requests go, to the same pod or round-robin
   sessionAffinity: None
 
@@ -233,10 +261,10 @@ ingress:
 
 ## @param resources CPU/Memory resource requests/limits
 resources: {}
-  # limits:
+  # requests:
   #   cpu: 100m
   #   memory: 128Mi
-  # requests:
+  # limits:
   #   cpu: 100m
   #   memory: 128Mi
 
@@ -263,6 +291,12 @@ extraEnvVarsCM:
 
 ## @param extraEnvVarsSecret Name of existing Secret containing additional container environment variables
 extraEnvVarsSecret:
+
+## @param extraVolumes Optionally specify extra list of additional volumes
+extraVolumes: []
+
+## @param extraVolumeMounts Optionally specify extra list of additional volumeMounts
+extraVolumeMounts: []
 
 autoscaling:
   hpa:
@@ -303,14 +337,22 @@ bpmn:
     ## @param bpmn.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent
 
-  ## @param bpmn.securityContext Container security context
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  ## @extra bpmn.securityContext Container security context
+  ## @param bpmn.securityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
+  ## @param bpmn.securityContext.capabilities.drop List of capabilities to be dropped
+  ## @param bpmn.securityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
+  ## @param bpmn.securityContext.runAsNonRoot Whether the container must run as a non-root user
+  ## @param bpmn.securityContext.runAsUser The UID to run the entrypoint of the container process
+  ## @param bpmn.securityContext.runAsGroup The GID to run the entrypoint of the container process
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1001
+    runAsGroup: 1001
 
   containerPorts:
     ## @param bpmn.containerPorts.http Container port for HTTP
@@ -318,10 +360,10 @@ bpmn:
 
   ## @param bpmn.resources CPU/Memory resource requests/limits
   resources: {}
-    # limits:
+    # requests:
     #   cpu: 100m
     #   memory: 128Mi
-    # requests:
+    # limits:
     #   cpu: 100m
     #   memory: 128Mi
 
@@ -339,6 +381,9 @@ bpmn:
 
   ## @param bpmn.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
+
+  ## @param bpmn.extraVolumeMounts Optionally specify extra list of additional volumeMounts
+  extraVolumeMounts: []
 
 ## @section Diagrams.net parameters
 
@@ -362,14 +407,22 @@ diagramsnet:
     ## @param diagramsnet.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent
 
-  ## @param diagramsnet.securityContext Container security context
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  ## @extra diagramsnet.securityContext Container security context
+  ## @param diagramsnet.securityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
+  ## @param diagramsnet.securityContext.capabilities.drop List of capabilities to be dropped
+  ## @param diagramsnet.securityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
+  ## @param diagramsnet.securityContext.runAsNonRoot Whether the container must run as a non-root user
+  ## @param diagramsnet.securityContext.runAsUser The UID to run the entrypoint of the container process
+  ## @param diagramsnet.securityContext.runAsGroup The GID to run the entrypoint of the container process
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1001
+    runAsGroup: 1001
 
   containerPorts:
     ## @param diagramsnet.containerPorts.http Container port for HTTP
@@ -377,10 +430,10 @@ diagramsnet:
 
   ## @param diagramsnet.resources CPU/Memory resource requests/limits
   resources: {}
-    # limits:
+    # requests:
     #   cpu: 100m
     #   memory: 128Mi
-    # requests:
+    # limits:
     #   cpu: 100m
     #   memory: 128Mi
 
@@ -398,6 +451,9 @@ diagramsnet:
 
   ## @param diagramsnet.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
+
+  ## @param diagramsnet.extraVolumeMounts Optionally specify extra list of additional volumeMounts
+  extraVolumeMounts: []
 
 ## @section Excalidraw parameters
 
@@ -421,14 +477,22 @@ excalidraw:
     ## @param excalidraw.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent
 
-  ## @param excalidraw.securityContext Container security context
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  ## @extra excalidraw.securityContext Container security context
+  ## @param excalidraw.securityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
+  ## @param excalidraw.securityContext.capabilities.drop List of capabilities to be dropped
+  ## @param excalidraw.securityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
+  ## @param excalidraw.securityContext.runAsNonRoot Whether the container must run as a non-root user
+  ## @param excalidraw.securityContext.runAsUser The UID to run the entrypoint of the container process
+  ## @param excalidraw.securityContext.runAsGroup The GID to run the entrypoint of the container process
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1001
+    runAsGroup: 1001
 
   containerPorts:
     ## @param excalidraw.containerPorts.http Container port for HTTP
@@ -436,10 +500,10 @@ excalidraw:
 
   ## @param excalidraw.resources CPU/Memory resource requests/limits
   resources: {}
-    # limits:
+    # requests:
     #   cpu: 100m
     #   memory: 128Mi
-    # requests:
+    # limits:
     #   cpu: 100m
     #   memory: 128Mi
 
@@ -457,6 +521,9 @@ excalidraw:
 
   ## @param excalidraw.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
+
+  ## @param excalidraw.extraVolumeMounts Optionally specify extra list of additional volumeMounts
+  extraVolumeMounts: []
 
 ## @section Mermaid parameters
 
@@ -480,14 +547,22 @@ mermaid:
     ## @param mermaid.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent
 
-  ## @param mermaid.securityContext Container security context
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  ## @extra mermaid.securityContext Container security context
+  ## @param mermaid.securityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
+  ## @param mermaid.securityContext.capabilities.drop List of capabilities to be dropped
+  ## @param mermaid.securityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
+  ## @param mermaid.securityContext.runAsNonRoot Whether the container must run as a non-root user
+  ## @param mermaid.securityContext.runAsUser The UID to run the entrypoint of the container process
+  ## @param mermaid.securityContext.runAsGroup The GID to run the entrypoint of the container process
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1001
+    runAsGroup: 1001
 
   containerPorts:
     ## @param mermaid.containerPorts.http Container port for HTTP
@@ -495,10 +570,10 @@ mermaid:
 
   ## @param mermaid.resources CPU/Memory resource requests/limits
   resources: {}
-    # limits:
+    # requests:
     #   cpu: 100m
     #   memory: 128Mi
-    # requests:
+    # limits:
     #   cpu: 100m
     #   memory: 128Mi
 
@@ -517,6 +592,9 @@ mermaid:
   ## @param mermaid.extraEnvVarsSecret Name of existing Secret containing additional container environment variables
   extraEnvVarsSecret:
 
+  ## @param mermaid.extraVolumeMounts Optionally specify extra list of additional volumeMounts
+  extraVolumeMounts: []
+
 ## @section Tests parameters
 
 tests:
@@ -528,7 +606,7 @@ tests:
     repository: cowboysysop/pytest
 
     ## @param tests.image.tag Image tag
-    tag: 1.0.41
+    tag: 1.2.0
 
     ## @param tests.image.digest Image digest
     digest: ""

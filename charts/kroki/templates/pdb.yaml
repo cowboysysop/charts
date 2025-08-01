@@ -3,6 +3,7 @@ apiVersion: {{ include "common.capabilities.policy.apiVersion" . }}
 kind: PodDisruptionBudget
 metadata:
   name: {{ include "kroki.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels:
     {{- include "kroki.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}

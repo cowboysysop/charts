@@ -10,11 +10,11 @@ name: kubeview
 sources:
   - https://github.com/benc-uk/kubeview
   - https://github.com/cowboysysop/charts/tree/master/charts/kubeview
-version: 5.1.0
+version: 6.0.0
 dependencies:
   - name: common
-    version: 2.9.0
-    repository: https://charts.bitnami.com/bitnami/
+    version: 2.31.3
+    repository: oci://ghcr.io/cowboysysop/charts
 annotations:
   artifacthub.io/signKey: |
     fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8

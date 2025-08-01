@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "kubebox.labels" -}}
+{{- define "kubebox.commonLabels" -}}
 helm.sh/chart: {{ include "kubebox.chart" . }}
-{{ include "kubebox.selectorLabels" . }}
+{{ include "kubebox.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "kubebox.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "kubebox.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "kubebox.componentLabels" -}}
+app.kubernetes.io/component: kubebox
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "kubebox.labels" -}}
+{{ include "kubebox.commonLabels" . }}
+{{ include "kubebox.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "kubebox.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "kubebox.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "kubebox.commonSelectorLabels" . }}
+{{ include "kubebox.componentLabels" . }}
 {{- end -}}
 
 {{/*

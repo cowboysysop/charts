@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "kubebox.tests.labels" -}}
-{{ include "kubebox.labels" . }}
+{{ include "kubebox.commonLabels" . }}
 {{ include "kubebox.tests.componentLabels" . }}
 {{- end -}}

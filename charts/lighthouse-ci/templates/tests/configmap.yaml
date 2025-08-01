@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "lighthouse-ci.tests.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels:
     {{- include "lighthouse-ci.tests.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}

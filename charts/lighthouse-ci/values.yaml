@@ -22,6 +22,9 @@ nameOverride: ""
 ## @param fullnameOverride Fully override `lighthouse-ci.fullname` template with a string
 fullnameOverride: ""
 
+## @param namespaceOverride Fully override `common.names.namespace` template with a string
+namespaceOverride: ""
+
 ## @param commonAnnotations Annotations to add to all deployed objects
 commonAnnotations: {}
 
@@ -35,6 +38,9 @@ extraDeploy: []
 
 ## @param replicaCount Number of replicas (do not change it)
 replicaCount: 1
+
+## @param revisionHistoryLimit Number of old history to retain to allow rollback
+revisionHistoryLimit: 10
 
 updateStrategy:
   ## @param updateStrategy.type Update strategy type (do not change it)
@@ -77,15 +83,26 @@ serviceAccount:
   ## @param serviceAccount.name The name of the service account to use (Generated using the `lighthouse-ci.fullname` template if not set)
   name:
 
+## @param enableServiceLinks Whether information about services should be injected into pod's environment variable
+enableServiceLinks: false
+
+## @param hostAliases Pod host aliases
+hostAliases: []
+
+## @param deploymentAnnotations Additional deployment annotations
+deploymentAnnotations: {}
+
 ## @param podAnnotations Additional pod annotations
 podAnnotations: {}
 
 ## @param podLabels Additional pod labels
 podLabels: {}
 
-## @param podSecurityContext Pod security context
-podSecurityContext: {}
-  # fsGroup: 2000
+## @extra podSecurityContext Pod security context
+## @param podSecurityContext.seccompProfile.type Set pod's Security Context seccomp profile
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
 
 ## @param priorityClassName Priority class name
 priorityClassName:
@@ -97,14 +114,21 @@ runtimeClassName: ""
 ## @param topologySpreadConstraints Topology Spread Constraints for pod assignment
 topologySpreadConstraints: []
 
-## @param securityContext Container security context
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+## @extra securityContext Container security context
+## @param securityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
+## @param securityContext.capabilities.drop List of capabilities to be dropped
+## @param securityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
+## @param securityContext.runAsNonRoot Whether the container must run as a non-root user
+## @param securityContext.runAsUser The UID to run the entrypoint of the container process
+## @param securityContext.runAsGroup The GID to run the entrypoint of the container process
+securityContext:
+  allowPrivilegeEscalation: true
+  capabilities:
+    drop: []
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+  runAsUser: 0
+  runAsGroup: 0
 
 containerPorts:
   ## @param containerPorts.http Container port for HTTP
@@ -178,6 +202,18 @@ service:
   clusterIP:
   # clusterIP: 10.43.0.100
 
+  ## @param service.ipFamilyPolicy Service IP family policy
+  ipFamilyPolicy: ""
+
+  ## @param service.ipFamilies Service IP families
+  ipFamilies: []
+
+  ## @param service.sessionAffinity Control where client requests go, to the same pod or round-robin
+  sessionAffinity: None
+
+  ## @param service.sessionAffinityConfig Additional settings for the sessionAffinity
+  sessionAffinityConfig: {}
+
   ## @param service.loadBalancerIP Static load balancer IP address when service type is LoadBalancer
   loadBalancerIP:
   # loadBalancerIP: 10.0.0.100
@@ -228,10 +264,10 @@ ingress:
 
 ## @param resources CPU/Memory resource requests/limits
 resources: {}
-  # limits:
+  # requests:
   #   cpu: 100m
   #   memory: 128Mi
-  # requests:
+  # limits:
   #   cpu: 100m
   #   memory: 128Mi
 
@@ -258,6 +294,12 @@ extraEnvVarsCM:
 
 ## @param extraEnvVarsSecret Name of existing Secret containing additional container environment variables
 extraEnvVarsSecret:
+
+## @param extraVolumes Optionally specify extra list of additional volumes
+extraVolumes: []
+
+## @param extraVolumeMounts Optionally specify extra list of additional volumeMounts
+extraVolumeMounts: []
 
 persistence:
   ## @param persistence.enabled Enable persistence using PVC
@@ -428,10 +470,10 @@ wait:
     registry: docker.io
 
     ## @param wait.image.repository Image repository
-    repository: atkrad/wait4x
+    repository: wait4x/wait4x
 
     ## @param wait.image.tag Image tag
-    tag: 2.14.0
+    tag: 3.3.1
 
     ## @param wait.image.digest Image digest
     digest: ""
@@ -439,23 +481,34 @@ wait:
     ## @param wait.image.pullPolicy Image pull policy
     pullPolicy: IfNotPresent
 
-  ## @param wait.securityContext Container security context
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  ## @extra wait.securityContext Container security context
+  ## @param wait.securityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
+  ## @param wait.securityContext.capabilities.drop List of capabilities to be dropped
+  ## @param wait.securityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
+  ## @param wait.securityContext.runAsNonRoot Whether the container must run as a non-root user
+  ## @param wait.securityContext.runAsUser The UID to run the entrypoint of the container process
+  ## @param wait.securityContext.runAsGroup The GID to run the entrypoint of the container process
+  securityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 65534
+    runAsGroup: 65534
 
   ## @param wait.resources CPU/Memory resource requests/limits
   resources: {}
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
     # requests:
     #   cpu: 100m
     #   memory: 128Mi
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  ## @param wait.extraVolumeMounts Optionally specify extra list of additional volumeMounts
+  extraVolumeMounts: []
 
 ## @section Tests parameters
 
@@ -468,7 +521,7 @@ tests:
     repository: cowboysysop/pytest
 
     ## @param tests.image.tag Image tag
-    tag: 1.0.35
+    tag: 1.2.0
 
     ## @param tests.image.digest Image digest
     digest: ""

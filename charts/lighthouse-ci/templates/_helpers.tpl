@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "lighthouse-ci.labels" -}}
+{{- define "lighthouse-ci.commonLabels" -}}
 helm.sh/chart: {{ include "lighthouse-ci.chart" . }}
-{{ include "lighthouse-ci.selectorLabels" . }}
+{{ include "lighthouse-ci.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "lighthouse-ci.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "lighthouse-ci.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "lighthouse-ci.componentLabels" -}}
+app.kubernetes.io/component: lighthouse-ci
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "lighthouse-ci.labels" -}}
+{{ include "lighthouse-ci.commonLabels" . }}
+{{ include "lighthouse-ci.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "lighthouse-ci.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "lighthouse-ci.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "lighthouse-ci.commonSelectorLabels" . }}
+{{ include "lighthouse-ci.componentLabels" . }}
 {{- end -}}
 
 {{/*
@@ -231,8 +254,8 @@ PostgreSQL user
 PostgreSQL secret name
 */}}
 {{- define "lighthouse-ci.postgresql.secretName" -}}
-{{- if .Values.postgresql.existingSecret -}}
-    {{ .Values.postgresql.existingSecret }}
+{{- if .Values.postgresql.auth.existingSecret -}}
+    {{ .Values.postgresql.auth.existingSecret }}
 {{- else if .Values.externalPostgresql.existingSecret -}}
     {{ .Values.externalPostgresql.existingSecret }}
 {{- else -}}

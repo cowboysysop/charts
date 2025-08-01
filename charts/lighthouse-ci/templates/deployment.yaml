@@ -2,17 +2,19 @@ apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
   name: {{ include "lighthouse-ci.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels:
     {{- include "lighthouse-ci.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
-  {{- if .Values.commonAnnotations }}
-  annotations:
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- if or .Values.deploymentAnnotations .Values.commonAnnotations }}
+  {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.deploymentAnnotations .Values.commonAnnotations ) "context" . ) }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
       {{- include "lighthouse-ci.selectorLabels" . | nindent 6 }}
@@ -41,7 +43,11 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
     spec:
+      enableServiceLinks: {{ .Values.enableServiceLinks }}
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.image ) "global" .Values.global ) | nindent 6 }}
+      {{- if .Values.hostAliases }}
+      hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
@@ -54,6 +60,71 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        {{- if or .Values.mariadb.enabled .Values.externalMariadb.enabled }}
+        - name: wait-mariadb
+          securityContext:
+            {{- toYaml .Values.wait.securityContext | nindent 12 }}
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.wait.image "global" .Values.global ) }}
+          imagePullPolicy: {{ .Values.wait.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              wait4x mysql "${MARIADB_USERNAME}:${MARIADB_PASSWORD}@tcp(${MARIADB_HOST}:${MARIADB_PORT})/${MARIADB_DATABASE}" --timeout 0
+          env:
+            - name: MARIADB_HOST
+              value: {{ include "lighthouse-ci.mariadb.host" . | quote }}
+            - name: MARIADB_PORT
+              value: {{ include "lighthouse-ci.mariadb.port" . | quote }}
+            - name: MARIADB_USERNAME
+              value: {{ include "lighthouse-ci.mariadb.username" . | quote }}
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "lighthouse-ci.mariadb.secretName" . }}
+                  key: {{ include "lighthouse-ci.mariadb.secretKeyPassword" . }}
+            - name: MARIADB_DATABASE
+              value: {{ include "lighthouse-ci.mariadb.database" . | quote }}
+          resources:
+            {{- toYaml .Values.wait.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.wait.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.wait.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+        {{- end }}
+        {{- if or .Values.postgresql.enabled .Values.externalPostgresql.enabled }}
+        - name: wait-postgresql
+          securityContext:
+            {{- toYaml .Values.wait.securityContext | nindent 12 }}
+          image: {{ include "common.images.image" ( dict "imageRoot" .Values.wait.image "global" .Values.global ) }}
+          imagePullPolicy: {{ .Values.wait.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -ec
+            - |
+              wait4x postgresql "postgres://${POSTGRESQL_USERNAME}:${POSTGRESQL_PASSWORD}@${POSTGRESQL_HOST}:${POSTGRESQL_PORT}/${POSTGRESQL_DATABASE}?sslmode=disable" --timeout 0
+          env:
+            - name: POSTGRESQL_HOST
+              value: {{ include "lighthouse-ci.postgresql.host" . | quote }}
+            - name: POSTGRESQL_PORT
+              value: {{ include "lighthouse-ci.postgresql.port" . | quote }}
+            - name: POSTGRESQL_USERNAME
+              value: {{ include "lighthouse-ci.postgresql.username" . | quote }}
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "lighthouse-ci.postgresql.secretName" . }}
+                  key: {{ include "lighthouse-ci.postgresql.secretKeyPassword" . }}
+            - name: POSTGRESQL_DATABASE
+              value: {{ include "lighthouse-ci.postgresql.database" . | quote }}
+          resources:
+            {{- toYaml .Values.wait.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.wait.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.wait.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+        {{- end }}
       containers:
         - name: lighthouse-ci
           securityContext:
@@ -175,6 +246,9 @@ spec:
               subPath: lighthouserc.json
             - name: data
               mountPath: /data
+            {{- if .Values.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -198,3 +272,6 @@ spec:
           {{- else }}
           emptyDir: {}
           {{- end }}
+        {{- if .Values.extraVolumes }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}

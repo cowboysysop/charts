@@ -3,19 +3,15 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ include "lighthouse-ci.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels:
     {{- include "lighthouse-ci.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
   {{- if or .Values.persistence.annotations .Values.commonAnnotations }}
-  annotations:
-    {{- if .Values.persistence.annotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.persistence.annotations "context" $ ) | nindent 4 }}
-    {{- end }}
-    {{- if .Values.commonAnnotations }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
-    {{- end }}
+  {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.persistence.annotations .Values.commonAnnotations ) "context" . ) }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
   accessModes:

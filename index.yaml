@@ -4609,6 +4609,31 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: 0.9.0
+    created: "2025-08-01T08:00:18.28328251Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 2.31.3
+    description: Terminal and Web console for Kubernetes
+    digest: ac44c26168ddf1c8232bf538dbf77f93435fb4cb6d9e9d70a738b51caacced6d
+    home: https://github.com/astefanutti/kubebox
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kubebox
+    sources:
+    - https://github.com/astefanutti/kubebox
+    - https://github.com/cowboysysop/charts/tree/master/charts/kubebox
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kubebox-6.0.0/kubebox-6.0.0.tgz
+    version: 6.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 0.9.0
     created: "2023-08-26T15:17:12.638778031Z"
     dependencies:
     - name: common
@@ -15351,4 +15376,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-08-01T07:18:18.703715195Z"
+generated: "2025-08-01T08:00:18.284241416Z"

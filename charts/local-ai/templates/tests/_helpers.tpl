@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "local-ai.tests.labels" -}}
-{{ include "local-ai.labels" . }}
+{{ include "local-ai.commonLabels" . }}
 {{ include "local-ai.tests.componentLabels" . }}
 {{- end -}}

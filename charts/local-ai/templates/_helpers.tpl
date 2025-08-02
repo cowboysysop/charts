@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "local-ai.labels" -}}
+{{- define "local-ai.commonLabels" -}}
 helm.sh/chart: {{ include "local-ai.chart" . }}
-{{ include "local-ai.selectorLabels" . }}
+{{ include "local-ai.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "local-ai.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "local-ai.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "local-ai.componentLabels" -}}
+app.kubernetes.io/component: local-ai
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "local-ai.labels" -}}
+{{ include "local-ai.commonLabels" . }}
+{{ include "local-ai.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "local-ai.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "local-ai.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "local-ai.commonSelectorLabels" . }}
+{{ include "local-ai.componentLabels" . }}
 {{- end -}}
 
 {{/*

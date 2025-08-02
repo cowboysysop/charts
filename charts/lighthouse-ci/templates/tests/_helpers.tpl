@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "lighthouse-ci.tests.labels" -}}
-{{ include "lighthouse-ci.labels" . }}
+{{ include "lighthouse-ci.commonLabels" . }}
 {{ include "lighthouse-ci.tests.componentLabels" . }}
 {{- end -}}

@@ -10,18 +10,18 @@ name: lighthouse-ci
 sources:
   - https://github.com/GoogleChrome/lighthouse-ci
   - https://github.com/cowboysysop/charts/tree/master/charts/lighthouse-ci
-version: 8.1.0
+version: 9.0.0
 dependencies:
   - name: common
-    version: 2.19.0
-    repository: https://charts.bitnami.com/bitnami/
+    version: 2.31.3
+    repository: oci://ghcr.io/cowboysysop/charts
   - name: mariadb
-    version: 17.0.1
-    repository: https://charts.bitnami.com/bitnami/
+    version: 20.4.2
+    repository: oci://ghcr.io/cowboysysop/charts
     condition: mariadb.enabled
   - name: postgresql
-    version: 15.1.4
-    repository: https://charts.bitnami.com/bitnami/
+    version: 15.5.7
+    repository: oci://ghcr.io/cowboysysop/charts
     condition: postgresql.enabled
 annotations:
   artifacthub.io/signKey: |

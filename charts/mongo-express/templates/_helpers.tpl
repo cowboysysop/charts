@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "mongo-express.labels" -}}
+{{- define "mongo-express.commonLabels" -}}
 helm.sh/chart: {{ include "mongo-express.chart" . }}
-{{ include "mongo-express.selectorLabels" . }}
+{{ include "mongo-express.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "mongo-express.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "mongo-express.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "mongo-express.componentLabels" -}}
+app.kubernetes.io/component: mongo-express
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "mongo-express.labels" -}}
+{{ include "mongo-express.commonLabels" . }}
+{{ include "mongo-express.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "mongo-express.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "mongo-express.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "mongo-express.commonSelectorLabels" . }}
+{{ include "mongo-express.componentLabels" . }}
 {{- end -}}
 
 {{/*

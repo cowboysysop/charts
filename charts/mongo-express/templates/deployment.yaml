@@ -2,6 +2,7 @@ apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
 kind: Deployment
 metadata:
   name: {{ include "mongo-express.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels:
     {{- include "mongo-express.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
@@ -13,6 +14,7 @@ metadata:
   {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   selector:
     matchLabels:
       {{- include "mongo-express.selectorLabels" . | nindent 6 }}
@@ -37,7 +39,11 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 8 }}
         {{- end }}
     spec:
+      enableServiceLinks: {{ .Values.enableServiceLinks }}
       {{- include "common.images.pullSecrets" ( dict "images" ( list .Values.image ) "global" .Values.global ) | nindent 6 }}
+      {{- if .Values.hostAliases }}
+      hostAliases: {{- include "common.tplvalues.render" (dict "value" .Values.hostAliases "context" $) | nindent 8 }}
+      {{- end }}
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName | quote }}
       {{- end }}
@@ -183,6 +189,10 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            {{- if .Values.extraVolumeMounts }}
+            {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -195,3 +205,7 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+      volumes:
+        {{- if .Values.extraVolumes }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}

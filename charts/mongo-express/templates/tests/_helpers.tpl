@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "mongo-express.tests.labels" -}}
-{{ include "mongo-express.labels" . }}
+{{ include "mongo-express.commonLabels" . }}
 {{ include "mongo-express.tests.componentLabels" . }}
 {{- end -}}

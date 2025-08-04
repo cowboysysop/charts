@@ -8769,6 +8769,36 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: 1.0.2
+    created: "2025-08-04T11:49:02.73352499Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 2.31.3
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 15.1.5
+    description: Web-based MongoDB admin interface, written with Node.js and express
+    digest: c787ef4bd9383f200ceb3c4ba29f918447e3b3e78a758ed7a5bd74f8c4a63215
+    home: https://github.com/mongo-express/mongo-express
+    icon: https://raw.githubusercontent.com/mongo-express/mongo-express/master/public/images/mongo-express-logo.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: mongo-express
+    sources:
+    - https://github.com/mongo-express/mongo-express
+    - https://github.com/cowboysysop/charts/tree/master/charts/mongo-express
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/mongo-express-7.0.0/mongo-express-7.0.0.tgz
+    version: 7.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 1.0.2
     created: "2024-04-28T01:57:14.840495904Z"
     dependencies:
     - name: common
@@ -15534,4 +15564,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-08-03T09:25:01.115717574Z"
+generated: "2025-08-04T11:49:02.73422799Z"

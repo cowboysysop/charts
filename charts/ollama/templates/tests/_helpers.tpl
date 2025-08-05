@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "ollama.tests.labels" -}}
-{{ include "ollama.labels" . }}
+{{ include "ollama.commonLabels" . }}
 {{ include "ollama.tests.componentLabels" . }}
 {{- end -}}

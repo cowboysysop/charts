@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "ollama.labels" -}}
+{{- define "ollama.commonLabels" -}}
 helm.sh/chart: {{ include "ollama.chart" . }}
-{{ include "ollama.selectorLabels" . }}
+{{ include "ollama.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "ollama.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "ollama.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "ollama.componentLabels" -}}
+app.kubernetes.io/component: ollama
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "ollama.labels" -}}
+{{ include "ollama.commonLabels" . }}
+{{ include "ollama.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "ollama.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "ollama.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "ollama.commonSelectorLabels" . }}
+{{ include "ollama.componentLabels" . }}
 {{- end -}}
 
 {{/*

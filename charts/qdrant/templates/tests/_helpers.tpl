@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "qdrant.tests.labels" -}}
-{{ include "qdrant.labels" . }}
+{{ include "qdrant.commonLabels" . }}
 {{ include "qdrant.tests.componentLabels" . }}
 {{- end -}}

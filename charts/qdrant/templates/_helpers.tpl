@@ -41,9 +41,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "qdrant.labels" -}}
+{{- define "qdrant.commonLabels" -}}
 helm.sh/chart: {{ include "qdrant.chart" . }}
-{{ include "qdrant.selectorLabels" . }}
+{{ include "qdrant.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -51,11 +51,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "qdrant.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "qdrant.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "qdrant.componentLabels" -}}
+app.kubernetes.io/component: qdrant
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "qdrant.labels" -}}
+{{ include "qdrant.commonLabels" . }}
+{{ include "qdrant.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "qdrant.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "qdrant.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "qdrant.commonSelectorLabels" . }}
+{{ include "qdrant.componentLabels" . }}
 {{- end -}}
 
 {{/*

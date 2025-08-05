@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "quickchart.tests.labels" -}}
-{{ include "quickchart.labels" . }}
+{{ include "quickchart.commonLabels" . }}
 {{ include "quickchart.tests.componentLabels" . }}
 {{- end -}}

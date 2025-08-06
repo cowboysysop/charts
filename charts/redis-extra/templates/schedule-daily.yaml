@@ -3,9 +3,9 @@ apiVersion: velero.io/v1
 kind: Schedule
 metadata:
   name: {{ include "redis-extra.fullname" . }}-daily
-  namespace: {{ default .Release.Namespace .Values.veleroBackups.namespace | quote }}
+  namespace: {{ default (include "common.names.namespace" .) .Values.veleroBackups.namespace | quote }}
   labels:
-    {{- include "redis-extra.labels" . | nindent 4 }}
+    {{- include "redis-extra.commonLabels" . | nindent 4 }}
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
@@ -22,7 +22,7 @@ spec:
   schedule: {{ .Values.veleroBackups.daily.minute }} {{ .Values.veleroBackups.daily.hour }} * * *
   template:
     includedNamespaces:
-      - {{ .Release.Namespace | quote }}
+      - {{ include "common.names.namespace" . | quote }}
     {{- if .Values.veleroBackups.backupLocation }}
     storageLocation: {{ .Values.veleroBackups.backupLocation }}
     {{- end }}

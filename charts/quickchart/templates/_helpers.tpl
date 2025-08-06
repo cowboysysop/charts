@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "quickchart.labels" -}}
+{{- define "quickchart.commonLabels" -}}
 helm.sh/chart: {{ include "quickchart.chart" . }}
-{{ include "quickchart.selectorLabels" . }}
+{{ include "quickchart.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,11 +44,34 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
+Common selector labels
+*/}}
+{{- define "quickchart.commonSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "quickchart.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{/*
+Component labels
+*/}}
+{{- define "quickchart.componentLabels" -}}
+app.kubernetes.io/component: quickchart
+{{- end -}}
+
+{{/*
+Labels
+*/}}
+{{- define "quickchart.labels" -}}
+{{ include "quickchart.commonLabels" . }}
+{{ include "quickchart.componentLabels" . }}
+{{- end -}}
+
+{{/*
 Selector labels
 */}}
 {{- define "quickchart.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "quickchart.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "quickchart.commonSelectorLabels" . }}
+{{ include "quickchart.componentLabels" . }}
 {{- end -}}
 
 {{/*

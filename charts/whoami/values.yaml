@@ -22,6 +22,9 @@ nameOverride: ""
 ## @param fullnameOverride Fully override `whoami.fullname` template with a string
 fullnameOverride: ""
 
+## @param namespaceOverride Fully override `common.names.namespace` template with a string
+namespaceOverride: ""
+
 ## @param commonAnnotations Annotations to add to all deployed objects
 commonAnnotations: {}
 
@@ -35,6 +38,9 @@ extraDeploy: []
 
 ## @param replicaCount Number of replicas
 replicaCount: 1
+
+## @param revisionHistoryLimit Number of old history to retain to allow rollback
+revisionHistoryLimit: 10
 
 image:
   ## @param image.registry Image registry
@@ -73,6 +79,9 @@ serviceAccount:
   ## @param serviceAccount.name The name of the service account to use (Generated using the `whoami.fullname` template if not set)
   name:
 
+## @param enableServiceLinks Whether information about services should be injected into pod's environment variable
+enableServiceLinks: false
+
 ## @param hostAliases Pod host aliases
 hostAliases: []
 
@@ -85,9 +94,11 @@ podAnnotations: {}
 ## @param podLabels Additional pod labels
 podLabels: {}
 
-## @param podSecurityContext Pod security context
-podSecurityContext: {}
-  # fsGroup: 2000
+## @extra podSecurityContext Pod security context
+## @param podSecurityContext.seccompProfile.type Set pod's Security Context seccomp profile
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
 
 ## @param priorityClassName Priority class name
 priorityClassName:
@@ -99,14 +110,21 @@ runtimeClassName: ""
 ## @param topologySpreadConstraints Topology Spread Constraints for pod assignment
 topologySpreadConstraints: []
 
-## @param securityContext Container security context
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+## @extra securityContext Container security context
+## @param securityContext.allowPrivilegeEscalation Set container's Security Context allowPrivilegeEscalation
+## @param securityContext.capabilities.drop List of capabilities to be dropped
+## @param securityContext.readOnlyRootFilesystem Set container's Security Context readOnlyRootFilesystem
+## @param securityContext.runAsNonRoot Whether the container must run as a non-root user
+## @param securityContext.runAsUser The UID to run the entrypoint of the container process
+## @param securityContext.runAsGroup The GID to run the entrypoint of the container process
+securityContext:
+  allowPrivilegeEscalation: true
+  capabilities:
+    drop: []
+  readOnlyRootFilesystem: true
+  runAsNonRoot: false
+  runAsUser: 0
+  runAsGroup: 0
 
 containerPorts:
   ## @param containerPorts.http Container port for HTTP
@@ -242,10 +260,10 @@ ingress:
 
 ## @param resources CPU/Memory resource requests/limits
 resources: {}
-  # limits:
+  # requests:
   #   cpu: 100m
   #   memory: 128Mi
-  # requests:
+  # limits:
   #   cpu: 100m
   #   memory: 128Mi
 
@@ -290,7 +308,7 @@ tests:
     repository: cowboysysop/pytest
 
     ## @param tests.image.tag Image tag
-    tag: 1.0.41
+    tag: 1.2.0
 
     ## @param tests.image.digest Image digest
     digest: ""

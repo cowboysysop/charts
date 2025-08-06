@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "whoami.fullname" . }}
+  namespace: {{ include "common.names.namespace" . | quote }}
   labels:
     {{- include "whoami.labels" . | nindent 4 }}
     {{- if .Values.commonLabels }}

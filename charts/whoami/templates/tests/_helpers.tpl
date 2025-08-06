@@ -14,9 +14,9 @@ app.kubernetes.io/component: tests
 {{- end -}}
 
 {{/*
-Common labels
+Labels
 */}}
 {{- define "whoami.tests.labels" -}}
-{{ include "whoami.labels" . }}
+{{ include "whoami.commonLabels" . }}
 {{ include "whoami.tests.componentLabels" . }}
 {{- end -}}

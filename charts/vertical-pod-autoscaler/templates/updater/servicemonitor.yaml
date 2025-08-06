@@ -25,13 +25,13 @@ spec:
     - port: http-metrics
       {{- if .Values.updater.metrics.serviceMonitor.interval }}
       interval: {{ .Values.updater.metrics.serviceMonitor.interval }}
-      {{- end}}
+      {{- end }}
       {{- if .Values.updater.metrics.serviceMonitor.scrapeTimeout }}
       scrapeTimeout: {{ .Values.updater.metrics.serviceMonitor.scrapeTimeout }}
-      {{- end}}
+      {{- end }}
       {{- if .Values.updater.metrics.serviceMonitor.honorLabels }}
       honorLabels: {{ .Values.updater.metrics.serviceMonitor.honorLabels }}
-      {{- end}}
+      {{- end }}
       {{- if .Values.updater.metrics.serviceMonitor.metricRelabelings }}
       metricRelabelings: {{ toYaml .Values.updater.metrics.serviceMonitor.metricRelabelings | nindent 8 }}
       {{- end }}

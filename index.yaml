@@ -13002,6 +13002,30 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-08-06T15:36:39.731004425Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 2.31.3
+    description: Collection of extra Kubernetes objects for a Redis instance
+    digest: a2c0fa55e2f01a20938c3fcaf3ea90c5b0194d66d43a6423c36582bb8aee1496
+    home: https://github.com/cowboysysop/charts/tree/master/charts/redis-extra
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: redis-extra
+    sources:
+    - https://github.com/cowboysysop/charts/tree/master/charts/redis-extra
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/redis-extra-2.0.0/redis-extra-2.0.0.tgz
+    version: 2.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-03-24T20:32:23.318269874Z"
     dependencies:
     - name: common
@@ -15641,4 +15665,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-08-06T09:21:53.939420682Z"
+generated: "2025-08-06T15:36:39.732506533Z"

@@ -34,9 +34,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "redis-extra.labels" -}}
+{{- define "redis-extra.commonLabels" -}}
 helm.sh/chart: {{ include "redis-extra.chart" . }}
-{{ include "redis-extra.selectorLabels" . }}
+{{ include "redis-extra.commonSelectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,9 +44,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end -}}
 
 {{/*
-Selector labels
+Common selector labels
 */}}
-{{- define "redis-extra.selectorLabels" -}}
+{{- define "redis-extra.commonSelectorLabels" -}}
 app.kubernetes.io/name: {{ include "redis-extra.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}

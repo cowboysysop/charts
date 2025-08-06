@@ -25,13 +25,13 @@ spec:
     - port: http-metrics
       {{- if .Values.admissionController.metrics.serviceMonitor.interval }}
       interval: {{ .Values.admissionController.metrics.serviceMonitor.interval }}
-      {{- end}}
+      {{- end }}
       {{- if .Values.admissionController.metrics.serviceMonitor.scrapeTimeout }}
       scrapeTimeout: {{ .Values.admissionController.metrics.serviceMonitor.scrapeTimeout }}
-      {{- end}}
+      {{- end }}
       {{- if .Values.admissionController.metrics.serviceMonitor.honorLabels }}
       honorLabels: {{ .Values.admissionController.metrics.serviceMonitor.honorLabels }}
-      {{- end}}
+      {{- end }}
       {{- if .Values.admissionController.metrics.serviceMonitor.metricRelabelings }}
       metricRelabelings: {{ toYaml .Values.admissionController.metrics.serviceMonitor.metricRelabelings | nindent 8 }}
       {{- end }}

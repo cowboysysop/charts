@@ -24,13 +24,13 @@ spec:
     - port: http-metrics
       {{- if .Values.recommender.metrics.serviceMonitor.interval }}
       interval: {{ .Values.recommender.metrics.serviceMonitor.interval }}
-      {{- end}}
+      {{- end }}
       {{- if .Values.recommender.metrics.serviceMonitor.scrapeTimeout }}
       scrapeTimeout: {{ .Values.recommender.metrics.serviceMonitor.scrapeTimeout }}
-      {{- end}}
+      {{- end }}
       {{- if .Values.recommender.metrics.serviceMonitor.honorLabels }}
       honorLabels: {{ .Values.recommender.metrics.serviceMonitor.honorLabels }}
-      {{- end}}
+      {{- end }}
       {{- if .Values.recommender.metrics.serviceMonitor.metricRelabelings }}
       metricRelabelings: {{ toYaml .Values.recommender.metrics.serviceMonitor.metricRelabelings | nindent 8 }}
       {{- end }}

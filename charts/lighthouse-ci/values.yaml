@@ -54,7 +54,7 @@ image:
   repository: patrickhulce/lhci-server
 
   ## @param image.tag Image tag
-  tag: 0.8.1
+  tag: 0.15.1
 
   ## @param image.digest Image digest
   digest: ""

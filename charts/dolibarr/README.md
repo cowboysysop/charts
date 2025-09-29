@@ -84,6 +84,7 @@ The MariaDB subchart has been updated to a major release, see these upgrade inst
 - https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-2020
 - https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-2000
 - https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1900
+- https://github.com/bitnami/charts/tree/master/bitnami/mariadb#to-1800
 
 ### Upgrading to version 6.0.0
 
@@ -164,7 +165,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `updateStrategy.type`                           | Update strategy type (do not change it)                                                               | `Recreate`               |
 | `image.registry`                                | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                              | Image repository                                                                                      | `dolibarr/dolibarr`      |
-| `image.tag`                                     | Image tag                                                                                             | `21.0.1`                 |
+| `image.tag`                                     | Image tag                                                                                             | `22.0.1`                 |
 | `image.digest`                                  | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                              | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                                    | Specifies whether a pod disruption budget should be created                                           | `false`                  |

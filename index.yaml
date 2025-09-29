@@ -85,6 +85,37 @@ entries:
         url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
       kubeVersion: '>=1.24'
     apiVersion: v2
+    appVersion: 22.0.1
+    created: "2025-09-29T10:11:05.001852465Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 2.31.3
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 20.4.2
+    description: A modern software package to manage your company or foundation's
+      activity
+    digest: 78b6384e1b3155b77d3e1a277a15552f4635da79c0763445e88188acf6af2c18
+    home: https://www.dolibarr.org/
+    icon: https://raw.githubusercontent.com/Dolibarr/dolibarr/develop/doc/images/dolibarr_256x256_color.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: dolibarr
+    sources:
+    - https://github.com/Dolibarr/dolibarr
+    - https://github.com/cowboysysop/charts/tree/master/charts/dolibarr
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/dolibarr-9.0.0/dolibarr-9.0.0.tgz
+    version: 9.0.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
     appVersion: 21.0.1
     created: "2025-07-27T19:44:36.232933498Z"
     dependencies:
@@ -15772,4 +15803,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-09-29T09:21:48.860793351Z"
+generated: "2025-09-29T10:11:05.002791657Z"

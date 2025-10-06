@@ -13368,6 +13368,33 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: 1.5.0
+    created: "2025-10-06T16:51:05.640999159Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 2.31.3
+    description: Set of components that automatically adjust the amount of CPU and
+      memory requested by pods running in the Kubernetes Cluster
+    digest: fbef3ad036f59dc3cf9fc361cb92fae0564aa11f335f59b8b9e878dc490a4970
+    home: https://github.com/kubernetes/autoscaler
+    icon: https://raw.githubusercontent.com/kubernetes/kubernetes/master/logo/logo.svg
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: vertical-pod-autoscaler
+    sources:
+    - https://github.com/kubernetes/autoscaler
+    - https://github.com/cowboysysop/charts/tree/master/charts/vertical-pod-autoscaler
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/vertical-pod-autoscaler-11.1.1/vertical-pod-autoscaler-11.1.1.tgz
+    version: 11.1.1
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 1.5.0
     created: "2025-09-29T09:21:48.859032018Z"
     dependencies:
     - name: common
@@ -15803,4 +15830,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-09-29T10:11:05.002791657Z"
+generated: "2025-10-06T16:51:05.641896227Z"

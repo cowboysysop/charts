@@ -54,7 +54,7 @@ admissionController:
     repository: autoscaling/vpa-admission-controller
 
     ## @param admissionController.image.tag Image tag
-    tag: 1.5.0
+    tag: 1.5.1
 
     ## @param admissionController.image.digest Image digest
     digest: ""
@@ -352,7 +352,7 @@ recommender:
     repository: autoscaling/vpa-recommender
 
     ## @param recommender.image.tag Image tag
-    tag: 1.5.0
+    tag: 1.5.1
 
     ## @param recommender.image.digest Image digest
     digest: ""
@@ -654,7 +654,7 @@ updater:
     repository: autoscaling/vpa-updater
 
     ## @param updater.image.tag Image tag
-    tag: 1.5.0
+    tag: 1.5.1
 
     ## @param updater.image.digest Image digest
     digest: ""

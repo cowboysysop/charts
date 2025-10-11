@@ -322,6 +322,9 @@ admissionController:
       ## @param admissionController.metrics.serviceMonitor.relabelings Specify general relabeling
       relabelings: []
 
+  ## @param admissionController.enableCertManager Enable cert-manager
+  enableCertManager: false
+
   tls:
     ## @param admissionController.tls.caCert TLS CA certificate (Generated using the `genCA` function if not set)
     caCert: ""

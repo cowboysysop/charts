@@ -9,7 +9,7 @@ name: kubernetes-mcp
 sources:
   - https://github.com/manusa/kubernetes-mcp-server
   - https://github.com/cowboysysop/charts/tree/master/charts/kubernetes-mcp
-version: 2.0.0
+version: 2.0.1
 dependencies:
   - name: common
     version: 2.31.3

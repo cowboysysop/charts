@@ -473,7 +473,7 @@ wait:
     repository: wait4x/wait4x
 
     ## @param wait.image.tag Image tag
-    tag: 3.3.1
+    tag: 3.6.0
 
     ## @param wait.image.digest Image digest
     digest: ""

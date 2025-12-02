@@ -106,7 +106,7 @@ spec:
             - name: data
               mountPath: /var/www/documents
               {{- if .Values.persistence.subPath }}
-              subPath: {{- Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
               {{- end }}
             {{- if .Values.init.extraVolumeMounts }}
             {{- include "common.tplvalues.render" (dict "value" .Values.init.extraVolumeMounts "context" $) | nindent 12 }}
@@ -210,7 +210,7 @@ spec:
             - name: data
               mountPath: /var/www/documents
               {{- if .Values.persistence.subPath }}
-              subPath: {{- Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
               {{- end }}
             {{- if .Values.extraVolumeMounts }}
             {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
@@ -270,7 +270,7 @@ spec:
             - name: data
               mountPath: /var/www/documents
               {{- if .Values.persistence.subPath }}
-              subPath: {{- Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
               {{- end }}
             {{- if .Values.extraVolumeMounts }}
             {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}

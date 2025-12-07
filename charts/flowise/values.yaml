@@ -54,7 +54,7 @@ image:
   repository: flowiseai/flowise
 
   ## @param image.tag Image tag
-  tag: 3.0.3
+  tag: 3.0.12
 
   ## @param image.digest Image digest
   digest: ""
@@ -357,7 +357,7 @@ worker:
     repository: flowiseai/flowise-worker
 
     ## @param worker.image.tag Image tag
-    tag: 3.0.3
+    tag: 3.0.12
 
     ## @param worker.image.digest Image digest
     digest: ""

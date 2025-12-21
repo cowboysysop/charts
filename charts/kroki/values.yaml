@@ -50,7 +50,7 @@ image:
   repository: yuzutech/kroki
 
   ## @param image.tag Image tag
-  tag: 0.28.0
+  tag: 0.29.1
 
   ## @param image.digest Image digest
   digest: ""
@@ -329,7 +329,7 @@ bpmn:
     repository: yuzutech/kroki-bpmn
 
     ## @param bpmn.image.tag Image tag
-    tag: 0.28.0
+    tag: 0.29.1
 
     ## @param bpmn.image.digest Image digest
     digest: ""
@@ -399,7 +399,7 @@ diagramsnet:
     repository: yuzutech/kroki-diagramsnet
 
     ## @param diagramsnet.image.tag Image tag
-    tag: 0.28.0
+    tag: 0.29.1
 
     ## @param diagramsnet.image.digest Image digest
     digest: ""
@@ -469,7 +469,7 @@ excalidraw:
     repository: yuzutech/kroki-excalidraw
 
     ## @param excalidraw.image.tag Image tag
-    tag: 0.28.0
+    tag: 0.29.1
 
     ## @param excalidraw.image.digest Image digest
     digest: ""
@@ -539,7 +539,7 @@ mermaid:
     repository: yuzutech/kroki-mermaid
 
     ## @param mermaid.image.tag Image tag
-    tag: 0.28.0
+    tag: 0.29.1
 
     ## @param mermaid.image.digest Image digest
     digest: ""

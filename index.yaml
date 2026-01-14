@@ -3925,6 +3925,32 @@ entries:
       kubeVersion: '>=1.24'
     apiVersion: v2
     appVersion: 0.28.0
+    created: "2026-01-14T13:32:20.421874028Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/cowboysysop/charts
+      version: 2.31.3
+    description: Creates diagrams from textual descriptions
+    digest: d6d6cc2f3871a2459a2cf675ab22c1a3abf22fd943231e7da4871a9a7b2127b9
+    home: https://kroki.io/
+    icon: https://raw.githubusercontent.com/yuzutech/kroki.io/master/assets/favicon-196x196.png
+    maintainers:
+    - email: sebastien.prudhomme@gmail.com
+      name: sebastien-prudhomme
+    name: kroki
+    sources:
+    - https://github.com/yuzutech/kroki
+    - https://github.com/cowboysysop/charts/tree/master/charts/kroki
+    urls:
+    - https://github.com/cowboysysop/charts/releases/download/kroki-6.1.0/kroki-6.1.0.tgz
+    version: 6.1.0
+  - annotations:
+      artifacthub.io/signKey: |
+        fingerprint: 9E57D2479D48B84463EF491F66D280CE667AD6C8
+        url: https://cowboysysop.github.io/charts/pgp-public-key-2022-02-19.asc
+      kubeVersion: '>=1.24'
+    apiVersion: v2
+    appVersion: 0.28.0
     created: "2025-08-01T07:18:18.702518292Z"
     dependencies:
     - name: common
@@ -15892,4 +15918,4 @@ entries:
     urls:
     - https://github.com/cowboysysop/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
     version: 1.0.0
-generated: "2025-11-27T15:00:09.507370184Z"
+generated: "2026-01-14T13:32:20.423287503Z"

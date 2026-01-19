@@ -351,6 +351,9 @@ persistence:
   storageClass:
   # storageClass: -
 
+  ## @param persistence.subPath PVC subpath
+  subPath:
+
 ## @section Config parameters
 
 dolibarr:

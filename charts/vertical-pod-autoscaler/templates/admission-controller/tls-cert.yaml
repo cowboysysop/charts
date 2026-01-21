@@ -1,0 +1,43 @@
+{{- if .Values.admissionController.enabled }}
+{{- if .Values.admissionController.enableCertManager }}
+{{- $cn := printf "%s.%s.svc" "vpa-webhook" .Release.Namespace }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ template "vertical-pod-autoscaler.admissionController.fullname" . }}-cert
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "vertical-pod-autoscaler.admissionController.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  dnsNames:
+  - {{ $cn }}
+  duration: 8760h # 1 year
+  commonName: {{ $cn }}
+  issuerRef:
+    kind: Issuer
+    name: {{ template "vertical-pod-autoscaler.admissionController.fullname" . }}-selfsigned-issuer
+  secretName: {{ template "vertical-pod-autoscaler.admissionController.tls.secretName" . }}
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ template "vertical-pod-autoscaler.admissionController.fullname" . }}-selfsigned-issuer
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "vertical-pod-autoscaler.admissionController.labels" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  selfSigned: {}
+{{- end }}
+{{- end }}

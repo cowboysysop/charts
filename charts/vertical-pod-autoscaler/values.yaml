@@ -919,7 +919,7 @@ crds:
     repository: bitnamilegacy/kubectl
 
     ## @param crds.image.tag Image tag
-    tag: 1.29.3
+    tag: 1.33.4
 
     ## @param crds.image.digest Image digest
     digest: ""

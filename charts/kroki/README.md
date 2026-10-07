@@ -142,7 +142,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `revisionHistoryLimit`                     | Number of old history to retain to allow rollback                                                     | `10`                     |
 | `image.registry`                           | Image registry                                                                                        | `docker.io`              |
 | `image.repository`                         | Image repository                                                                                      | `yuzutech/kroki`         |
-| `image.tag`                                | Image tag                                                                                             | `0.28.0`                 |
+| `image.tag`                                | Image tag                                                                                             | `0.33.0`                 |
 | `image.digest`                             | Image digest                                                                                          | `""`                     |
 | `image.pullPolicy`                         | Image pull policy                                                                                     | `IfNotPresent`           |
 | `pdb.create`                               | Specifies whether a pod disruption budget should be created                                           | `false`                  |
@@ -229,7 +229,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `bpmn.enabled`                                  | Enable BPMN                                                                      | `true`                |
 | `bpmn.image.registry`                           | Image registry                                                                   | `docker.io`           |
 | `bpmn.image.repository`                         | Image repository                                                                 | `yuzutech/kroki-bpmn` |
-| `bpmn.image.tag`                                | Image tag                                                                        | `0.28.0`              |
+| `bpmn.image.tag`                                | Image tag                                                                        | `0.33.0`              |
 | `bpmn.image.digest`                             | Image digest                                                                     | `""`                  |
 | `bpmn.image.pullPolicy`                         | Image pull policy                                                                | `IfNotPresent`        |
 | `bpmn.securityContext`                          | Container security context                                                       |                       |
@@ -254,7 +254,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `diagramsnet.enabled`                                  | Enable Diagrams.net                                                              | `true`                       |
 | `diagramsnet.image.registry`                           | Image registry                                                                   | `docker.io`                  |
 | `diagramsnet.image.repository`                         | Image repository                                                                 | `yuzutech/kroki-diagramsnet` |
-| `diagramsnet.image.tag`                                | Image tag                                                                        | `0.28.0`                     |
+| `diagramsnet.image.tag`                                | Image tag                                                                        | `0.33.0`                     |
 | `diagramsnet.image.digest`                             | Image digest                                                                     | `""`                         |
 | `diagramsnet.image.pullPolicy`                         | Image pull policy                                                                | `IfNotPresent`               |
 | `diagramsnet.securityContext`                          | Container security context                                                       |                              |
@@ -279,7 +279,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `excalidraw.enabled`                                  | Enable Excalidraw                                                                | `true`                      |
 | `excalidraw.image.registry`                           | Image registry                                                                   | `docker.io`                 |
 | `excalidraw.image.repository`                         | Image repository                                                                 | `yuzutech/kroki-excalidraw` |
-| `excalidraw.image.tag`                                | Image tag                                                                        | `0.28.0`                    |
+| `excalidraw.image.tag`                                | Image tag                                                                        | `0.33.0`                    |
 | `excalidraw.image.digest`                             | Image digest                                                                     | `""`                        |
 | `excalidraw.image.pullPolicy`                         | Image pull policy                                                                | `IfNotPresent`              |
 | `excalidraw.securityContext`                          | Container security context                                                       |                             |
@@ -304,7 +304,7 @@ The command deletes the release named `my-release` and frees all the kubernetes 
 | `mermaid.enabled`                                  | Enable Mermaid                                                                   | `true`                   |
 | `mermaid.image.registry`                           | Image registry                                                                   | `docker.io`              |
 | `mermaid.image.repository`                         | Image repository                                                                 | `yuzutech/kroki-mermaid` |
-| `mermaid.image.tag`                                | Image tag                                                                        | `0.28.0`                 |
+| `mermaid.image.tag`                                | Image tag                                                                        | `0.33.0`                 |
 | `mermaid.image.digest`                             | Image digest                                                                     | `""`                     |
 | `mermaid.image.pullPolicy`                         | Image pull policy                                                                | `IfNotPresent`           |
 | `mermaid.securityContext`                          | Container security context                                                       |                          |

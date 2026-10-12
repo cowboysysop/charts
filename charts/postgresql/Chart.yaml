@@ -35,4 +35,4 @@ maintainers:
 name: postgresql
 sources:
 - https://github.com/cowboysysop/charts/tree/master/charts/postgresql
-version: 15.5.7
+version: 15.6.0

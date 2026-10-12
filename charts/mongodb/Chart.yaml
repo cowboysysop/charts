@@ -39,4 +39,4 @@ maintainers:
 name: mongodb
 sources:
 - https://github.com/cowboysysop/charts/tree/master/charts/mongodb
-version: 15.1.5
+version: 15.2.0

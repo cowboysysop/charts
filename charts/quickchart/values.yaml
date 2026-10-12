@@ -50,7 +50,7 @@ image:
   repository: ianw/quickchart
 
   ## @param image.tag Image tag
-  tag: v1.7.1
+  tag: v1.8.1
 
   ## @param image.digest Image digest
   digest: ""

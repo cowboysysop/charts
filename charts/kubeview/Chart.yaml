@@ -10,7 +10,7 @@ name: kubeview
 sources:
   - https://github.com/benc-uk/kubeview
   - https://github.com/cowboysysop/charts/tree/master/charts/kubeview
-version: 6.0.0
+version: 7.0.0
 dependencies:
   - name: common
     version: 2.31.3
